@@ -1,0 +1,3 @@
+[submodule "external/pytorch_car_caring"]
+	path = external/pytorch_car_caring
+	url = https://github.com/xtma/pytorch_car_caring.git

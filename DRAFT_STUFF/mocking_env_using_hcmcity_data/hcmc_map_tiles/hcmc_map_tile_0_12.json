@@ -1,0 +1,1139 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "lat": 10.6762748,
+      "long": 106.7949671,
+      "x": 0.6316773163462212,
+      "y": -0.39036836785715423,
+      "id": 1597983134
+    },
+    {
+      "lat": 10.6767568,
+      "long": 106.7942008,
+      "x": 0.5897937872935927,
+      "y": -0.36361736785716137,
+      "id": 1597983136
+    },
+    {
+      "lat": 10.6774495,
+      "long": 106.7935381,
+      "x": 0.5535727058593845,
+      "y": -0.32517251785715573,
+      "id": 1597983138
+    },
+    {
+      "lat": 10.6796899,
+      "long": 106.7859953,
+      "x": 0.1413071663309916,
+      "y": -0.20083031785716632,
+      "id": 1597983143
+    },
+    {
+      "lat": 10.6798353,
+      "long": 106.7864137,
+      "x": 0.16417558412528932,
+      "y": -0.19276061785711296,
+      "id": 1597983144
+    },
+    {
+      "lat": 10.6797312,
+      "long": 106.7857739,
+      "x": 0.1292061441042528,
+      "y": -0.19853816785709733,
+      "id": 1597983152
+    },
+    {
+      "lat": 10.6800838,
+      "long": 106.7855304,
+      "x": 0.11589720592831032,
+      "y": -0.17896886785713229,
+      "id": 1597983154
+    },
+    {
+      "lat": 10.6804014,
+      "long": 106.7873284,
+      "x": 0.21417018679408073,
+      "y": -0.1613420678571923,
+      "id": 1597983156
+    },
+    {
+      "lat": 10.680607,
+      "long": 106.7819069,
+      "x": -0.08215181863557713,
+      "y": -0.1499312678571353,
+      "id": 1597983160
+    },
+    {
+      "lat": 10.6810965,
+      "long": 106.7811354,
+      "x": -0.1243195632059394,
+      "y": -0.12276401785710889,
+      "id": 1597983161
+    },
+    {
+      "lat": 10.6818058,
+      "long": 106.7837101,
+      "x": 0.016405377747150285,
+      "y": -0.0833978678571815,
+      "id": 1597983163
+    },
+    {
+      "lat": 10.6818485,
+      "long": 106.7845258,
+      "x": 0.06098895421669659,
+      "y": -0.08102801785719038,
+      "id": 1597983164
+    },
+    {
+      "lat": 10.6820338,
+      "long": 106.7840915,
+      "x": 0.03725149282108309,
+      "y": -0.07074386785718734,
+      "id": 1597983166
+    },
+    {
+      "lat": 10.6821819,
+      "long": 106.7805616,
+      "x": -0.15568165242747936,
+      "y": -0.06252431785715734,
+      "id": 1597983171
+    },
+    {
+      "lat": 10.6835849,
+      "long": 106.7809103,
+      "x": -0.136622815704404,
+      "y": 0.015342182142832672,
+      "id": 1597983173
+    },
+    {
+      "lat": 10.6843441,
+      "long": 106.7799851,
+      "x": -0.18719131509059095,
+      "y": 0.05747778214288596,
+      "id": 1597983176
+    },
+    {
+      "lat": 10.6765153,
+      "long": 106.7945169,
+      "x": 0.6070708113492921,
+      "y": -0.37702061785713703,
+      "id": 2414429257
+    },
+    {
+      "lat": 10.6770022,
+      "long": 106.7939314,
+      "x": 0.5750692372132394,
+      "y": -0.34999766785712094,
+      "id": 2414429259
+    },
+    {
+      "lat": 10.6806482,
+      "long": 106.7816721,
+      "x": -0.09498524238824596,
+      "y": -0.14764466785713115,
+      "id": 2414429269
+    },
+    {
+      "lat": 10.6806929,
+      "long": 106.7821189,
+      "x": -0.07056457061337507,
+      "y": -0.1451638178571245,
+      "id": 2414429270
+    },
+    {
+      "lat": 10.6807113,
+      "long": 106.7871509,
+      "x": 0.20446859941685835,
+      "y": -0.14414261785711976,
+      "id": 2414429271
+    },
+    {
+      "lat": 10.6815841,
+      "long": 106.780594,
+      "x": -0.15391077112628956,
+      "y": -0.09570221785713168,
+      "id": 2414429272
+    },
+    {
+      "lat": 10.6818075,
+      "long": 106.780487,
+      "x": -0.15975905196754475,
+      "y": -0.08330351785716339,
+      "id": 2414429274
+    },
+    {
+      "lat": 10.6820941,
+      "long": 106.7894409,
+      "x": 0.329632740786061,
+      "y": -0.06739721785711883,
+      "id": 2414429275
+    },
+    {
+      "lat": 10.6820993,
+      "long": 106.7843232,
+      "x": 0.04991548039980803,
+      "y": -0.06710861785709815,
+      "id": 2414429276
+    },
+    {
+      "lat": 10.6809008,
+      "long": 106.7870409,
+      "x": 0.19845634808436374,
+      "y": -0.13362536785715318,
+      "id": 5599264349
+    },
+    {
+      "lat": 10.6853171,
+      "long": 106.7796375,
+      "x": -0.2061900293000307,
+      "y": 0.11147928214289216,
+      "id": 1597983203
+    },
+    {
+      "lat": 10.6877388,
+      "long": 106.777822,
+      "x": -0.30541950469582935,
+      "y": 0.24588363214285358,
+      "id": 1597983206
+    },
+    {
+      "lat": 10.6837818,
+      "long": 106.780776,
+      "x": -0.14396322801259662,
+      "y": 0.026270132142866554,
+      "id": 2414429286
+    },
+    {
+      "lat": 10.6890569,
+      "long": 106.7777576,
+      "x": -0.3089394045666133,
+      "y": 0.3190381821428899,
+      "id": 1597983208
+    },
+    {
+      "lat": 10.6848017,
+      "long": 106.7798236,
+      "x": -0.19601839318301625,
+      "y": 0.08287458214282756,
+      "id": 2414429289
+    },
+    {
+      "lat": 10.6845678,
+      "long": 106.7798236,
+      "x": -0.19601839318301625,
+      "y": 0.06989313214285164,
+      "id": 2414429288
+    },
+    {
+      "lat": 10.6909963,
+      "long": 106.7778986,
+      "x": -0.30123279149545557,
+      "y": 0.4266748821428611,
+      "id": 1597983211
+    },
+    {
+      "lat": 10.6850962,
+      "long": 106.7797674,
+      "x": -0.19909010704560387,
+      "y": 0.09921933214286932,
+      "id": 2414429291
+    },
+    {
+      "lat": 10.6848543,
+      "long": 106.7940689,
+      "x": 0.5825845513780807,
+      "y": 0.08579388214283135,
+      "id": 2414429290
+    },
+    {
+      "lat": 10.6914811,
+      "long": 106.7779562,
+      "x": -0.2980845580703414,
+      "y": 0.4535812821428954,
+      "id": 1597983214
+    },
+    {
+      "lat": 10.6866997,
+      "long": 106.7786064,
+      "x": -0.2625466870146139,
+      "y": 0.188213582142862,
+      "id": 2414429294
+    },
+    {
+      "lat": 10.6879852,
+      "long": 106.777737,
+      "x": -0.3100653352705856,
+      "y": 0.25955883214285247,
+      "id": 2414429296
+    },
+    {
+      "lat": 10.6882901,
+      "long": 106.7777156,
+      "x": -0.31123499143930267,
+      "y": 0.2764807821428369,
+      "id": 2414429297
+    },
+    {
+      "lat": 10.6917078,
+      "long": 106.7779178,
+      "x": -0.30018338035400977,
+      "y": 0.4661631321428351,
+      "id": 1597983220
+    },
+    {
+      "lat": 10.6918265,
+      "long": 106.777843,
+      "x": -0.3042717112594846,
+      "y": 0.4727509821428244,
+      "id": 1597983222
+    },
+    {
+      "lat": 10.6929733,
+      "long": 106.776216,
+      "x": -0.3931983741448114,
+      "y": 0.5363983821428676,
+      "id": 1597983228
+    }
+  ],
+  "links": [
+    {
+      "segment_id": 39928,
+      "length": 55,
+      "street_id": 233101472,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Vtt",
+      "street_type": "unclassified",
+      "source": 1597983134,
+      "target": 2414429257
+    },
+    {
+      "segment_id": 39924,
+      "length": 40,
+      "street_id": 233101472,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Vtt",
+      "street_type": "unclassified",
+      "source": 1597983136,
+      "target": 2414429259
+    },
+    {
+      "segment_id": 39925,
+      "length": 43,
+      "street_id": 233101472,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Vtt",
+      "street_type": "unclassified",
+      "source": 1597983136,
+      "target": 2414429257
+    },
+    {
+      "segment_id": 39921,
+      "length": 65,
+      "street_id": 233101472,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Vtt",
+      "street_type": "unclassified",
+      "source": 1597983138,
+      "target": 2414429259
+    },
+    {
+      "segment_id": 25420,
+      "length": 24,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983143,
+      "target": 1597983152
+    },
+    {
+      "segment_id": 25421,
+      "length": 48,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983143,
+      "target": 1597983144
+    },
+    {
+      "segment_id": 25422,
+      "length": 48,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983144,
+      "target": 1597983143
+    },
+    {
+      "segment_id": 25423,
+      "length": 118,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983144,
+      "target": 1597983156
+    },
+    {
+      "segment_id": 25418,
+      "length": 47,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983152,
+      "target": 1597983154
+    },
+    {
+      "segment_id": 25419,
+      "length": 24,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983152,
+      "target": 1597983143
+    },
+    {
+      "segment_id": 25416,
+      "length": 224,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983154,
+      "target": 1597983164
+    },
+    {
+      "segment_id": 25417,
+      "length": 47,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983154,
+      "target": 1597983152
+    },
+    {
+      "segment_id": 25424,
+      "length": 118,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983156,
+      "target": 1597983144
+    },
+    {
+      "segment_id": 25404,
+      "length": 26,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983160,
+      "target": 2414429269
+    },
+    {
+      "segment_id": 25405,
+      "length": 25,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983160,
+      "target": 2414429270
+    },
+    {
+      "segment_id": 25400,
+      "length": 80,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983161,
+      "target": 2414429272
+    },
+    {
+      "segment_id": 25401,
+      "length": 76,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983161,
+      "target": 2414429269
+    },
+    {
+      "segment_id": 25408,
+      "length": 213,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983163,
+      "target": 2414429270
+    },
+    {
+      "segment_id": 25409,
+      "length": 48,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983163,
+      "target": 1597983166
+    },
+    {
+      "segment_id": 25414,
+      "length": 35,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983164,
+      "target": 2414429276
+    },
+    {
+      "segment_id": 25415,
+      "length": 224,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983164,
+      "target": 1597983154
+    },
+    {
+      "segment_id": 25410,
+      "length": 48,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983166,
+      "target": 1597983163
+    },
+    {
+      "segment_id": 25411,
+      "length": 26,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983166,
+      "target": 2414429276
+    },
+    {
+      "segment_id": 25394,
+      "length": 160,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983171,
+      "target": 1597983173
+    },
+    {
+      "segment_id": 25395,
+      "length": 42,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983171,
+      "target": 2414429274
+    },
+    {
+      "segment_id": 25392,
+      "length": 26,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983173,
+      "target": 2414429286
+    },
+    {
+      "segment_id": 25393,
+      "length": 160,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983173,
+      "target": 1597983171
+    },
+    {
+      "segment_id": 25388,
+      "length": 30,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983176,
+      "target": 2414429288
+    },
+    {
+      "segment_id": 25389,
+      "length": 106,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983176,
+      "target": 2414429286
+    },
+    {
+      "segment_id": 39926,
+      "length": 43,
+      "street_id": 233101472,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Vtt",
+      "street_type": "unclassified",
+      "source": 2414429257,
+      "target": 1597983136
+    },
+    {
+      "segment_id": 39927,
+      "length": 55,
+      "street_id": 233101472,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Vtt",
+      "street_type": "unclassified",
+      "source": 2414429257,
+      "target": 1597983134
+    },
+    {
+      "segment_id": 39922,
+      "length": 65,
+      "street_id": 233101472,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Vtt",
+      "street_type": "unclassified",
+      "source": 2414429259,
+      "target": 1597983138
+    },
+    {
+      "segment_id": 39923,
+      "length": 40,
+      "street_id": 233101472,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Vtt",
+      "street_type": "unclassified",
+      "source": 2414429259,
+      "target": 1597983136
+    },
+    {
+      "segment_id": 25402,
+      "length": 76,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429269,
+      "target": 1597983161
+    },
+    {
+      "segment_id": 25403,
+      "length": 26,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429269,
+      "target": 1597983160
+    },
+    {
+      "segment_id": 25406,
+      "length": 25,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429270,
+      "target": 1597983160
+    },
+    {
+      "segment_id": 25407,
+      "length": 213,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429270,
+      "target": 1597983163
+    },
+    {
+      "segment_id": 39954,
+      "length": 293,
+      "street_id": 233101476,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ph\u1ea1m Th\u00e1i B\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 2414429271,
+      "target": 2414429275
+    },
+    {
+      "segment_id": 25398,
+      "length": 27,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429272,
+      "target": 2414429274
+    },
+    {
+      "segment_id": 25399,
+      "length": 80,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429272,
+      "target": 1597983161
+    },
+    {
+      "segment_id": 25396,
+      "length": 42,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429274,
+      "target": 1597983171
+    },
+    {
+      "segment_id": 25397,
+      "length": 27,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429274,
+      "target": 2414429272
+    },
+    {
+      "segment_id": 39952,
+      "length": 591,
+      "street_id": 233101476,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ph\u1ea1m Th\u00e1i B\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 2414429275,
+      "target": 2414429290
+    },
+    {
+      "segment_id": 39953,
+      "length": 293,
+      "street_id": 233101476,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ph\u1ea1m Th\u00e1i B\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 2414429275,
+      "target": 2414429271
+    },
+    {
+      "segment_id": 25412,
+      "length": 26,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429276,
+      "target": 1597983166
+    },
+    {
+      "segment_id": 25413,
+      "length": 35,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429276,
+      "target": 1597983164
+    },
+    {
+      "segment_id": 25380,
+      "length": 190,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983203,
+      "target": 2414429294
+    },
+    {
+      "segment_id": 25381,
+      "length": 28,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983203,
+      "target": 2414429291
+    },
+    {
+      "segment_id": 25376,
+      "length": 28,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983206,
+      "target": 2414429296
+    },
+    {
+      "segment_id": 25377,
+      "length": 143,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983206,
+      "target": 2414429294
+    },
+    {
+      "segment_id": 25390,
+      "length": 106,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429286,
+      "target": 1597983176
+    },
+    {
+      "segment_id": 25391,
+      "length": 26,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429286,
+      "target": 1597983173
+    },
+    {
+      "segment_id": 25370,
+      "length": 216,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983208,
+      "target": 1597983211
+    },
+    {
+      "segment_id": 25371,
+      "length": 85,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983208,
+      "target": 2414429297
+    },
+    {
+      "segment_id": 25384,
+      "length": 33,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429289,
+      "target": 2414429291
+    },
+    {
+      "segment_id": 25385,
+      "length": 26,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429289,
+      "target": 2414429288
+    },
+    {
+      "segment_id": 25386,
+      "length": 26,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429288,
+      "target": 2414429289
+    },
+    {
+      "segment_id": 25387,
+      "length": 30,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429288,
+      "target": 1597983176
+    },
+    {
+      "segment_id": 25368,
+      "length": 54,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983211,
+      "target": 1597983214
+    },
+    {
+      "segment_id": 25369,
+      "length": 216,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983211,
+      "target": 1597983208
+    },
+    {
+      "segment_id": 25382,
+      "length": 28,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429291,
+      "target": 1597983203
+    },
+    {
+      "segment_id": 25383,
+      "length": 33,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429291,
+      "target": 2414429289
+    },
+    {
+      "segment_id": 39951,
+      "length": 591,
+      "street_id": 233101476,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ph\u1ea1m Th\u00e1i B\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 2414429290,
+      "target": 2414429275
+    },
+    {
+      "segment_id": 25366,
+      "length": 25,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983214,
+      "target": 1597983220
+    },
+    {
+      "segment_id": 25367,
+      "length": 54,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983214,
+      "target": 1597983211
+    },
+    {
+      "segment_id": 25378,
+      "length": 143,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429294,
+      "target": 1597983206
+    },
+    {
+      "segment_id": 25379,
+      "length": 190,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429294,
+      "target": 1597983203
+    },
+    {
+      "segment_id": 25374,
+      "length": 33,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429296,
+      "target": 2414429297
+    },
+    {
+      "segment_id": 25375,
+      "length": 28,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429296,
+      "target": 1597983206
+    },
+    {
+      "segment_id": 25372,
+      "length": 85,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429297,
+      "target": 1597983208
+    },
+    {
+      "segment_id": 25373,
+      "length": 33,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 2414429297,
+      "target": 2414429296
+    },
+    {
+      "segment_id": 25364,
+      "length": 15,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983220,
+      "target": 1597983222
+    },
+    {
+      "segment_id": 25365,
+      "length": 25,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983220,
+      "target": 1597983214
+    },
+    {
+      "segment_id": 25286,
+      "length": 218,
+      "street_id": 146320738,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983222,
+      "target": 1597983228
+    },
+    {
+      "segment_id": 25363,
+      "length": 15,
+      "street_id": 146320741,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983222,
+      "target": 1597983220
+    },
+    {
+      "segment_id": 25285,
+      "length": 218,
+      "street_id": 146320738,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Phan V\u0103n \u0110\u00e1ng",
+      "street_type": "tertiary",
+      "source": 1597983228,
+      "target": 1597983222
+    }
+  ]
+}

@@ -1,0 +1,1418 @@
+{
+  "observation": {
+    "type": "Kinematics"
+  },
+  "action": {
+    "type": "DiscreteMetaAction"
+  },
+  "simulation_frequency": 15,
+  "policy_frequency": 1,
+  "other_vehicles_type": "highway_env.vehicle.behavior.IDMVehicle",
+  "screen_width": 600,
+  "screen_height": 150,
+  "centering_position": [
+    0.3,
+    0.5
+  ],
+  "scaling": 5.5,
+  "show_trajectories": false,
+  "render_agent": true,
+  "offscreen_rendering": false,
+  "manual_control": false,
+  "real_time_rendering": false,
+  "destination": null,
+  "initial_vehicle_count": 0,
+  "controlled_vehicles": 0,
+  "spawn_probability": 0.0,
+  "duration": 40.0,
+  "collision_reward": -5,
+  "high_speed_reward": 1.0,
+  "arrived_reward": 1.0,
+  "reward_speed_range": [
+    6.0,
+    12.0
+  ],
+  "auto_curve": false,
+  "corner_radius": 25.0,
+  "curve_samples": 8,
+  "exit_distance": 5.0,
+  "graph": {
+    "nodes": {
+      "2496935172": [
+        17.59403,
+        744.144
+      ],
+      "2496935177": [
+        375.88595,
+        377.00595
+      ],
+      "2496935178": [
+        374.126,
+        411.52695
+      ],
+      "2496935179": [
+        21.47467,
+        744.144
+      ],
+      "2496935180": [
+        374.19706,
+        252.747
+      ],
+      "2496935181": [
+        375.30113,
+        353.6016
+      ],
+      "2496935182": [
+        377.13213,
+        219.9798
+      ],
+      "2496935183": [
+        35.47775,
+        742.97295
+      ],
+      "2496935184": [
+        364.22765,
+        532.7112
+      ],
+      "2496935185": [
+        373.31708,
+        132.8004
+      ],
+      "5755264777": [
+        163.5551,
+        23.03805
+      ],
+      "2496935187": [
+        366.50138,
+        51.39855
+      ],
+      "2496935189": [
+        373.54118,
+        279.00405
+      ],
+      "2496935190": [
+        370.31642,
+        429.66435
+      ],
+      "2496935191": [
+        297.60098,
+        666.91575
+      ],
+      "2496935193": [
+        371.85228,
+        559.0404
+      ],
+      "2496935194": [
+        52.48149,
+        739.75395
+      ],
+      "2496935195": [
+        326.03892,
+        659.01255
+      ],
+      "2496935197": [
+        372.95088,
+        570.66765
+      ],
+      "2496935198": [
+        386.44019,
+        641.1693
+      ],
+      "2496935199": [
+        390.32629,
+        635.0976
+      ],
+      "2496935201": [
+        376.76593,
+        192.4074
+      ],
+      "2496935204": [
+        25.50834,
+        744.144
+      ],
+      "2496935205": [
+        0.0,
+        742.6788
+      ],
+      "2496935206": [
+        374.126,
+        323.47065
+      ],
+      "2496935207": [
+        359.83324,
+        460.74435
+      ],
+      "2496935208": [
+        266.22795,
+        676.5672
+      ],
+      "2496935209": [
+        356.60849,
+        477.12795
+      ],
+      "2496935211": [
+        369.43645,
+        80.06985
+      ],
+      "2496935212": [
+        358.29192,
+        491.0973
+      ],
+      "2684989123": [
+        32.05623,
+        0.0
+      ],
+      "2684989125": [
+        97.07053,
+        9.2685
+      ],
+      "2684989128": [
+        187.48932,
+        27.9942
+      ],
+      "5752795593": [
+        27.47599,
+        743.9109
+      ],
+      "2684989130": [
+        273.54104,
+        42.18
+      ],
+      "5755264729": [
+        88.15054,
+        7.99755
+      ],
+      "5752795490": [
+        166.18409,
+        706.14315
+      ],
+      "5752795496": [
+        126.22995,
+        717.95355
+      ]
+    },
+    "edges": [
+      {
+        "start": "5752795593",
+        "end": "5752795593",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              27.47599,
+              743.9109
+            ],
+            [
+              25.50834,
+              744.144
+            ],
+            [
+              27.47599,
+              743.9109
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 41770,
+          "street_id": 242174801,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "residential",
+          "street_level": 4,
+          "street_group": "242174801",
+          "composite": true
+        },
+        "length_hint": 3.9628182559890446,
+        "speed_limit": 8.333333333333334
+      },
+      {
+        "start": "5752795593",
+        "end": "5752795593",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              27.47599,
+              743.9109
+            ],
+            [
+              35.47775,
+              742.97295
+            ],
+            [
+              27.47599,
+              743.9109
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 41771,
+          "street_id": 242174801,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "242174801",
+          "composite": true
+        },
+        "length_hint": 16.113089498926023,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935205",
+        "end": "2496935205",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              0.0,
+              742.6788
+            ],
+            [
+              17.59403,
+              744.144
+            ],
+            [
+              0.0,
+              742.6788
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 41763,
+          "street_id": 242174801,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "242174801",
+          "composite": true
+        },
+        "length_hint": 35.309868460865154,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935172",
+        "end": "2496935172",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              17.59403,
+              744.144
+            ],
+            [
+              21.47467,
+              744.144
+            ],
+            [
+              17.59403,
+              744.144
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 41765,
+          "street_id": 242174801,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "242174801",
+          "composite": true
+        },
+        "length_hint": 7.761279999999999,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935179",
+        "end": "2496935179",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              21.47467,
+              744.144
+            ],
+            [
+              25.50834,
+              744.144
+            ],
+            [
+              21.47467,
+              744.144
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 41767,
+          "street_id": 242174801,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "242174801",
+          "composite": true
+        },
+        "length_hint": 8.067340000000002,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2684989130",
+        "end": "2684989130",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              273.54104,
+              42.18
+            ],
+            [
+              366.50138,
+              51.39855
+            ],
+            [
+              273.54104,
+              42.18
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44056,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 186.8326146797512,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2684989130",
+        "end": "2684989130",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              273.54104,
+              42.18
+            ],
+            [
+              187.48932,
+              27.9942
+            ],
+            [
+              273.54104,
+              42.18
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44057,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 174.4263218278526,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5755264777",
+        "end": "5755264777",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              163.5551,
+              23.03805
+            ],
+            [
+              187.48932,
+              27.9942
+            ],
+            [
+              163.5551,
+              23.03805
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44060,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 48.883956870568454,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5755264777",
+        "end": "5755264777",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              163.5551,
+              23.03805
+            ],
+            [
+              97.07053,
+              9.2685
+            ],
+            [
+              163.5551,
+              23.03805
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44061,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 135.7909946246422,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2684989123",
+        "end": "2684989123",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              32.05623,
+              0.0
+            ],
+            [
+              88.15054,
+              7.99755
+            ],
+            [
+              32.05623,
+              0.0
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44066,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 113.32312068379693,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2684989125",
+        "end": "2684989125",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              97.07053,
+              9.2685
+            ],
+            [
+              88.15054,
+              7.99755
+            ],
+            [
+              97.07053,
+              9.2685
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44063,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 18.02015932255872,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935198",
+        "end": "2496935198",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              386.44019,
+              641.1693
+            ],
+            [
+              326.03892,
+              659.01255
+            ],
+            [
+              386.44019,
+              641.1693
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44016,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 125.96340719709664,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935198",
+        "end": "2496935198",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              386.44019,
+              641.1693
+            ],
+            [
+              390.32629,
+              635.0976
+            ],
+            [
+              386.44019,
+              641.1693
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44017,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 14.417671670557567,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935194",
+        "end": "2496935194",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              52.48149,
+              739.75395
+            ],
+            [
+              126.22995,
+              717.95355
+            ],
+            [
+              52.48149,
+              739.75395
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44005,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "residential",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 153.80627805823275,
+        "speed_limit": 8.333333333333334
+      },
+      {
+        "start": "2496935195",
+        "end": "2496935195",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              326.03892,
+              659.01255
+            ],
+            [
+              297.60098,
+              666.91575
+            ],
+            [
+              326.03892,
+              659.01255
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44014,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 59.03141542208186,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935191",
+        "end": "2496935191",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              297.60098,
+              666.91575
+            ],
+            [
+              266.22795,
+              676.5672
+            ],
+            [
+              297.60098,
+              666.91575
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44012,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 65.64807684870586,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935208",
+        "end": "2496935208",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              266.22795,
+              676.5672
+            ],
+            [
+              166.18409,
+              706.14315
+            ],
+            [
+              266.22795,
+              676.5672
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44010,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 208.64813195523325,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5752795496",
+        "end": "5752795496",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              126.22995,
+              717.95355
+            ],
+            [
+              166.18409,
+              706.14315
+            ],
+            [
+              126.22995,
+              717.95355
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44007,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 83.32631880263519,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935181",
+        "end": "2496935181",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              375.30113,
+              353.6016
+            ],
+            [
+              375.88595,
+              377.00595
+            ],
+            [
+              375.30113,
+              353.6016
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44038,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 46.823311004451554,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935181",
+        "end": "2496935181",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              375.30113,
+              353.6016
+            ],
+            [
+              374.126,
+              323.47065
+            ],
+            [
+              375.30113,
+              353.6016
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44039,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 60.30771355040423,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935206",
+        "end": "2496935206",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              374.126,
+              323.47065
+            ],
+            [
+              373.54118,
+              279.00405
+            ],
+            [
+              374.126,
+              323.47065
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44041,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 88.94089115794596,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935189",
+        "end": "2496935189",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              373.54118,
+              279.00405
+            ],
+            [
+              374.19706,
+              252.747
+            ],
+            [
+              373.54118,
+              279.00405
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44043,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 52.53048080027061,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935211",
+        "end": "2496935211",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              369.43645,
+              80.06985
+            ],
+            [
+              373.31708,
+              132.8004
+            ],
+            [
+              369.43645,
+              80.06985
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44052,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 105.74630381246239,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935211",
+        "end": "2496935211",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              369.43645,
+              80.06985
+            ],
+            [
+              366.50138,
+              51.39855
+            ],
+            [
+              369.43645,
+              80.06985
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44053,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 57.64227891382852,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935182",
+        "end": "2496935182",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              377.13213,
+              219.9798
+            ],
+            [
+              374.19706,
+              252.747
+            ],
+            [
+              377.13213,
+              219.9798
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44046,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 65.796779001556,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935182",
+        "end": "2496935182",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              377.13213,
+              219.9798
+            ],
+            [
+              376.76593,
+              192.4074
+            ],
+            [
+              377.13213,
+              219.9798
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44047,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 55.14966343324321,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935185",
+        "end": "2496935185",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              373.31708,
+              132.8004
+            ],
+            [
+              376.76593,
+              192.4074
+            ],
+            [
+              373.31708,
+              132.8004
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44050,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 119.41338309121805,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935197",
+        "end": "2496935197",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              372.95088,
+              570.66765
+            ],
+            [
+              390.32629,
+              635.0976
+            ],
+            [
+              372.95088,
+              570.66765
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44020,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 133.4634531198801,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935197",
+        "end": "2496935197",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              372.95088,
+              570.66765
+            ],
+            [
+              371.85228,
+              559.0404
+            ],
+            [
+              372.95088,
+              570.66765
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44021,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 23.358070512994008,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935212",
+        "end": "2496935212",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              358.29192,
+              491.0973
+            ],
+            [
+              364.22765,
+              532.7112
+            ],
+            [
+              358.29192,
+              491.0973
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44026,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 84.07019837832894,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935212",
+        "end": "2496935212",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              358.29192,
+              491.0973
+            ],
+            [
+              356.60849,
+              477.12795
+            ],
+            [
+              358.29192,
+              491.0973
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44027,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 28.140836944725045,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935184",
+        "end": "2496935184",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              364.22765,
+              532.7112
+            ],
+            [
+              371.85228,
+              559.0404
+            ],
+            [
+              364.22765,
+              532.7112
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44024,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 54.82195747241797,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935207",
+        "end": "2496935207",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              359.83324,
+              460.74435
+            ],
+            [
+              356.60849,
+              477.12795
+            ],
+            [
+              359.83324,
+              460.74435
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44030,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 33.39588965860918,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935207",
+        "end": "2496935207",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              359.83324,
+              460.74435
+            ],
+            [
+              370.31642,
+              429.66435
+            ],
+            [
+              359.83324,
+              460.74435
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44031,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 65.60071532879498,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935177",
+        "end": "2496935177",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              375.88595,
+              377.00595
+            ],
+            [
+              374.126,
+              411.52695
+            ],
+            [
+              375.88595,
+              377.00595
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44036,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 69.13166756277477,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935190",
+        "end": "2496935190",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              370.31642,
+              429.66435
+            ],
+            [
+              374.126,
+              411.52695
+            ],
+            [
+              370.31642,
+              429.66435
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44033,
+          "street_id": 262891290,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891290",
+          "composite": true
+        },
+        "length_hint": 37.066328576561254,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2496935194",
+        "end": "2496935194",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              52.48149,
+              739.75395
+            ],
+            [
+              35.47775,
+              742.97295
+            ],
+            [
+              52.48149,
+              739.75395
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 44002,
+          "street_id": 262891189,
+          "street_name": "X\u00e3 Phong Ph\u00fa",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "262891189",
+          "composite": true
+        },
+        "length_hint": 34.611508778878715,
+        "speed_limit": 11.11111111111111
+      }
+    ]
+  }
+}

@@ -1,0 +1,3272 @@
+{
+  "observation": {
+    "type": "Kinematics"
+  },
+  "action": {
+    "type": "DiscreteMetaAction"
+  },
+  "simulation_frequency": 15,
+  "policy_frequency": 1,
+  "other_vehicles_type": "highway_env.vehicle.behavior.IDMVehicle",
+  "screen_width": 600,
+  "screen_height": 150,
+  "centering_position": [
+    0.3,
+    0.5
+  ],
+  "scaling": 5.5,
+  "show_trajectories": false,
+  "render_agent": true,
+  "offscreen_rendering": false,
+  "manual_control": false,
+  "real_time_rendering": false,
+  "destination": null,
+  "initial_vehicle_count": 0,
+  "controlled_vehicles": 0,
+  "spawn_probability": 0.0,
+  "duration": 40.0,
+  "collision_reward": -5,
+  "high_speed_reward": 1.0,
+  "arrived_reward": 1.0,
+  "reward_speed_range": [
+    6.0,
+    12.0
+  ],
+  "auto_curve": false,
+  "corner_radius": 25.0,
+  "curve_samples": 8,
+  "exit_distance": 5.0,
+  "graph": {
+    "nodes": {
+      "366384657": [
+        12.48909,
+        742.9119
+      ],
+      "5740098066": [
+        20.22849,
+        827.4828
+      ],
+      "3378126602": [
+        283.97503,
+        79.7424
+      ],
+      "5732964406": [
+        56.27467,
+        190.73685
+      ],
+      "5732964407": [
+        36.72392,
+        191.4528
+      ],
+      "5732964411": [
+        10.23722,
+        142.5906
+      ],
+      "5740098116": [
+        7.73941,
+        441.59685
+      ],
+      "5740098117": [
+        5.39463,
+        441.6801
+      ],
+      "5737944140": [
+        257.41181,
+        430.66335
+      ],
+      "5740098128": [
+        25.01097,
+        879.65835
+      ],
+      "5735418454": [
+        291.3373,
+        147.4524
+      ],
+      "5740098139": [
+        13.3144,
+        751.8918
+      ],
+      "366468199": [
+        20.46898,
+        24.1092
+      ],
+      "5735418472": [
+        289.55549,
+        128.62125
+      ],
+      "366388334": [
+        274.23518,
+        193.3065
+      ],
+      "366474867": [
+        9.72892,
+        193.06785
+      ],
+      "366450852": [
+        295.17421,
+        195.74295
+      ],
+      "366465192": [
+        118.57253,
+        187.54005
+      ],
+      "5732964013": [
+        18.88393,
+        37.7955
+      ],
+      "5737886896": [
+        3.28488,
+        437.29005
+      ],
+      "366426288": [
+        38.15593,
+        1021.38315
+      ],
+      "5740600500": [
+        31.24184,
+        946.8744
+      ],
+      "5737926324": [
+        166.55029,
+        433.5771
+      ],
+      "5732964537": [
+        194.75868,
+        184.37655
+      ],
+      "5737926338": [
+        1.35002,
+        552.2139
+      ],
+      "5737926347": [
+        3.90796,
+        504.84465
+      ],
+      "5732964557": [
+        11.61458,
+        103.5408
+      ],
+      "5737926350": [
+        254.77735,
+        430.6356
+      ],
+      "5737926351": [
+        227.06634,
+        431.3682
+      ],
+      "5737926352": [
+        181.6957,
+        432.9
+      ],
+      "5737926353": [
+        135.88235,
+        434.94795
+      ],
+      "5737926354": [
+        80.09958,
+        437.80065
+      ],
+      "5737926355": [
+        28.3505,
+        440.8698
+      ],
+      "366404821": [
+        93.02046,
+        189.39375
+      ],
+      "5740561113": [
+        35.9314,
+        997.38495
+      ],
+      "366477539": [
+        229.3018,
+        183.92145
+      ],
+      "366479077": [
+        244.03728,
+        186.36345
+      ],
+      "366474982": [
+        235.25393,
+        1093.8384
+      ],
+      "366463722": [
+        267.06967,
+        190.7646
+      ],
+      "3378126592": [
+        262.13962,
+        0.0
+      ],
+      "3378126593": [
+        260.83879,
+        26.4957
+      ],
+      "366440706": [
+        255.25286,
+        187.78425
+      ],
+      "3378126595": [
+        262.8283,
+        64.5021
+      ],
+      "3378126596": [
+        263.5607,
+        68.25945
+      ],
+      "3378126597": [
+        265.75791,
+        69.93
+      ],
+      "3378126598": [
+        270.46932,
+        70.6626
+      ],
+      "3378126594": [
+        262.03031,
+        49.06755
+      ],
+      "3378126600": [
+        280.93611,
+        73.7928
+      ],
+      "3378126601": [
+        282.61407,
+        75.8796
+      ],
+      "3378126599": [
+        278.31805,
+        72.5385
+      ],
+      "3378126603": [
+        285.01897,
+        87.8898
+      ],
+      "3378126604": [
+        287.32003,
+        109.5015
+      ],
+      "3378126605": [
+        290.04194,
+        132.78375
+      ],
+      "3378126606": [
+        292.76385,
+        163.5807
+      ],
+      "5740602127": [
+        42.97667,
+        1075.5345
+      ],
+      "3378126608": [
+        281.32964,
+        194.65515
+      ],
+      "3378126609": [
+        286.95929,
+        195.22125
+      ],
+      "3378126610": [
+        298.16941,
+        196.1925
+      ],
+      "3378126611": [
+        291.44662,
+        195.58755
+      ],
+      "3378126607": [
+        294.83534,
+        177.42795
+      ],
+      "5740602137": [
+        185.07896,
+        1103.19015
+      ],
+      "5740602140": [
+        44.74208,
+        1095.348
+      ],
+      "5740602142": [
+        44.21738,
+        1089.45945
+      ],
+      "5740602154": [
+        39.2928,
+        1034.18145
+      ],
+      "5740602158": [
+        28.30131,
+        915.1506
+      ],
+      "5733044016": [
+        9.83823,
+        174.46425
+      ],
+      "366470963": [
+        4.62943,
+        345.2211
+      ],
+      "366466912": [
+        2.946,
+        442.60695
+      ],
+      "366464867": [
+        215.5884,
+        182.9169
+      ],
+      "366403954": [
+        9.70159,
+        185.1369
+      ],
+      "366422903": [
+        10.52144,
+        119.9466
+      ],
+      "5740726136": [
+        271.44768,
+        1086.68445
+      ],
+      "366444412": [
+        203.77706,
+        1100.1432
+      ],
+      "5732950406": [
+        167.47399,
+        185.9694
+      ],
+      "5732950407": [
+        94.80774,
+        189.2661
+      ],
+      "366474634": [
+        12.07369,
+        96.6144
+      ],
+      "5732950415": [
+        6.77745,
+        281.1852
+      ],
+      "366374308": [
+        24.32776,
+        872.29905
+      ],
+      "5737925571": [
+        6.75012,
+        281.9955
+      ],
+      "5738010057": [
+        288.3913,
+        118.6479
+      ],
+      "5733030859": [
+        16.326,
+        192.1965
+      ],
+      "5733030860": [
+        10.45039,
+        192.41295
+      ],
+      "366443993": [
+        181.11087,
+        184.85385
+      ],
+      "5740098010": [
+        0.74333,
+        612.4425
+      ],
+      "366458333": [
+        0.0,
+        565.2897
+      ],
+      "366401008": [
+        7.56997,
+        695.5482
+      ],
+      "366427124": [
+        1.19698,
+        641.45235
+      ],
+      "5733044725": [
+        20.86798,
+        20.424
+      ],
+      "5738009597": [
+        7.56451,
+        257.6088
+      ]
+    },
+    "edges": [
+      {
+        "start": "5740602127",
+        "end": "5740602127",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              42.97667,
+              1075.5345
+            ],
+            [
+              39.2928,
+              1034.18145
+            ],
+            [
+              42.97667,
+              1075.5345
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4071,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 83.03362312893242,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5740602127",
+        "end": "5740602127",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              42.97667,
+              1075.5345
+            ],
+            [
+              44.21738,
+              1089.45945
+            ],
+            [
+              42.97667,
+              1075.5345
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4072,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 27.960228454474564,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5740602142",
+        "end": "5740602142",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              44.21738,
+              1089.45945
+            ],
+            [
+              44.74208,
+              1095.348
+            ],
+            [
+              44.21738,
+              1089.45945
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4074,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 11.823761024732997,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366374308",
+        "end": "366374308",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              24.32776,
+              872.29905
+            ],
+            [
+              20.22849,
+              827.4828
+            ],
+            [
+              24.32776,
+              872.29905
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4057,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 90.00667261032144,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366374308",
+        "end": "366374308",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              24.32776,
+              872.29905
+            ],
+            [
+              25.01097,
+              879.65835
+            ],
+            [
+              24.32776,
+              872.29905
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4058,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 14.781890595468647,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366474634",
+        "end": "366474634",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              12.07369,
+              96.6144
+            ],
+            [
+              18.88393,
+              37.7955
+            ],
+            [
+              12.07369,
+              96.6144
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4013,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 118.42368624675726,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366474634",
+        "end": "366474634",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              12.07369,
+              96.6144
+            ],
+            [
+              11.61458,
+              103.5408
+            ],
+            [
+              12.07369,
+              96.6144
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4014,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 13.883198327777357,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5732964013",
+        "end": "5732964013",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              18.88393,
+              37.7955
+            ],
+            [
+              20.46898,
+              24.1092
+            ],
+            [
+              18.88393,
+              37.7955
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4011,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 27.55555778368494,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5733044725",
+        "end": "5733044725",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              20.86798,
+              20.424
+            ],
+            [
+              20.46898,
+              24.1092
+            ],
+            [
+              20.86798,
+              20.424
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4008,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 7.41347423007594,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366470963",
+        "end": "366470963",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              4.62943,
+              345.2211
+            ],
+            [
+              6.75012,
+              281.9955
+            ],
+            [
+              4.62943,
+              345.2211
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4033,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 126.52231141480301,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366470963",
+        "end": "366470963",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              4.62943,
+              345.2211
+            ],
+            [
+              3.28488,
+              437.29005
+            ],
+            [
+              4.62943,
+              345.2211
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4034,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 184.15753439710258,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5732950415",
+        "end": "5732950415",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              6.77745,
+              281.1852
+            ],
+            [
+              7.56451,
+              257.6088
+            ],
+            [
+              6.77745,
+              281.1852
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4029,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 47.17906740933321,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5732950415",
+        "end": "5732950415",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              6.77745,
+              281.1852
+            ],
+            [
+              6.75012,
+              281.9955
+            ],
+            [
+              6.77745,
+              281.1852
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4030,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 1.6215215310318563,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5733044016",
+        "end": "5733044016",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              9.83823,
+              174.46425
+            ],
+            [
+              10.23722,
+              142.5906
+            ],
+            [
+              9.83823,
+              174.46425
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4021,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 63.75229430671809,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5733044016",
+        "end": "5733044016",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              9.83823,
+              174.46425
+            ],
+            [
+              9.70159,
+              185.1369
+            ],
+            [
+              9.83823,
+              174.46425
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4022,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 21.347049305428616,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5732964411",
+        "end": "5732964411",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              10.23722,
+              142.5906
+            ],
+            [
+              10.52144,
+              119.9466
+            ],
+            [
+              10.23722,
+              142.5906
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4019,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 45.29156729495678,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5732964557",
+        "end": "5732964557",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              11.61458,
+              103.5408
+            ],
+            [
+              10.52144,
+              119.9466
+            ],
+            [
+              11.61458,
+              103.5408
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4016,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 32.88435668822487,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366403954",
+        "end": "366403954",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              9.70159,
+              185.1369
+            ],
+            [
+              9.72892,
+              193.06785
+            ],
+            [
+              9.70159,
+              185.1369
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4024,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 15.861994178715353,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5738009597",
+        "end": "5738009597",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              7.56451,
+              257.6088
+            ],
+            [
+              9.72892,
+              193.06785
+            ],
+            [
+              7.56451,
+              257.6088
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4027,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 129.15446407384604,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5737926347",
+        "end": "5737926347",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              3.90796,
+              504.84465
+            ],
+            [
+              2.946,
+              442.60695
+            ],
+            [
+              3.90796,
+              504.84465
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4039,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 124.49026738394616,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5737926347",
+        "end": "5737926347",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              3.90796,
+              504.84465
+            ],
+            [
+              1.35002,
+              552.2139
+            ],
+            [
+              3.90796,
+              504.84465
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4040,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 94.87652823762254,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366466912",
+        "end": "366466912",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              2.946,
+              442.60695
+            ],
+            [
+              3.28488,
+              437.29005
+            ],
+            [
+              2.946,
+              442.60695
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4037,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 10.655377095982994,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5740098139",
+        "end": "5740098139",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              13.3144,
+              751.8918
+            ],
+            [
+              12.48909,
+              742.9119
+            ],
+            [
+              13.3144,
+              751.8918
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4053,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 18.03549174334881,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5740098139",
+        "end": "5740098139",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              13.3144,
+              751.8918
+            ],
+            [
+              20.22849,
+              827.4828
+            ],
+            [
+              13.3144,
+              751.8918
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4054,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 151.81309458051504,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366458333",
+        "end": "366458333",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              0.0,
+              565.2897
+            ],
+            [
+              1.35002,
+              552.2139
+            ],
+            [
+              0.0,
+              565.2897
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4043,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 26.290614267483512,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366458333",
+        "end": "366458333",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              0.0,
+              565.2897
+            ],
+            [
+              0.74333,
+              612.4425
+            ],
+            [
+              0.0,
+              565.2897
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4044,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 94.31731733523586,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366384657",
+        "end": "366384657",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              12.48909,
+              742.9119
+            ],
+            [
+              7.56997,
+              695.5482
+            ],
+            [
+              12.48909,
+              742.9119
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4051,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 95.23692181637118,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366427124",
+        "end": "366427124",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              1.19698,
+              641.45235
+            ],
+            [
+              0.74333,
+              612.4425
+            ],
+            [
+              1.19698,
+              641.45235
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4047,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 58.02679365069215,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366427124",
+        "end": "366427124",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              1.19698,
+              641.45235
+            ],
+            [
+              7.56997,
+              695.5482
+            ],
+            [
+              1.19698,
+              641.45235
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4048,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 108.93990983588323,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5740602158",
+        "end": "5740602158",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              28.30131,
+              915.1506
+            ],
+            [
+              25.01097,
+              879.65835
+            ],
+            [
+              28.30131,
+              915.1506
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4061,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 71.28888124744563,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5740602158",
+        "end": "5740602158",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              28.30131,
+              915.1506
+            ],
+            [
+              31.24184,
+              946.8744
+            ],
+            [
+              28.30131,
+              915.1506
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4062,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 63.719579506487605,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5740602154",
+        "end": "5740602154",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              39.2928,
+              1034.18145
+            ],
+            [
+              38.15593,
+              1021.38315
+            ],
+            [
+              39.2928,
+              1034.18145
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4069,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 25.697389461725564,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366426288",
+        "end": "366426288",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              38.15593,
+              1021.38315
+            ],
+            [
+              35.9314,
+              997.38495
+            ],
+            [
+              38.15593,
+              1021.38315
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4067,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 48.20216331082661,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5740561113",
+        "end": "5740561113",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              35.9314,
+              997.38495
+            ],
+            [
+              31.24184,
+              946.8744
+            ],
+            [
+              35.9314,
+              997.38495
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4065,
+          "street_id": 32578658,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578658",
+          "composite": true
+        },
+        "length_hint": 101.4555594197991,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "3378126596",
+        "end": "3378126596",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              263.5607,
+              68.25945
+            ],
+            [
+              265.75791,
+              69.93
+            ],
+            [
+              263.5607,
+              68.25945
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53524,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 5.5203148774684765,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126596",
+        "end": "3378126596",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              263.5607,
+              68.25945
+            ],
+            [
+              262.8283,
+              64.5021
+            ],
+            [
+              263.5607,
+              68.25945
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53525,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 7.656131864721243,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126595",
+        "end": "3378126595",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              262.8283,
+              64.5021
+            ],
+            [
+              262.03031,
+              49.06755
+            ],
+            [
+              262.8283,
+              64.5021
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53527,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 30.910329777768474,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126593",
+        "end": "3378126593",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              260.83879,
+              26.4957
+            ],
+            [
+              262.03031,
+              49.06755
+            ],
+            [
+              260.83879,
+              26.4957
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53530,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 45.206554052831756,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126593",
+        "end": "3378126593",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              260.83879,
+              26.4957
+            ],
+            [
+              262.13962,
+              0.0
+            ],
+            [
+              260.83879,
+              26.4957
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53531,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 53.05522696884445,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126599",
+        "end": "3378126599",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              278.31805,
+              72.5385
+            ],
+            [
+              280.93611,
+              73.7928
+            ],
+            [
+              278.31805,
+              72.5385
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53518,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 5.806033638758831,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126599",
+        "end": "3378126599",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              278.31805,
+              72.5385
+            ],
+            [
+              270.46932,
+              70.6626
+            ],
+            [
+              278.31805,
+              72.5385
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53519,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 16.139586540292875,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5735418472",
+        "end": "5735418472",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              289.55549,
+              128.62125
+            ],
+            [
+              290.04194,
+              132.78375
+            ],
+            [
+              289.55549,
+              128.62125
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53504,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 8.381656125730748,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5735418472",
+        "end": "5735418472",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              289.55549,
+              128.62125
+            ],
+            [
+              288.3913,
+              118.6479
+            ],
+            [
+              289.55549,
+              128.62125
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53505,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 20.082136198980425,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126602",
+        "end": "3378126602",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              283.97503,
+              79.7424
+            ],
+            [
+              285.01897,
+              87.8898
+            ],
+            [
+              283.97503,
+              79.7424
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53512,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 16.42801722468051,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126602",
+        "end": "3378126602",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              283.97503,
+              79.7424
+            ],
+            [
+              282.61407,
+              75.8796
+            ],
+            [
+              283.97503,
+              79.7424
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53513,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 8.191077087074689,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126604",
+        "end": "3378126604",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              287.32003,
+              109.5015
+            ],
+            [
+              288.3913,
+              118.6479
+            ],
+            [
+              287.32003,
+              109.5015
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53508,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 18.417844865553658,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126604",
+        "end": "3378126604",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              287.32003,
+              109.5015
+            ],
+            [
+              285.01897,
+              87.8898
+            ],
+            [
+              287.32003,
+              109.5015
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53509,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 43.46771003922795,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126601",
+        "end": "3378126601",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              282.61407,
+              75.8796
+            ],
+            [
+              280.93611,
+              73.7928
+            ],
+            [
+              282.61407,
+              75.8796
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53515,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 5.355477196889228,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5735418454",
+        "end": "5735418454",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              291.3373,
+              147.4524
+            ],
+            [
+              292.76385,
+              163.5807
+            ],
+            [
+              291.3373,
+              147.4524
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53500,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 32.38253268615658,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5735418454",
+        "end": "5735418454",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              291.3373,
+              147.4524
+            ],
+            [
+              290.04194,
+              132.78375
+            ],
+            [
+              291.3373,
+              147.4524
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53501,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 29.451468578126995,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126606",
+        "end": "3378126606",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              292.76385,
+              163.5807
+            ],
+            [
+              294.83534,
+              177.42795
+            ],
+            [
+              292.76385,
+              163.5807
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53498,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 28.002671542736774,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126607",
+        "end": "3378126607",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              294.83534,
+              177.42795
+            ],
+            [
+              298.16941,
+              196.1925
+            ],
+            [
+              294.83534,
+              177.42795
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53496,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 38.11689176558864,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126597",
+        "end": "3378126597",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              265.75791,
+              69.93
+            ],
+            [
+              270.46932,
+              70.6626
+            ],
+            [
+              265.75791,
+              69.93
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 53522,
+          "street_id": 330809479,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "330809479",
+          "composite": true
+        },
+        "length_hint": 9.536055148351439,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "3378126608",
+        "end": "3378126608",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              281.32964,
+              194.65515
+            ],
+            [
+              274.23518,
+              193.3065
+            ],
+            [
+              281.32964,
+              194.65515
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9366,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 14.44302177719047,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "3378126608",
+        "end": "3378126608",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              281.32964,
+              194.65515
+            ],
+            [
+              286.95929,
+              195.22125
+            ],
+            [
+              281.32964,
+              194.65515
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9367,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 11.31608206624542,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "3378126609",
+        "end": "3378126609",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              286.95929,
+              195.22125
+            ],
+            [
+              291.44662,
+              195.58755
+            ],
+            [
+              286.95929,
+              195.22125
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9369,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 9.004511362400487,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "3378126611",
+        "end": "3378126611",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              291.44662,
+              195.58755
+            ],
+            [
+              295.17421,
+              195.74295
+            ],
+            [
+              291.44662,
+              195.58755
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9371,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 7.461655679029999,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366450852",
+        "end": "366450852",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              295.17421,
+              195.74295
+            ],
+            [
+              298.16941,
+              196.1925
+            ],
+            [
+              295.17421,
+              195.74295
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9373,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 6.057497252991554,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5732950406",
+        "end": "5732950406",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              167.47399,
+              185.9694
+            ],
+            [
+              118.57253,
+              187.54005
+            ],
+            [
+              167.47399,
+              185.9694
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9348,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 97.85335418991214,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5732950406",
+        "end": "5732950406",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              167.47399,
+              185.9694
+            ],
+            [
+              181.11087,
+              184.85385
+            ],
+            [
+              167.47399,
+              185.9694
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9349,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 27.36486418288244,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5732964407",
+        "end": "5732964407",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              36.72392,
+              191.4528
+            ],
+            [
+              16.326,
+              192.1965
+            ],
+            [
+              36.72392,
+              191.4528
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9338,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 40.822945999346985,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5732964407",
+        "end": "5732964407",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              36.72392,
+              191.4528
+            ],
+            [
+              56.27467,
+              190.73685
+            ],
+            [
+              36.72392,
+              191.4528
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9339,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 39.1277093612698,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5732950407",
+        "end": "5732950407",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              94.80774,
+              189.2661
+            ],
+            [
+              93.02046,
+              189.39375
+            ],
+            [
+              94.80774,
+              189.2661
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9344,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 3.583665342020646,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5732950407",
+        "end": "5732950407",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              94.80774,
+              189.2661
+            ],
+            [
+              118.57253,
+              187.54005
+            ],
+            [
+              94.80774,
+              189.2661
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9345,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 47.65477908233759,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366404821",
+        "end": "366404821",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              93.02046,
+              189.39375
+            ],
+            [
+              56.27467,
+              190.73685
+            ],
+            [
+              93.02046,
+              189.39375
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9342,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 73.54065543178412,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366463722",
+        "end": "366463722",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              267.06967,
+              190.7646
+            ],
+            [
+              255.25286,
+              187.78425
+            ],
+            [
+              267.06967,
+              190.7646
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9362,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 24.37371409519686,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366463722",
+        "end": "366463722",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              267.06967,
+              190.7646
+            ],
+            [
+              274.23518,
+              193.3065
+            ],
+            [
+              267.06967,
+              190.7646
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9363,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 15.206023697219543,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366477539",
+        "end": "366477539",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              229.3018,
+              183.92145
+            ],
+            [
+              215.5884,
+              182.9169
+            ],
+            [
+              229.3018,
+              183.92145
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9356,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 27.50028801758261,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366477539",
+        "end": "366477539",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              229.3018,
+              183.92145
+            ],
+            [
+              244.03728,
+              186.36345
+            ],
+            [
+              229.3018,
+              183.92145
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9357,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 29.872913137516452,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366443993",
+        "end": "366443993",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              181.11087,
+              184.85385
+            ],
+            [
+              194.75868,
+              184.37655
+            ],
+            [
+              181.11087,
+              184.85385
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9351,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 27.31230734200974,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5732964537",
+        "end": "5732964537",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              194.75868,
+              184.37655
+            ],
+            [
+              215.5884,
+              182.9169
+            ],
+            [
+              194.75868,
+              184.37655
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9353,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 41.761600228003736,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366479077",
+        "end": "366479077",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              244.03728,
+              186.36345
+            ],
+            [
+              255.25286,
+              187.78425
+            ],
+            [
+              244.03728,
+              186.36345
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 9359,
+          "street_id": 32582530,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32582530",
+          "composite": true
+        },
+        "length_hint": 22.610431873487045,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5737926350",
+        "end": "5737926350",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              254.77735,
+              430.6356
+            ],
+            [
+              227.06634,
+              431.3682
+            ],
+            [
+              254.77735,
+              430.6356
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 73388,
+          "street_id": 604794148,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "604794148",
+          "composite": true
+        },
+        "length_hint": 55.44138446972986,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5737926350",
+        "end": "5737926350",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              254.77735,
+              430.6356
+            ],
+            [
+              257.41181,
+              430.66335
+            ],
+            [
+              254.77735,
+              430.6356
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 73389,
+          "street_id": 604794148,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "residential",
+          "street_level": 4,
+          "street_group": "604794148",
+          "composite": true
+        },
+        "length_hint": 5.269212295628236,
+        "speed_limit": 8.333333333333334
+      },
+      {
+        "start": "5737926324",
+        "end": "5737926324",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              166.55029,
+              433.5771
+            ],
+            [
+              135.88235,
+              434.94795
+            ],
+            [
+              166.55029,
+              433.5771
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 73382,
+          "street_id": 604794148,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "604794148",
+          "composite": true
+        },
+        "length_hint": 61.39712610753371,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5737926324",
+        "end": "5737926324",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              166.55029,
+              433.5771
+            ],
+            [
+              181.6957,
+              432.9
+            ],
+            [
+              166.55029,
+              433.5771
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 73383,
+          "street_id": 604794148,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "604794148",
+          "composite": true
+        },
+        "length_hint": 30.321075738047288,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5737926353",
+        "end": "5737926353",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              135.88235,
+              434.94795
+            ],
+            [
+              80.09958,
+              437.80065
+            ],
+            [
+              135.88235,
+              434.94795
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 73380,
+          "street_id": 604794148,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "604794148",
+          "composite": true
+        },
+        "length_hint": 111.71133024295969,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5740098116",
+        "end": "5740098116",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              7.73941,
+              441.59685
+            ],
+            [
+              28.3505,
+              440.8698
+            ],
+            [
+              7.73941,
+              441.59685
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 73375,
+          "street_id": 604794148,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "604794148",
+          "composite": true
+        },
+        "length_hint": 41.24781849701146,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5737926355",
+        "end": "5737926355",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              28.3505,
+              440.8698
+            ],
+            [
+              80.09958,
+              437.80065
+            ],
+            [
+              28.3505,
+              440.8698
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 73377,
+          "street_id": 604794148,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "604794148",
+          "composite": true
+        },
+        "length_hint": 103.68002628411898,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5737926352",
+        "end": "5737926352",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              181.6957,
+              432.9
+            ],
+            [
+              227.06634,
+              431.3682
+            ],
+            [
+              181.6957,
+              432.9
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 73385,
+          "street_id": 604794148,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "604794148",
+          "composite": true
+        },
+        "length_hint": 90.79298178272593,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "5740098117",
+        "end": "5740098117",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              5.39463,
+              441.6801
+            ],
+            [
+              7.73941,
+              441.59685
+            ],
+            [
+              5.39463,
+              441.6801
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 74122,
+          "street_id": 605111032,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "605111032",
+          "composite": true
+        },
+        "length_hint": 4.692514810163094,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "366466912",
+        "end": "366466912",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              2.946,
+              442.60695
+            ],
+            [
+              5.39463,
+              441.6801
+            ],
+            [
+              2.946,
+              442.60695
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 74124,
+          "street_id": 605111033,
+          "street_name": "Kinh Trung \u01b0\u01a1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "605111033",
+          "composite": true
+        },
+        "length_hint": 5.236349797101032,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366474867",
+        "end": "366474867",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              9.72892,
+              193.06785
+            ],
+            [
+              10.45039,
+              192.41295
+            ],
+            [
+              9.72892,
+              193.06785
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 71906,
+          "street_id": 604101743,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "604101743",
+          "composite": true
+        },
+        "length_hint": 1.9487564967434974,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366474982",
+        "end": "366474982",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              235.25393,
+              1093.8384
+            ],
+            [
+              271.44768,
+              1086.68445
+            ],
+            [
+              235.25393,
+              1093.8384
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4119,
+          "street_id": 32578663,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578663",
+          "composite": true
+        },
+        "length_hint": 73.78798112606148,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366474982",
+        "end": "366474982",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              235.25393,
+              1093.8384
+            ],
+            [
+              203.77706,
+              1100.1432
+            ],
+            [
+              235.25393,
+              1093.8384
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4120,
+          "street_id": 32578663,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578663",
+          "composite": true
+        },
+        "length_hint": 64.204169585375,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "366444412",
+        "end": "366444412",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              203.77706,
+              1100.1432
+            ],
+            [
+              185.07896,
+              1103.19015
+            ],
+            [
+              203.77706,
+              1100.1432
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 4122,
+          "street_id": 32578663,
+          "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "32578663",
+          "composite": true
+        },
+        "length_hint": 37.88946280498049,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "5733030859",
+        "end": "5733030859",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              16.326,
+              192.1965
+            ],
+            [
+              10.45039,
+              192.41295
+            ],
+            [
+              16.326,
+              192.1965
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 71905,
+          "street_id": 604101742,
+          "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "604101742",
+          "composite": true
+        },
+        "length_hint": 11.759191039284973,
+        "speed_limit": 13.88888888888889
+      }
+    ]
+  }
+}

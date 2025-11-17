@@ -1,0 +1,342 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "lat": 10.7540043,
+      "long": 106.8488469,
+      "x": 0.06666535634435322,
+      "y": 0.35717836153847216,
+      "id": 1605303749
+    },
+    {
+      "lat": 10.7494719,
+      "long": 106.8433483,
+      "x": -0.23387069069997868,
+      "y": 0.10563016153844795,
+      "id": 1605303722
+    },
+    {
+      "lat": 10.7483449,
+      "long": 106.841971,
+      "x": -0.30914954306147513,
+      "y": 0.04308166153843018,
+      "id": 1605303820
+    },
+    {
+      "lat": 10.7518752,
+      "long": 106.8463041,
+      "x": -0.07231603172262374,
+      "y": 0.23901331153850325,
+      "id": 1605303791
+    },
+    {
+      "lat": 10.7444797,
+      "long": 106.8372451,
+      "x": -0.5674522573391043,
+      "y": -0.17143693846156444,
+      "id": 1605303729
+    },
+    {
+      "lat": 10.7474728,
+      "long": 106.8408673,
+      "x": -0.3694742866550387,
+      "y": -0.005319888461498334,
+      "id": 1605303732
+    },
+    {
+      "lat": 10.7507789,
+      "long": 106.844963,
+      "x": -0.14561630682694643,
+      "y": 0.178168661538482,
+      "id": 1605303701
+    },
+    {
+      "lat": 10.7363298,
+      "long": 106.855912,
+      "x": 0.45282132804191666,
+      "y": -0.6237563884615299,
+      "id": 934971575
+    },
+    {
+      "lat": 10.7363813,
+      "long": 106.8559921,
+      "x": 0.45719934014783004,
+      "y": -0.6208981384615494,
+      "id": 2686826200
+    },
+    {
+      "lat": 10.7548739,
+      "long": 106.8499305,
+      "x": 0.12589149764902152,
+      "y": 0.4054411615384551,
+      "id": 1605303707
+    },
+    {
+      "lat": 10.752808,
+      "long": 106.8473931,
+      "x": -0.012794743534035535,
+      "y": 0.29078371153846394,
+      "id": 1605303773
+    },
+    {
+      "lat": 10.7361174,
+      "long": 106.855708,
+      "x": 0.44167133466250164,
+      "y": -0.6355445884615608,
+      "id": 934971614
+    },
+    {
+      "lat": 10.7554544,
+      "long": 106.8506721,
+      "x": 0.16642500299357954,
+      "y": 0.43765891153844805,
+      "id": 1605303741
+    }
+  ],
+  "links": [
+    {
+      "segment_id": 25888,
+      "length": 207,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303749,
+      "target": 1605303773
+    },
+    {
+      "segment_id": 25889,
+      "length": 152,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303749,
+      "target": 1605303707
+    },
+    {
+      "segment_id": 25880,
+      "length": 195,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303722,
+      "target": 1605303820
+    },
+    {
+      "segment_id": 25881,
+      "length": 228,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303722,
+      "target": 1605303701
+    },
+    {
+      "segment_id": 25827,
+      "length": 154,
+      "street_id": 147293392,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303820,
+      "target": 1605303732
+    },
+    {
+      "segment_id": 25879,
+      "length": 195,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303820,
+      "target": 1605303722
+    },
+    {
+      "segment_id": 25884,
+      "length": 190,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303791,
+      "target": 1605303701
+    },
+    {
+      "segment_id": 25885,
+      "length": 157,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303791,
+      "target": 1605303773
+    },
+    {
+      "segment_id": 25878,
+      "length": 517,
+      "street_id": 147293404,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "C\u1ea7u \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "bridge",
+      "source": 1605303729,
+      "target": 1605303732
+    },
+    {
+      "segment_id": 25828,
+      "length": 154,
+      "street_id": 147293392,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303732,
+      "target": 1605303820
+    },
+    {
+      "segment_id": 25877,
+      "length": 517,
+      "street_id": 147293404,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "C\u1ea7u \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "bridge",
+      "source": 1605303732,
+      "target": 1605303729
+    },
+    {
+      "segment_id": 25882,
+      "length": 228,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303701,
+      "target": 1605303722
+    },
+    {
+      "segment_id": 25883,
+      "length": 190,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303701,
+      "target": 1605303791
+    },
+    {
+      "segment_id": 59681,
+      "length": 10,
+      "street_id": 410411589,
+      "max_velocity": 40.0,
+      "street_level": 3,
+      "street_name": "L\u00fd Th\u00e1i T\u1ed5",
+      "street_type": "secondary",
+      "source": 934971575,
+      "target": 2686826200
+    },
+    {
+      "segment_id": 59682,
+      "length": 32,
+      "street_id": 410411589,
+      "max_velocity": 40.0,
+      "street_level": 3,
+      "street_name": "L\u00fd Th\u00e1i T\u1ed5",
+      "street_type": "secondary",
+      "source": 934971575,
+      "target": 934971614
+    },
+    {
+      "segment_id": 59680,
+      "length": 10,
+      "street_id": 410411589,
+      "max_velocity": 40.0,
+      "street_level": 3,
+      "street_name": "L\u00fd Th\u00e1i T\u1ed5",
+      "street_type": "secondary",
+      "source": 2686826200,
+      "target": 934971575
+    },
+    {
+      "segment_id": 25890,
+      "length": 152,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303707,
+      "target": 1605303749
+    },
+    {
+      "segment_id": 25891,
+      "length": 103,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303707,
+      "target": 1605303741
+    },
+    {
+      "segment_id": 25886,
+      "length": 157,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303773,
+      "target": 1605303791
+    },
+    {
+      "segment_id": 25887,
+      "length": 207,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303773,
+      "target": 1605303749
+    },
+    {
+      "segment_id": 59683,
+      "length": 32,
+      "street_id": 410411589,
+      "max_velocity": 40.0,
+      "street_level": 3,
+      "street_name": "L\u00fd Th\u00e1i T\u1ed5",
+      "street_type": "secondary",
+      "source": 934971614,
+      "target": 934971575
+    },
+    {
+      "segment_id": 25892,
+      "length": 103,
+      "street_id": 147293406,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1605303741,
+      "target": 1605303707
+    }
+  ]
+}

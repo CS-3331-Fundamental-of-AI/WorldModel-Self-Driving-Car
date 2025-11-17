@@ -1,0 +1,1089 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "lat": 10.7112397,
+      "long": 106.6564964,
+      "x": -0.23623056020096644,
+      "y": 0.3175610684210574,
+      "id": 2496935172
+    },
+    {
+      "lat": 10.7046246,
+      "long": 106.6630517,
+      "x": 0.12206135941346868,
+      "y": -0.049576981578910884,
+      "id": 2496935177
+    },
+    {
+      "lat": 10.7052466,
+      "long": 106.6630195,
+      "x": 0.12030140947846502,
+      "y": -0.015055981578916466,
+      "id": 2496935178
+    },
+    {
+      "lat": 10.7112397,
+      "long": 106.6565674,
+      "x": -0.23234992524992215,
+      "y": 0.3175610684210574,
+      "id": 2496935179
+    },
+    {
+      "lat": 10.7023857,
+      "long": 106.6630208,
+      "x": 0.12037246335751012,
+      "y": -0.17383593157891336,
+      "id": 2496935180
+    },
+    {
+      "lat": 10.7042029,
+      "long": 106.663041,
+      "x": 0.12147653132988684,
+      "y": -0.07298133157893388,
+      "id": 2496935181
+    },
+    {
+      "lat": 10.7017953,
+      "long": 106.6630745,
+      "x": 0.12330753514393555,
+      "y": -0.20660313157891902,
+      "id": 2496935182
+    },
+    {
+      "lat": 10.7112186,
+      "long": 106.6568236,
+      "x": -0.21834684532931287,
+      "y": 0.3163900184210761,
+      "id": 2496935183
+    },
+    {
+      "lat": 10.7074301,
+      "long": 106.6628384,
+      "x": 0.11040305751222157,
+      "y": 0.10612826842104067,
+      "id": 2496935184
+    },
+    {
+      "lat": 10.7002245,
+      "long": 106.6630047,
+      "x": 0.11949248839000831,
+      "y": -0.29378253157899814,
+      "id": 2496935185
+    },
+    {
+      "lat": 10.6982468,
+      "long": 106.6591669,
+      "x": -0.09026949490528044,
+      "y": -0.4035448815789658,
+      "id": 5755264777
+    },
+    {
+      "lat": 10.6987578,
+      "long": 106.66288,
+      "x": 0.11267678165253858,
+      "y": -0.3751843815789944,
+      "id": 2496935187
+    },
+    {
+      "lat": 10.7028588,
+      "long": 106.6630088,
+      "x": 0.11971658139410646,
+      "y": -0.14757888157897475,
+      "id": 2496935189
+    },
+    {
+      "lat": 10.7055734,
+      "long": 106.6629498,
+      "x": 0.11649182840724259,
+      "y": 0.003081418421075177,
+      "id": 2496935190
+    },
+    {
+      "lat": 10.7098482,
+      "long": 106.6616194,
+      "x": 0.04377638138650175,
+      "y": 0.24033281842103332,
+      "id": 2496935191
+    },
+    {
+      "lat": 10.7079045,
+      "long": 106.6629779,
+      "x": 0.118027685338148,
+      "y": 0.13245746842103373,
+      "id": 2496935193
+    },
+    {
+      "lat": 10.7111606,
+      "long": 106.6571347,
+      "x": -0.20134310542516112,
+      "y": 0.3131710184210205,
+      "id": 2496935194
+    },
+    {
+      "lat": 10.7097058,
+      "long": 106.6621397,
+      "x": 0.07221433018702567,
+      "y": 0.23242961842105253,
+      "id": 2496935195
+    },
+    {
+      "lat": 10.708114,
+      "long": 106.662998,
+      "x": 0.11912628762704325,
+      "y": 0.1440847184210569,
+      "id": 2496935197
+    },
+    {
+      "lat": 10.7093843,
+      "long": 106.6632448,
+      "x": 0.1326155933431158,
+      "y": 0.21458636842104778,
+      "id": 2496935198
+    },
+    {
+      "lat": 10.7092749,
+      "long": 106.6633159,
+      "x": 0.13650169397686485,
+      "y": 0.20851466842107652,
+      "id": 2496935199
+    },
+    {
+      "lat": 10.7012985,
+      "long": 106.6630678,
+      "x": 0.12294133438097044,
+      "y": -0.23417553157894783,
+      "id": 2496935201
+    },
+    {
+      "lat": 10.7112397,
+      "long": 106.6566412,
+      "x": -0.22831625117460147,
+      "y": 0.3175610684210574,
+      "id": 2496935204
+    },
+    {
+      "lat": 10.7112133,
+      "long": 106.6561745,
+      "x": -0.25382459387140477,
+      "y": 0.3160958684210892,
+      "id": 2496935205
+    },
+    {
+      "lat": 10.70366,
+      "long": 106.6630195,
+      "x": 0.12030140947846502,
+      "y": -0.10311228157899005,
+      "id": 2496935206
+    },
+    {
+      "lat": 10.7061334,
+      "long": 106.662758,
+      "x": 0.10600864835664048,
+      "y": 0.03416141842108161,
+      "id": 2496935207
+    },
+    {
+      "lat": 10.7100221,
+      "long": 106.6610454,
+      "x": 0.012403360798775631,
+      "y": 0.24998426842103666,
+      "id": 2496935208
+    },
+    {
+      "lat": 10.7064286,
+      "long": 106.662699,
+      "x": 0.10278389536977656,
+      "y": 0.05054501842108444,
+      "id": 2496935209
+    },
+    {
+      "lat": 10.6992744,
+      "long": 106.6629337,
+      "x": 0.11561185343896402,
+      "y": -0.3465130815789402,
+      "id": 2496935211
+    },
+    {
+      "lat": 10.7066803,
+      "long": 106.6627298,
+      "x": 0.10446732574225359,
+      "y": 0.06451436842107028,
+      "id": 2496935212
+    },
+    {
+      "lat": 10.6978317,
+      "long": 106.656761,
+      "x": -0.2217683629051979,
+      "y": -0.4265829315789474,
+      "id": 2684989123
+    },
+    {
+      "lat": 10.6979987,
+      "long": 106.6579505,
+      "x": -0.15675406327291008,
+      "y": -0.4173144315789828,
+      "id": 2684989125
+    },
+    {
+      "lat": 10.6983361,
+      "long": 106.6596048,
+      "x": -0.06633526892064584,
+      "y": -0.3985887315789188,
+      "id": 2684989128
+    },
+    {
+      "lat": 10.7112355,
+      "long": 106.6566772,
+      "x": -0.22634860528361386,
+      "y": 0.31732796842109384,
+      "id": 5752795593
+    },
+    {
+      "lat": 10.6985917,
+      "long": 106.6611792,
+      "x": 0.019716444691891155,
+      "y": -0.3844029315789668,
+      "id": 2684989130
+    },
+    {
+      "lat": 10.6979758,
+      "long": 106.6577873,
+      "x": -0.1656740579767529,
+      "y": -0.4185853815789485,
+      "id": 5755264729
+    },
+    {
+      "lat": 10.710555,
+      "long": 106.659215,
+      "x": -0.08764050136818449,
+      "y": 0.27956021842101525,
+      "id": 5752795490
+    },
+    {
+      "lat": 10.7107678,
+      "long": 106.658484,
+      "x": -0.1275946443118654,
+      "y": 0.2913706184210098,
+      "id": 5752795496
+    }
+  ],
+  "links": [
+    {
+      "segment_id": 41764,
+      "length": 35,
+      "street_id": 242174801,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935172,
+      "target": 2496935205
+    },
+    {
+      "segment_id": 41765,
+      "length": 7,
+      "street_id": 242174801,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935172,
+      "target": 2496935179
+    },
+    {
+      "segment_id": 44036,
+      "length": 69,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935177,
+      "target": 2496935178
+    },
+    {
+      "segment_id": 44037,
+      "length": 46,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935177,
+      "target": 2496935181
+    },
+    {
+      "segment_id": 44034,
+      "length": 37,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935178,
+      "target": 2496935190
+    },
+    {
+      "segment_id": 44035,
+      "length": 69,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935178,
+      "target": 2496935177
+    },
+    {
+      "segment_id": 41766,
+      "length": 7,
+      "street_id": 242174801,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935179,
+      "target": 2496935172
+    },
+    {
+      "segment_id": 41767,
+      "length": 8,
+      "street_id": 242174801,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935179,
+      "target": 2496935204
+    },
+    {
+      "segment_id": 44044,
+      "length": 52,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935180,
+      "target": 2496935189
+    },
+    {
+      "segment_id": 44045,
+      "length": 65,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935180,
+      "target": 2496935182
+    },
+    {
+      "segment_id": 44038,
+      "length": 46,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935181,
+      "target": 2496935177
+    },
+    {
+      "segment_id": 44039,
+      "length": 60,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935181,
+      "target": 2496935206
+    },
+    {
+      "segment_id": 44046,
+      "length": 65,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935182,
+      "target": 2496935180
+    },
+    {
+      "segment_id": 44047,
+      "length": 55,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935182,
+      "target": 2496935201
+    },
+    {
+      "segment_id": 41772,
+      "length": 16,
+      "street_id": 242174801,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935183,
+      "target": 5752795593
+    },
+    {
+      "segment_id": 44001,
+      "length": 34,
+      "street_id": 262891189,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935183,
+      "target": 2496935194
+    },
+    {
+      "segment_id": 44024,
+      "length": 54,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935184,
+      "target": 2496935193
+    },
+    {
+      "segment_id": 44025,
+      "length": 84,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935184,
+      "target": 2496935212
+    },
+    {
+      "segment_id": 44050,
+      "length": 119,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935185,
+      "target": 2496935201
+    },
+    {
+      "segment_id": 44051,
+      "length": 105,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935185,
+      "target": 2496935211
+    },
+    {
+      "segment_id": 44060,
+      "length": 48,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 5755264777,
+      "target": 2684989128
+    },
+    {
+      "segment_id": 44061,
+      "length": 135,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 5755264777,
+      "target": 2684989125
+    },
+    {
+      "segment_id": 44054,
+      "length": 57,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935187,
+      "target": 2496935211
+    },
+    {
+      "segment_id": 44055,
+      "length": 186,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935187,
+      "target": 2684989130
+    },
+    {
+      "segment_id": 44042,
+      "length": 89,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935189,
+      "target": 2496935206
+    },
+    {
+      "segment_id": 44043,
+      "length": 52,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935189,
+      "target": 2496935180
+    },
+    {
+      "segment_id": 44032,
+      "length": 65,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935190,
+      "target": 2496935207
+    },
+    {
+      "segment_id": 44033,
+      "length": 37,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935190,
+      "target": 2496935178
+    },
+    {
+      "segment_id": 44012,
+      "length": 65,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935191,
+      "target": 2496935208
+    },
+    {
+      "segment_id": 44013,
+      "length": 59,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935191,
+      "target": 2496935195
+    },
+    {
+      "segment_id": 44022,
+      "length": 23,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935193,
+      "target": 2496935197
+    },
+    {
+      "segment_id": 44023,
+      "length": 54,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935193,
+      "target": 2496935184
+    },
+    {
+      "segment_id": 44002,
+      "length": 34,
+      "street_id": 262891189,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935194,
+      "target": 2496935183
+    },
+    {
+      "segment_id": 44005,
+      "length": 153,
+      "street_id": 262891290,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "residential",
+      "source": 2496935194,
+      "target": 5752795496
+    },
+    {
+      "segment_id": 44014,
+      "length": 59,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935195,
+      "target": 2496935191
+    },
+    {
+      "segment_id": 44015,
+      "length": 125,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935195,
+      "target": 2496935198
+    },
+    {
+      "segment_id": 44020,
+      "length": 133,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935197,
+      "target": 2496935199
+    },
+    {
+      "segment_id": 44021,
+      "length": 23,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935197,
+      "target": 2496935193
+    },
+    {
+      "segment_id": 44016,
+      "length": 125,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935198,
+      "target": 2496935195
+    },
+    {
+      "segment_id": 44017,
+      "length": 14,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935198,
+      "target": 2496935199
+    },
+    {
+      "segment_id": 44018,
+      "length": 14,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935199,
+      "target": 2496935198
+    },
+    {
+      "segment_id": 44019,
+      "length": 133,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935199,
+      "target": 2496935197
+    },
+    {
+      "segment_id": 44048,
+      "length": 55,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935201,
+      "target": 2496935182
+    },
+    {
+      "segment_id": 44049,
+      "length": 119,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935201,
+      "target": 2496935185
+    },
+    {
+      "segment_id": 41768,
+      "length": 8,
+      "street_id": 242174801,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935204,
+      "target": 2496935179
+    },
+    {
+      "segment_id": 41769,
+      "length": 3,
+      "street_id": 242174801,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935204,
+      "target": 5752795593
+    },
+    {
+      "segment_id": 41763,
+      "length": 35,
+      "street_id": 242174801,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935205,
+      "target": 2496935172
+    },
+    {
+      "segment_id": 44040,
+      "length": 60,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935206,
+      "target": 2496935181
+    },
+    {
+      "segment_id": 44041,
+      "length": 89,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935206,
+      "target": 2496935189
+    },
+    {
+      "segment_id": 44030,
+      "length": 33,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935207,
+      "target": 2496935209
+    },
+    {
+      "segment_id": 44031,
+      "length": 65,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935207,
+      "target": 2496935190
+    },
+    {
+      "segment_id": 44010,
+      "length": 208,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935208,
+      "target": 5752795490
+    },
+    {
+      "segment_id": 44011,
+      "length": 65,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935208,
+      "target": 2496935191
+    },
+    {
+      "segment_id": 44028,
+      "length": 28,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935209,
+      "target": 2496935212
+    },
+    {
+      "segment_id": 44029,
+      "length": 33,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935209,
+      "target": 2496935207
+    },
+    {
+      "segment_id": 44052,
+      "length": 105,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935211,
+      "target": 2496935185
+    },
+    {
+      "segment_id": 44053,
+      "length": 57,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935211,
+      "target": 2496935187
+    },
+    {
+      "segment_id": 44026,
+      "length": 84,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935212,
+      "target": 2496935184
+    },
+    {
+      "segment_id": 44027,
+      "length": 28,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2496935212,
+      "target": 2496935209
+    },
+    {
+      "segment_id": 44066,
+      "length": 113,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2684989123,
+      "target": 5755264729
+    },
+    {
+      "segment_id": 44062,
+      "length": 135,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2684989125,
+      "target": 5755264777
+    },
+    {
+      "segment_id": 44063,
+      "length": 18,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2684989125,
+      "target": 5755264729
+    },
+    {
+      "segment_id": 44058,
+      "length": 174,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2684989128,
+      "target": 2684989130
+    },
+    {
+      "segment_id": 44059,
+      "length": 48,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2684989128,
+      "target": 5755264777
+    },
+    {
+      "segment_id": 41770,
+      "length": 3,
+      "street_id": 242174801,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "residential",
+      "source": 5752795593,
+      "target": 2496935204
+    },
+    {
+      "segment_id": 41771,
+      "length": 16,
+      "street_id": 242174801,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 5752795593,
+      "target": 2496935183
+    },
+    {
+      "segment_id": 44056,
+      "length": 186,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2684989130,
+      "target": 2496935187
+    },
+    {
+      "segment_id": 44057,
+      "length": 174,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 2684989130,
+      "target": 2684989128
+    },
+    {
+      "segment_id": 44064,
+      "length": 18,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 5755264729,
+      "target": 2684989125
+    },
+    {
+      "segment_id": 44065,
+      "length": 113,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 5755264729,
+      "target": 2684989123
+    },
+    {
+      "segment_id": 44008,
+      "length": 83,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 5752795490,
+      "target": 5752795496
+    },
+    {
+      "segment_id": 44009,
+      "length": 208,
+      "street_id": 262891290,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "residential",
+      "source": 5752795490,
+      "target": 2496935208
+    },
+    {
+      "segment_id": 44006,
+      "length": 153,
+      "street_id": 262891290,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "residential",
+      "source": 5752795496,
+      "target": 2496935194
+    },
+    {
+      "segment_id": 44007,
+      "length": 83,
+      "street_id": 262891290,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Phong Ph\u00fa",
+      "street_type": "unclassified",
+      "source": 5752795496,
+      "target": 5752795490
+    }
+  ]
+}

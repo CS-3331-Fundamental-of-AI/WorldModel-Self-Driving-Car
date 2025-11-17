@@ -1,0 +1,168 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "lat": 10.8615139,
+      "long": 106.8649578,
+      "x": 0.3318091237139731,
+      "y": -0.29275694999999224,
+      "id": 5751141511
+    },
+    {
+      "lat": 10.8614085,
+      "long": 106.8643677,
+      "x": 0.2995561281587451,
+      "y": -0.29860665000003106,
+      "id": 5751141512
+    },
+    {
+      "lat": 10.8599545,
+      "long": 106.8574905,
+      "x": -0.07632982512690505,
+      "y": -0.3793036499999731,
+      "id": 5751141513
+    },
+    {
+      "lat": 10.8597753,
+      "long": 106.8566644,
+      "x": -0.12148183263114223,
+      "y": -0.38924924999996335,
+      "id": 5751141514
+    },
+    {
+      "lat": 10.8744643,
+      "long": 106.8560684,
+      "x": -0.15405730348536725,
+      "y": 0.42599024999997237,
+      "id": 2287611019
+    },
+    {
+      "lat": 10.8752942,
+      "long": 106.8563627,
+      "x": -0.13797179832998058,
+      "y": 0.47204970000003676,
+      "id": 5153241356
+    },
+    {
+      "lat": 10.8751109,
+      "long": 106.8562977,
+      "x": -0.14152449229932307,
+      "y": 0.46187654999995065,
+      "id": 5153241332
+    }
+  ],
+  "links": [
+    {
+      "segment_id": 79709,
+      "length": 65,
+      "street_id": 608188541,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nam Cao",
+      "street_type": "tertiary",
+      "source": 5751141511,
+      "target": 5751141512
+    },
+    {
+      "segment_id": 79707,
+      "length": 768,
+      "street_id": 608188541,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nam Cao",
+      "street_type": "tertiary",
+      "source": 5751141512,
+      "target": 5751141513
+    },
+    {
+      "segment_id": 79708,
+      "length": 65,
+      "street_id": 608188541,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nam Cao",
+      "street_type": "tertiary",
+      "source": 5751141512,
+      "target": 5751141511
+    },
+    {
+      "segment_id": 79705,
+      "length": 92,
+      "street_id": 608188541,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nam Cao",
+      "street_type": "tertiary",
+      "source": 5751141513,
+      "target": 5751141514
+    },
+    {
+      "segment_id": 79706,
+      "length": 768,
+      "street_id": 608188541,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nam Cao",
+      "street_type": "tertiary",
+      "source": 5751141513,
+      "target": 5751141512
+    },
+    {
+      "segment_id": 79704,
+      "length": 92,
+      "street_id": 608188541,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nam Cao",
+      "street_type": "tertiary",
+      "source": 5751141514,
+      "target": 5751141513
+    },
+    {
+      "segment_id": 81880,
+      "length": 76,
+      "street_id": 610101817,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Long H\u01b0ng",
+      "street_type": "tertiary",
+      "source": 2287611019,
+      "target": 5153241332
+    },
+    {
+      "segment_id": 81877,
+      "length": 21,
+      "street_id": 610101817,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Long H\u01b0ng",
+      "street_type": "tertiary",
+      "source": 5153241356,
+      "target": 5153241332
+    },
+    {
+      "segment_id": 81878,
+      "length": 21,
+      "street_id": 610101817,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Long H\u01b0ng",
+      "street_type": "tertiary",
+      "source": 5153241332,
+      "target": 5153241356
+    },
+    {
+      "segment_id": 81879,
+      "length": 76,
+      "street_id": 610101817,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Long H\u01b0ng",
+      "street_type": "tertiary",
+      "source": 5153241332,
+      "target": 2287611019
+    }
+  ]
+}

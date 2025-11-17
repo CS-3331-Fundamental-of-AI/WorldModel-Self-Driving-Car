@@ -1,0 +1,1567 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "lat": 10.6872072,
+      "long": 106.6257874,
+      "x": 0.03635674749513007,
+      "y": 0.4072772357142631,
+      "id": 2684988929
+    },
+    {
+      "lat": 10.6783958,
+      "long": 106.6321459,
+      "x": 0.38389220290819226,
+      "y": -0.08175546428568284,
+      "id": 2684988417
+    },
+    {
+      "lat": 10.6783958,
+      "long": 106.632728,
+      "x": 0.41570794382140996,
+      "y": -0.08175546428568284,
+      "id": 2684988419
+    },
+    {
+      "lat": 10.6768742,
+      "long": 106.6330238,
+      "x": 0.4318754342220279,
+      "y": -0.16620426428569582,
+      "id": 2684988289
+    },
+    {
+      "lat": 10.6770136,
+      "long": 106.6331524,
+      "x": 0.43890430259740965,
+      "y": -0.158467564285689,
+      "id": 2684988297
+    },
+    {
+      "lat": 10.67704,
+      "long": 106.6328851,
+      "x": 0.4242945318600696,
+      "y": -0.1570023642857208,
+      "id": 2684988300
+    },
+    {
+      "lat": 10.6770549,
+      "long": 106.6333962,
+      "x": 0.4522296378230197,
+      "y": -0.1561754142857186,
+      "id": 2684988301
+    },
+    {
+      "lat": 10.6796189,
+      "long": 106.6303448,
+      "x": 0.2854497858692546,
+      "y": -0.013873414285742652,
+      "id": 2684988558
+    },
+    {
+      "lat": 10.6824286,
+      "long": 106.6278136,
+      "x": 0.14710241703330895,
+      "y": 0.14206493571427112,
+      "id": 2684988692
+    },
+    {
+      "lat": 10.6772106,
+      "long": 106.6336286,
+      "x": 0.46493188518223116,
+      "y": -0.14753406428568885,
+      "id": 2684988309
+    },
+    {
+      "lat": 10.6789912,
+      "long": 106.6183491,
+      "x": -0.3701971532666164,
+      "y": -0.048710764285687685,
+      "id": 366451860
+    },
+    {
+      "lat": 10.6773001,
+      "long": 106.6282965,
+      "x": 0.1734962003818722,
+      "y": -0.1425668142857093,
+      "id": 2684988312
+    },
+    {
+      "lat": 10.6879878,
+      "long": 106.6249544,
+      "x": -0.009172392138258378,
+      "y": 0.45060053571429504,
+      "id": 2684988953
+    },
+    {
+      "lat": 10.6765127,
+      "long": 106.6170012,
+      "x": -0.44386909481738557,
+      "y": -0.1862675142857151,
+      "id": 1589919775
+    },
+    {
+      "lat": 10.6789822,
+      "long": 106.6183444,
+      "x": -0.3704540403692731,
+      "y": -0.04921026428570821,
+      "id": 366457890
+    },
+    {
+      "lat": 10.680195,
+      "long": 106.6223475,
+      "x": -0.15165728302635173,
+      "y": 0.01810013571425559,
+      "id": 2684988579
+    },
+    {
+      "lat": 10.6883228,
+      "long": 106.6244173,
+      "x": -0.03852857568754742,
+      "y": 0.4691930357142813,
+      "id": 2684988966
+    },
+    {
+      "lat": 10.6792077,
+      "long": 106.6162968,
+      "x": -0.4823693660753923,
+      "y": -0.03669501428575808,
+      "id": 366452775
+    },
+    {
+      "lat": 10.6803205,
+      "long": 106.6293992,
+      "x": 0.23376628714450487,
+      "y": 0.02506538571431724,
+      "id": 2684988584
+    },
+    {
+      "lat": 10.6860947,
+      "long": 106.6269549,
+      "x": 0.10016859686169566,
+      "y": 0.3455334857142838,
+      "id": 2684988841
+    },
+    {
+      "lat": 10.6793288,
+      "long": 106.6172948,
+      "x": -0.4278218494440389,
+      "y": -0.02997396428569113,
+      "id": 366472360
+    },
+    {
+      "lat": 10.6890588,
+      "long": 106.6236614,
+      "x": -0.07984367370548506,
+      "y": 0.510041035714273,
+      "id": 366425644
+    },
+    {
+      "lat": 10.6829817,
+      "long": 106.6274502,
+      "x": 0.12724012490525827,
+      "y": 0.1727619857142388,
+      "id": 2684988718
+    },
+    {
+      "lat": 10.6784653,
+      "long": 106.6325479,
+      "x": 0.4058642486860974,
+      "y": -0.07789821428575983,
+      "id": 2684988466
+    },
+    {
+      "lat": 10.6792246,
+      "long": 106.616692,
+      "x": -0.4607689867439337,
+      "y": -0.03575706428574035,
+      "id": 366447028
+    },
+    {
+      "lat": 10.6793302,
+      "long": 106.6170233,
+      "x": -0.44266117886818196,
+      "y": -0.02989626428567041,
+      "id": 366464948
+    },
+    {
+      "lat": 10.6807472,
+      "long": 106.6289168,
+      "x": 0.20739983221179548,
+      "y": 0.04874723571432968,
+      "id": 2684988605
+    },
+    {
+      "lat": 10.6906363,
+      "long": 106.6244123,
+      "x": -0.03880185983909512,
+      "y": 0.597592285714261,
+      "id": 366451518
+    },
+    {
+      "lat": 10.6786225,
+      "long": 106.6255526,
+      "x": 0.023523323743237956,
+      "y": -0.06917361428574312,
+      "id": 2684988480
+    },
+    {
+      "lat": 10.6836106,
+      "long": 106.6273794,
+      "x": 0.1233704213204001,
+      "y": 0.20766593571427203,
+      "id": 2684988747
+    },
+    {
+      "lat": 10.6811647,
+      "long": 106.6203502,
+      "x": -0.2608233701688804,
+      "y": 0.07191848571429046,
+      "id": 2684988620
+    },
+    {
+      "lat": 10.6792713,
+      "long": 106.6175887,
+      "x": -0.41175820702102456,
+      "y": -0.0331652142857182,
+      "id": 366454609
+    },
+    {
+      "lat": 10.6760634,
+      "long": 106.6322962,
+      "x": 0.3921071245011819,
+      "y": -0.21120366428569584,
+      "id": 2684988242
+    },
+    {
+      "lat": 10.6909618,
+      "long": 106.624726,
+      "x": -0.021656012176853146,
+      "y": 0.6156575357142968,
+      "id": 2684989011
+    },
+    {
+      "lat": 10.6815227,
+      "long": 106.6196156,
+      "x": -0.3009742777015824,
+      "y": 0.09178748571430725,
+      "id": 366425947
+    },
+    {
+      "lat": 10.676258,
+      "long": 106.6304055,
+      "x": 0.2887674554675361,
+      "y": -0.20040336428567487,
+      "id": 2684988253
+    },
+    {
+      "lat": 10.6765541,
+      "long": 106.6170204,
+      "x": -0.44281968367593977,
+      "y": -0.18396981428567985,
+      "id": 5783600993
+    },
+    {
+      "lat": 10.6762903,
+      "long": 106.61689,
+      "x": -0.4499469343462204,
+      "y": -0.198610714285725,
+      "id": 5783600994
+    },
+    {
+      "lat": 10.6763619,
+      "long": 106.6167367,
+      "x": -0.4583258264296727,
+      "y": -0.19463691428572163,
+      "id": 5783600995
+    },
+    {
+      "lat": 10.6763675,
+      "long": 106.6164972,
+      "x": -0.47141613728499826,
+      "y": -0.19432611428573734,
+      "id": 5783600996
+    },
+    {
+      "lat": 10.6764447,
+      "long": 106.6162979,
+      "x": -0.4823092435617567,
+      "y": -0.1900415142857497,
+      "id": 5783600997
+    },
+    {
+      "lat": 10.6764993,
+      "long": 106.6160469,
+      "x": -0.49602810796540886,
+      "y": -0.18701121428573034,
+      "id": 5783600998
+    },
+    {
+      "lat": 10.6764502,
+      "long": 106.6321722,
+      "x": 0.3853296775449755,
+      "y": -0.18973626428573168,
+      "id": 2684988262
+    },
+    {
+      "lat": 10.6764934,
+      "long": 106.6324151,
+      "x": 0.39860582162313607,
+      "y": -0.18733866428571203,
+      "id": 2684988266
+    },
+    {
+      "lat": 10.67911,
+      "long": 106.6306825,
+      "x": 0.3039073974590806,
+      "y": -0.042117364285732234,
+      "id": 2684988524
+    },
+    {
+      "lat": 10.6772249,
+      "long": 106.617397,
+      "x": -0.42223592138814514,
+      "y": -0.14674041428568144,
+      "id": 366426092
+    },
+    {
+      "lat": 10.6787029,
+      "long": 106.6181938,
+      "x": -0.37868535901115374,
+      "y": -0.06471141428575036,
+      "id": 366400493
+    },
+    {
+      "lat": 10.6765954,
+      "long": 106.6339691,
+      "x": 0.48354253589711016,
+      "y": -0.18167766428570944,
+      "id": 2684988273
+    },
+    {
+      "lat": 10.676326,
+      "long": 106.6169064,
+      "x": -0.44905056232905094,
+      "y": -0.19662936428573888,
+      "id": 366473586
+    },
+    {
+      "lat": 10.6846378,
+      "long": 106.6273666,
+      "x": 0.12267081389302859,
+      "y": 0.264675535714334,
+      "id": 2684988787
+    },
+    {
+      "lat": 10.6817333,
+      "long": 106.6282221,
+      "x": 0.16942973220799296,
+      "y": 0.10347578571425523,
+      "id": 2684988660
+    },
+    {
+      "lat": 10.6766567,
+      "long": 106.6323252,
+      "x": 0.3936921725795368,
+      "y": -0.17827551428568247,
+      "id": 2684988277
+    },
+    {
+      "lat": 10.6791347,
+      "long": 106.6180179,
+      "x": -0.3882994954596634,
+      "y": -0.04074651428568357,
+      "id": 366383736
+    },
+    {
+      "lat": 10.6768275,
+      "long": 106.6328335,
+      "x": 0.421474239417434,
+      "y": -0.16879611428571797,
+      "id": 2684988284
+    },
+    {
+      "lat": 10.6849791,
+      "long": 106.627135,
+      "x": 0.11001229199700835,
+      "y": 0.2836176857142656,
+      "id": 2684988797
+    },
+    {
+      "lat": 10.6768649,
+      "long": 106.6325387,
+      "x": 0.4053614058469701,
+      "y": -0.16672041428571374,
+      "id": 2684988287
+    }
+  ],
+  "links": [
+    {
+      "segment_id": 24888,
+      "length": 125,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988929,
+      "target": 2684988953
+    },
+    {
+      "segment_id": 24889,
+      "length": 177,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988929,
+      "target": 2684988841
+    },
+    {
+      "segment_id": 24912,
+      "length": 178,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988417,
+      "target": 2684988524
+    },
+    {
+      "segment_id": 24913,
+      "length": 44,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988417,
+      "target": 2684988466
+    },
+    {
+      "segment_id": 24916,
+      "length": 21,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988419,
+      "target": 2684988466
+    },
+    {
+      "segment_id": 24917,
+      "length": 164,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988419,
+      "target": 2684988309
+    },
+    {
+      "segment_id": 43894,
+      "length": 20,
+      "street_id": 262844524,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "residential",
+      "source": 2684988289,
+      "target": 2684988297
+    },
+    {
+      "segment_id": 43895,
+      "length": 21,
+      "street_id": 262844524,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "residential",
+      "source": 2684988289,
+      "target": 2684988284
+    },
+    {
+      "segment_id": 43852,
+      "length": 27,
+      "street_id": 262844509,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988297,
+      "target": 2684988301
+    },
+    {
+      "segment_id": 43853,
+      "length": 29,
+      "street_id": 262844509,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988297,
+      "target": 2684988300
+    },
+    {
+      "segment_id": 43893,
+      "length": 20,
+      "street_id": 262844524,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "residential",
+      "source": 2684988297,
+      "target": 2684988289
+    },
+    {
+      "segment_id": 43854,
+      "length": 29,
+      "street_id": 262844509,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988300,
+      "target": 2684988297
+    },
+    {
+      "segment_id": 43855,
+      "length": 42,
+      "street_id": 262844509,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988300,
+      "target": 2684988287
+    },
+    {
+      "segment_id": 43850,
+      "length": 30,
+      "street_id": 262844509,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988301,
+      "target": 2684988309
+    },
+    {
+      "segment_id": 43851,
+      "length": 27,
+      "street_id": 262844509,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988301,
+      "target": 2684988297
+    },
+    {
+      "segment_id": 24908,
+      "length": 129,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988558,
+      "target": 2684988584
+    },
+    {
+      "segment_id": 24909,
+      "length": 67,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988558,
+      "target": 2684988524
+    },
+    {
+      "segment_id": 24900,
+      "length": 73,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988692,
+      "target": 2684988718
+    },
+    {
+      "segment_id": 24901,
+      "length": 89,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988692,
+      "target": 2684988660
+    },
+    {
+      "segment_id": 24918,
+      "length": 164,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988309,
+      "target": 2684988419
+    },
+    {
+      "segment_id": 24919,
+      "length": 77,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988309,
+      "target": 2684988273
+    },
+    {
+      "segment_id": 43849,
+      "length": 30,
+      "street_id": 262844509,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988309,
+      "target": 2684988301
+    },
+    {
+      "segment_id": 24932,
+      "length": 39,
+      "street_id": 145610583,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366451860,
+      "target": 366383736
+    },
+    {
+      "segment_id": 43890,
+      "length": 1,
+      "street_id": 262844517,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366451860,
+      "target": 366457890
+    },
+    {
+      "segment_id": 43958,
+      "length": 257,
+      "street_id": 262844535,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988312,
+      "target": 2684988253
+    },
+    {
+      "segment_id": 43959,
+      "length": 333,
+      "street_id": 262844535,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988312,
+      "target": 2684988480
+    },
+    {
+      "segment_id": 24886,
+      "length": 69,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988953,
+      "target": 2684988966
+    },
+    {
+      "segment_id": 24887,
+      "length": 125,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988953,
+      "target": 2684988929
+    },
+    {
+      "segment_id": 43830,
+      "length": 23,
+      "street_id": 262844471,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 1589919775,
+      "target": 366473586
+    },
+    {
+      "segment_id": 43881,
+      "length": 5,
+      "street_id": 262844517,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 1589919775,
+      "target": 5783600993
+    },
+    {
+      "segment_id": 43888,
+      "length": 35,
+      "street_id": 262844517,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366457890,
+      "target": 366400493
+    },
+    {
+      "segment_id": 43889,
+      "length": 1,
+      "street_id": 262844517,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366457890,
+      "target": 366451860
+    },
+    {
+      "segment_id": 43962,
+      "length": 391,
+      "street_id": 262844535,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988579,
+      "target": 2684988480
+    },
+    {
+      "segment_id": 43963,
+      "length": 243,
+      "street_id": 262844535,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988579,
+      "target": 2684988620
+    },
+    {
+      "segment_id": 24884,
+      "length": 116,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988966,
+      "target": 366425644
+    },
+    {
+      "segment_id": 24885,
+      "length": 69,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988966,
+      "target": 2684988953
+    },
+    {
+      "segment_id": 24921,
+      "length": 43,
+      "street_id": 145610583,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366452775,
+      "target": 366447028
+    },
+    {
+      "segment_id": 24906,
+      "length": 70,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988584,
+      "target": 2684988605
+    },
+    {
+      "segment_id": 24907,
+      "length": 129,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988584,
+      "target": 2684988558
+    },
+    {
+      "segment_id": 24890,
+      "length": 177,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988841,
+      "target": 2684988929
+    },
+    {
+      "segment_id": 24891,
+      "length": 125,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988841,
+      "target": 2684988797
+    },
+    {
+      "segment_id": 24926,
+      "length": 29,
+      "street_id": 145610583,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366472360,
+      "target": 366464948
+    },
+    {
+      "segment_id": 24927,
+      "length": 32,
+      "street_id": 145610583,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366472360,
+      "target": 366454609
+    },
+    {
+      "segment_id": 14442,
+      "length": 193,
+      "street_id": 32586911,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 366425644,
+      "target": 366451518
+    },
+    {
+      "segment_id": 24883,
+      "length": 116,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 366425644,
+      "target": 2684988966
+    },
+    {
+      "segment_id": 24898,
+      "length": 70,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988718,
+      "target": 2684988747
+    },
+    {
+      "segment_id": 24899,
+      "length": 73,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988718,
+      "target": 2684988692
+    },
+    {
+      "segment_id": 24914,
+      "length": 44,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988466,
+      "target": 2684988417
+    },
+    {
+      "segment_id": 24915,
+      "length": 21,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988466,
+      "target": 2684988419
+    },
+    {
+      "segment_id": 24922,
+      "length": 43,
+      "street_id": 145610583,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366447028,
+      "target": 366452775
+    },
+    {
+      "segment_id": 24923,
+      "length": 38,
+      "street_id": 145610583,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366447028,
+      "target": 366464948
+    },
+    {
+      "segment_id": 24924,
+      "length": 38,
+      "street_id": 145610583,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366464948,
+      "target": 366447028
+    },
+    {
+      "segment_id": 24925,
+      "length": 29,
+      "street_id": 145610583,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366464948,
+      "target": 366472360
+    },
+    {
+      "segment_id": 24904,
+      "length": 133,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988605,
+      "target": 2684988660
+    },
+    {
+      "segment_id": 24905,
+      "length": 70,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988605,
+      "target": 2684988584
+    },
+    {
+      "segment_id": 14443,
+      "length": 193,
+      "street_id": 32586911,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 366451518,
+      "target": 366425644
+    },
+    {
+      "segment_id": 14444,
+      "length": 49,
+      "street_id": 32586911,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 366451518,
+      "target": 2684989011
+    },
+    {
+      "segment_id": 43960,
+      "length": 333,
+      "street_id": 262844535,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988480,
+      "target": 2684988312
+    },
+    {
+      "segment_id": 43961,
+      "length": 391,
+      "street_id": 262844535,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988480,
+      "target": 2684988579
+    },
+    {
+      "segment_id": 24896,
+      "length": 114,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988747,
+      "target": 2684988787
+    },
+    {
+      "segment_id": 24897,
+      "length": 70,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988747,
+      "target": 2684988718
+    },
+    {
+      "segment_id": 43964,
+      "length": 243,
+      "street_id": 262844535,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988620,
+      "target": 2684988579
+    },
+    {
+      "segment_id": 43965,
+      "length": 89,
+      "street_id": 262844535,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988620,
+      "target": 366425947
+    },
+    {
+      "segment_id": 24928,
+      "length": 32,
+      "street_id": 145610583,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366454609,
+      "target": 366472360
+    },
+    {
+      "segment_id": 24929,
+      "length": 49,
+      "street_id": 145610583,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366454609,
+      "target": 366383736
+    },
+    {
+      "segment_id": 43900,
+      "length": 49,
+      "street_id": 262844524,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "residential",
+      "source": 2684988242,
+      "target": 2684988266
+    },
+    {
+      "segment_id": 14445,
+      "length": 49,
+      "street_id": 32586911,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684989011,
+      "target": 366451518
+    },
+    {
+      "segment_id": 43966,
+      "length": 89,
+      "street_id": 262844535,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 366425947,
+      "target": 2684988620
+    },
+    {
+      "segment_id": 43957,
+      "length": 257,
+      "street_id": 262844535,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988253,
+      "target": 2684988312
+    },
+    {
+      "segment_id": 43882,
+      "length": 5,
+      "street_id": 262844517,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 5783600993,
+      "target": 1589919775
+    },
+    {
+      "segment_id": 43883,
+      "length": 85,
+      "street_id": 262844517,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 5783600993,
+      "target": 366426092
+    },
+    {
+      "segment_id": 82331,
+      "length": 18,
+      "street_id": 610729497,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 5783600994,
+      "target": 5783600995
+    },
+    {
+      "segment_id": 43891,
+      "length": 4,
+      "street_id": 262844519,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 5783600994,
+      "target": 366473586
+    },
+    {
+      "segment_id": 82332,
+      "length": 18,
+      "street_id": 610729497,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 5783600995,
+      "target": 5783600994
+    },
+    {
+      "segment_id": 82333,
+      "length": 26,
+      "street_id": 610729497,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 5783600995,
+      "target": 5783600996
+    },
+    {
+      "segment_id": 82334,
+      "length": 26,
+      "street_id": 610729497,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 5783600996,
+      "target": 5783600995
+    },
+    {
+      "segment_id": 82335,
+      "length": 23,
+      "street_id": 610729497,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 5783600996,
+      "target": 5783600997
+    },
+    {
+      "segment_id": 82336,
+      "length": 23,
+      "street_id": 610729497,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 5783600997,
+      "target": 5783600996
+    },
+    {
+      "segment_id": 82337,
+      "length": 28,
+      "street_id": 610729497,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 5783600997,
+      "target": 5783600998
+    },
+    {
+      "segment_id": 82338,
+      "length": 28,
+      "street_id": 610729497,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 5783600998,
+      "target": 5783600997
+    },
+    {
+      "segment_id": 43860,
+      "length": 28,
+      "street_id": 262844509,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988262,
+      "target": 2684988277
+    },
+    {
+      "segment_id": 43898,
+      "length": 58,
+      "street_id": 262844524,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "residential",
+      "source": 2684988266,
+      "target": 2684988284
+    },
+    {
+      "segment_id": 43899,
+      "length": 49,
+      "street_id": 262844524,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "residential",
+      "source": 2684988266,
+      "target": 2684988242
+    },
+    {
+      "segment_id": 24910,
+      "length": 67,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988524,
+      "target": 2684988558
+    },
+    {
+      "segment_id": 24911,
+      "length": 178,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988524,
+      "target": 2684988417
+    },
+    {
+      "segment_id": 43884,
+      "length": 85,
+      "street_id": 262844517,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366426092,
+      "target": 5783600993
+    },
+    {
+      "segment_id": 43885,
+      "length": 185,
+      "street_id": 262844517,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366426092,
+      "target": 366400493
+    },
+    {
+      "segment_id": 43886,
+      "length": 185,
+      "street_id": 262844517,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366400493,
+      "target": 366426092
+    },
+    {
+      "segment_id": 43887,
+      "length": 35,
+      "street_id": 262844517,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366400493,
+      "target": 366457890
+    },
+    {
+      "segment_id": 24920,
+      "length": 77,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988273,
+      "target": 2684988309
+    },
+    {
+      "segment_id": 43829,
+      "length": 23,
+      "street_id": 262844471,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366473586,
+      "target": 1589919775
+    },
+    {
+      "segment_id": 43892,
+      "length": 4,
+      "street_id": 262844519,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366473586,
+      "target": 5783600994
+    },
+    {
+      "segment_id": 24894,
+      "length": 45,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988787,
+      "target": 2684988797
+    },
+    {
+      "segment_id": 24895,
+      "length": 114,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988787,
+      "target": 2684988747
+    },
+    {
+      "segment_id": 24902,
+      "length": 89,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988660,
+      "target": 2684988692
+    },
+    {
+      "segment_id": 24903,
+      "length": 133,
+      "street_id": 145604505,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "residential",
+      "source": 2684988660,
+      "target": 2684988605
+    },
+    {
+      "segment_id": 43858,
+      "length": 32,
+      "street_id": 262844509,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988277,
+      "target": 2684988287
+    },
+    {
+      "segment_id": 43859,
+      "length": 28,
+      "street_id": 262844509,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988277,
+      "target": 2684988262
+    },
+    {
+      "segment_id": 24930,
+      "length": 49,
+      "street_id": 145610583,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366383736,
+      "target": 366454609
+    },
+    {
+      "segment_id": 24931,
+      "length": 39,
+      "street_id": 145610583,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng An Ph\u00fa T\u00e2y - H\u01b0ng Long",
+      "street_type": "tertiary",
+      "source": 366383736,
+      "target": 366451860
+    },
+    {
+      "segment_id": 43896,
+      "length": 21,
+      "street_id": 262844524,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "residential",
+      "source": 2684988284,
+      "target": 2684988289
+    },
+    {
+      "segment_id": 43897,
+      "length": 58,
+      "street_id": 262844524,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "residential",
+      "source": 2684988284,
+      "target": 2684988266
+    },
+    {
+      "segment_id": 24892,
+      "length": 125,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988797,
+      "target": 2684988841
+    },
+    {
+      "segment_id": 24893,
+      "length": 45,
+      "street_id": 145604505,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988797,
+      "target": 2684988787
+    },
+    {
+      "segment_id": 43856,
+      "length": 42,
+      "street_id": 262844509,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988287,
+      "target": 2684988300
+    },
+    {
+      "segment_id": 43857,
+      "length": 32,
+      "street_id": 262844509,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 H\u01b0ng Long",
+      "street_type": "unclassified",
+      "source": 2684988287,
+      "target": 2684988277
+    }
+  ]
+}

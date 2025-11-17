@@ -1,0 +1,1467 @@
+{
+  "observation": {
+    "type": "Kinematics"
+  },
+  "action": {
+    "type": "DiscreteMetaAction"
+  },
+  "simulation_frequency": 15,
+  "policy_frequency": 1,
+  "other_vehicles_type": "highway_env.vehicle.behavior.IDMVehicle",
+  "screen_width": 600,
+  "screen_height": 150,
+  "centering_position": [
+    0.3,
+    0.5
+  ],
+  "scaling": 5.5,
+  "show_trajectories": false,
+  "render_agent": true,
+  "offscreen_rendering": false,
+  "manual_control": false,
+  "real_time_rendering": false,
+  "destination": null,
+  "initial_vehicle_count": 0,
+  "controlled_vehicles": 0,
+  "spawn_probability": 0.0,
+  "duration": 40.0,
+  "collision_reward": -5,
+  "high_speed_reward": 1.0,
+  "arrived_reward": 1.0,
+  "reward_speed_range": [
+    6.0,
+    12.0
+  ],
+  "auto_curve": false,
+  "corner_radius": 25.0,
+  "curve_samples": 8,
+  "exit_distance": 5.0,
+  "graph": {
+    "nodes": {
+      "1597983134": [
+        1024.87569,
+        0.0
+      ],
+      "1597983136": [
+        982.99216,
+        26.751
+      ],
+      "1597983138": [
+        946.77108,
+        65.19585
+      ],
+      "1597983143": [
+        534.50554,
+        189.53805
+      ],
+      "1597983144": [
+        557.37396,
+        197.60775
+      ],
+      "1597983152": [
+        522.40452,
+        191.8302
+      ],
+      "1597983154": [
+        509.09558,
+        211.3995
+      ],
+      "1597983156": [
+        607.36856,
+        229.0263
+      ],
+      "1597983160": [
+        311.04656,
+        240.4371
+      ],
+      "1597983161": [
+        268.87881,
+        267.60435
+      ],
+      "1597983163": [
+        409.60375,
+        306.9705
+      ],
+      "1597983164": [
+        454.18733,
+        309.34035
+      ],
+      "1597983166": [
+        430.44987,
+        319.6245
+      ],
+      "1597983171": [
+        237.51672,
+        327.84405
+      ],
+      "1597983173": [
+        256.57556,
+        405.71055
+      ],
+      "1597983176": [
+        206.00706,
+        447.84615
+      ],
+      "2414429257": [
+        1000.26919,
+        13.34775
+      ],
+      "2414429259": [
+        968.26761,
+        40.3707
+      ],
+      "2414429269": [
+        298.21313,
+        242.7237
+      ],
+      "2414429270": [
+        322.6338,
+        245.20455
+      ],
+      "2414429271": [
+        597.66697,
+        246.22575
+      ],
+      "2414429272": [
+        239.2876,
+        294.66615
+      ],
+      "2414429274": [
+        233.43932,
+        307.06485
+      ],
+      "2414429275": [
+        722.83111,
+        322.97115
+      ],
+      "2414429276": [
+        443.11385,
+        323.25975
+      ],
+      "5599264349": [
+        591.65472,
+        256.743
+      ],
+      "1597983203": [
+        187.00834,
+        501.84765
+      ],
+      "1597983206": [
+        87.77887,
+        636.252
+      ],
+      "2414429286": [
+        249.23515,
+        416.6385
+      ],
+      "1597983208": [
+        84.25897,
+        709.40655
+      ],
+      "2414429289": [
+        197.17998,
+        473.24295
+      ],
+      "2414429288": [
+        197.17998,
+        460.2615
+      ],
+      "1597983211": [
+        91.96558,
+        817.04325
+      ],
+      "2414429291": [
+        194.10827,
+        489.5877
+      ],
+      "2414429290": [
+        975.78293,
+        476.16225
+      ],
+      "1597983214": [
+        95.11382,
+        843.94965
+      ],
+      "2414429294": [
+        130.65169,
+        578.58195
+      ],
+      "2414429296": [
+        83.13304,
+        649.9272
+      ],
+      "2414429297": [
+        81.96338,
+        666.84915
+      ],
+      "1597983220": [
+        93.01499,
+        856.5315
+      ],
+      "1597983222": [
+        88.92666,
+        863.11935
+      ],
+      "1597983228": [
+        0.0,
+        926.76675
+      ]
+    },
+    "edges": [
+      {
+        "start": "1597983134",
+        "end": "1597983134",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              1024.87569,
+              0.0
+            ],
+            [
+              1000.26919,
+              13.34775
+            ],
+            [
+              1024.87569,
+              0.0
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 39928,
+          "street_id": 233101472,
+          "street_name": "Vtt",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "233101472",
+          "composite": true
+        },
+        "length_hint": 55.987222553454274,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2414429259",
+        "end": "2414429259",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              968.26761,
+              40.3707
+            ],
+            [
+              946.77108,
+              65.19585
+            ],
+            [
+              968.26761,
+              40.3707
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 39922,
+          "street_id": 233101472,
+          "street_name": "Vtt",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "233101472",
+          "composite": true
+        },
+        "length_hint": 65.67766361750088,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "2414429259",
+        "end": "2414429259",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              968.26761,
+              40.3707
+            ],
+            [
+              982.99216,
+              26.751
+            ],
+            [
+              968.26761,
+              40.3707
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 39923,
+          "street_id": 233101472,
+          "street_name": "Vtt",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "233101472",
+          "composite": true
+        },
+        "length_hint": 40.11526396734792,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1597983136",
+        "end": "1597983136",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              982.99216,
+              26.751
+            ],
+            [
+              1000.26919,
+              13.34775
+            ],
+            [
+              982.99216,
+              26.751
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 39925,
+          "street_id": 233101472,
+          "street_name": "Vtt",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "233101472",
+          "composite": true
+        },
+        "length_hint": 43.73295673440793,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1597983164",
+        "end": "1597983164",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              454.18733,
+              309.34035
+            ],
+            [
+              443.11385,
+              323.25975
+            ],
+            [
+              454.18733,
+              309.34035
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25414,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 35.57367879038652,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983164",
+        "end": "1597983164",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              454.18733,
+              309.34035
+            ],
+            [
+              509.09558,
+              211.3995
+            ],
+            [
+              454.18733,
+              309.34035
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25415,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 224.56469906719536,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "2414429288",
+        "end": "2414429288",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              197.17998,
+              460.2615
+            ],
+            [
+              197.17998,
+              473.24295
+            ],
+            [
+              197.17998,
+              460.2615
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25386,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 25.96289999999999,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "2414429288",
+        "end": "2414429288",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              197.17998,
+              460.2615
+            ],
+            [
+              206.00706,
+              447.84615
+            ],
+            [
+              197.17998,
+              460.2615
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25387,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 30.46691693945416,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983220",
+        "end": "1597983220",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              93.01499,
+              856.5315
+            ],
+            [
+              88.92666,
+              863.11935
+            ],
+            [
+              93.01499,
+              856.5315
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25364,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 15.506670798259702,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983220",
+        "end": "1597983220",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              93.01499,
+              856.5315
+            ],
+            [
+              95.11382,
+              843.94965
+            ],
+            [
+              93.01499,
+              856.5315
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25365,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 25.511412096659864,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983211",
+        "end": "1597983211",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              91.96558,
+              817.04325
+            ],
+            [
+              95.11382,
+              843.94965
+            ],
+            [
+              91.96558,
+              817.04325
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25368,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 54.179914213944784,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983211",
+        "end": "1597983211",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              91.96558,
+              817.04325
+            ],
+            [
+              84.25897,
+              709.40655
+            ],
+            [
+              91.96558,
+              817.04325
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25369,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 215.8244752068873,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983203",
+        "end": "1597983203",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              187.00834,
+              501.84765
+            ],
+            [
+              130.65169,
+              578.58195
+            ],
+            [
+              187.00834,
+              501.84765
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25380,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 190.41244492640183,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983203",
+        "end": "1597983203",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              187.00834,
+              501.84765
+            ],
+            [
+              194.10827,
+              489.5877
+            ],
+            [
+              187.00834,
+              501.84765
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25381,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 28.334811099239754,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "2414429289",
+        "end": "2414429289",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              197.17998,
+              473.24295
+            ],
+            [
+              194.10827,
+              489.5877
+            ],
+            [
+              197.17998,
+              473.24295
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25384,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 33.261765129746145,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983208",
+        "end": "1597983208",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              84.25897,
+              709.40655
+            ],
+            [
+              81.96338,
+              666.84915
+            ],
+            [
+              84.25897,
+              709.40655
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25371,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 85.23853654792772,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "2414429297",
+        "end": "2414429297",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              81.96338,
+              666.84915
+            ],
+            [
+              83.13304,
+              649.9272
+            ],
+            [
+              81.96338,
+              666.84915
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25373,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 33.924651586603,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983206",
+        "end": "1597983206",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              87.77887,
+              636.252
+            ],
+            [
+              83.13304,
+              649.9272
+            ],
+            [
+              87.77887,
+              636.252
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25376,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 28.88562489743994,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983206",
+        "end": "1597983206",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              87.77887,
+              636.252
+            ],
+            [
+              130.65169,
+              578.58195
+            ],
+            [
+              87.77887,
+              636.252
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25377,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 143.72074814382083,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983171",
+        "end": "1597983171",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              237.51672,
+              327.84405
+            ],
+            [
+              256.57556,
+              405.71055
+            ],
+            [
+              237.51672,
+              327.84405
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25394,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 160.33004964005474,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983171",
+        "end": "1597983171",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              237.51672,
+              327.84405
+            ],
+            [
+              233.43932,
+              307.06485
+            ],
+            [
+              237.51672,
+              327.84405
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25395,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 42.350931201096394,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983176",
+        "end": "1597983176",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              206.00706,
+              447.84615
+            ],
+            [
+              249.23515,
+              416.6385
+            ],
+            [
+              206.00706,
+              447.84615
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25389,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 106.63179982670462,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "2414429286",
+        "end": "2414429286",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              249.23515,
+              416.6385
+            ],
+            [
+              256.57556,
+              405.71055
+            ],
+            [
+              249.23515,
+              416.6385
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25391,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 26.328821482975652,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "2414429276",
+        "end": "2414429276",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              443.11385,
+              323.25975
+            ],
+            [
+              430.44987,
+              319.6245
+            ],
+            [
+              443.11385,
+              323.25975
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25412,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 26.350820253107937,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "2414429274",
+        "end": "2414429274",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              233.43932,
+              307.06485
+            ],
+            [
+              239.2876,
+              294.66615
+            ],
+            [
+              233.43932,
+              307.06485
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25397,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 27.417522911335293,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983166",
+        "end": "1597983166",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              430.44987,
+              319.6245
+            ],
+            [
+              409.60375,
+              306.9705
+            ],
+            [
+              430.44987,
+              319.6245
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25410,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 48.772305053355815,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983161",
+        "end": "1597983161",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              268.87881,
+              267.60435
+            ],
+            [
+              239.2876,
+              294.66615
+            ],
+            [
+              268.87881,
+              267.60435
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25400,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 80.19927003418671,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983161",
+        "end": "1597983161",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              268.87881,
+              267.60435
+            ],
+            [
+              298.21313,
+              242.7237
+            ],
+            [
+              268.87881,
+              267.60435
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25401,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 76.92981409791395,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "2414429269",
+        "end": "2414429269",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              298.21313,
+              242.7237
+            ],
+            [
+              311.04656,
+              240.4371
+            ],
+            [
+              298.21313,
+              242.7237
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25403,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 26.071092430115055,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983160",
+        "end": "1597983160",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              311.04656,
+              240.4371
+            ],
+            [
+              322.6338,
+              245.20455
+            ],
+            [
+              311.04656,
+              240.4371
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25405,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 25.059346385738035,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983163",
+        "end": "1597983163",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              409.60375,
+              306.9705
+            ],
+            [
+              322.6338,
+              245.20455
+            ],
+            [
+              409.60375,
+              306.9705
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25408,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 213.34296128445388,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983156",
+        "end": "1597983156",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              607.36856,
+              229.0263
+            ],
+            [
+              557.37396,
+              197.60775
+            ],
+            [
+              607.36856,
+              229.0263
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25424,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 118.09462838355516,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983152",
+        "end": "1597983152",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              522.40452,
+              191.8302
+            ],
+            [
+              509.09558,
+              211.3995
+            ],
+            [
+              522.40452,
+              191.8302
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25418,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 47.33224636180292,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983152",
+        "end": "1597983152",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              522.40452,
+              191.8302
+            ],
+            [
+              534.50554,
+              189.53805
+            ],
+            [
+              522.40452,
+              191.8302
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25419,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 24.632388163789457,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983143",
+        "end": "1597983143",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              534.50554,
+              189.53805
+            ],
+            [
+              557.37396,
+              197.60775
+            ],
+            [
+              534.50554,
+              189.53805
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25421,
+          "street_id": 146320741,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320741",
+          "composite": true
+        },
+        "length_hint": 48.500915100084484,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "2414429271",
+        "end": "2414429271",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              597.66697,
+              246.22575
+            ],
+            [
+              722.83111,
+              322.97115
+            ],
+            [
+              597.66697,
+              246.22575
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 39954,
+          "street_id": 233101476,
+          "street_name": "Ph\u1ea1m Th\u00e1i B\u01b0\u1eddng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "233101476",
+          "composite": true
+        },
+        "length_hint": 293.6386783998293,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "2414429290",
+        "end": "2414429290",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              975.78293,
+              476.16225
+            ],
+            [
+              722.83111,
+              322.97115
+            ],
+            [
+              975.78293,
+              476.16225
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 39951,
+          "street_id": 233101476,
+          "street_name": "Ph\u1ea1m Th\u00e1i B\u01b0\u1eddng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "233101476",
+          "composite": true
+        },
+        "length_hint": 591.4461475418448,
+        "speed_limit": 13.88888888888889
+      },
+      {
+        "start": "1597983228",
+        "end": "1597983228",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              0.0,
+              926.76675
+            ],
+            [
+              88.92666,
+              863.11935
+            ],
+            [
+              0.0,
+              926.76675
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25285,
+          "street_id": 146320738,
+          "street_name": "Phan V\u0103n \u0110\u00e1ng",
+          "street_type": "tertiary",
+          "street_level": 4,
+          "street_group": "146320738",
+          "composite": true
+        },
+        "length_hint": 218.71389883146972,
+        "speed_limit": 13.88888888888889
+      }
+    ]
+  }
+}

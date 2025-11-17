@@ -1,0 +1,1097 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "lat": 10.7858128,
+      "long": 106.8533981,
+      "x": 0.36732634478858783,
+      "y": -0.05557226808508531,
+      "id": 2592845449
+    },
+    {
+      "lat": 10.7858733,
+      "long": 106.854739,
+      "x": 0.4406156885267244,
+      "y": -0.05221451808508426,
+      "id": 2975892377
+    },
+    {
+      "lat": 10.7859557,
+      "long": 106.8547623,
+      "x": 0.44188919267304505,
+      "y": -0.04764131808507599,
+      "id": 2975892378
+    },
+    {
+      "lat": 10.7870964,
+      "long": 106.8441512,
+      "x": -0.13807989924058267,
+      "y": 0.015667531914855926,
+      "id": 5740660123
+    },
+    {
+      "lat": 10.7859271,
+      "long": 106.8534308,
+      "x": 0.3691136231386687,
+      "y": -0.04922861808509077,
+      "id": 2592830362
+    },
+    {
+      "lat": 10.7859172,
+      "long": 106.8518004,
+      "x": 0.2800011270305069,
+      "y": -0.049778068085103544,
+      "id": 2592830364
+    },
+    {
+      "lat": 10.7860119,
+      "long": 106.8485047,
+      "x": 0.09986861143683157,
+      "y": -0.04452221808510337,
+      "id": 2592830366
+    },
+    {
+      "lat": 10.7890724,
+      "long": 106.8442705,
+      "x": -0.13155933938703296,
+      "y": 0.12533553191490399,
+      "id": 5740660127
+    },
+    {
+      "lat": 10.7866225,
+      "long": 106.843937,
+      "x": -0.14978739228927923,
+      "y": -0.010633918085108607,
+      "id": 2592830371
+    },
+    {
+      "lat": 10.7814285,
+      "long": 106.8465935,
+      "x": -0.004591522618081961,
+      "y": -0.29890091808507957,
+      "id": 2674323888
+    },
+    {
+      "lat": 10.7857927,
+      "long": 106.8518039,
+      "x": 0.28019242593604654,
+      "y": -0.056687818085108144,
+      "id": 2592845362
+    },
+    {
+      "lat": 10.7859946,
+      "long": 106.847298,
+      "x": 0.03391421432262953,
+      "y": -0.04548236808508471,
+      "id": 5963818573
+    },
+    {
+      "lat": 10.7791859,
+      "long": 106.8496714,
+      "x": 0.16363673533865247,
+      "y": -0.4233652180851156,
+      "id": 1852795971
+    },
+    {
+      "lat": 10.7799793,
+      "long": 106.8483922,
+      "x": 0.09371971802895163,
+      "y": -0.37933151808506327,
+      "id": 1852795974
+    },
+    {
+      "lat": 10.7858875,
+      "long": 106.8485051,
+      "x": 0.09989047416842717,
+      "y": -0.0514264180851417,
+      "id": 2592845383
+    },
+    {
+      "lat": 10.7805339,
+      "long": 106.8475989,
+      "x": 0.05036045455749988,
+      "y": -0.3485512180851086,
+      "id": 1852795976
+    },
+    {
+      "lat": 10.786507,
+      "long": 106.8439101,
+      "x": -0.1512576610238443,
+      "y": -0.01704416808509268,
+      "id": 2592845384
+    },
+    {
+      "lat": 10.7810955,
+      "long": 106.8470486,
+      "x": 0.020282800847690075,
+      "y": -0.3173824180851489,
+      "id": 1852795978
+    },
+    {
+      "lat": 10.7859222,
+      "long": 106.849974,
+      "x": 0.1801758921849403,
+      "y": -0.04950056808511405,
+      "id": 5963818571
+    },
+    {
+      "lat": 10.7816706,
+      "long": 106.8460944,
+      "x": -0.03187074661685174,
+      "y": -0.2854643680851091,
+      "id": 1852795980
+    },
+    {
+      "lat": 10.7858183,
+      "long": 106.8500089,
+      "x": 0.18208341556229224,
+      "y": -0.05526701808506729,
+      "id": 5963818572
+    },
+    {
+      "lat": 10.7818704,
+      "long": 106.8454227,
+      "x": -0.06858373952400107,
+      "y": -0.2743754680850675,
+      "id": 1852795982
+    },
+    {
+      "lat": 10.7860991,
+      "long": 106.8473249,
+      "x": 0.03538448305797132,
+      "y": -0.039682618085136734,
+      "id": 5963818574
+    },
+    {
+      "lat": 10.7821186,
+      "long": 106.8445477,
+      "x": -0.11640846602930224,
+      "y": -0.26060036808508424,
+      "id": 1852795984
+    },
+    {
+      "lat": 10.7862412,
+      "long": 106.8461583,
+      "x": -0.02837817516114491,
+      "y": -0.03179606808515334,
+      "id": 5963818576
+    },
+    {
+      "lat": 10.7822713,
+      "long": 106.8441561,
+      "x": -0.1378120807717398,
+      "y": -0.25212551808512706,
+      "id": 1852795986
+    },
+    {
+      "lat": 10.7861329,
+      "long": 106.8461539,
+      "x": -0.028618665214134004,
+      "y": -0.037806718085101276,
+      "id": 5963818575
+    },
+    {
+      "lat": 10.7824842,
+      "long": 106.8441002,
+      "x": -0.14086739758543645,
+      "y": -0.24030956808506762,
+      "id": 1852795988
+    },
+    {
+      "lat": 10.7830678,
+      "long": 106.8439254,
+      "x": -0.15042141152031052,
+      "y": -0.20791976808513443,
+      "id": 1852795989
+    },
+    {
+      "lat": 10.785892,
+      "long": 106.8557067,
+      "x": 0.4935071032006778,
+      "y": -0.05117666808508209,
+      "id": 5735829333
+    },
+    {
+      "lat": 10.7839467,
+      "long": 106.8439464,
+      "x": -0.14927361808474254,
+      "y": -0.15914081808513358,
+      "id": 1852795991
+    },
+    {
+      "lat": 10.786731,
+      "long": 106.8441291,
+      "x": -0.13928781518978628,
+      "y": -0.004612168085129487,
+      "id": 1852795994
+    },
+    {
+      "lat": 10.7899313,
+      "long": 106.8443224,
+      "x": -0.1287226498947297,
+      "y": 0.1730044819148483,
+      "id": 1852795996
+    },
+    {
+      "lat": 10.7905622,
+      "long": 106.8443787,
+      "x": -0.1256454703494374,
+      "y": 0.20801943191489713,
+      "id": 1852795998
+    },
+    {
+      "lat": 10.7916781,
+      "long": 106.8444551,
+      "x": -0.1214696885144731,
+      "y": 0.2699518819149126,
+      "id": 1852796000
+    },
+    {
+      "lat": 10.7921117,
+      "long": 106.844432,
+      "x": -0.12273226129460761,
+      "y": 0.2940166819148652,
+      "id": 1852796003
+    },
+    {
+      "lat": 10.7898057,
+      "long": 106.8443148,
+      "x": -0.12913804180436753,
+      "y": 0.16603368191491896,
+      "id": 5740675812
+    },
+    {
+      "lat": 10.7926314,
+      "long": 106.8443498,
+      "x": -0.12722505274431084,
+      "y": 0.3228600319148597,
+      "id": 1852796005
+    },
+    {
+      "lat": 10.7923877,
+      "long": 106.8443987,
+      "x": -0.12455233374324687,
+      "y": 0.30933468191493596,
+      "id": 1852796004
+    },
+    {
+      "lat": 10.7929131,
+      "long": 106.8442257,
+      "x": -0.13400796538399873,
+      "y": 0.338494381914881,
+      "id": 1852796007
+    },
+    {
+      "lat": 10.7936538,
+      "long": 106.8437859,
+      "x": -0.15804603934623696,
+      "y": 0.37960323191486467,
+      "id": 1852796009
+    },
+    {
+      "lat": 10.795311,
+      "long": 106.8427434,
+      "x": -0.21502578492566526,
+      "y": 0.47157783191488456,
+      "id": 5740275689
+    },
+    {
+      "lat": 10.7941619,
+      "long": 106.8434572,
+      "x": -0.1760117394631218,
+      "y": 0.4078027819149269,
+      "id": 1852796011
+    },
+    {
+      "lat": 10.7945978,
+      "long": 106.8431864,
+      "x": -0.1908128091067783,
+      "y": 0.43199523191489253,
+      "id": 5740275693
+    },
+    {
+      "lat": 10.786298,
+      "long": 106.8450235,
+      "x": -0.09040274617685314,
+      "y": -0.028643668085087337,
+      "id": 3056721902
+    },
+    {
+      "lat": 10.78641,
+      "long": 106.8450507,
+      "x": -0.08891608039262044,
+      "y": -0.022427668085105712,
+      "id": 3056721903
+    },
+    {
+      "lat": 10.7928486,
+      "long": 106.8442541,
+      "x": -0.13245571140342566,
+      "y": 0.33491463191484894,
+      "id": 5740276344
+    }
+  ],
+  "links": [
+    {
+      "segment_id": 46946,
+      "length": 146,
+      "street_id": 294021803,
+      "max_velocity": 60.0,
+      "street_level": 1,
+      "street_name": "Cao t\u1ed1c TP. H\u1ed3 Ch\u00ed Minh - Long Th\u00e0nh - D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 2592845449,
+      "target": 2975892377
+    },
+    {
+      "segment_id": 46938,
+      "length": 105,
+      "street_id": 294021802,
+      "max_velocity": 120.0,
+      "street_level": 1,
+      "street_name": "Cao t\u1ed1c TP. H\u1ed3 Ch\u00ed Minh - Long Th\u00e0nh - D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 2975892377,
+      "target": 5735829333
+    },
+    {
+      "segment_id": 46947,
+      "length": 145,
+      "street_id": 294021804,
+      "max_velocity": 120.0,
+      "street_level": 1,
+      "street_name": "\u0110\u01b0\u1eddng Cao t\u1ed1c Tp. H\u1ed3 Ch\u00ed Minh-Long Th\u00e0nh-D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 2975892378,
+      "target": 2592830362
+    },
+    {
+      "segment_id": 27938,
+      "length": 220,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 5740660123,
+      "target": 5740660127
+    },
+    {
+      "segment_id": 27939,
+      "length": 40,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 5740660123,
+      "target": 1852795994
+    },
+    {
+      "segment_id": 46948,
+      "length": 178,
+      "street_id": 294021804,
+      "max_velocity": 80.0,
+      "street_level": 1,
+      "street_name": "\u0110\u01b0\u1eddng Cao t\u1ed1c Tp. H\u1ed3 Ch\u00ed Minh-Long Th\u00e0nh-D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 2592830362,
+      "target": 2592830364
+    },
+    {
+      "segment_id": 46949,
+      "length": 199,
+      "street_id": 294021804,
+      "max_velocity": 80.0,
+      "street_level": 1,
+      "street_name": "\u0110\u01b0\u1eddng Cao t\u1ed1c Tp. H\u1ed3 Ch\u00ed Minh-Long Th\u00e0nh-D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 2592830364,
+      "target": 5963818571
+    },
+    {
+      "segment_id": 46925,
+      "length": 129,
+      "street_id": 294021800,
+      "max_velocity": 120.0,
+      "street_level": 1,
+      "street_name": "Cao t\u1ed1c TP. H\u1ed3 Ch\u00ed Minh - Long Th\u00e0nh - D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 2592830366,
+      "target": 5963818574
+    },
+    {
+      "segment_id": 27936,
+      "length": 81,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 5740660127,
+      "target": 5740675812
+    },
+    {
+      "segment_id": 27937,
+      "length": 220,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 5740660127,
+      "target": 5740660123
+    },
+    {
+      "segment_id": 27956,
+      "length": 60,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 2674323888,
+      "target": 1852795980
+    },
+    {
+      "segment_id": 27957,
+      "length": 61,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 2674323888,
+      "target": 1852795978
+    },
+    {
+      "segment_id": 46945,
+      "length": 174,
+      "street_id": 294021803,
+      "max_velocity": 60.0,
+      "street_level": 1,
+      "street_name": "Cao t\u1ed1c TP. H\u1ed3 Ch\u00ed Minh - Long Th\u00e0nh - D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 2592845362,
+      "target": 2592845449
+    },
+    {
+      "segment_id": 47921,
+      "length": 132,
+      "street_id": 311688117,
+      "max_velocity": 60.0,
+      "street_level": 1,
+      "street_name": "\u0110\u01b0\u1eddng Cao t\u1ed1c Tp. H\u1ed3 Ch\u00ed Minh-Long Th\u00e0nh-D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 5963818573,
+      "target": 2592845383
+    },
+    {
+      "segment_id": 27964,
+      "length": 165,
+      "street_id": 174620025,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "residential",
+      "source": 1852795971,
+      "target": 1852795974
+    },
+    {
+      "segment_id": 27962,
+      "length": 106,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795974,
+      "target": 1852795976
+    },
+    {
+      "segment_id": 27963,
+      "length": 165,
+      "street_id": 174620025,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "residential",
+      "source": 1852795974,
+      "target": 1852795971
+    },
+    {
+      "segment_id": 46943,
+      "length": 164,
+      "street_id": 294021803,
+      "max_velocity": 60.0,
+      "street_level": 1,
+      "street_name": "Cao t\u1ed1c TP. H\u1ed3 Ch\u00ed Minh - Long Th\u00e0nh - D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 2592845383,
+      "target": 5963818572
+    },
+    {
+      "segment_id": 27960,
+      "length": 86,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795976,
+      "target": 1852795978
+    },
+    {
+      "segment_id": 27961,
+      "length": 106,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795976,
+      "target": 1852795974
+    },
+    {
+      "segment_id": 47918,
+      "length": 123,
+      "street_id": 311688116,
+      "max_velocity": 80.0,
+      "street_level": 1,
+      "street_name": "Cao t\u1ed1c TP. H\u1ed3 Ch\u00ed Minh - Long Th\u00e0nh - D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 2592845384,
+      "target": 3056721902
+    },
+    {
+      "segment_id": 27958,
+      "length": 61,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795978,
+      "target": 2674323888
+    },
+    {
+      "segment_id": 27959,
+      "length": 86,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795978,
+      "target": 1852795976
+    },
+    {
+      "segment_id": 46950,
+      "length": 160,
+      "street_id": 294021804,
+      "max_velocity": 120.0,
+      "street_level": 1,
+      "street_name": "\u0110\u01b0\u1eddng Cao t\u1ed1c Tp. H\u1ed3 Ch\u00ed Minh-Long Th\u00e0nh-D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 5963818571,
+      "target": 2592830366
+    },
+    {
+      "segment_id": 27954,
+      "length": 76,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795980,
+      "target": 1852795982
+    },
+    {
+      "segment_id": 27955,
+      "length": 60,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795980,
+      "target": 2674323888
+    },
+    {
+      "segment_id": 46944,
+      "length": 196,
+      "street_id": 294021803,
+      "max_velocity": 60.0,
+      "street_level": 1,
+      "street_name": "Cao t\u1ed1c TP. H\u1ed3 Ch\u00ed Minh - Long Th\u00e0nh - D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 5963818572,
+      "target": 2592845362
+    },
+    {
+      "segment_id": 27952,
+      "length": 99,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795982,
+      "target": 1852795984
+    },
+    {
+      "segment_id": 27953,
+      "length": 76,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795982,
+      "target": 1852795980
+    },
+    {
+      "segment_id": 46926,
+      "length": 128,
+      "street_id": 294021800,
+      "max_velocity": 120.0,
+      "street_level": 1,
+      "street_name": "Cao t\u1ed1c TP. H\u1ed3 Ch\u00ed Minh - Long Th\u00e0nh - D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 5963818574,
+      "target": 5963818576
+    },
+    {
+      "segment_id": 27950,
+      "length": 46,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795984,
+      "target": 1852795986
+    },
+    {
+      "segment_id": 27951,
+      "length": 99,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795984,
+      "target": 1852795982
+    },
+    {
+      "segment_id": 46927,
+      "length": 122,
+      "street_id": 294021800,
+      "max_velocity": 120.0,
+      "street_level": 1,
+      "street_name": "Cao t\u1ed1c TP. H\u1ed3 Ch\u00ed Minh - Long Th\u00e0nh - D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 5963818576,
+      "target": 3056721903
+    },
+    {
+      "segment_id": 27948,
+      "length": 24,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795986,
+      "target": 1852795988
+    },
+    {
+      "segment_id": 27949,
+      "length": 46,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795986,
+      "target": 1852795984
+    },
+    {
+      "segment_id": 47920,
+      "length": 125,
+      "street_id": 311688117,
+      "max_velocity": 60.0,
+      "street_level": 1,
+      "street_name": "\u0110\u01b0\u1eddng Cao t\u1ed1c Tp. H\u1ed3 Ch\u00ed Minh-Long Th\u00e0nh-D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 5963818575,
+      "target": 5963818573
+    },
+    {
+      "segment_id": 27946,
+      "length": 67,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795988,
+      "target": 1852795989
+    },
+    {
+      "segment_id": 27947,
+      "length": 24,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795988,
+      "target": 1852795986
+    },
+    {
+      "segment_id": 27944,
+      "length": 97,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795989,
+      "target": 1852795991
+    },
+    {
+      "segment_id": 27945,
+      "length": 67,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795989,
+      "target": 1852795988
+    },
+    {
+      "segment_id": 27942,
+      "length": 310,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795991,
+      "target": 1852795994
+    },
+    {
+      "segment_id": 27943,
+      "length": 97,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795991,
+      "target": 1852795989
+    },
+    {
+      "segment_id": 27940,
+      "length": 40,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795994,
+      "target": 5740660123
+    },
+    {
+      "segment_id": 27941,
+      "length": 310,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795994,
+      "target": 1852795991
+    },
+    {
+      "segment_id": 27933,
+      "length": 13,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 1852795996,
+      "target": 5740675812
+    },
+    {
+      "segment_id": 27994,
+      "length": 124,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 1852795998,
+      "target": 1852796000
+    },
+    {
+      "segment_id": 27992,
+      "length": 48,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 1852796000,
+      "target": 1852796003
+    },
+    {
+      "segment_id": 27993,
+      "length": 124,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 1852796000,
+      "target": 1852795998
+    },
+    {
+      "segment_id": 27990,
+      "length": 30,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 1852796003,
+      "target": 1852796004
+    },
+    {
+      "segment_id": 27991,
+      "length": 48,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 1852796003,
+      "target": 1852796000
+    },
+    {
+      "segment_id": 27934,
+      "length": 13,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 5740675812,
+      "target": 1852795996
+    },
+    {
+      "segment_id": 27935,
+      "length": 81,
+      "street_id": 174620025,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Ph\u01b0\u1edbc",
+      "street_type": "unclassified",
+      "source": 5740675812,
+      "target": 5740660127
+    },
+    {
+      "segment_id": 27986,
+      "length": 26,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 1852796005,
+      "target": 5740276344
+    },
+    {
+      "segment_id": 27987,
+      "length": 27,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 1852796005,
+      "target": 1852796004
+    },
+    {
+      "segment_id": 27988,
+      "length": 27,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 1852796004,
+      "target": 1852796005
+    },
+    {
+      "segment_id": 27989,
+      "length": 30,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 1852796004,
+      "target": 1852796003
+    },
+    {
+      "segment_id": 27982,
+      "length": 95,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 1852796007,
+      "target": 1852796009
+    },
+    {
+      "segment_id": 27983,
+      "length": 7,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 1852796007,
+      "target": 5740276344
+    },
+    {
+      "segment_id": 27966,
+      "length": 66,
+      "street_id": 174620027,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Tr\u01b0\u1eddng",
+      "street_type": "unclassified",
+      "source": 1852796009,
+      "target": 1852796011
+    },
+    {
+      "segment_id": 27981,
+      "length": 95,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 1852796009,
+      "target": 1852796007
+    },
+    {
+      "segment_id": 27977,
+      "length": 92,
+      "street_id": 174620028,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Tr\u01b0\u1eddng",
+      "street_type": "unclassified",
+      "source": 5740275689,
+      "target": 5740275693
+    },
+    {
+      "segment_id": 27965,
+      "length": 66,
+      "street_id": 174620027,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Tr\u01b0\u1eddng",
+      "street_type": "unclassified",
+      "source": 1852796011,
+      "target": 1852796009
+    },
+    {
+      "segment_id": 27980,
+      "length": 56,
+      "street_id": 174620028,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Tr\u01b0\u1eddng",
+      "street_type": "unclassified",
+      "source": 1852796011,
+      "target": 5740275693
+    },
+    {
+      "segment_id": 27978,
+      "length": 92,
+      "street_id": 174620028,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Tr\u01b0\u1eddng",
+      "street_type": "unclassified",
+      "source": 5740275693,
+      "target": 5740275689
+    },
+    {
+      "segment_id": 27979,
+      "length": 56,
+      "street_id": 174620028,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Long Tr\u01b0\u1eddng",
+      "street_type": "unclassified",
+      "source": 5740275693,
+      "target": 1852796011
+    },
+    {
+      "segment_id": 47919,
+      "length": 124,
+      "street_id": 311688117,
+      "max_velocity": 60.0,
+      "street_level": 1,
+      "street_name": "\u0110\u01b0\u1eddng Cao t\u1ed1c Tp. H\u1ed3 Ch\u00ed Minh-Long Th\u00e0nh-D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 3056721902,
+      "target": 5963818575
+    },
+    {
+      "segment_id": 46928,
+      "length": 123,
+      "street_id": 294021800,
+      "max_velocity": 120.0,
+      "street_level": 1,
+      "street_name": "Cao t\u1ed1c TP. H\u1ed3 Ch\u00ed Minh - Long Th\u00e0nh - D\u1ea7u Gi\u00e2y",
+      "street_type": "motorway",
+      "source": 3056721903,
+      "target": 2592830371
+    },
+    {
+      "segment_id": 27984,
+      "length": 7,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 5740276344,
+      "target": 1852796007
+    },
+    {
+      "segment_id": 27985,
+      "length": 26,
+      "street_id": 174620030,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Ph\u01b0\u1eddng Tr\u01b0\u1eddng Th\u1ea1nh",
+      "street_type": "unclassified",
+      "source": 5740276344,
+      "target": 1852796005
+    }
+  ]
+}

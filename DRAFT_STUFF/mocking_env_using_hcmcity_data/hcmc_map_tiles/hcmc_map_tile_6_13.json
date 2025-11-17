@@ -1,0 +1,2432 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "lat": 10.7968436,
+      "long": 106.8078643,
+      "x": 0.34308752585650404,
+      "y": -0.2699046326732278,
+      "id": 1834116609
+    },
+    {
+      "lat": 10.8154082,
+      "long": 106.7968539,
+      "x": -0.2587060383926804,
+      "y": 0.7604306673267438,
+      "id": 366440987
+    },
+    {
+      "lat": 10.8023731,
+      "long": 106.8125729,
+      "x": 0.6004446769702911,
+      "y": 0.03698261732675795,
+      "id": 366412828
+    },
+    {
+      "lat": 10.8043901,
+      "long": 106.7969248,
+      "x": -0.25483086912511754,
+      "y": 0.14892611732677902,
+      "id": 5735953445
+    },
+    {
+      "lat": 10.8017274,
+      "long": 106.8118078,
+      "x": 0.5586267361132262,
+      "y": 0.001146267326771866,
+      "id": 2456378406
+    },
+    {
+      "lat": 10.8043203,
+      "long": 106.7988568,
+      "x": -0.14923387300082228,
+      "y": 0.14505221732676005,
+      "id": 3037237801
+    },
+    {
+      "lat": 10.8043643,
+      "long": 106.7991048,
+      "x": -0.13567897908840937,
+      "y": 0.14749421732670703,
+      "id": 3037237802
+    },
+    {
+      "lat": 10.8094061,
+      "long": 106.7976126,
+      "x": -0.21723790125046644,
+      "y": 0.42731411732674945,
+      "id": 366463531
+    },
+    {
+      "lat": 10.8043984,
+      "long": 106.7968001,
+      "x": -0.26164657586258727,
+      "y": 0.1493867673267399,
+      "id": 5735953459
+    },
+    {
+      "lat": 10.7993455,
+      "long": 106.8089431,
+      "x": 0.40205131437503416,
+      "y": -0.13104918267330473,
+      "id": 1834116667
+    },
+    {
+      "lat": 10.8058801,
+      "long": 106.7989624,
+      "x": -0.1434621117220936,
+      "y": 0.2316211173267046,
+      "id": 366403660
+    },
+    {
+      "lat": 10.8090556,
+      "long": 106.7977082,
+      "x": -0.21201270827405633,
+      "y": 0.4078613673267661,
+      "id": 366443602
+    },
+    {
+      "lat": 10.7984209,
+      "long": 106.8084282,
+      "x": 0.37390851245765355,
+      "y": -0.18236448267327068,
+      "id": 370523253
+    },
+    {
+      "lat": 10.7970822,
+      "long": 106.807956,
+      "x": 0.3480995571942255,
+      "y": -0.25666233267325983,
+      "id": 370523254
+    },
+    {
+      "lat": 10.8001224,
+      "long": 106.8098828,
+      "x": 0.45341233780078705,
+      "y": -0.08793123267330644,
+      "id": 3029259383
+    },
+    {
+      "lat": 10.8025442,
+      "long": 106.8128381,
+      "x": 0.6149396683630647,
+      "y": 0.04647866732671985,
+      "id": 3029259390
+    },
+    {
+      "lat": 10.7967275,
+      "long": 106.7983843,
+      "x": -0.17505922531391793,
+      "y": -0.27634818267330524,
+      "id": 3032866943
+    },
+    {
+      "lat": 10.796651,
+      "long": 106.7989726,
+      "x": -0.14290461205281219,
+      "y": -0.28059393267323324,
+      "id": 3032866944
+    },
+    {
+      "lat": 10.7965855,
+      "long": 106.7975802,
+      "x": -0.21900878255165623,
+      "y": -0.2842291826732238,
+      "id": 3032866942
+    },
+    {
+      "lat": 10.8005328,
+      "long": 106.810375,
+      "x": 0.4803144296704055,
+      "y": -0.06515403267331693,
+      "id": 3187226246
+    },
+    {
+      "lat": 10.8001526,
+      "long": 106.8099191,
+      "x": 0.45539638074066546,
+      "y": -0.08625513267323975,
+      "id": 5737771143
+    },
+    {
+      "lat": 10.8047045,
+      "long": 106.8159586,
+      "x": 0.7854963072902704,
+      "y": 0.1663753173267139,
+      "id": 5737771142
+    },
+    {
+      "lat": 10.8000745,
+      "long": 106.8098251,
+      "x": 0.4502586386929681,
+      "y": -0.09058968267331818,
+      "id": 5737771146
+    },
+    {
+      "lat": 10.7963465,
+      "long": 106.7963846,
+      "x": -0.28435648884912734,
+      "y": -0.297493682673254,
+      "id": 5963945622
+    },
+    {
+      "lat": 10.7965994,
+      "long": 106.7970364,
+      "x": -0.2487311668646871,
+      "y": -0.2834577326732786,
+      "id": 5963945623
+    },
+    {
+      "lat": 10.8000299,
+      "long": 106.8097714,
+      "x": 0.4473235669065426,
+      "y": -0.09306498267325997,
+      "id": 5737771160
+    },
+    {
+      "lat": 10.796747,
+      "long": 106.7975218,
+      "x": -0.22220074144073837,
+      "y": -0.2752659326732772,
+      "id": 5963945625
+    },
+    {
+      "lat": 10.796797,
+      "long": 106.7977847,
+      "x": -0.20783146075716402,
+      "y": -0.27249093267328367,
+      "id": 5963945626
+    },
+    {
+      "lat": 10.796826,
+      "long": 106.7980985,
+      "x": -0.19068014741144063,
+      "y": -0.27088143267330517,
+      "id": 5963945627
+    },
+    {
+      "lat": 10.7968129,
+      "long": 106.7983936,
+      "x": -0.17455091679208593,
+      "y": -0.2716084826732244,
+      "id": 5963945628
+    },
+    {
+      "lat": 10.7967549,
+      "long": 106.7986886,
+      "x": -0.158427151855436,
+      "y": -0.27482748267328,
+      "id": 5963945629
+    },
+    {
+      "lat": 10.7966811,
+      "long": 106.7972724,
+      "x": -0.23583215491567783,
+      "y": -0.2789233826732314,
+      "id": 5963945624
+    },
+    {
+      "lat": 10.7967156,
+      "long": 106.7986624,
+      "x": -0.15985916080951448,
+      "y": -0.2770086326732349,
+      "id": 5963945630
+    },
+    {
+      "lat": 10.805219,
+      "long": 106.799389,
+      "x": -0.12014550791882267,
+      "y": 0.19493006732668777,
+      "id": 366448298
+    },
+    {
+      "lat": 10.8064871,
+      "long": 106.7987344,
+      "x": -0.155923869028316,
+      "y": 0.2653096173267306,
+      "id": 366402233
+    },
+    {
+      "lat": 10.7997651,
+      "long": 106.8094524,
+      "x": 0.4298880380430854,
+      "y": -0.10776138267326357,
+      "id": 3029236923
+    },
+    {
+      "lat": 10.7989925,
+      "long": 106.808627,
+      "x": 0.38477429032011157,
+      "y": -0.1506406826732334,
+      "id": 3029236928
+    },
+    {
+      "lat": 10.8136052,
+      "long": 106.7974276,
+      "x": -0.22734941485384522,
+      "y": 0.6603641673267069,
+      "id": 366412996
+    },
+    {
+      "lat": 10.8115881,
+      "long": 106.7975133,
+      "x": -0.22266532449782564,
+      "y": 0.5484151173267195,
+      "id": 366468805
+    },
+    {
+      "lat": 10.796659,
+      "long": 106.7978259,
+      "x": -0.2055795993484426,
+      "y": -0.28014993267326976,
+      "id": 3245652175
+    },
+    {
+      "lat": 10.8034578,
+      "long": 106.8141574,
+      "x": 0.6870484245678514,
+      "y": 0.09718346732674837,
+      "id": 1834116826
+    },
+    {
+      "lat": 10.8097334,
+      "long": 106.7975977,
+      "x": -0.21805228802162788,
+      "y": 0.4454792673267695,
+      "id": 5881087206
+    },
+    {
+      "lat": 10.8066966,
+      "long": 106.7986682,
+      "x": -0.15954215119399884,
+      "y": 0.2769368673267539,
+      "id": 366401258
+    },
+    {
+      "lat": 10.8137426,
+      "long": 106.7974069,
+      "x": -0.22848081124129901,
+      "y": 0.6679898673266982,
+      "id": 5733571323
+    },
+    {
+      "lat": 10.8139216,
+      "long": 106.7973612,
+      "x": -0.23097862838571426,
+      "y": 0.6779243673267559,
+      "id": 366442751
+    },
+    {
+      "lat": 10.8036174,
+      "long": 106.8143898,
+      "x": 0.6997506719278396,
+      "y": 0.10604126732674435,
+      "id": 5737771266
+    },
+    {
+      "lat": 10.804343,
+      "long": 106.7983641,
+      "x": -0.17616329328551789,
+      "y": 0.1463120673266946,
+      "id": 5735953165
+    },
+    {
+      "lat": 10.804762,
+      "long": 106.7997517,
+      "x": -0.10032147557203533,
+      "y": 0.16956656732674097,
+      "id": 366473487
+    },
+    {
+      "lat": 10.8043658,
+      "long": 106.7976911,
+      "x": -0.21294734007248906,
+      "y": 0.14757746732669402,
+      "id": 5735953170
+    },
+    {
+      "lat": 10.8087341,
+      "long": 106.7978296,
+      "x": -0.20537736907671678,
+      "y": 0.39001811732676145,
+      "id": 366371610
+    },
+    {
+      "lat": 10.8148552,
+      "long": 106.7969124,
+      "x": -0.25550861382089357,
+      "y": 0.7297391673267424,
+      "id": 366421786
+    },
+    {
+      "lat": 10.8043892,
+      "long": 106.7970027,
+      "x": -0.2505731020456987,
+      "y": 0.14887616732668824,
+      "id": 5735953197
+    },
+    {
+      "lat": 10.7967151,
+      "long": 106.7981113,
+      "x": -0.18998053998329228,
+      "y": -0.2770363826732634,
+      "id": 3245654829
+    },
+    {
+      "lat": 10.7964776,
+      "long": 106.7973644,
+      "x": -0.2308037265282888,
+      "y": -0.29021763267330664,
+      "id": 5963184439
+    },
+    {
+      "lat": 10.7961545,
+      "long": 106.7997419,
+      "x": -0.10085711250894439,
+      "y": -0.30814968267326465,
+      "id": 5963184441
+    },
+    {
+      "lat": 10.7963336,
+      "long": 106.7995166,
+      "x": -0.11317129637359513,
+      "y": -0.2982096326732407,
+      "id": 5963184442
+    },
+    {
+      "lat": 10.796439,
+      "long": 106.7993664,
+      "x": -0.12138075228388012,
+      "y": -0.29235993267330046,
+      "id": 5963184443
+    },
+    {
+      "lat": 10.7965681,
+      "long": 106.7991411,
+      "x": -0.13369493614853084,
+      "y": -0.28519488267327003,
+      "id": 5963184444
+    },
+    {
+      "lat": 10.7963592,
+      "long": 106.7971647,
+      "x": -0.2417186955381963,
+      "y": -0.2967888326732984,
+      "id": 3630750524
+    },
+    {
+      "lat": 10.7961128,
+      "long": 106.7968418,
+      "x": -0.2593673860395655,
+      "y": -0.3104640326732973,
+      "id": 3630750522
+    },
+    {
+      "lat": 10.8060969,
+      "long": 106.7988852,
+      "x": -0.1476816190202492,
+      "y": 0.2436535173267303,
+      "id": 366427972
+    },
+    {
+      "lat": 10.7961322,
+      "long": 106.7970197,
+      "x": -0.24964393592997072,
+      "y": -0.30938733267323554,
+      "id": 5963184464
+    },
+    {
+      "lat": 10.8054141,
+      "long": 106.799264,
+      "x": -0.12697761170596003,
+      "y": 0.20575811732673727,
+      "id": 366478673
+    },
+    {
+      "lat": 10.7962534,
+      "long": 106.7971753,
+      "x": -0.24113933313654248,
+      "y": -0.3026607326733009,
+      "id": 5963184465
+    },
+    {
+      "lat": 10.7963666,
+      "long": 106.7973308,
+      "x": -0.2326401960265957,
+      "y": -0.29637813267323115,
+      "id": 5963184466
+    },
+    {
+      "lat": 10.7964641,
+      "long": 106.7975401,
+      "x": -0.2212005214459653,
+      "y": -0.29096688267328813,
+      "id": 5963184467
+    },
+    {
+      "lat": 10.7965274,
+      "long": 106.797701,
+      "x": -0.21240623745209852,
+      "y": -0.28745373267324564,
+      "id": 5963184468
+    },
+    {
+      "lat": 10.7965695,
+      "long": 106.7978378,
+      "x": -0.20492918306852043,
+      "y": -0.2851171826732493,
+      "id": 5963184469
+    },
+    {
+      "lat": 10.796609,
+      "long": 106.7980229,
+      "x": -0.19481220378088349,
+      "y": -0.2829249326732633,
+      "id": 5963184470
+    },
+    {
+      "lat": 10.7966301,
+      "long": 106.7982106,
+      "x": -0.18455311673515634,
+      "y": -0.281753882673282,
+      "id": 5963184471
+    },
+    {
+      "lat": 10.7966275,
+      "long": 106.7983957,
+      "x": -0.1744361374482961,
+      "y": -0.2818981826732923,
+      "id": 5963184472
+    },
+    {
+      "lat": 10.796609,
+      "long": 106.7985781,
+      "x": -0.1644667316030075,
+      "y": -0.2829249326732633,
+      "id": 5963184473
+    },
+    {
+      "lat": 10.7965839,
+      "long": 106.7987144,
+      "x": -0.15701700563450652,
+      "y": -0.2843179826732756,
+      "id": 5963184474
+    },
+    {
+      "lat": 10.7965528,
+      "long": 106.7988426,
+      "x": -0.15000999999072043,
+      "y": -0.2860440326732359,
+      "id": 5963184475
+    },
+    {
+      "lat": 10.7964579,
+      "long": 106.7991073,
+      "x": -0.1355423370122472,
+      "y": -0.2913109826732672,
+      "id": 5963184477
+    },
+    {
+      "lat": 10.7965067,
+      "long": 106.7989874,
+      "x": -0.14209569096435545,
+      "y": -0.2886025826732633,
+      "id": 5963184476
+    },
+    {
+      "lat": 10.796313,
+      "long": 106.7993348,
+      "x": -0.1231079081211019,
+      "y": -0.29935293267329205,
+      "id": 5963184479
+    },
+    {
+      "lat": 10.7988126,
+      "long": 106.8085603,
+      "x": 0.3811286797393516,
+      "y": -0.16062513267328332,
+      "id": 366479200
+    },
+    {
+      "lat": 10.796137,
+      "long": 106.7994824,
+      "x": -0.11504055996968385,
+      "y": -0.30912093267327717,
+      "id": 5963184481
+    },
+    {
+      "lat": 10.7963848,
+      "long": 106.7992356,
+      "x": -0.1285298656857564,
+      "y": -0.29536803267325756,
+      "id": 5963184478
+    },
+    {
+      "lat": 10.7962263,
+      "long": 106.7994189,
+      "x": -0.11851126869301834,
+      "y": -0.30416478267323016,
+      "id": 5963184480
+    },
+    {
+      "lat": 10.7960408,
+      "long": 106.7995168,
+      "x": -0.11316036500740895,
+      "y": -0.31446003267326433,
+      "id": 5963184482
+    },
+    {
+      "lat": 10.8095791,
+      "long": 106.7976047,
+      "x": -0.2176696902097719,
+      "y": 0.4369156173267605,
+      "id": 5733201284
+    },
+    {
+      "lat": 10.8043403,
+      "long": 106.798991,
+      "x": -0.14189892637533438,
+      "y": 0.14616221732671808,
+      "id": 1637455240
+    },
+    {
+      "lat": 10.8043323,
+      "long": 106.7986779,
+      "x": -0.15901197993979452,
+      "y": 0.14571821732675455,
+      "id": 1637455242
+    },
+    {
+      "lat": 10.8125597,
+      "long": 106.7974565,
+      "x": -0.22576983245897178,
+      "y": 0.6023389173267051,
+      "id": 366440333
+    },
+    {
+      "lat": 10.8043599,
+      "long": 106.8154613,
+      "x": 0.7583154655856229,
+      "y": 0.14725001732671233,
+      "id": 5737797005
+    },
+    {
+      "lat": 10.7991035,
+      "long": 106.8086921,
+      "x": 0.38833244997215877,
+      "y": -0.14448018267330892,
+      "id": 366434726
+    },
+    {
+      "lat": 10.8144883,
+      "long": 106.7970824,
+      "x": -0.24621695267138094,
+      "y": 0.7093762173267699,
+      "id": 366386087
+    },
+    {
+      "lat": 10.8068894,
+      "long": 106.7985888,
+      "x": -0.163881903518649,
+      "y": 0.28763726732669176,
+      "id": 5733201326
+    },
+    {
+      "lat": 10.7961893,
+      "long": 106.8077191,
+      "x": 0.33515135409776675,
+      "y": -0.3062182826732707,
+      "id": 5740162479
+    },
+    {
+      "lat": 10.8067357,
+      "long": 106.7986521,
+      "x": -0.16042212616150067,
+      "y": 0.2791069173267761,
+      "id": 5733201330
+    },
+    {
+      "lat": 10.8039683,
+      "long": 106.8148961,
+      "x": 0.7274234251046515,
+      "y": 0.12551621732669122,
+      "id": 5737771449
+    },
+    {
+      "lat": 10.804223,
+      "long": 106.8152637,
+      "x": 0.7475152759202818,
+      "y": 0.13965206732674962,
+      "id": 5737771472
+    },
+    {
+      "lat": 10.8146549,
+      "long": 106.7970195,
+      "x": -0.2496548672961569,
+      "y": 0.7186225173267708,
+      "id": 366371793
+    },
+    {
+      "lat": 10.8035387,
+      "long": 106.8142761,
+      "x": 0.6935361903236194,
+      "y": 0.10167341732676966,
+      "id": 5737771476
+    },
+    {
+      "lat": 10.8137874,
+      "long": 106.7974002,
+      "x": -0.2288470120042641,
+      "y": 0.6704762673267697,
+      "id": 366456280
+    },
+    {
+      "lat": 10.8124677,
+      "long": 106.7974619,
+      "x": -0.2254746855750518,
+      "y": 0.5972329173266815,
+      "id": 5082918367
+    },
+    {
+      "lat": 10.8005643,
+      "long": 106.8104128,
+      "x": 0.4823804578555153,
+      "y": -0.06340578267329439,
+      "id": 5737771490
+    },
+    {
+      "lat": 10.8010862,
+      "long": 106.8110389,
+      "x": 0.5166010993017309,
+      "y": -0.03444033267325325,
+      "id": 5737771496
+    },
+    {
+      "lat": 10.7996821,
+      "long": 106.8093516,
+      "x": 0.4243786295497183,
+      "y": -0.11236788267326664,
+      "id": 5737771515
+    }
+  ],
+  "links": [
+    {
+      "segment_id": 43427,
+      "length": 74,
+      "street_id": 260948045,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 1834116609,
+      "target": 5740162479
+    },
+    {
+      "segment_id": 43428,
+      "length": 28,
+      "street_id": 260948045,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 1834116609,
+      "target": 370523254
+    },
+    {
+      "segment_id": 43387,
+      "length": 61,
+      "street_id": 260948043,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366440987,
+      "target": 366421786
+    },
+    {
+      "segment_id": 17910,
+      "length": 110,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 366412828,
+      "target": 2456378406
+    },
+    {
+      "segment_id": 17911,
+      "length": 34,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 366412828,
+      "target": 3029259390
+    },
+    {
+      "segment_id": 72079,
+      "length": 13,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 5735953445,
+      "target": 5735953459
+    },
+    {
+      "segment_id": 72080,
+      "length": 8,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 5735953445,
+      "target": 5735953197
+    },
+    {
+      "segment_id": 17908,
+      "length": 110,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 2456378406,
+      "target": 5737771496
+    },
+    {
+      "segment_id": 17909,
+      "length": 110,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 2456378406,
+      "target": 366412828
+    },
+    {
+      "segment_id": 72089,
+      "length": 19,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 3037237801,
+      "target": 1637455242
+    },
+    {
+      "segment_id": 72090,
+      "length": 14,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 3037237801,
+      "target": 1637455240
+    },
+    {
+      "segment_id": 72093,
+      "length": 12,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 3037237802,
+      "target": 1637455240
+    },
+    {
+      "segment_id": 72094,
+      "length": 83,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 3037237802,
+      "target": 366473487
+    },
+    {
+      "segment_id": 9849,
+      "length": 40,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366463531,
+      "target": 366443602
+    },
+    {
+      "segment_id": 9850,
+      "length": 19,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366463531,
+      "target": 5733201284
+    },
+    {
+      "segment_id": 72078,
+      "length": 13,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 5735953459,
+      "target": 5735953445
+    },
+    {
+      "segment_id": 17888,
+      "length": 38,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 1834116667,
+      "target": 366434726
+    },
+    {
+      "segment_id": 17889,
+      "length": 58,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 1834116667,
+      "target": 5737771515
+    },
+    {
+      "segment_id": 9833,
+      "length": 61,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366403660,
+      "target": 366478673
+    },
+    {
+      "segment_id": 9834,
+      "length": 25,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366403660,
+      "target": 366427972
+    },
+    {
+      "segment_id": 9847,
+      "length": 38,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366443602,
+      "target": 366371610
+    },
+    {
+      "segment_id": 9848,
+      "length": 40,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366443602,
+      "target": 366463531
+    },
+    {
+      "segment_id": 17881,
+      "length": 45,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 370523253,
+      "target": 366479200
+    },
+    {
+      "segment_id": 18012,
+      "length": 157,
+      "street_id": 32899399,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "C\u1ea7u \u00d4ng Nhi\u00eau",
+      "street_type": "tertiary",
+      "source": 370523253,
+      "target": 370523254
+    },
+    {
+      "segment_id": 18011,
+      "length": 157,
+      "street_id": 32899399,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "C\u1ea7u \u00d4ng Nhi\u00eau",
+      "street_type": "tertiary",
+      "source": 370523254,
+      "target": 370523253
+    },
+    {
+      "segment_id": 43429,
+      "length": 28,
+      "street_id": 260948045,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 370523254,
+      "target": 1834116609
+    },
+    {
+      "segment_id": 17898,
+      "length": 8,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 3029259383,
+      "target": 5737771146
+    },
+    {
+      "segment_id": 17899,
+      "length": 5,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 3029259383,
+      "target": 5737771143
+    },
+    {
+      "segment_id": 17912,
+      "length": 34,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 3029259390,
+      "target": 366412828
+    },
+    {
+      "segment_id": 17913,
+      "length": 176,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 3029259390,
+      "target": 1834116826
+    },
+    {
+      "segment_id": 49030,
+      "length": 29,
+      "street_id": 318170833,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B2",
+      "street_type": "motorway_link",
+      "source": 3032866943,
+      "target": 3245654829
+    },
+    {
+      "segment_id": 48996,
+      "length": 33,
+      "street_id": 318079306,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B1",
+      "street_type": "motorway_link",
+      "source": 3032866944,
+      "target": 5963945629
+    },
+    {
+      "segment_id": 49028,
+      "length": 34,
+      "street_id": 318170833,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B2",
+      "street_type": "motorway_link",
+      "source": 3032866944,
+      "target": 5963945630
+    },
+    {
+      "segment_id": 49033,
+      "length": 26,
+      "street_id": 318170833,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B2",
+      "street_type": "motorway_link",
+      "source": 3032866942,
+      "target": 5963184439
+    },
+    {
+      "segment_id": 17902,
+      "length": 65,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 3187226246,
+      "target": 5737771143
+    },
+    {
+      "segment_id": 17903,
+      "length": 5,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 3187226246,
+      "target": 5737771490
+    },
+    {
+      "segment_id": 17900,
+      "length": 5,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771143,
+      "target": 3029259383
+    },
+    {
+      "segment_id": 17901,
+      "length": 65,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771143,
+      "target": 3187226246
+    },
+    {
+      "segment_id": 17926,
+      "length": 66,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771142,
+      "target": 5737797005
+    },
+    {
+      "segment_id": 17896,
+      "length": 7,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771146,
+      "target": 5737771160
+    },
+    {
+      "segment_id": 17897,
+      "length": 8,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771146,
+      "target": 3029259383
+    },
+    {
+      "segment_id": 49003,
+      "length": 76,
+      "street_id": 318079306,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B1",
+      "street_type": "motorway_link",
+      "source": 5963945623,
+      "target": 5963945622
+    },
+    {
+      "segment_id": 17894,
+      "length": 45,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771160,
+      "target": 3029236923
+    },
+    {
+      "segment_id": 17895,
+      "length": 7,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771160,
+      "target": 5737771146
+    },
+    {
+      "segment_id": 49001,
+      "length": 28,
+      "street_id": 318079306,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B1",
+      "street_type": "motorway_link",
+      "source": 5963945625,
+      "target": 5963945624
+    },
+    {
+      "segment_id": 49000,
+      "length": 29,
+      "street_id": 318079306,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B1",
+      "street_type": "motorway_link",
+      "source": 5963945626,
+      "target": 5963945625
+    },
+    {
+      "segment_id": 48999,
+      "length": 34,
+      "street_id": 318079306,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B1",
+      "street_type": "motorway_link",
+      "source": 5963945627,
+      "target": 5963945626
+    },
+    {
+      "segment_id": 48998,
+      "length": 32,
+      "street_id": 318079306,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B1",
+      "street_type": "motorway_link",
+      "source": 5963945628,
+      "target": 5963945627
+    },
+    {
+      "segment_id": 48997,
+      "length": 32,
+      "street_id": 318079306,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B1",
+      "street_type": "motorway_link",
+      "source": 5963945629,
+      "target": 5963945628
+    },
+    {
+      "segment_id": 49002,
+      "length": 27,
+      "street_id": 318079306,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B1",
+      "street_type": "motorway_link",
+      "source": 5963945624,
+      "target": 5963945623
+    },
+    {
+      "segment_id": 49029,
+      "length": 30,
+      "street_id": 318170833,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B2",
+      "street_type": "motorway_link",
+      "source": 5963945630,
+      "target": 3032866943
+    },
+    {
+      "segment_id": 9829,
+      "length": 64,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366448298,
+      "target": 366473487
+    },
+    {
+      "segment_id": 9830,
+      "length": 25,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366448298,
+      "target": 366478673
+    },
+    {
+      "segment_id": 9837,
+      "length": 46,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366402233,
+      "target": 366427972
+    },
+    {
+      "segment_id": 9838,
+      "length": 24,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366402233,
+      "target": 366401258
+    },
+    {
+      "segment_id": 17892,
+      "length": 14,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 3029236923,
+      "target": 5737771515
+    },
+    {
+      "segment_id": 17893,
+      "length": 45,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 3029236923,
+      "target": 5737771160
+    },
+    {
+      "segment_id": 17884,
+      "length": 21,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 3029236928,
+      "target": 366479200
+    },
+    {
+      "segment_id": 17885,
+      "length": 14,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 3029236928,
+      "target": 366434726
+    },
+    {
+      "segment_id": 9861,
+      "length": 116,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366412996,
+      "target": 366440333
+    },
+    {
+      "segment_id": 9862,
+      "length": 15,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366412996,
+      "target": 5733571323
+    },
+    {
+      "segment_id": 9855,
+      "length": 206,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366468805,
+      "target": 5881087206
+    },
+    {
+      "segment_id": 9856,
+      "length": 97,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366468805,
+      "target": 5082918367
+    },
+    {
+      "segment_id": 49032,
+      "length": 28,
+      "street_id": 318170833,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B2",
+      "street_type": "motorway_link",
+      "source": 3245652175,
+      "target": 3032866942
+    },
+    {
+      "segment_id": 17914,
+      "length": 176,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 1834116826,
+      "target": 3029259390
+    },
+    {
+      "segment_id": 17915,
+      "length": 15,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 1834116826,
+      "target": 5737771476
+    },
+    {
+      "segment_id": 9853,
+      "length": 17,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 5881087206,
+      "target": 5733201284
+    },
+    {
+      "segment_id": 9854,
+      "length": 206,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 5881087206,
+      "target": 366468805
+    },
+    {
+      "segment_id": 9839,
+      "length": 24,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366401258,
+      "target": 366402233
+    },
+    {
+      "segment_id": 9840,
+      "length": 4,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366401258,
+      "target": 5733201330
+    },
+    {
+      "segment_id": 9863,
+      "length": 15,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 5733571323,
+      "target": 366412996
+    },
+    {
+      "segment_id": 9864,
+      "length": 5,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 5733571323,
+      "target": 366456280
+    },
+    {
+      "segment_id": 9867,
+      "length": 15,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366442751,
+      "target": 366456280
+    },
+    {
+      "segment_id": 43380,
+      "length": 69,
+      "street_id": 260948042,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366442751,
+      "target": 366386087
+    },
+    {
+      "segment_id": 17918,
+      "length": 15,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771266,
+      "target": 5737771476
+    },
+    {
+      "segment_id": 17919,
+      "length": 67,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771266,
+      "target": 5737771449
+    },
+    {
+      "segment_id": 72085,
+      "length": 73,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 5735953165,
+      "target": 5735953170
+    },
+    {
+      "segment_id": 72086,
+      "length": 34,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 5735953165,
+      "target": 1637455242
+    },
+    {
+      "segment_id": 9828,
+      "length": 64,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366473487,
+      "target": 366448298
+    },
+    {
+      "segment_id": 72095,
+      "length": 83,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 366473487,
+      "target": 3037237802
+    },
+    {
+      "segment_id": 72083,
+      "length": 75,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 5735953170,
+      "target": 5735953197
+    },
+    {
+      "segment_id": 72084,
+      "length": 73,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 5735953170,
+      "target": 5735953165
+    },
+    {
+      "segment_id": 9845,
+      "length": 221,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366371610,
+      "target": 5733201326
+    },
+    {
+      "segment_id": 9846,
+      "length": 38,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366371610,
+      "target": 366443602
+    },
+    {
+      "segment_id": 43385,
+      "length": 25,
+      "street_id": 260948043,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366421786,
+      "target": 366371793
+    },
+    {
+      "segment_id": 43386,
+      "length": 61,
+      "street_id": 260948043,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366421786,
+      "target": 366440987
+    },
+    {
+      "segment_id": 72081,
+      "length": 8,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 5735953197,
+      "target": 5735953445
+    },
+    {
+      "segment_id": 72082,
+      "length": 75,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 5735953197,
+      "target": 5735953170
+    },
+    {
+      "segment_id": 49031,
+      "length": 31,
+      "street_id": 318170833,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B2",
+      "street_type": "motorway_link",
+      "source": 3245654829,
+      "target": 3245652175
+    },
+    {
+      "segment_id": 49034,
+      "length": 25,
+      "street_id": 318170833,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B2",
+      "street_type": "motorway_link",
+      "source": 5963184439,
+      "target": 3630750524
+    },
+    {
+      "segment_id": 48901,
+      "length": 31,
+      "street_id": 317158381,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B1A",
+      "street_type": "motorway_link",
+      "source": 5963184441,
+      "target": 5963184442
+    },
+    {
+      "segment_id": 48902,
+      "length": 20,
+      "street_id": 317158381,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B1A",
+      "street_type": "motorway_link",
+      "source": 5963184442,
+      "target": 5963184443
+    },
+    {
+      "segment_id": 48903,
+      "length": 28,
+      "street_id": 317158381,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B1A",
+      "street_type": "motorway_link",
+      "source": 5963184443,
+      "target": 5963184444
+    },
+    {
+      "segment_id": 84306,
+      "length": 20,
+      "street_id": 631557253,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B1A",
+      "street_type": "motorway_link",
+      "source": 5963184444,
+      "target": 3032866944
+    },
+    {
+      "segment_id": 49035,
+      "length": 44,
+      "street_id": 318170833,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh B2",
+      "street_type": "motorway_link",
+      "source": 3630750524,
+      "target": 3630750522
+    },
+    {
+      "segment_id": 9835,
+      "length": 25,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366427972,
+      "target": 366403660
+    },
+    {
+      "segment_id": 9836,
+      "length": 46,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366427972,
+      "target": 366402233
+    },
+    {
+      "segment_id": 84196,
+      "length": 21,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184464,
+      "target": 5963184465
+    },
+    {
+      "segment_id": 9831,
+      "length": 25,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366478673,
+      "target": 366448298
+    },
+    {
+      "segment_id": 9832,
+      "length": 61,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366478673,
+      "target": 366403660
+    },
+    {
+      "segment_id": 84197,
+      "length": 21,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184465,
+      "target": 5963184466
+    },
+    {
+      "segment_id": 84198,
+      "length": 25,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184466,
+      "target": 5963184467
+    },
+    {
+      "segment_id": 84199,
+      "length": 18,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184467,
+      "target": 5963184468
+    },
+    {
+      "segment_id": 84200,
+      "length": 15,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184468,
+      "target": 5963184469
+    },
+    {
+      "segment_id": 84201,
+      "length": 20,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184469,
+      "target": 5963184470
+    },
+    {
+      "segment_id": 84202,
+      "length": 20,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184470,
+      "target": 5963184471
+    },
+    {
+      "segment_id": 84203,
+      "length": 20,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184471,
+      "target": 5963184472
+    },
+    {
+      "segment_id": 84204,
+      "length": 20,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184472,
+      "target": 5963184473
+    },
+    {
+      "segment_id": 84205,
+      "length": 15,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184473,
+      "target": 5963184474
+    },
+    {
+      "segment_id": 84206,
+      "length": 14,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184474,
+      "target": 5963184475
+    },
+    {
+      "segment_id": 84207,
+      "length": 16,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184475,
+      "target": 5963184476
+    },
+    {
+      "segment_id": 84209,
+      "length": 16,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184477,
+      "target": 5963184478
+    },
+    {
+      "segment_id": 84208,
+      "length": 14,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184476,
+      "target": 5963184477
+    },
+    {
+      "segment_id": 84211,
+      "length": 13,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184479,
+      "target": 5963184480
+    },
+    {
+      "segment_id": 17882,
+      "length": 45,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 366479200,
+      "target": 370523253
+    },
+    {
+      "segment_id": 17883,
+      "length": 21,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 366479200,
+      "target": 3029236928
+    },
+    {
+      "segment_id": 84213,
+      "length": 11,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184481,
+      "target": 5963184482
+    },
+    {
+      "segment_id": 84210,
+      "length": 13,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184478,
+      "target": 5963184479
+    },
+    {
+      "segment_id": 84212,
+      "length": 12,
+      "street_id": 631427447,
+      "max_velocity": 60.0,
+      "street_level": 3,
+      "street_name": "Nh\u00e1nh A2",
+      "street_type": "motorway_link",
+      "source": 5963184480,
+      "target": 5963184481
+    },
+    {
+      "segment_id": 9851,
+      "length": 19,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 5733201284,
+      "target": 366463531
+    },
+    {
+      "segment_id": 9852,
+      "length": 17,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 5733201284,
+      "target": 5881087206
+    },
+    {
+      "segment_id": 72091,
+      "length": 14,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 1637455240,
+      "target": 3037237801
+    },
+    {
+      "segment_id": 72092,
+      "length": 12,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 1637455240,
+      "target": 3037237802
+    },
+    {
+      "segment_id": 72087,
+      "length": 34,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 1637455242,
+      "target": 5735953165
+    },
+    {
+      "segment_id": 72088,
+      "length": 19,
+      "street_id": 604124151,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Li\u00ean ph\u01b0\u1eddng",
+      "street_type": "tertiary",
+      "source": 1637455242,
+      "target": 3037237801
+    },
+    {
+      "segment_id": 9859,
+      "length": 10,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366440333,
+      "target": 5082918367
+    },
+    {
+      "segment_id": 9860,
+      "length": 116,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366440333,
+      "target": 366412996
+    },
+    {
+      "segment_id": 17924,
+      "length": 26,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737797005,
+      "target": 5737771472
+    },
+    {
+      "segment_id": 17925,
+      "length": 66,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737797005,
+      "target": 5737771142
+    },
+    {
+      "segment_id": 17886,
+      "length": 14,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 366434726,
+      "target": 3029236928
+    },
+    {
+      "segment_id": 17887,
+      "length": 38,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 366434726,
+      "target": 1834116667
+    },
+    {
+      "segment_id": 43381,
+      "length": 69,
+      "street_id": 260948042,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366386087,
+      "target": 366442751
+    },
+    {
+      "segment_id": 43382,
+      "length": 19,
+      "street_id": 260948043,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366386087,
+      "target": 366371793
+    },
+    {
+      "segment_id": 9843,
+      "length": 18,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 5733201326,
+      "target": 5733201330
+    },
+    {
+      "segment_id": 9844,
+      "length": 221,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 5733201326,
+      "target": 366371610
+    },
+    {
+      "segment_id": 43426,
+      "length": 74,
+      "street_id": 260948045,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5740162479,
+      "target": 1834116609
+    },
+    {
+      "segment_id": 9841,
+      "length": 4,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 5733201330,
+      "target": 366401258
+    },
+    {
+      "segment_id": 9842,
+      "length": 18,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 5733201330,
+      "target": 5733201326
+    },
+    {
+      "segment_id": 17920,
+      "length": 67,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771449,
+      "target": 5737771266
+    },
+    {
+      "segment_id": 17921,
+      "length": 49,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771449,
+      "target": 5737771472
+    },
+    {
+      "segment_id": 17922,
+      "length": 49,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771472,
+      "target": 5737771449
+    },
+    {
+      "segment_id": 17923,
+      "length": 26,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771472,
+      "target": 5737797005
+    },
+    {
+      "segment_id": 43383,
+      "length": 19,
+      "street_id": 260948043,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366371793,
+      "target": 366386087
+    },
+    {
+      "segment_id": 43384,
+      "length": 25,
+      "street_id": 260948043,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366371793,
+      "target": 366421786
+    },
+    {
+      "segment_id": 17916,
+      "length": 15,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771476,
+      "target": 1834116826
+    },
+    {
+      "segment_id": 17917,
+      "length": 15,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771476,
+      "target": 5737771266
+    },
+    {
+      "segment_id": 9865,
+      "length": 5,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366456280,
+      "target": 5733571323
+    },
+    {
+      "segment_id": 9866,
+      "length": 15,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 366456280,
+      "target": 366442751
+    },
+    {
+      "segment_id": 9857,
+      "length": 97,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 5082918367,
+      "target": 366468805
+    },
+    {
+      "segment_id": 9858,
+      "length": 10,
+      "street_id": 32582891,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "B\u01b0ng \u00d4ng Tho\u00e0n",
+      "street_type": "tertiary",
+      "source": 5082918367,
+      "target": 366440333
+    },
+    {
+      "segment_id": 17904,
+      "length": 5,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771490,
+      "target": 3187226246
+    },
+    {
+      "segment_id": 17905,
+      "length": 89,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771490,
+      "target": 5737771496
+    },
+    {
+      "segment_id": 17906,
+      "length": 89,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771496,
+      "target": 5737771490
+    },
+    {
+      "segment_id": 17907,
+      "length": 110,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771496,
+      "target": 2456378406
+    },
+    {
+      "segment_id": 17890,
+      "length": 58,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771515,
+      "target": 1834116667
+    },
+    {
+      "segment_id": 17891,
+      "length": 14,
+      "street_id": 32899393,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n Duy Trinh",
+      "street_type": "tertiary",
+      "source": 5737771515,
+      "target": 3029236923
+    }
+  ]
+}

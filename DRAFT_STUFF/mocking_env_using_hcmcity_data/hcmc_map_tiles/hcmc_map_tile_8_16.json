@@ -1,0 +1,248 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "lat": 10.852482,
+      "long": 106.857358,
+      "x": -0.07899065843615723,
+      "y": 0.1140241333333396,
+      "id": 2287611008
+    },
+    {
+      "lat": 10.8480795,
+      "long": 106.8603226,
+      "x": 0.08304498064795257,
+      "y": -0.13031461666662825,
+      "id": 2287610980
+    },
+    {
+      "lat": 10.8511261,
+      "long": 106.8581945,
+      "x": -0.03327021989722913,
+      "y": 0.038771683333335416,
+      "id": 2287611013
+    },
+    {
+      "lat": 10.8535502,
+      "long": 106.8566783,
+      "x": -0.11614090598609345,
+      "y": 0.17330923333337456,
+      "id": 2287611017
+    },
+    {
+      "lat": 10.8529343,
+      "long": 106.8570646,
+      "x": -0.09502697244409446,
+      "y": 0.1391267833332943,
+      "id": 5765069835
+    },
+    {
+      "lat": 10.8542916,
+      "long": 106.8561629,
+      "x": -0.14431103631855124,
+      "y": 0.21445693333331928,
+      "id": 5765069836
+    },
+    {
+      "lat": 10.8490384,
+      "long": 106.8595823,
+      "x": 0.04258252918243968,
+      "y": -0.07709566666669687,
+      "id": 2287610965
+    },
+    {
+      "lat": 10.8438013,
+      "long": 106.8638634,
+      "x": 0.276573885346283,
+      "y": -0.3677547166666226,
+      "id": 5751141500
+    },
+    {
+      "lat": 10.8485442,
+      "long": 106.8600023,
+      "x": 0.06553839790545027,
+      "y": -0.10452376666671537,
+      "id": 2287610975
+    }
+  ],
+  "links": [
+    {
+      "segment_id": 43460,
+      "length": 59,
+      "street_id": 261043948,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Long H\u01b0ng",
+      "street_type": "unclassified",
+      "source": 2287611008,
+      "target": 5765069835
+    },
+    {
+      "segment_id": 43461,
+      "length": 176,
+      "street_id": 261043948,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Long H\u01b0ng",
+      "street_type": "unclassified",
+      "source": 2287611008,
+      "target": 2287611013
+    },
+    {
+      "segment_id": 43452,
+      "length": 62,
+      "street_id": 261043941,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "H\u01b0\u01a1ng l\u1ed9 2",
+      "street_type": "unclassified",
+      "source": 2287610980,
+      "target": 2287610975
+    },
+    {
+      "segment_id": 43453,
+      "length": 613,
+      "street_id": 261043941,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "H\u01b0\u01a1ng l\u1ed9 2",
+      "street_type": "chalet",
+      "source": 2287610980,
+      "target": 5751141500
+    },
+    {
+      "segment_id": 43447,
+      "length": 277,
+      "street_id": 261043930,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Long H\u01b0ng",
+      "street_type": "unclassified",
+      "source": 2287611013,
+      "target": 2287610965
+    },
+    {
+      "segment_id": 43462,
+      "length": 176,
+      "street_id": 261043948,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Long H\u01b0ng",
+      "street_type": "unclassified",
+      "source": 2287611013,
+      "target": 2287611008
+    },
+    {
+      "segment_id": 43456,
+      "length": 99,
+      "street_id": 261043948,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Long H\u01b0ng",
+      "street_type": "unclassified",
+      "source": 2287611017,
+      "target": 5765069836
+    },
+    {
+      "segment_id": 43457,
+      "length": 80,
+      "street_id": 261043948,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Long H\u01b0ng",
+      "street_type": "unclassified",
+      "source": 2287611017,
+      "target": 5765069835
+    },
+    {
+      "segment_id": 43458,
+      "length": 80,
+      "street_id": 261043948,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Long H\u01b0ng",
+      "street_type": "unclassified",
+      "source": 5765069835,
+      "target": 2287611017
+    },
+    {
+      "segment_id": 43459,
+      "length": 59,
+      "street_id": 261043948,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Long H\u01b0ng",
+      "street_type": "unclassified",
+      "source": 5765069835,
+      "target": 2287611008
+    },
+    {
+      "segment_id": 43455,
+      "length": 99,
+      "street_id": 261043948,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Long H\u01b0ng",
+      "street_type": "unclassified",
+      "source": 5765069836,
+      "target": 2287611017
+    },
+    {
+      "segment_id": 43448,
+      "length": 277,
+      "street_id": 261043930,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "X\u00e3 Long H\u01b0ng",
+      "street_type": "unclassified",
+      "source": 2287610965,
+      "target": 2287611013
+    },
+    {
+      "segment_id": 43449,
+      "length": 71,
+      "street_id": 261043941,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "H\u01b0\u01a1ng l\u1ed9 2",
+      "street_type": "unclassified",
+      "source": 2287610965,
+      "target": 2287610975
+    },
+    {
+      "segment_id": 43454,
+      "length": 613,
+      "street_id": 261043941,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "H\u01b0\u01a1ng l\u1ed9 2",
+      "street_type": "chalet",
+      "source": 5751141500,
+      "target": 2287610980
+    },
+    {
+      "segment_id": 43450,
+      "length": 71,
+      "street_id": 261043941,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Xuy\u00ean T\u00e2m",
+      "street_type": "chalet",
+      "source": 2287610975,
+      "target": 2287610965
+    },
+    {
+      "segment_id": 43451,
+      "length": 62,
+      "street_id": 261043941,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "H\u01b0\u01a1ng l\u1ed9 2",
+      "street_type": "unclassified",
+      "source": 2287610975,
+      "target": 2287610980
+    }
+  ]
+}

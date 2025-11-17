@@ -1,0 +1,2546 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "lat": 10.8294354,
+      "long": 106.5507499,
+      "x": -0.12259213832478366,
+      "y": 0.367493062921318,
+      "id": 366384657
+    },
+    {
+      "lat": 10.8309592,
+      "long": 106.5508915,
+      "x": -0.1148527311550674,
+      "y": 0.4520639629213776,
+      "id": 5740098066
+    },
+    {
+      "lat": 10.8174864,
+      "long": 106.555717,
+      "x": 0.14889380341958863,
+      "y": -0.29567643707865665,
+      "id": 3378126602
+    },
+    {
+      "lat": 10.8194863,
+      "long": 106.551551,
+      "x": -0.07880655157750789,
+      "y": -0.18468198707868444,
+      "id": 5732964406
+    },
+    {
+      "lat": 10.8194992,
+      "long": 106.5511933,
+      "x": -0.09835729977352435,
+      "y": -0.18396603707869771,
+      "id": 5732964407
+    },
+    {
+      "lat": 10.8186188,
+      "long": 106.5507087,
+      "x": -0.12484399973272836,
+      "y": -0.23282823707868558,
+      "id": 5732964411
+    },
+    {
+      "lat": 10.8240063,
+      "long": 106.550663,
+      "x": -0.1273418168771436,
+      "y": 0.06617801292138165,
+      "id": 5740098116
+    },
+    {
+      "lat": 10.8240078,
+      "long": 106.5506201,
+      "x": -0.12968659489650575,
+      "y": 0.06626126292136858,
+      "id": 5740098117
+    },
+    {
+      "lat": 10.8238093,
+      "long": 106.555231,
+      "x": 0.12233058389785811,
+      "y": 0.05524451292138144,
+      "id": 5737944140
+    },
+    {
+      "lat": 10.8318993,
+      "long": 106.550979,
+      "x": -0.11007025850492565,
+      "y": 0.5042395129213406,
+      "id": 5740098128
+    },
+    {
+      "lat": 10.8187064,
+      "long": 106.5558517,
+      "x": 0.15625607846015366,
+      "y": -0.2279664370786567,
+      "id": 5735418454
+    },
+    {
+      "lat": 10.8295972,
+      "long": 106.550765,
+      "x": -0.12176682018743604,
+      "y": 0.37647296292136057,
+      "id": 5740098139
+    },
+    {
+      "lat": 10.816484,
+      "long": 106.5508959,
+      "x": -0.11461224110207831,
+      "y": -0.3513096370786051,
+      "id": 366468199
+    },
+    {
+      "lat": 10.8183671,
+      "long": 106.5558191,
+      "x": 0.1544742657920009,
+      "y": -0.2467975870786714,
+      "id": 5735418472
+    },
+    {
+      "lat": 10.8195326,
+      "long": 106.5555388,
+      "x": 0.139153956261103,
+      "y": -0.18211233707862595,
+      "id": 366388334
+    },
+    {
+      "lat": 10.8195283,
+      "long": 106.5506994,
+      "x": -0.12535230825456034,
+      "y": -0.18235098707865438,
+      "id": 366474867
+    },
+    {
+      "lat": 10.8195765,
+      "long": 106.5559219,
+      "x": 0.1600929879464532,
+      "y": -0.1796758870786452,
+      "id": 366450852
+    },
+    {
+      "lat": 10.8194287,
+      "long": 106.5526908,
+      "x": -0.016508696411028742,
+      "y": -0.18787878707867778,
+      "id": 366465192
+    },
+    {
+      "lat": 10.8167306,
+      "long": 106.5508669,
+      "x": -0.1161972891804332,
+      "y": -0.33762333707867365,
+      "id": 5732964013
+    },
+    {
+      "lat": 10.8239287,
+      "long": 106.5505815,
+      "x": -0.13179634854558353,
+      "y": 0.061871212921331686,
+      "id": 5737886896
+    },
+    {
+      "lat": 10.8344529,
+      "long": 106.5512195,
+      "x": -0.09692529081944583,
+      "y": 0.6459643129213739,
+      "id": 366426288
+    },
+    {
+      "lat": 10.8331104,
+      "long": 106.551093,
+      "x": -0.10383937985181446,
+      "y": 0.571455562921385,
+      "id": 5740600500
+    },
+    {
+      "lat": 10.8238618,
+      "long": 106.5535686,
+      "x": 0.03146906922010223,
+      "y": 0.058158262921320425,
+      "id": 5737926324
+    },
+    {
+      "lat": 10.8193717,
+      "long": 106.5540847,
+      "x": 0.05967745933382332,
+      "y": -0.19104228707867632,
+      "id": 5732964537
+    },
+    {
+      "lat": 10.8259994,
+      "long": 106.5505461,
+      "x": -0.1337312003380126,
+      "y": 0.17679506292137992,
+      "id": 5737926338
+    },
+    {
+      "lat": 10.8251459,
+      "long": 106.5505929,
+      "x": -0.13117326068073845,
+      "y": 0.12942581292138877,
+      "id": 5737926347
+    },
+    {
+      "lat": 10.8179152,
+      "long": 106.5507339,
+      "x": -0.12346664760958073,
+      "y": -0.2718780370786624,
+      "id": 5732964557
+    },
+    {
+      "lat": 10.8238088,
+      "long": 106.5551828,
+      "x": 0.11969612467728069,
+      "y": 0.05521676292135291,
+      "id": 5737926350
+    },
+    {
+      "lat": 10.823822,
+      "long": 106.5546758,
+      "x": 0.09198511171920543,
+      "y": 0.055949362921337065,
+      "id": 5737926351
+    },
+    {
+      "lat": 10.8238496,
+      "long": 106.5538457,
+      "x": 0.046614476893574786,
+      "y": 0.057481162921393436,
+      "id": 5737926352
+    },
+    {
+      "lat": 10.8238865,
+      "long": 106.5530075,
+      "x": 0.0008011217432292161,
+      "y": 0.05952911292136909,
+      "id": 5737926353
+    },
+    {
+      "lat": 10.8239379,
+      "long": 106.5519869,
+      "x": -0.05498163925318167,
+      "y": 0.06238181292138334,
+      "id": 5737926354
+    },
+    {
+      "lat": 10.8239932,
+      "long": 106.5510401,
+      "x": -0.10673072617427187,
+      "y": 0.06545096292136376,
+      "id": 5737926355
+    },
+    {
+      "lat": 10.8194621,
+      "long": 106.5522233,
+      "x": -0.04206076457257675,
+      "y": -0.186025087078606,
+      "id": 366404821
+    },
+    {
+      "lat": 10.8340205,
+      "long": 106.5511788,
+      "x": -0.09914982381231344,
+      "y": 0.6219661129213124,
+      "id": 5740561113
+    },
+    {
+      "lat": 10.8193635,
+      "long": 106.5547167,
+      "x": 0.0942205760782592,
+      "y": -0.19149738707867092,
+      "id": 366477539
+    },
+    {
+      "lat": 10.8194075,
+      "long": 106.5549863,
+      "x": 0.10895605752479864,
+      "y": -0.18905538707862532,
+      "id": 366479077
+    },
+    {
+      "lat": 10.8357584,
+      "long": 106.5548256,
+      "x": 0.10017270489711805,
+      "y": 0.7184195629213226,
+      "id": 366474982
+    },
+    {
+      "lat": 10.8194868,
+      "long": 106.5554077,
+      "x": 0.13198844581033575,
+      "y": -0.18465423707865591,
+      "id": 366463722
+    },
+    {
+      "lat": 10.8160496,
+      "long": 106.5553175,
+      "x": 0.12705839971784566,
+      "y": -0.3754188370786822,
+      "id": 3378126592
+    },
+    {
+      "lat": 10.816527,
+      "long": 106.5552937,
+      "x": 0.12575756715644787,
+      "y": -0.34892313707861655,
+      "id": 3378126593
+    },
+    {
+      "lat": 10.8194331,
+      "long": 106.5551915,
+      "x": 0.12017163910133083,
+      "y": -0.18763458707868308,
+      "id": 366440706
+    },
+    {
+      "lat": 10.8172118,
+      "long": 106.5553301,
+      "x": 0.12774707577980782,
+      "y": -0.3109167370786081,
+      "id": 3378126595
+    },
+    {
+      "lat": 10.8172795,
+      "long": 106.5553435,
+      "x": 0.128479477305738,
+      "y": -0.3071593870786695,
+      "id": 3378126596
+    },
+    {
+      "lat": 10.8173096,
+      "long": 106.5553837,
+      "x": 0.13067668188275178,
+      "y": -0.3054888370786677,
+      "id": 3378126597
+    },
+    {
+      "lat": 10.8173228,
+      "long": 106.5554699,
+      "x": 0.1353881006546252,
+      "y": -0.3047562370786836,
+      "id": 3378126598
+    },
+    {
+      "lat": 10.8169337,
+      "long": 106.5553155,
+      "x": 0.1269490860575373,
+      "y": -0.3263512870786607,
+      "id": 3378126594
+    },
+    {
+      "lat": 10.8173792,
+      "long": 106.5556614,
+      "x": 0.14585488365555954,
+      "y": -0.30162603707867985,
+      "id": 3378126600
+    },
+    {
+      "lat": 10.8174168,
+      "long": 106.5556921,
+      "x": 0.14753284834533192,
+      "y": -0.2995392370786445,
+      "id": 3378126601
+    },
+    {
+      "lat": 10.8173566,
+      "long": 106.5556135,
+      "x": 0.14323682148464983,
+      "y": -0.30288033707864814,
+      "id": 3378126599
+    },
+    {
+      "lat": 10.8176332,
+      "long": 106.5557361,
+      "x": 0.14993774887832972,
+      "y": -0.28752903707868116,
+      "id": 3378126603
+    },
+    {
+      "lat": 10.8180226,
+      "long": 106.5557782,
+      "x": 0.15223880143372387,
+      "y": -0.2659173370786081,
+      "id": 3378126604
+    },
+    {
+      "lat": 10.8184421,
+      "long": 106.555828,
+      "x": 0.1549607115822373,
+      "y": -0.2426350870786318,
+      "id": 3378126605
+    },
+    {
+      "lat": 10.818997,
+      "long": 106.5558778,
+      "x": 0.1576826217307507,
+      "y": -0.21183813707867968,
+      "id": 3378126606
+    },
+    {
+      "lat": 10.8354286,
+      "long": 106.5513077,
+      "x": -0.0921045583880408,
+      "y": 0.7001156629213567,
+      "id": 5740602127
+    },
+    {
+      "lat": 10.8195569,
+      "long": 106.5556686,
+      "x": 0.1462484128336018,
+      "y": -0.18076368707863955,
+      "id": 3378126608
+    },
+    {
+      "lat": 10.8195671,
+      "long": 106.5557716,
+      "x": 0.15187806635346351,
+      "y": -0.18019758707862943,
+      "id": 3378126609
+    },
+    {
+      "lat": 10.8195846,
+      "long": 106.5559767,
+      "x": 0.16308818224651428,
+      "y": -0.1792263370786169,
+      "id": 3378126610
+    },
+    {
+      "lat": 10.8195737,
+      "long": 106.5558537,
+      "x": 0.15636539212046202,
+      "y": -0.17983128707868667,
+      "id": 3378126611
+    },
+    {
+      "lat": 10.8192465,
+      "long": 106.5559157,
+      "x": 0.15975411559856523,
+      "y": -0.19799088707864199,
+      "id": 3378126607
+    },
+    {
+      "lat": 10.8359269,
+      "long": 106.5539076,
+      "x": 0.049997734688973255,
+      "y": 0.7277713129213725,
+      "id": 5740602137
+    },
+    {
+      "lat": 10.8357856,
+      "long": 106.55134,
+      "x": -0.09033914276955574,
+      "y": 0.7199291629213165,
+      "id": 5740602140
+    },
+    {
+      "lat": 10.8356795,
+      "long": 106.5513304,
+      "x": -0.09086384834027864,
+      "y": 0.7140406129213166,
+      "id": 5740602142
+    },
+    {
+      "lat": 10.8346835,
+      "long": 106.5512403,
+      "x": -0.0957884287492873,
+      "y": 0.6587626129213784,
+      "id": 5740602154
+    },
+    {
+      "lat": 10.8325388,
+      "long": 106.5510392,
+      "x": -0.1067799173209446,
+      "y": 0.5397317629213477,
+      "id": 5740602158
+    },
+    {
+      "lat": 10.8191931,
+      "long": 106.5507014,
+      "x": -0.12524299459425198,
+      "y": -0.20095458707867175,
+      "id": 5733044016
+    },
+    {
+      "lat": 10.8222698,
+      "long": 106.5506061,
+      "x": -0.13045179052099445,
+      "y": -0.030197737078607734,
+      "id": 366470963
+    },
+    {
+      "lat": 10.8240245,
+      "long": 106.5505753,
+      "x": -0.13213522089347154,
+      "y": 0.06718811292135524,
+      "id": 366466912
+    },
+    {
+      "lat": 10.8193454,
+      "long": 106.5544658,
+      "x": 0.08050717735808846,
+      "y": -0.19250193707867824,
+      "id": 366464867
+    },
+    {
+      "lat": 10.8193854,
+      "long": 106.5506989,
+      "x": -0.12537963666963745,
+      "y": -0.1902819370786637,
+      "id": 366403954
+    },
+    {
+      "lat": 10.8182108,
+      "long": 106.5507139,
+      "x": -0.12455978421499454,
+      "y": -0.25547223707869593,
+      "id": 366422903
+    },
+    {
+      "lat": 10.8356295,
+      "long": 106.5554878,
+      "x": 0.13636645791624918,
+      "y": 0.7112656129213231,
+      "id": 5740726136
+    },
+    {
+      "lat": 10.835872,
+      "long": 106.5542497,
+      "x": 0.06869583633178827,
+      "y": 0.7247243629213558,
+      "id": 366444412
+    },
+    {
+      "lat": 10.8194004,
+      "long": 106.5535855,
+      "x": 0.032392769651572034,
+      "y": -0.18944943707869522,
+      "id": 5732950406
+    },
+    {
+      "lat": 10.8194598,
+      "long": 106.552256,
+      "x": -0.04027348622171932,
+      "y": -0.1861527370786189,
+      "id": 5732950407
+    },
+    {
+      "lat": 10.8177904,
+      "long": 106.5507423,
+      "x": -0.1230075302351982,
+      "y": -0.2788044370786644,
+      "id": 366474634
+    },
+    {
+      "lat": 10.821116,
+      "long": 106.5506454,
+      "x": -0.1283037770906534,
+      "y": -0.09423363707865606,
+      "id": 5732950415
+    },
+    {
+      "lat": 10.8317667,
+      "long": 106.5509665,
+      "x": -0.11075346888340637,
+      "y": 0.4968802129213077,
+      "id": 366374308
+    },
+    {
+      "lat": 10.8211306,
+      "long": 106.5506449,
+      "x": -0.1283311055057305,
+      "y": -0.09342333707865125,
+      "id": 5737925571
+    },
+    {
+      "lat": 10.8181874,
+      "long": 106.5557978,
+      "x": 0.15331007530676527,
+      "y": -0.25677093707869014,
+      "id": 5738010057
+    },
+    {
+      "lat": 10.8195126,
+      "long": 106.5508201,
+      "x": -0.11875522883848408,
+      "y": -0.1832223370786825,
+      "id": 5733030859
+    },
+    {
+      "lat": 10.8195165,
+      "long": 106.5507126,
+      "x": -0.12463083809481636,
+      "y": -0.18300588707861776,
+      "id": 5733030860
+    },
+    {
+      "lat": 10.8193803,
+      "long": 106.553835,
+      "x": 0.04602964880999297,
+      "y": -0.19056498707861946,
+      "id": 366443993
+    },
+    {
+      "lat": 10.8270846,
+      "long": 106.550535,
+      "x": -0.1343378911547435,
+      "y": 0.23702366292130028,
+      "id": 5740098010
+    },
+    {
+      "lat": 10.826235,
+      "long": 106.5505214,
+      "x": -0.13508122404685985,
+      "y": 0.1898708629213739,
+      "id": 366458333
+    },
+    {
+      "lat": 10.828582,
+      "long": 106.5506599,
+      "x": -0.1275112530510876,
+      "y": 0.3201293629213917,
+      "id": 366401008
+    },
+    {
+      "lat": 10.8276073,
+      "long": 106.5505433,
+      "x": -0.13388423946306569,
+      "y": 0.26603351292136734,
+      "id": 366427124
+    },
+    {
+      "lat": 10.8164176,
+      "long": 106.5509032,
+      "x": -0.1142132462413314,
+      "y": -0.3549948370786864,
+      "id": 5733044725
+    },
+    {
+      "lat": 10.8206912,
+      "long": 106.5506598,
+      "x": -0.12751671873379233,
+      "y": -0.11781003707861926,
+      "id": 5738009597
+    }
+  ],
+  "links": [
+    {
+      "segment_id": 4051,
+      "length": 95,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366384657,
+      "target": 366401008
+    },
+    {
+      "segment_id": 4052,
+      "length": 18,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366384657,
+      "target": 5740098139
+    },
+    {
+      "segment_id": 4055,
+      "length": 152,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740098066,
+      "target": 5740098139
+    },
+    {
+      "segment_id": 4056,
+      "length": 90,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740098066,
+      "target": 366374308
+    },
+    {
+      "segment_id": 53512,
+      "length": 16,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126602,
+      "target": 3378126603
+    },
+    {
+      "segment_id": 53513,
+      "length": 8,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126602,
+      "target": 3378126601
+    },
+    {
+      "segment_id": 9340,
+      "length": 39,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5732964406,
+      "target": 5732964407
+    },
+    {
+      "segment_id": 9341,
+      "length": 73,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5732964406,
+      "target": 366404821
+    },
+    {
+      "segment_id": 9338,
+      "length": 40,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5732964407,
+      "target": 5733030859
+    },
+    {
+      "segment_id": 9339,
+      "length": 39,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5732964407,
+      "target": 5732964406
+    },
+    {
+      "segment_id": 4019,
+      "length": 45,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5732964411,
+      "target": 366422903
+    },
+    {
+      "segment_id": 4020,
+      "length": 63,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5732964411,
+      "target": 5733044016
+    },
+    {
+      "segment_id": 73375,
+      "length": 41,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5740098116,
+      "target": 5737926355
+    },
+    {
+      "segment_id": 74123,
+      "length": 4,
+      "street_id": 605111032,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5740098116,
+      "target": 5740098117
+    },
+    {
+      "segment_id": 74122,
+      "length": 4,
+      "street_id": 605111032,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5740098117,
+      "target": 5740098116
+    },
+    {
+      "segment_id": 74125,
+      "length": 5,
+      "street_id": 605111033,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5740098117,
+      "target": 366466912
+    },
+    {
+      "segment_id": 73390,
+      "length": 5,
+      "street_id": 604794148,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "residential",
+      "source": 5737944140,
+      "target": 5737926350
+    },
+    {
+      "segment_id": 4059,
+      "length": 14,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740098128,
+      "target": 366374308
+    },
+    {
+      "segment_id": 4060,
+      "length": 71,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740098128,
+      "target": 5740602158
+    },
+    {
+      "segment_id": 53500,
+      "length": 32,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5735418454,
+      "target": 3378126606
+    },
+    {
+      "segment_id": 53501,
+      "length": 29,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5735418454,
+      "target": 3378126605
+    },
+    {
+      "segment_id": 4053,
+      "length": 18,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740098139,
+      "target": 366384657
+    },
+    {
+      "segment_id": 4054,
+      "length": 152,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740098139,
+      "target": 5740098066
+    },
+    {
+      "segment_id": 4009,
+      "length": 7,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366468199,
+      "target": 5733044725
+    },
+    {
+      "segment_id": 4010,
+      "length": 27,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366468199,
+      "target": 5732964013
+    },
+    {
+      "segment_id": 53504,
+      "length": 8,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5735418472,
+      "target": 3378126605
+    },
+    {
+      "segment_id": 53505,
+      "length": 20,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5735418472,
+      "target": 5738010057
+    },
+    {
+      "segment_id": 9364,
+      "length": 15,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366388334,
+      "target": 366463722
+    },
+    {
+      "segment_id": 9365,
+      "length": 14,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366388334,
+      "target": 3378126608
+    },
+    {
+      "segment_id": 4025,
+      "length": 15,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366474867,
+      "target": 366403954
+    },
+    {
+      "segment_id": 4026,
+      "length": 129,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366474867,
+      "target": 5738009597
+    },
+    {
+      "segment_id": 71906,
+      "length": 1,
+      "street_id": 604101743,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366474867,
+      "target": 5733030860
+    },
+    {
+      "segment_id": 9372,
+      "length": 7,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366450852,
+      "target": 3378126611
+    },
+    {
+      "segment_id": 9373,
+      "length": 6,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366450852,
+      "target": 3378126610
+    },
+    {
+      "segment_id": 9346,
+      "length": 47,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366465192,
+      "target": 5732950407
+    },
+    {
+      "segment_id": 9347,
+      "length": 97,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366465192,
+      "target": 5732950406
+    },
+    {
+      "segment_id": 4011,
+      "length": 27,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5732964013,
+      "target": 366468199
+    },
+    {
+      "segment_id": 4012,
+      "length": 118,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5732964013,
+      "target": 366474634
+    },
+    {
+      "segment_id": 4035,
+      "length": 184,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5737886896,
+      "target": 366470963
+    },
+    {
+      "segment_id": 4036,
+      "length": 10,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5737886896,
+      "target": 366466912
+    },
+    {
+      "segment_id": 4067,
+      "length": 48,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366426288,
+      "target": 5740561113
+    },
+    {
+      "segment_id": 4068,
+      "length": 25,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366426288,
+      "target": 5740602154
+    },
+    {
+      "segment_id": 4063,
+      "length": 63,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740600500,
+      "target": 5740602158
+    },
+    {
+      "segment_id": 4064,
+      "length": 101,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740600500,
+      "target": 5740561113
+    },
+    {
+      "segment_id": 73382,
+      "length": 61,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926324,
+      "target": 5737926353
+    },
+    {
+      "segment_id": 73383,
+      "length": 30,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926324,
+      "target": 5737926352
+    },
+    {
+      "segment_id": 9352,
+      "length": 27,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5732964537,
+      "target": 366443993
+    },
+    {
+      "segment_id": 9353,
+      "length": 41,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5732964537,
+      "target": 366464867
+    },
+    {
+      "segment_id": 4041,
+      "length": 95,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5737926338,
+      "target": 5737926347
+    },
+    {
+      "segment_id": 4042,
+      "length": 26,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5737926338,
+      "target": 366458333
+    },
+    {
+      "segment_id": 4039,
+      "length": 124,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5737926347,
+      "target": 366466912
+    },
+    {
+      "segment_id": 4040,
+      "length": 95,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5737926347,
+      "target": 5737926338
+    },
+    {
+      "segment_id": 4015,
+      "length": 13,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5732964557,
+      "target": 366474634
+    },
+    {
+      "segment_id": 4016,
+      "length": 32,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5732964557,
+      "target": 366422903
+    },
+    {
+      "segment_id": 73388,
+      "length": 55,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926350,
+      "target": 5737926351
+    },
+    {
+      "segment_id": 73389,
+      "length": 5,
+      "street_id": 604794148,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "residential",
+      "source": 5737926350,
+      "target": 5737944140
+    },
+    {
+      "segment_id": 73386,
+      "length": 90,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926351,
+      "target": 5737926352
+    },
+    {
+      "segment_id": 73387,
+      "length": 55,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926351,
+      "target": 5737926350
+    },
+    {
+      "segment_id": 73384,
+      "length": 30,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926352,
+      "target": 5737926324
+    },
+    {
+      "segment_id": 73385,
+      "length": 90,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926352,
+      "target": 5737926351
+    },
+    {
+      "segment_id": 73380,
+      "length": 111,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926353,
+      "target": 5737926354
+    },
+    {
+      "segment_id": 73381,
+      "length": 61,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926353,
+      "target": 5737926324
+    },
+    {
+      "segment_id": 73378,
+      "length": 103,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926354,
+      "target": 5737926355
+    },
+    {
+      "segment_id": 73379,
+      "length": 111,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926354,
+      "target": 5737926353
+    },
+    {
+      "segment_id": 73376,
+      "length": 41,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926355,
+      "target": 5740098116
+    },
+    {
+      "segment_id": 73377,
+      "length": 103,
+      "street_id": 604794148,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5737926355,
+      "target": 5737926354
+    },
+    {
+      "segment_id": 9342,
+      "length": 73,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366404821,
+      "target": 5732964406
+    },
+    {
+      "segment_id": 9343,
+      "length": 3,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366404821,
+      "target": 5732950407
+    },
+    {
+      "segment_id": 4065,
+      "length": 101,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740561113,
+      "target": 5740600500
+    },
+    {
+      "segment_id": 4066,
+      "length": 48,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740561113,
+      "target": 366426288
+    },
+    {
+      "segment_id": 9356,
+      "length": 27,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366477539,
+      "target": 366464867
+    },
+    {
+      "segment_id": 9357,
+      "length": 29,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366477539,
+      "target": 366479077
+    },
+    {
+      "segment_id": 9358,
+      "length": 29,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366479077,
+      "target": 366477539
+    },
+    {
+      "segment_id": 9359,
+      "length": 22,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366479077,
+      "target": 366440706
+    },
+    {
+      "segment_id": 4119,
+      "length": 73,
+      "street_id": 32578663,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "tertiary",
+      "source": 366474982,
+      "target": 5740726136
+    },
+    {
+      "segment_id": 4120,
+      "length": 64,
+      "street_id": 32578663,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "tertiary",
+      "source": 366474982,
+      "target": 366444412
+    },
+    {
+      "segment_id": 9362,
+      "length": 24,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366463722,
+      "target": 366440706
+    },
+    {
+      "segment_id": 9363,
+      "length": 15,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366463722,
+      "target": 366388334
+    },
+    {
+      "segment_id": 53532,
+      "length": 53,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126592,
+      "target": 3378126593
+    },
+    {
+      "segment_id": 53530,
+      "length": 45,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126593,
+      "target": 3378126594
+    },
+    {
+      "segment_id": 53531,
+      "length": 53,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126593,
+      "target": 3378126592
+    },
+    {
+      "segment_id": 9360,
+      "length": 22,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366440706,
+      "target": 366479077
+    },
+    {
+      "segment_id": 9361,
+      "length": 24,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366440706,
+      "target": 366463722
+    },
+    {
+      "segment_id": 53526,
+      "length": 7,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126595,
+      "target": 3378126596
+    },
+    {
+      "segment_id": 53527,
+      "length": 30,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126595,
+      "target": 3378126594
+    },
+    {
+      "segment_id": 53524,
+      "length": 5,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126596,
+      "target": 3378126597
+    },
+    {
+      "segment_id": 53525,
+      "length": 7,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126596,
+      "target": 3378126595
+    },
+    {
+      "segment_id": 53522,
+      "length": 9,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126597,
+      "target": 3378126598
+    },
+    {
+      "segment_id": 53523,
+      "length": 5,
+      "street_id": 330809479,
+      "max_velocity": 30.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "residential",
+      "source": 3378126597,
+      "target": 3378126596
+    },
+    {
+      "segment_id": 53520,
+      "length": 16,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126598,
+      "target": 3378126599
+    },
+    {
+      "segment_id": 53521,
+      "length": 9,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126598,
+      "target": 3378126597
+    },
+    {
+      "segment_id": 53528,
+      "length": 30,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126594,
+      "target": 3378126595
+    },
+    {
+      "segment_id": 53529,
+      "length": 45,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126594,
+      "target": 3378126593
+    },
+    {
+      "segment_id": 53516,
+      "length": 5,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126600,
+      "target": 3378126601
+    },
+    {
+      "segment_id": 53517,
+      "length": 5,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126600,
+      "target": 3378126599
+    },
+    {
+      "segment_id": 53514,
+      "length": 8,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126601,
+      "target": 3378126602
+    },
+    {
+      "segment_id": 53515,
+      "length": 5,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126601,
+      "target": 3378126600
+    },
+    {
+      "segment_id": 53518,
+      "length": 5,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126599,
+      "target": 3378126600
+    },
+    {
+      "segment_id": 53519,
+      "length": 16,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126599,
+      "target": 3378126598
+    },
+    {
+      "segment_id": 53510,
+      "length": 43,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126603,
+      "target": 3378126604
+    },
+    {
+      "segment_id": 53511,
+      "length": 16,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126603,
+      "target": 3378126602
+    },
+    {
+      "segment_id": 53508,
+      "length": 18,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126604,
+      "target": 5738010057
+    },
+    {
+      "segment_id": 53509,
+      "length": 43,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126604,
+      "target": 3378126603
+    },
+    {
+      "segment_id": 53502,
+      "length": 29,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126605,
+      "target": 5735418454
+    },
+    {
+      "segment_id": 53503,
+      "length": 8,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126605,
+      "target": 5735418472
+    },
+    {
+      "segment_id": 53498,
+      "length": 28,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126606,
+      "target": 3378126607
+    },
+    {
+      "segment_id": 53499,
+      "length": 32,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126606,
+      "target": 5735418454
+    },
+    {
+      "segment_id": 4071,
+      "length": 83,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740602127,
+      "target": 5740602154
+    },
+    {
+      "segment_id": 4072,
+      "length": 28,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740602127,
+      "target": 5740602142
+    },
+    {
+      "segment_id": 9366,
+      "length": 14,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 3378126608,
+      "target": 366388334
+    },
+    {
+      "segment_id": 9367,
+      "length": 11,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 3378126608,
+      "target": 3378126609
+    },
+    {
+      "segment_id": 9368,
+      "length": 11,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 3378126609,
+      "target": 3378126608
+    },
+    {
+      "segment_id": 9369,
+      "length": 8,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 3378126609,
+      "target": 3378126611
+    },
+    {
+      "segment_id": 9374,
+      "length": 6,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 3378126610,
+      "target": 366450852
+    },
+    {
+      "segment_id": 53495,
+      "length": 38,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126610,
+      "target": 3378126607
+    },
+    {
+      "segment_id": 9370,
+      "length": 8,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 3378126611,
+      "target": 3378126609
+    },
+    {
+      "segment_id": 9371,
+      "length": 7,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 3378126611,
+      "target": 366450852
+    },
+    {
+      "segment_id": 53496,
+      "length": 38,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126607,
+      "target": 3378126610
+    },
+    {
+      "segment_id": 53497,
+      "length": 28,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 3378126607,
+      "target": 3378126606
+    },
+    {
+      "segment_id": 4123,
+      "length": 37,
+      "street_id": 32578663,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "tertiary",
+      "source": 5740602137,
+      "target": 366444412
+    },
+    {
+      "segment_id": 4075,
+      "length": 11,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740602140,
+      "target": 5740602142
+    },
+    {
+      "segment_id": 4073,
+      "length": 28,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740602142,
+      "target": 5740602127
+    },
+    {
+      "segment_id": 4074,
+      "length": 11,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740602142,
+      "target": 5740602140
+    },
+    {
+      "segment_id": 4069,
+      "length": 25,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740602154,
+      "target": 366426288
+    },
+    {
+      "segment_id": 4070,
+      "length": 83,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740602154,
+      "target": 5740602127
+    },
+    {
+      "segment_id": 4061,
+      "length": 71,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740602158,
+      "target": 5740098128
+    },
+    {
+      "segment_id": 4062,
+      "length": 63,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740602158,
+      "target": 5740600500
+    },
+    {
+      "segment_id": 4021,
+      "length": 63,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5733044016,
+      "target": 5732964411
+    },
+    {
+      "segment_id": 4022,
+      "length": 21,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5733044016,
+      "target": 366403954
+    },
+    {
+      "segment_id": 4033,
+      "length": 126,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366470963,
+      "target": 5737925571
+    },
+    {
+      "segment_id": 4034,
+      "length": 184,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366470963,
+      "target": 5737886896
+    },
+    {
+      "segment_id": 4037,
+      "length": 10,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366466912,
+      "target": 5737886896
+    },
+    {
+      "segment_id": 4038,
+      "length": 124,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366466912,
+      "target": 5737926347
+    },
+    {
+      "segment_id": 74124,
+      "length": 5,
+      "street_id": 605111033,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366466912,
+      "target": 5740098117
+    },
+    {
+      "segment_id": 9354,
+      "length": 41,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366464867,
+      "target": 5732964537
+    },
+    {
+      "segment_id": 9355,
+      "length": 27,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366464867,
+      "target": 366477539
+    },
+    {
+      "segment_id": 4023,
+      "length": 21,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366403954,
+      "target": 5733044016
+    },
+    {
+      "segment_id": 4024,
+      "length": 15,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366403954,
+      "target": 366474867
+    },
+    {
+      "segment_id": 4017,
+      "length": 32,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366422903,
+      "target": 5732964557
+    },
+    {
+      "segment_id": 4018,
+      "length": 45,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366422903,
+      "target": 5732964411
+    },
+    {
+      "segment_id": 4118,
+      "length": 73,
+      "street_id": 32578663,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "tertiary",
+      "source": 5740726136,
+      "target": 366474982
+    },
+    {
+      "segment_id": 4121,
+      "length": 64,
+      "street_id": 32578663,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "tertiary",
+      "source": 366444412,
+      "target": 366474982
+    },
+    {
+      "segment_id": 4122,
+      "length": 37,
+      "street_id": 32578663,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "tertiary",
+      "source": 366444412,
+      "target": 5740602137
+    },
+    {
+      "segment_id": 9348,
+      "length": 97,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5732950406,
+      "target": 366465192
+    },
+    {
+      "segment_id": 9349,
+      "length": 27,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5732950406,
+      "target": 366443993
+    },
+    {
+      "segment_id": 9344,
+      "length": 3,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5732950407,
+      "target": 366404821
+    },
+    {
+      "segment_id": 9345,
+      "length": 47,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5732950407,
+      "target": 366465192
+    },
+    {
+      "segment_id": 4013,
+      "length": 118,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366474634,
+      "target": 5732964013
+    },
+    {
+      "segment_id": 4014,
+      "length": 13,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366474634,
+      "target": 5732964557
+    },
+    {
+      "segment_id": 4029,
+      "length": 47,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5732950415,
+      "target": 5738009597
+    },
+    {
+      "segment_id": 4030,
+      "length": 1,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5732950415,
+      "target": 5737925571
+    },
+    {
+      "segment_id": 4057,
+      "length": 90,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366374308,
+      "target": 5740098066
+    },
+    {
+      "segment_id": 4058,
+      "length": 14,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366374308,
+      "target": 5740098128
+    },
+    {
+      "segment_id": 4031,
+      "length": 1,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5737925571,
+      "target": 5732950415
+    },
+    {
+      "segment_id": 4032,
+      "length": 126,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5737925571,
+      "target": 366470963
+    },
+    {
+      "segment_id": 53506,
+      "length": 20,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5738010057,
+      "target": 5735418472
+    },
+    {
+      "segment_id": 53507,
+      "length": 18,
+      "street_id": 330809479,
+      "max_velocity": 40.0,
+      "street_level": 4,
+      "street_name": "Huy\u1ec7n B\u00ecnh Ch\u00e1nh",
+      "street_type": "unclassified",
+      "source": 5738010057,
+      "target": 3378126604
+    },
+    {
+      "segment_id": 9337,
+      "length": 40,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5733030859,
+      "target": 5732964407
+    },
+    {
+      "segment_id": 71905,
+      "length": 11,
+      "street_id": 604101742,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5733030859,
+      "target": 5733030860
+    },
+    {
+      "segment_id": 71904,
+      "length": 11,
+      "street_id": 604101742,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5733030860,
+      "target": 5733030859
+    },
+    {
+      "segment_id": 71907,
+      "length": 1,
+      "street_id": 604101743,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 5733030860,
+      "target": 366474867
+    },
+    {
+      "segment_id": 9350,
+      "length": 27,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366443993,
+      "target": 5732950406
+    },
+    {
+      "segment_id": 9351,
+      "length": 27,
+      "street_id": 32582530,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "\u0110\u01b0\u1eddng Li\u00ean \u1ea4p 6-2",
+      "street_type": "tertiary",
+      "source": 366443993,
+      "target": 5732964537
+    },
+    {
+      "segment_id": 4045,
+      "length": 94,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740098010,
+      "target": 366458333
+    },
+    {
+      "segment_id": 4046,
+      "length": 58,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5740098010,
+      "target": 366427124
+    },
+    {
+      "segment_id": 4043,
+      "length": 26,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366458333,
+      "target": 5737926338
+    },
+    {
+      "segment_id": 4044,
+      "length": 94,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366458333,
+      "target": 5740098010
+    },
+    {
+      "segment_id": 4049,
+      "length": 109,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366401008,
+      "target": 366427124
+    },
+    {
+      "segment_id": 4050,
+      "length": 95,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366401008,
+      "target": 366384657
+    },
+    {
+      "segment_id": 4047,
+      "length": 58,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366427124,
+      "target": 5740098010
+    },
+    {
+      "segment_id": 4048,
+      "length": 109,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 366427124,
+      "target": 366401008
+    },
+    {
+      "segment_id": 4008,
+      "length": 7,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5733044725,
+      "target": 366468199
+    },
+    {
+      "segment_id": 4027,
+      "length": 129,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5738009597,
+      "target": 366474867
+    },
+    {
+      "segment_id": 4028,
+      "length": 47,
+      "street_id": 32578658,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Kinh Trung \u01b0\u01a1ng",
+      "street_type": "tertiary",
+      "source": 5738009597,
+      "target": 5732950415
+    }
+  ]
+}

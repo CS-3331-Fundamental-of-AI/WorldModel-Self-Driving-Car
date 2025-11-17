@@ -1,0 +1,1118 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "lat": 10.883108,
+      "long": 106.8590217,
+      "x": 0.008131675035966734,
+      "y": -0.07331365000000212,
+      "id": 2287611009
+    },
+    {
+      "lat": 10.8844988,
+      "long": 106.8585254,
+      "x": -0.01899450983775,
+      "y": 0.003875749999962319,
+      "id": 2287611011
+    },
+    {
+      "lat": 10.8780277,
+      "long": 106.857338,
+      "x": -0.08389403012702476,
+      "y": -0.3552702999999734,
+      "id": 5752767747
+    },
+    {
+      "lat": 10.8879236,
+      "long": 106.8609478,
+      "x": 0.11340619586204162,
+      "y": 0.1939521500000304,
+      "id": 5750860811
+    },
+    {
+      "lat": 10.8837762,
+      "long": 106.8569919,
+      "x": -0.10281075909123322,
+      "y": -0.036228550000014015,
+      "id": 5751141499
+    },
+    {
+      "lat": 10.883989,
+      "long": 106.8574771,
+      "x": -0.07629126503347067,
+      "y": -0.024418150000019456,
+      "id": 5751045772
+    },
+    {
+      "lat": 10.8835611,
+      "long": 106.8563367,
+      "x": -0.13862191429850837,
+      "y": -0.04816660000002149,
+      "id": 2287611022
+    },
+    {
+      "lat": 10.886253,
+      "long": 106.8600679,
+      "x": 0.06531365088789756,
+      "y": 0.1012338499999953,
+      "id": 2244263968
+    },
+    {
+      "lat": 10.8885445,
+      "long": 106.861291,
+      "x": 0.13216442001771558,
+      "y": 0.22841210000000156,
+      "id": 2244263974
+    },
+    {
+      "lat": 10.887217,
+      "long": 106.8605025,
+      "x": 0.08906750933240198,
+      "y": 0.15473584999998102,
+      "id": 2244263976
+    },
+    {
+      "lat": 10.8849782,
+      "long": 106.8592096,
+      "x": 0.018401693447880035,
+      "y": 0.03048245000004346,
+      "id": 2244263979
+    },
+    {
+      "lat": 10.8843172,
+      "long": 106.8581412,
+      "x": -0.039993664035959164,
+      "y": -0.006203050000007093,
+      "id": 5750860973
+    },
+    {
+      "lat": 10.8846252,
+      "long": 106.8591506,
+      "x": 0.015176940461016059,
+      "y": 0.010890950000016164,
+      "id": 2244263983
+    },
+    {
+      "lat": 10.888966,
+      "long": 106.861452,
+      "x": 0.14096416969506378,
+      "y": 0.2518053499999934,
+      "id": 2244263986
+    },
+    {
+      "lat": 10.8882706,
+      "long": 106.8611945,
+      "x": 0.12689003589463274,
+      "y": 0.21321065000001116,
+      "id": 2244263990
+    },
+    {
+      "lat": 10.8859336,
+      "long": 106.8598365,
+      "x": 0.05266606035806359,
+      "y": 0.08350714999997233,
+      "id": 5750860986
+    },
+    {
+      "lat": 10.8838665,
+      "long": 106.8592447,
+      "x": 0.020320148191418197,
+      "y": -0.031216900000008485,
+      "id": 5750860219
+    },
+    {
+      "lat": 10.8836463,
+      "long": 106.8566467,
+      "x": -0.12167829690799223,
+      "y": -0.04343799999997178,
+      "id": 5750860732
+    },
+    {
+      "lat": 10.8837884,
+      "long": 106.8570215,
+      "x": -0.1011929169143198,
+      "y": -0.03555144999998838,
+      "id": 5751141446
+    },
+    {
+      "lat": 10.8881495,
+      "long": 106.8611162,
+      "x": 0.12261040608284154,
+      "y": 0.2064896000000428,
+      "id": 5742651974
+    },
+    {
+      "lat": 10.8857262,
+      "long": 106.859671,
+      "x": 0.043620354945021506,
+      "y": 0.07199645000002952,
+      "id": 2244264007
+    },
+    {
+      "lat": 10.8760995,
+      "long": 106.8566483,
+      "x": -0.12159084597927951,
+      "y": -0.462285399999976,
+      "id": 5153241416
+    },
+    {
+      "lat": 10.8855577,
+      "long": 106.85951,
+      "x": 0.03482060526767328,
+      "y": 0.06264469999997935,
+      "id": 2244264010
+    },
+    {
+      "lat": 10.8871715,
+      "long": 106.8604871,
+      "x": 0.08822579414616344,
+      "y": 0.15221059999994846,
+      "id": 5740067021
+    },
+    {
+      "lat": 10.8874488,
+      "long": 106.8605937,
+      "x": 0.09405221225504629,
+      "y": 0.1676007499999751,
+      "id": 2244264015
+    },
+    {
+      "lat": 10.8835979,
+      "long": 106.8564706,
+      "x": -0.1313033647226881,
+      "y": -0.04612420000001205,
+      "id": 5751141456
+    },
+    {
+      "lat": 10.883727,
+      "long": 106.8568732,
+      "x": -0.10929852484700113,
+      "y": -0.038959149999981624,
+      "id": 2287610962
+    },
+    {
+      "lat": 10.8843418,
+      "long": 106.8581837,
+      "x": -0.037670748748969377,
+      "y": -0.004837750000023289,
+      "id": 2287610967
+    },
+    {
+      "lat": 10.8834146,
+      "long": 106.8591842,
+      "x": 0.01701340995854625,
+      "y": -0.05629734999999958,
+      "id": 2287610983
+    },
+    {
+      "lat": 10.8837613,
+      "long": 106.8592577,
+      "x": 0.021030686984975983,
+      "y": -0.03705550000001623,
+      "id": 2287610988
+    },
+    {
+      "lat": 10.8839601,
+      "long": 106.8574365,
+      "x": -0.07851033234285683,
+      "y": -0.026022100000031634,
+      "id": 2287610995
+    },
+    {
+      "lat": 10.8864797,
+      "long": 106.8601701,
+      "x": 0.07089957894379134,
+      "y": 0.11381570000003371,
+      "id": 5750861172
+    },
+    {
+      "lat": 10.8860554,
+      "long": 106.8599248,
+      "x": 0.05749225847295006,
+      "y": 0.09026705000000046,
+      "id": 5750860788
+    },
+    {
+      "lat": 10.8798705,
+      "long": 106.8577335,
+      "x": -0.062277253746675226,
+      "y": -0.25299489999995306,
+      "id": 5153241331
+    },
+    {
+      "lat": 10.8815382,
+      "long": 106.8577557,
+      "x": -0.061063872113990156,
+      "y": -0.16043755000002424,
+      "id": 2287610999
+    },
+    {
+      "lat": 10.8875097,
+      "long": 106.8606391,
+      "x": 0.09653363235057061,
+      "y": 0.1709807000000384,
+      "id": 5750860923
+    },
+    {
+      "lat": 10.8825944,
+      "long": 106.8585952,
+      "x": -0.015179463083822772,
+      "y": -0.1018184499999838,
+      "id": 2287611004
+    },
+    {
+      "lat": 10.8818016,
+      "long": 106.8578415,
+      "x": -0.05637431607448913,
+      "y": -0.14581885000004136,
+      "id": 2287611005
+    },
+    {
+      "lat": 10.8786334,
+      "long": 106.8575546,
+      "x": -0.07205536068564745,
+      "y": -0.32165395000000185,
+      "id": 2287611007
+    }
+  ],
+  "links": [
+    {
+      "segment_id": 34451,
+      "length": 38,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2287611009,
+      "target": 2287610983
+    },
+    {
+      "segment_id": 77721,
+      "length": 73,
+      "street_id": 606586227,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2287611009,
+      "target": 2287611004
+    },
+    {
+      "segment_id": 77728,
+      "length": 41,
+      "street_id": 606613907,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 2287611011,
+      "target": 2287610967
+    },
+    {
+      "segment_id": 77729,
+      "length": 69,
+      "street_id": 606613907,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 2287611011,
+      "target": 2244263983
+    },
+    {
+      "segment_id": 81872,
+      "length": 71,
+      "street_id": 610101817,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Long H\u01b0ng",
+      "street_type": "tertiary",
+      "source": 5752767747,
+      "target": 2287611007
+    },
+    {
+      "segment_id": 81873,
+      "length": 227,
+      "street_id": 610101817,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Long H\u01b0ng",
+      "street_type": "tertiary",
+      "source": 5752767747,
+      "target": 5153241416
+    },
+    {
+      "segment_id": 34419,
+      "length": 31,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5750860811,
+      "target": 5742651974
+    },
+    {
+      "segment_id": 34420,
+      "length": 57,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5750860811,
+      "target": 5750860923
+    },
+    {
+      "segment_id": 70380,
+      "length": 14,
+      "street_id": 583931667,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 5751141499,
+      "target": 2287610962
+    },
+    {
+      "segment_id": 70381,
+      "length": 3,
+      "street_id": 583931667,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 5751141499,
+      "target": 5751141446
+    },
+    {
+      "segment_id": 77723,
+      "length": 81,
+      "street_id": 606613907,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 5751045772,
+      "target": 5750860973
+    },
+    {
+      "segment_id": 77732,
+      "length": 5,
+      "street_id": 606613908,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 5751045772,
+      "target": 2287610995
+    },
+    {
+      "segment_id": 70373,
+      "length": 15,
+      "street_id": 583931667,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 2287611022,
+      "target": 5751141456
+    },
+    {
+      "segment_id": 34431,
+      "length": 27,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263968,
+      "target": 5750861172
+    },
+    {
+      "segment_id": 34432,
+      "length": 26,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263968,
+      "target": 5750860788
+    },
+    {
+      "segment_id": 34413,
+      "length": 50,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263974,
+      "target": 2244263986
+    },
+    {
+      "segment_id": 34414,
+      "length": 32,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263974,
+      "target": 2244263990
+    },
+    {
+      "segment_id": 34425,
+      "length": 27,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263976,
+      "target": 2244264015
+    },
+    {
+      "segment_id": 34426,
+      "length": 5,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263976,
+      "target": 5740067021
+    },
+    {
+      "segment_id": 34441,
+      "length": 72,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263979,
+      "target": 2244264010
+    },
+    {
+      "segment_id": 34442,
+      "length": 39,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263979,
+      "target": 2244263983
+    },
+    {
+      "segment_id": 77724,
+      "length": 81,
+      "street_id": 606613907,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 5750860973,
+      "target": 5751045772
+    },
+    {
+      "segment_id": 77725,
+      "length": 5,
+      "street_id": 606613907,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 5750860973,
+      "target": 2287610967
+    },
+    {
+      "segment_id": 34443,
+      "length": 39,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263983,
+      "target": 2244263979
+    },
+    {
+      "segment_id": 34444,
+      "length": 84,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263983,
+      "target": 5750860219
+    },
+    {
+      "segment_id": 77730,
+      "length": 69,
+      "street_id": 606613907,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 2244263983,
+      "target": 2287611011
+    },
+    {
+      "segment_id": 34412,
+      "length": 50,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263986,
+      "target": 2244263974
+    },
+    {
+      "segment_id": 34415,
+      "length": 32,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263990,
+      "target": 2244263974
+    },
+    {
+      "segment_id": 34416,
+      "length": 15,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244263990,
+      "target": 5742651974
+    },
+    {
+      "segment_id": 34435,
+      "length": 16,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5750860986,
+      "target": 5750860788
+    },
+    {
+      "segment_id": 34436,
+      "length": 29,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5750860986,
+      "target": 2244264007
+    },
+    {
+      "segment_id": 34445,
+      "length": 84,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5750860219,
+      "target": 2244263983
+    },
+    {
+      "segment_id": 34446,
+      "length": 11,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5750860219,
+      "target": 2287610988
+    },
+    {
+      "segment_id": 70376,
+      "length": 19,
+      "street_id": 583931667,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 5750860732,
+      "target": 5751141456
+    },
+    {
+      "segment_id": 70377,
+      "length": 26,
+      "street_id": 583931667,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 5750860732,
+      "target": 2287610962
+    },
+    {
+      "segment_id": 70382,
+      "length": 3,
+      "street_id": 583931667,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 5751141446,
+      "target": 5751141499
+    },
+    {
+      "segment_id": 70383,
+      "length": 49,
+      "street_id": 583931667,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 5751141446,
+      "target": 2287610995
+    },
+    {
+      "segment_id": 34417,
+      "length": 15,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5742651974,
+      "target": 2244263990
+    },
+    {
+      "segment_id": 34418,
+      "length": 31,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5742651974,
+      "target": 5750860811
+    },
+    {
+      "segment_id": 34437,
+      "length": 29,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244264007,
+      "target": 5750860986
+    },
+    {
+      "segment_id": 34438,
+      "length": 25,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244264007,
+      "target": 2244264010
+    },
+    {
+      "segment_id": 81874,
+      "length": 227,
+      "street_id": 610101817,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Long H\u01b0ng",
+      "street_type": "tertiary",
+      "source": 5153241416,
+      "target": 5752767747
+    },
+    {
+      "segment_id": 34439,
+      "length": 25,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244264010,
+      "target": 2244264007
+    },
+    {
+      "segment_id": 34440,
+      "length": 72,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244264010,
+      "target": 2244263979
+    },
+    {
+      "segment_id": 34427,
+      "length": 5,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5740067021,
+      "target": 2244263976
+    },
+    {
+      "segment_id": 34428,
+      "length": 84,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5740067021,
+      "target": 5750861172
+    },
+    {
+      "segment_id": 34423,
+      "length": 8,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244264015,
+      "target": 5750860923
+    },
+    {
+      "segment_id": 34424,
+      "length": 27,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2244264015,
+      "target": 2244263976
+    },
+    {
+      "segment_id": 70374,
+      "length": 15,
+      "street_id": 583931667,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 5751141456,
+      "target": 2287611022
+    },
+    {
+      "segment_id": 70375,
+      "length": 19,
+      "street_id": 583931667,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 5751141456,
+      "target": 5750860732
+    },
+    {
+      "segment_id": 70378,
+      "length": 26,
+      "street_id": 583931667,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 2287610962,
+      "target": 5750860732
+    },
+    {
+      "segment_id": 70379,
+      "length": 14,
+      "street_id": 583931667,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 2287610962,
+      "target": 5751141499
+    },
+    {
+      "segment_id": 77726,
+      "length": 5,
+      "street_id": 606613907,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 2287610967,
+      "target": 5750860973
+    },
+    {
+      "segment_id": 77727,
+      "length": 41,
+      "street_id": 606613907,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 2287610967,
+      "target": 2287611011
+    },
+    {
+      "segment_id": 34449,
+      "length": 39,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2287610983,
+      "target": 2287610988
+    },
+    {
+      "segment_id": 34450,
+      "length": 38,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2287610983,
+      "target": 2287611009
+    },
+    {
+      "segment_id": 34447,
+      "length": 11,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2287610988,
+      "target": 5750860219
+    },
+    {
+      "segment_id": 34448,
+      "length": 39,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2287610988,
+      "target": 2287610983
+    },
+    {
+      "segment_id": 70384,
+      "length": 49,
+      "street_id": 583931667,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 2287610995,
+      "target": 5751141446
+    },
+    {
+      "segment_id": 77731,
+      "length": 5,
+      "street_id": 606613908,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Nguy\u1ec5n V\u0103n T\u1ed1",
+      "street_type": "tertiary",
+      "source": 2287610995,
+      "target": 5751045772
+    },
+    {
+      "segment_id": 34429,
+      "length": 84,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5750861172,
+      "target": 5740067021
+    },
+    {
+      "segment_id": 34430,
+      "length": 27,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5750861172,
+      "target": 2244263968
+    },
+    {
+      "segment_id": 34433,
+      "length": 26,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5750860788,
+      "target": 2244263968
+    },
+    {
+      "segment_id": 34434,
+      "length": 16,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5750860788,
+      "target": 5750860986
+    },
+    {
+      "segment_id": 81868,
+      "length": 185,
+      "street_id": 610101817,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Long H\u01b0ng",
+      "street_type": "tertiary",
+      "source": 5153241331,
+      "target": 2287610999
+    },
+    {
+      "segment_id": 81869,
+      "length": 138,
+      "street_id": 610101817,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Long H\u01b0ng",
+      "street_type": "tertiary",
+      "source": 5153241331,
+      "target": 2287611007
+    },
+    {
+      "segment_id": 77720,
+      "length": 30,
+      "street_id": 606586226,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2287610999,
+      "target": 2287611005
+    },
+    {
+      "segment_id": 81867,
+      "length": 185,
+      "street_id": 610101817,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Long H\u01b0ng",
+      "street_type": "tertiary",
+      "source": 2287610999,
+      "target": 5153241331
+    },
+    {
+      "segment_id": 34421,
+      "length": 57,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5750860923,
+      "target": 5750860811
+    },
+    {
+      "segment_id": 34422,
+      "length": 8,
+      "street_id": 214994451,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 5750860923,
+      "target": 2244264015
+    },
+    {
+      "segment_id": 77717,
+      "length": 120,
+      "street_id": 606586226,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2287611004,
+      "target": 2287611005
+    },
+    {
+      "segment_id": 77722,
+      "length": 73,
+      "street_id": 606586227,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2287611004,
+      "target": 2287611009
+    },
+    {
+      "segment_id": 77718,
+      "length": 120,
+      "street_id": 606586226,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2287611005,
+      "target": 2287611004
+    },
+    {
+      "segment_id": 77719,
+      "length": 30,
+      "street_id": 606586226,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Ng\u00f4 Quy\u1ec1n",
+      "street_type": "tertiary",
+      "source": 2287611005,
+      "target": 2287610999
+    },
+    {
+      "segment_id": 81870,
+      "length": 138,
+      "street_id": 610101817,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Long H\u01b0ng",
+      "street_type": "tertiary",
+      "source": 2287611007,
+      "target": 5153241331
+    },
+    {
+      "segment_id": 81871,
+      "length": 71,
+      "street_id": 610101817,
+      "max_velocity": 50.0,
+      "street_level": 4,
+      "street_name": "Long H\u01b0ng",
+      "street_type": "tertiary",
+      "source": 2287611007,
+      "target": 5752767747
+    }
+  ]
+}

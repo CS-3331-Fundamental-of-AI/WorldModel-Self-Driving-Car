@@ -1,0 +1,678 @@
+{
+  "observation": {
+    "type": "Kinematics"
+  },
+  "action": {
+    "type": "DiscreteMetaAction"
+  },
+  "simulation_frequency": 15,
+  "policy_frequency": 1,
+  "other_vehicles_type": "highway_env.vehicle.behavior.IDMVehicle",
+  "screen_width": 600,
+  "screen_height": 150,
+  "centering_position": [
+    0.3,
+    0.5
+  ],
+  "scaling": 5.5,
+  "show_trajectories": false,
+  "render_agent": true,
+  "offscreen_rendering": false,
+  "manual_control": false,
+  "real_time_rendering": false,
+  "destination": null,
+  "initial_vehicle_count": 0,
+  "controlled_vehicles": 0,
+  "spawn_probability": 0.0,
+  "duration": 40.0,
+  "collision_reward": -5,
+  "high_speed_reward": 1.0,
+  "arrived_reward": 1.0,
+  "reward_speed_range": [
+    6.0,
+    12.0
+  ],
+  "auto_curve": false,
+  "corner_radius": 25.0,
+  "curve_samples": 8,
+  "exit_distance": 5.0,
+  "graph": {
+    "nodes": {
+      "1605303776": [
+        627.526,
+        349.5279
+      ],
+      "1605303746": [
+        806.37955,
+        186.0249
+      ],
+      "1605303704": [
+        759.17244,
+        233.99355
+      ],
+      "1605303784": [
+        851.45503,
+        120.17415
+      ],
+      "1605303721": [
+        773.76035,
+        49.9722
+      ],
+      "1605303819": [
+        570.64464,
+        392.2296
+      ],
+      "1605303823": [
+        906.87159,
+        107.88645
+      ],
+      "1605303730": [
+        916.91205,
+        109.9788
+      ],
+      "1605303699": [
+        497.63404,
+        447.219
+      ],
+      "1605303827": [
+        887.59413,
+        114.65745
+      ],
+      "1605303829": [
+        898.44351,
+        109.1019
+      ],
+      "1605303835": [
+        926.51526,
+        116.95515
+      ],
+      "1605303831": [
+        864.43057,
+        131.91795
+      ],
+      "1605303768": [
+        328.16507,
+        342.50715
+      ],
+      "1605303797": [
+        714.31012,
+        0.0
+      ],
+      "1605303770": [
+        0.0,
+        142.69605
+      ],
+      "1605303803": [
+        223.78693,
+        278.16045
+      ],
+      "1605303740": [
+        676.19791,
+        304.4841
+      ]
+    },
+    "edges": [
+      {
+        "start": "1605303746",
+        "end": "1605303746",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              806.37955,
+              186.0249
+            ],
+            [
+              759.17244,
+              233.99355
+            ],
+            [
+              806.37955,
+              186.0249
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25850,
+          "street_id": 147293399,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293399",
+          "composite": true
+        },
+        "length_hint": 134.60315921069008,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303746",
+        "end": "1605303746",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              806.37955,
+              186.0249
+            ],
+            [
+              864.43057,
+              131.91795
+            ],
+            [
+              806.37955,
+              186.0249
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25851,
+          "street_id": 147293399,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293399",
+          "composite": true
+        },
+        "length_hint": 158.7133637894793,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303819",
+        "end": "1605303819",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              570.64464,
+              392.2296
+            ],
+            [
+              497.63404,
+              447.219
+            ],
+            [
+              570.64464,
+              392.2296
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25842,
+          "street_id": 147293399,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293399",
+          "composite": true
+        },
+        "length_hint": 182.80461509185147,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303819",
+        "end": "1605303819",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              570.64464,
+              392.2296
+            ],
+            [
+              627.526,
+              349.5279
+            ],
+            [
+              570.64464,
+              392.2296
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25843,
+          "street_id": 147293399,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293399",
+          "composite": true
+        },
+        "length_hint": 142.25223089062047,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303699",
+        "end": "1605303699",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              497.63404,
+              447.219
+            ],
+            [
+              328.16507,
+              342.50715
+            ],
+            [
+              497.63404,
+              447.219
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25840,
+          "street_id": 147293399,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293399",
+          "composite": true
+        },
+        "length_hint": 398.41838975269906,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303803",
+        "end": "1605303803",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              223.78693,
+              278.16045
+            ],
+            [
+              0.0,
+              142.69605
+            ],
+            [
+              223.78693,
+              278.16045
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25836,
+          "street_id": 147293399,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293399",
+          "composite": true
+        },
+        "length_hint": 523.1871317461274,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303803",
+        "end": "1605303803",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              223.78693,
+              278.16045
+            ],
+            [
+              328.16507,
+              342.50715
+            ],
+            [
+              223.78693,
+              278.16045
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25837,
+          "street_id": 147293399,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293399",
+          "composite": true
+        },
+        "length_hint": 245.23697853912327,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303704",
+        "end": "1605303704",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              759.17244,
+              233.99355
+            ],
+            [
+              676.19791,
+              304.4841
+            ],
+            [
+              759.17244,
+              233.99355
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25848,
+          "street_id": 147293399,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293399",
+          "composite": true
+        },
+        "length_hint": 217.7493078567499,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303740",
+        "end": "1605303740",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              676.19791,
+              304.4841
+            ],
+            [
+              627.526,
+              349.5279
+            ],
+            [
+              676.19791,
+              304.4841
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25846,
+          "street_id": 147293399,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293399",
+          "composite": true
+        },
+        "length_hint": 132.6333101673648,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303784",
+        "end": "1605303784",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              851.45503,
+              120.17415
+            ],
+            [
+              773.76035,
+              49.9722
+            ],
+            [
+              851.45503,
+              120.17415
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25898,
+          "street_id": 147293406,
+          "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293406",
+          "composite": true
+        },
+        "length_hint": 209.42566303206388,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303784",
+        "end": "1605303784",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              851.45503,
+              120.17415
+            ],
+            [
+              864.43057,
+              131.91795
+            ],
+            [
+              851.45503,
+              120.17415
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25899,
+          "street_id": 147293406,
+          "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293406",
+          "composite": true
+        },
+        "length_hint": 35.001798624162184,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303797",
+        "end": "1605303797",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              714.31012,
+              0.0
+            ],
+            [
+              773.76035,
+              49.9722
+            ],
+            [
+              714.31012,
+              0.0
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25895,
+          "street_id": 147293406,
+          "street_name": "Khu \u0111\u00f4 th\u1ecb \u0110\u1ea1i Ph\u01b0\u1edbc",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293406",
+          "composite": true
+        },
+        "length_hint": 155.32611654055995,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303823",
+        "end": "1605303823",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              906.87159,
+              107.88645
+            ],
+            [
+              898.44351,
+              109.1019
+            ],
+            [
+              906.87159,
+              107.88645
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25858,
+          "street_id": 147293401,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293401",
+          "composite": true
+        },
+        "length_hint": 17.03054329008918,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303823",
+        "end": "1605303823",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              906.87159,
+              107.88645
+            ],
+            [
+              916.91205,
+              109.9788
+            ],
+            [
+              906.87159,
+              107.88645
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25859,
+          "street_id": 147293401,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293401",
+          "composite": true
+        },
+        "length_hint": 20.512314889753533,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303730",
+        "end": "1605303730",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              916.91205,
+              109.9788
+            ],
+            [
+              926.51526,
+              116.95515
+            ],
+            [
+              916.91205,
+              109.9788
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25861,
+          "street_id": 147293401,
+          "street_name": "NaN",
+          "street_type": "residential",
+          "street_level": 4,
+          "street_group": "147293401",
+          "composite": true
+        },
+        "length_hint": 23.739511505218445,
+        "speed_limit": 8.333333333333334
+      },
+      {
+        "start": "1605303829",
+        "end": "1605303829",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              898.44351,
+              109.1019
+            ],
+            [
+              887.59413,
+              114.65745
+            ],
+            [
+              898.44351,
+              109.1019
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25856,
+          "street_id": 147293401,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293401",
+          "composite": true
+        },
+        "length_hint": 24.378119877209553,
+        "speed_limit": 11.11111111111111
+      },
+      {
+        "start": "1605303831",
+        "end": "1605303831",
+        "reverse": false,
+        "shape": {
+          "type": "polyline",
+          "points": [
+            [
+              864.43057,
+              131.91795
+            ],
+            [
+              887.59413,
+              114.65745
+            ],
+            [
+              864.43057,
+              131.91795
+            ]
+          ]
+        },
+        "metadata": {
+          "segment_id": 25853,
+          "street_id": 147293401,
+          "street_name": "NaN",
+          "street_type": "unclassified",
+          "street_level": 4,
+          "street_group": "147293401",
+          "composite": true
+        },
+        "length_hint": 57.774574758230735,
+        "speed_limit": 11.11111111111111
+      }
+    ]
+  }
+}
