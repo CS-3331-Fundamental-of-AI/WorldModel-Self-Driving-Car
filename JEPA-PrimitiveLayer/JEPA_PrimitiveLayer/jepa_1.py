@@ -29,13 +29,33 @@ class PrimitiveLayer(nn.Module):
       z = z_c_raw.clone()
       B, HW, D = z.shape
 
-      # Flatten to (B, HW)
+      # Flatten
       mask_any_lat   = mask_any_lat.reshape(B, HW).bool()
       mask_empty_lat = mask_empty_lat.reshape(B, HW).bool()
 
-      # --- Inject masked tokens ---
+      # ===========================
+      #  IF CUDA → AMP-safe version
+      # ===========================
+      if torch.cuda.is_available():
+          tok_dtype = z.dtype
+          mask_tok  = self.mask_token.to(tok_dtype)
+          empty_tok = self.empty_token.to(tok_dtype)
+
+          if mask_any_lat.any():
+              num_any = int(mask_any_lat.sum().item())
+              z[mask_any_lat] = mask_tok.expand(num_any, -1)
+
+          if mask_empty_lat.any():
+              num_empty = int(mask_empty_lat.sum().item())
+              z[mask_empty_lat] = empty_tok.expand(num_empty, -1)
+
+          return z
+
+      # ===========================
+      #  ELSE → ORIGINAL VERSION
+      # ===========================
       if mask_any_lat.any():
-          num_any = int(mask_any_lat.sum().item())    # correct count
+          num_any = int(mask_any_lat.sum().item())
           z[mask_any_lat] = self.mask_token.expand(num_any, -1)
 
       if mask_empty_lat.any():
@@ -49,10 +69,24 @@ class PrimitiveLayer(nn.Module):
       z = z_t_raw.clone()
       B, HW, D = z.shape
 
-      # --- Flatten and convert to bool ---
       mask_empty_lat = mask_empty_lat.reshape(B, HW).bool()
 
-      # --- Inject empty tokens ---
+      # ===========================
+      #  IF CUDA → AMP-safe version
+      # ===========================
+      if torch.cuda.is_available():
+          tok_dtype = z.dtype
+          empty_tok = self.empty_token.to(tok_dtype)
+
+          if mask_empty_lat.any():
+              num_empty = int(mask_empty_lat.sum().item())
+              z[mask_empty_lat] = empty_tok.expand(num_empty, -1)
+
+          return z
+
+      # ===========================
+      #  ELSE → ORIGINAL VERSION
+      # ===========================
       if mask_empty_lat.any():
           num_empty = int(mask_empty_lat.sum().item())
           z[mask_empty_lat] = self.empty_token.expand(num_empty, -1)
