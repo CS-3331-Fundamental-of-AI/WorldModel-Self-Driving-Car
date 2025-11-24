@@ -148,7 +148,7 @@ def main():
             mask_non_up = mask_non_up.to(device)
             mask_any_up = mask_any_up.to(device)
 
-            with torch.cuda.amp.autocast(enabled=use_fp16, device_type="cuda"):
+            with torch.cuda.amp.autocast("cuda", enabled=use_fp16):
                 z_c, s_c, z_t = primitive_layer(
                     bev,
                     mask_emp.squeeze(1).to(device),
