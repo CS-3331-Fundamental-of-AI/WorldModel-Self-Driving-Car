@@ -177,7 +177,6 @@ def _train_fn(index):
 
             with autocast_ctx:
                 z_c, s_c, z_t = primitive_layer(
-                    bev,
                     mask_emp.squeeze(1),
                     mask_non_emp.squeeze(1),
                     mask_emp_up,
