@@ -5,66 +5,82 @@ import torch
 from PIL import Image
 import matplotlib.pyplot as plt
 from sklearn.cluster import AgglomerativeClustering
-from color_analysis import analyze_bev_colors
-from patch_util import patchify, unpatchify
+from .color_analysis import analyze_bev_colors
+from .patch_util import patchify, unpatchify
 import torch.nn.functional as F
 import math
 from torchvision import transforms
 
-def create_bev_mask_grid_occupancy(bev_rgb, mask_ratio=MASK_RATIO, patch_size=PATCH_SIZE):
+def create_bev_mask_grid_occupancy(bev_rgb, mask_ratio=0.5, patch_size=16):
     """
-    BEV Masking using STRICT semantic occupancy:
-    EMPTY   = pixel == (50,50,50)
-    NON-EMPTY = anything not equal to gray road
+    BEV Masking using TOLERANT semantic occupancy:
+
+    EMPTY (P-set)       = patch is >= 95% background white
+    NON-EMPTY (Q-set)   = patch contains > 5% non-white pixels
     """
+
     device = bev_rgb.device
     B, C, H, W = bev_rgb.shape
 
-    # -----------------------------
-    # 1. Strict occupancy detection
-    # -----------------------------
-    background_gray = torch.tensor([50,50,50], device=device).view(1,3,1,1)
-    is_road = (bev_rgb == background_gray).all(dim=1)       # (B,H,W)
-    occupancy = (~is_road).float().unsqueeze(1)             # (B,1,H,W)
+    # -----------------------------------------------------
+    # 1. Tolerant white-background detection
+    # -----------------------------------------------------
+    bg = torch.tensor([255, 255, 255], device=device).view(1, 3, 1, 1)
 
-    # -----------------------------
-    # 2. Patchify occupancy
-    # -----------------------------
+    # Per-pixel difference (sum of abs diff across channels)
+    diff = (bev_rgb.float() - bg.float()).abs().sum(dim=1)
+
+    # A pixel counts as background if diff < 15 (tolerance)
+    is_background = (diff < 15)        # (B,H,W)
+
+    # Occupancy = NOT background
+    occupancy = (~is_background).float().unsqueeze(1)   # (B,1,H,W)
+
+    # -----------------------------------------------------
+    # 2. Patchify occupancy map
+    # -----------------------------------------------------
     tokens, ph, pw = patchify(occupancy, patch_size)
     N = ph * pw
+
+    # tokens shape: (B, N, 1, p, p)
     tokens = tokens.view(B, N, 1, patch_size, patch_size)
 
-    # patch non-empty = if any pixel in patch has occupancy
-    patch_occ = tokens.sum(dim=(2,3,4))   # (B,N)
-    patch_empty = patch_occ == 0
+    # Count non-white pixels inside each patch
+    patch_occ = tokens.sum(dim=(2, 3, 4))       # (B,N)
+
+    # Tolerant patch classification:
+    patch_empty = (patch_occ < (patch_size*patch_size * 0.05))   # < 5% occupancy
     patch_nonempty = ~patch_empty
 
-    # -----------------------------
-    # 3. Random P/Q masking
-    # -----------------------------
+    # -----------------------------------------------------
+    # 3. Random P / Q masking
+    # -----------------------------------------------------
     mask_empty = torch.zeros(B, N, dtype=torch.bool, device=device)
     mask_nonempty = torch.zeros(B, N, dtype=torch.bool, device=device)
 
     num_mask_total = int(mask_ratio * N)
 
     for b in range(B):
-        empty_idx = patch_empty[b].nonzero(as_tuple=False).squeeze(-1)
-        nonempty_idx = patch_nonempty[b].nonzero(as_tuple=False).squeeze(-1)
+
+        empty_idx = patch_empty[b].nonzero().squeeze(-1)
+        nonempty_idx = patch_nonempty[b].nonzero().squeeze(-1)
 
         num_P = min(len(empty_idx), num_mask_total // 2)
         num_Q = min(len(nonempty_idx), num_mask_total - num_P)
 
         if num_P > 0:
-            mask_empty[b, empty_idx[torch.randperm(len(empty_idx))[:num_P]]] = True
+            perm = torch.randperm(len(empty_idx), device=device)[:num_P]
+            mask_empty[b, empty_idx[perm]] = True
 
         if num_Q > 0:
-            mask_nonempty[b, nonempty_idx[torch.randperm(len(nonempty_idx))[:num_Q]]] = True
+            perm = torch.randperm(len(nonempty_idx), device=device)[:num_Q]
+            mask_nonempty[b, nonempty_idx[perm]] = True
 
     mask_any = mask_empty | mask_nonempty
 
-    # -----------------------------
-    # 4. Upsample to pixel mask
-    # -----------------------------
+    # -----------------------------------------------------
+    # 4. Upsample back to pixel mask
+    # -----------------------------------------------------
     mask_grid = mask_any.view(B, 1, ph, pw).float()
     mask_pixel = F.interpolate(mask_grid, size=(H, W), mode="nearest").bool()
 
@@ -86,7 +102,10 @@ def create_non_empty_mask(
     arr = np.array(img)
 
     # remove background gray
-    target_colors = [code for code, _ in color_analysis if code != [50, 50, 50]]
+    target_colors = [
+      rgb for rgb, _ in color_analysis
+      if rgb not in ([255, 255, 255], [0, 0, 0])
+    ]
 
     # -------------------------------------------------------------
     # 2. Point sampling

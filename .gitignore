@@ -2,3 +2,10 @@ worldmodel31/
 .venv/
 __pycache__/
 *.pyc
+env/
+5/
+*/.env
+*.pt
+old_train.txt
+.DS_Store
+*/.DS_Store

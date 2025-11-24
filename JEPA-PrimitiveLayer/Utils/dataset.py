@@ -1,13 +1,18 @@
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 import pandas as pd
-from mask import masking, apply_mask
-
+from Utils.mask import masking, apply_mask
+import os
 class MapDataset(Dataset):
 
     def __init__(self, map_csv_file: str):
 
         self.map_files = pd.read_csv(map_csv_file)
-        self.root_dir = "/content/dataset/exported_maps/maps/"
+        # Load root path from .env (safer than hard-code)
+        self.root_dir = os.getenv("MAP_ROOT", "./5/exported_maps/local_maps/")
+
+        # Ensure folder ends with "/"
+        if not self.root_dir.endswith("/"):
+            self.root_dir += "/"
 
     def __len__(self):
         return len(self.map_files)

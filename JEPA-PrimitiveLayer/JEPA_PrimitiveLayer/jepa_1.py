@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from bev_jepa import BEVJEPAEncoder2D
-from spatial_pred import SpatialPredictorCNN
+from .bev_jepa import BEVJEPAEncoder2D
+from .spatial_pred import SpatialPredictorCNN
 from Utils.ema_buffer import init_target_from_online, LatentBuffer
 from config import EMA_DECAY
 
@@ -61,27 +61,41 @@ class PrimitiveLayer(nn.Module):
 
     def forward(self, masked_img, unmasked_img,
             mask_empty_lat, mask_non_lat, mask_any_lat):
-      """
-      masked_img:   (B,3,H,W)
-      unmasked_img: (B,3,H,W)
+        """
+        masked_img:   (B,3,H,W)
+        unmasked_img: (B,3,H,W)
+        mask_*_lat: (B, Hc*Wc)
+        """
 
-      mask_*_lat: (B, Hc*Wc)  masks already resized to latent grid
-      """
+        # ---- FORCE dtype/device consistency (BF16-safe) ----
+        dtype = next(self.context_encoder.parameters()).dtype  # bf16 under autocast
+        device = next(self.context_encoder.parameters()).device
 
-      # 1) Context encoder
-      z_c_raw, (Hc, Wc) = self.context_encoder(masked_img)   # (B, Hc*Wc, D)
+        masked_img   = masked_img.to(device=device, dtype=dtype)
+        unmasked_img = unmasked_img.to(device=device, dtype=dtype)
 
-      # 2) Insert tokens for context
-      z_c = self._inject_tokens_context(z_c_raw, mask_empty_lat, mask_any_lat)
+        # masks should be on device; bool is fine
+        mask_empty_lat = mask_empty_lat.to(device=device)
+        mask_any_lat   = mask_any_lat.to(device=device)
+        mask_non_lat   = mask_non_lat.to(device=device)  # even if unused now
 
-      # 3) Target encoder
-      z_t_raw, _ = self.target_encoder(unmasked_img)        # (B, Hc*Wc, D)
+        # tokens must match dtype too
+        mask_token  = self.mask_token.to(dtype=dtype)
+        empty_token = self.empty_token.to(dtype=dtype)
 
-      # 4) Insert empty tokens for target
-      z_t = self._inject_tokens_target(z_t_raw, mask_empty_lat)
+        # 1) Context encoder
+        z_c_raw, (Hc, Wc) = self.context_encoder(masked_img)
 
-      # 5) Predictor uses true (Hc,Wc)
-      s_c = self.predictor(z_c, Hc, Wc)
+        # 2) Insert tokens for context
+        z_c = self._inject_tokens_context(z_c_raw, mask_empty_lat, mask_any_lat)
 
-      return z_c, s_c, z_t
+        # 3) Target encoder
+        z_t_raw, _ = self.target_encoder(unmasked_img)
 
+        # 4) Insert empty tokens for target
+        z_t = self._inject_tokens_target(z_t_raw, mask_empty_lat)
+
+        # 5) Predictor
+        s_c = self.predictor(z_c, Hc, Wc)
+
+        return z_c, s_c, z_t
