@@ -2,12 +2,12 @@
 
 import os
 import time
+from comet_ml import Experiment
 import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from contextlib import nullcontext
 from dotenv import load_dotenv
-from comet_ml import Experiment
 from ultralytics import YOLO
 from tqdm import tqdm
 

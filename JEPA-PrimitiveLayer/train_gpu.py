@@ -1,9 +1,9 @@
 import os
 import torch
 import torch.nn as nn
+from comet_ml import Experiment
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
-from comet_ml import Experiment
 from Utils.dataset import MapDataset
 from config import (DEVICE, LAMBDA_JEPA, LAMBDA_REG, ALPHA_0, ALPHA_1,
                     BETA_1, BETA_2, GAMMA, EPOCH, EMA_DECAY,
@@ -79,8 +79,8 @@ def main():
     map_ds = MapDataset(map_csv_file=os.getenv("MAP_CSV"))
     dataloader = DataLoader(
         map_ds,
-        batch_size=16,
-        num_workers=4,
+        batch_size=32,
+        num_workers=2,
         pin_memory=True,
         persistent_workers=True,
         prefetch_factor=2
