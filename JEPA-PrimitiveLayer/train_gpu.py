@@ -74,7 +74,7 @@ def main():
 
     # Mixed-precision setup
     use_fp16 = True
-    scaler = torch.cuda.amp.GradScaler(enabled=use_fp16)
+    scaler = torch.cuda.amp.GradScaler("cuda",enabled=use_fp16)
 
     map_ds = MapDataset(map_csv_file=os.getenv("MAP_CSV"))
     dataloader = DataLoader(
