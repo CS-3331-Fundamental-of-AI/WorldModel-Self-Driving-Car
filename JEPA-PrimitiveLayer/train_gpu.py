@@ -62,7 +62,7 @@ def transfer_yolo_weights(primitive_layer):
     print("✅ YOLO → JEPA weight transfer complete.")
 
     for p in ctx.parameters():
-        p.requires_grad = False
+        p.requires_grad = True
     for p in tgt.parameters():
         p.requires_grad = False
 
