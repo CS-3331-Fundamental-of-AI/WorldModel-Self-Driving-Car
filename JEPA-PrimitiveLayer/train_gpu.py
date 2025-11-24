@@ -66,7 +66,7 @@ def transfer_yolo_weights(primitive_layer):
     for p in tgt.parameters():
         p.requires_grad = False
 
-    print("🔒 Encoders frozen. Predictor will train.")
+    print("🔒 Target Encoders frozen. Predictor & Context Encoder will train.")
     return primitive_layer
 
 
