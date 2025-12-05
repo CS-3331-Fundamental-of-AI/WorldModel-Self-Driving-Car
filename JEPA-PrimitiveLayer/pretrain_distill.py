@@ -16,78 +16,60 @@ from Utils.dataset import MapDataset
 
 load_dotenv()
 
+# ------------------------------------------------------------------
+# Global flags / Kaggle detection
+# ------------------------------------------------------------------
+IS_KAGGLE = "KAGGLE_KERNEL_RUN_TYPE" in os.environ
+
+# Fewer workers on Kaggle to avoid weird hangs with multiprocessing
+DEFAULT_NUM_WORKERS = 0 if IS_KAGGLE else 2
+BATCH_SIZE = int(os.getenv("BATCH_SIZE", "32"))
+
+# On Kaggle, you can optionally cap epochs / steps per epoch
+KAGGLE_EPOCHS = int(os.getenv("KAGGLE_EPOCHS", "5"))
+KAGGLE_MAX_STEPS = int(os.getenv("KAGGLE_MAX_STEPS", "300"))  # per epoch
+
+
 # --------------------------------------------------------
-# 1. Load DINO ResNet-50 (from local / Kaggle / download)
+# 1. Load DINO ResNet-50 (Kaggle checkpoint)
 # --------------------------------------------------------
 def load_dino_resnet50(device):
     """
-    Load a DINO-pretrained ResNet-50 backbone.
-
-    Priority:
-      1) If DINO_CKPT env var is set and exists -> use that path.
-      2) Try some common local / Kaggle paths.
-      3) Otherwise, download official DINO ckpt into CWD.
+    Load a DINO-pretrained ResNet-50 backbone from Kaggle model path.
     """
-    candidate_paths = []
+    kaggle_ckpt = "/kaggle/input/dino-resnet50-pretrain/pytorch/dino_resnet50_pretrain/1/dino_resnet50_pretrain.pth"
 
-    # 1) Explicit env var (recommended, esp. on Kaggle)
-    env_path = os.getenv("DINO_CKPT")
-    if env_path:
-        candidate_paths.append(env_path)
-
-    # 2) Common local paths (Mac / local dev)
-    cwd = os.getcwd()
-    candidate_paths.append(os.path.join(cwd, "dino_resnet50_pretrain.pth"))
-    candidate_paths.append(os.path.join(cwd, "dino_resnet50_pretrain", "dino_resnet50_pretrain.pth"))
-
-    # 3) Common Kaggle path (attach your Kaggle Model or Dataset here)
-    #    You can adjust this to the exact mounted path you see in Kaggle UI.
-    candidate_paths.append("/kaggle/input/dino-resnet50-pretrain/dino_resnet50_pretrain.pth")
-
-    ckpt_path = None
-    for p in candidate_paths:
-        if p and os.path.isfile(p):
-            ckpt_path = p
-            break
-
-    if ckpt_path is None:
-        # Download into current working directory (one-time)
-        url = "https://dl.fbaipublicfiles.com/dino/dino_resnet50_pretrain/dino_resnet50_pretrain.pth"
-        ckpt_path = os.path.join(cwd, "dino_resnet50_pretrain.pth")
-        print(f"📥 DINO checkpoint not found locally. Downloading to {ckpt_path} ...")
-        from torch.hub import download_url_to_file
-        download_url_to_file(url, ckpt_path)
+    if os.path.exists(kaggle_ckpt):
+        ckpt_path = kaggle_ckpt
+        print(f"✅ Using Kaggle DINO checkpoint at: {ckpt_path}")
     else:
-        print(f"✅ Using local DINO checkpoint at: {ckpt_path}")
+        raise FileNotFoundError(
+            f"DINO checkpoint not found at expected Kaggle path:\n{kaggle_ckpt}"
+        )
 
     checkpoint = torch.load(ckpt_path, map_location=device)
 
-    # checkpoint may be:
-    #  - an nn.Module (if you saved the whole model), or
-    #  - a plain state_dict, or
-    #  - a dict with key "state_dict".
-    if isinstance(checkpoint, nn.Module):
-        model = checkpoint
-    else:
-        state_dict = checkpoint.get("state_dict", checkpoint)
+    # Extract state_dict (works for both raw and wrapped checkpoints)
+    state_dict = checkpoint.get("state_dict", checkpoint)
 
-        # Strip potential "module." prefix
-        new_state = {}
-        for k, v in state_dict.items():
-            if k.startswith("module."):
-                k = k[len("module."):]
-            new_state[k] = v
+    # Strip "module." prefix from multi-GPU training checkpoints
+    new_state = {}
+    for k, v in state_dict.items():
+        if k.startswith("module."):
+            k = k[len("module."):]
+        new_state[k] = v
 
-        # Standard ResNet-50 backbone with no pretrained weights
-        model = resnet50(weights=None)
+    # Load into torchvision ResNet-50 backbone (no ImageNet weights)
+    model = resnet50(weights=None)
 
-        missing, unexpected = model.load_state_dict(new_state, strict=False)
-        print(f"ℹ️ Loaded DINO ResNet-50 state_dict.")
-        print(f"   Missing keys:   {len(missing)}")
-        print(f"   Unexpected keys:{len(unexpected)}")
-    
-    # 🔥 CRITICAL FIX: remove the 1000-class head
+    missing, unexpected = model.load_state_dict(new_state, strict=False)
+    print(f"ℹ️ Loaded DINO ResNet-50 state_dict.")
+    print(f"   Missing keys:   {len(missing)}")
+    print(f"   Unexpected keys:{len(unexpected)}")
+
+    # 🔥 Remove the 1000-class head → output 2048-dim features
     model.fc = nn.Identity()
+
     model.to(device)
     model.eval()
     for p in model.parameters():
@@ -150,9 +132,11 @@ def main():
         "weight_decay": 0.05,
         "width_mult": 0.5,
         "teacher_dim": 2048,
+        "batch_size": BATCH_SIZE,
+        "num_workers": DEFAULT_NUM_WORKERS,
+        "is_kaggle": IS_KAGGLE,
     })
 
-    # So we can decide in except whether to save a fail-safe checkpoint
     student = None
 
     try:
@@ -162,6 +146,7 @@ def main():
         if torch.cuda.is_available():
             device = torch.device("cuda")
             print(f"🔥 Using CUDA: {torch.cuda.get_device_name(0)}")
+            torch.backends.cudnn.benchmark = True
         elif torch.backends.mps.is_available():
             device = torch.device("mps")
             print("🍎 Using MPS (Apple Silicon)")
@@ -171,17 +156,18 @@ def main():
         experiment.log_parameter("device", str(device))
 
         # --------------------------
-        # Dataset
+        # Dataset / DataLoader
         # --------------------------
         map_csv = os.getenv("MAP_CSV")
         ds = MapDataset(map_csv_file=map_csv)
 
         dataloader = DataLoader(
             ds,
-            batch_size=32,
+            batch_size=BATCH_SIZE,
             shuffle=True,
-            num_workers=2,
+            num_workers=DEFAULT_NUM_WORKERS,
             pin_memory=True if device.type == "cuda" else False,
+            persistent_workers=False,  # safer on Kaggle
         )
 
         # --------------------------
@@ -201,7 +187,11 @@ def main():
         # --------------------------
         optim = torch.optim.AdamW(student.parameters(), lr=3e-4, weight_decay=0.05)
 
-        epochs = 5
+        if IS_KAGGLE:
+            epochs = KAGGLE_EPOCHS
+        else:
+            epochs = 5
+
         alpha_cos = 1.0
         alpha_l2 = 1.0
 
@@ -210,15 +200,22 @@ def main():
         # --------------------------
         global_step = 0
         for epoch in range(epochs):
-            pbar = tqdm(dataloader, desc=f"[Distill] Epoch {epoch+1}/{epochs}")
-            for batch in pbar:
+            print(f"\n🚀 Starting epoch {epoch+1}/{epochs}")
+            pbar = tqdm(dataloader, desc=f"[Distill] Epoch {epoch+1}/{epochs}", mininterval=1.0)
+
+            for step, batch in enumerate(pbar):
+                # Optional cap for Kaggle so kernel doesn't run forever
+                if IS_KAGGLE and step >= KAGGLE_MAX_STEPS:
+                    print(f"⏹ Reached KAGGLE_MAX_STEPS={KAGGLE_MAX_STEPS} for this epoch, stopping early.")
+                    break
+
                 (
                     bev, mask_emp, mask_non_emp, mask_union,
                     mask_emp_np, mask_non_emp_np, mask_union_np,
                     ph, pw, img
                 ) = batch
 
-                img = img.to(device)  # (B,3,H,W)
+                img = img.to(device, non_blocking=True)  # (B,3,H,W)
 
                 # Teacher forward
                 with torch.no_grad():
@@ -234,7 +231,7 @@ def main():
                 l2_loss  = F.mse_loss(s_proj, t_feat)
                 loss = alpha_cos * cos_loss + alpha_l2 * l2_loss
 
-                optim.zero_grad()
+                optim.zero_grad(set_to_none=True)
                 loss.backward()
                 torch.nn.utils.clip_grad_norm_(student.parameters(), 1.0)
                 optim.step()
@@ -245,10 +242,11 @@ def main():
                     "loss": f"{loss.item():.4f}",
                 })
 
-                # Comet logging
-                experiment.log_metric("loss", loss.item(), step=global_step)
-                experiment.log_metric("cos_loss", cos_loss.item(), step=global_step)
-                experiment.log_metric("l2_loss", l2_loss.item(), step=global_step)
+                # Comet logging (light)
+                if global_step % 10 == 0:
+                    experiment.log_metric("loss", loss.item(), step=global_step)
+                    experiment.log_metric("cos_loss", cos_loss.item(), step=global_step)
+                    experiment.log_metric("l2_loss", l2_loss.item(), step=global_step)
                 global_step += 1
 
         # --------------------------
@@ -286,8 +284,7 @@ def main():
         experiment.log_asset(err_log)
         experiment.log_text(str(e), metadata={"phase": "distill_fail"})
 
-        # Re-raise so you still see the traceback in the notebook
-        raise
+        raise  # so you still see full traceback in Logs
 
     finally:
         experiment.end()

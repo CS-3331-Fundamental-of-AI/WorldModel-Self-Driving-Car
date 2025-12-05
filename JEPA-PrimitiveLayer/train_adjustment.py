@@ -1,25 +1,35 @@
+# ------------------------------------------------------------
+# train_adjustment.py (Kaggle-optimized version)
+# ------------------------------------------------------------
 import os
 from dotenv import load_dotenv
 from comet_ml import Experiment
 from torch.utils.data import DataLoader
 from Utils.dataset import MapDataset
-from config import LAMBDA_JEPA, LAMBDA_REG, ALPHA_0, ALPHA_1, BETA_1, BETA_2, GAMMA, EPOCH, EMA_DECAY, ACCUM_STEPS, USE_BF16
+from config import (
+    LAMBDA_JEPA, LAMBDA_REG, ALPHA_0, ALPHA_1,
+    BETA_1, BETA_2, GAMMA, EPOCH,
+    EMA_DECAY, ACCUM_STEPS, USE_BF16
+)
 import torch
 import torch.nn.functional as F
 from contextlib import nullcontext
 from JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer, load_dino_resnet50
 from Utils.losses import compute_jepa_loss
 from Utils.ema_buffer import ema_update
-from torchvision.models import resnet50
 from tqdm import tqdm
 import traceback
 
-# ----------------------------
-# Environment Setup
-# ----------------------------
+# ------------------------------------------------------------
+# Kaggle detection
+# ------------------------------------------------------------
+IS_KAGGLE = "KAGGLE_KERNEL_RUN_TYPE" in os.environ
+NUM_WORKERS = 0 if IS_KAGGLE else 2
+BATCH_SIZE = 8 if IS_KAGGLE else 16
+MAX_STEPS = 300 if IS_KAGGLE else 999999
+
 load_dotenv()
 os.environ["COMET_LOG_PACKAGES"] = "0"
-os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
 
 
 # ----------------------------
@@ -40,16 +50,18 @@ def main():
     if torch.cuda.is_available():
         device = torch.device("cuda")
         print(f"🔥 Using CUDA GPU: {torch.cuda.get_device_name(0)}")
+        torch.backends.cudnn.benchmark = True
     elif torch.backends.mps.is_available():
         device = torch.device("mps")
         print("🍎 Using Apple Silicon MPS backend")
     else:
         device = torch.device("cpu")
-        print("⚠️ No GPU detected — using CPU (very slow!)")
+        print("⚠️ No GPU detected — using CPU")
 
     print(f"👉 Final device used for training: {device}")
 
-    teacher = load_dino_resnet50()
+    # Load DINO teacher (Kaggle-safe path)
+    teacher = load_dino_resnet50(device)
 
     # Mixed precision context
     autocast_ctx = (
@@ -57,32 +69,42 @@ def main():
         if USE_BF16 else nullcontext()
     )
 
-    # Comet Experiment (initialized early for fail-safe)
+    # ----------------------------
+    # Comet Init
+    # ----------------------------
     experiment = Experiment(
         api_key=os.getenv("API_KEY"),
         project_name=os.getenv("PROJECT_NAME"),
         workspace=os.getenv("WORK_SPACE"),
     )
-    experiment.set_name("JEPA-PrimitiveLayer-v1")
+    experiment.set_name("JEPA-PrimitiveLayer-v1-Kaggle")
 
     try:
         # ----------------------------
-        # Dataset
+        # Dataset + DataLoader
         # ----------------------------
         map_ds = MapDataset(map_csv_file=os.getenv("MAP_CSV"))
-        dataloader = DataLoader(map_ds, batch_size=16, num_workers=2)
+        dataloader = DataLoader(
+            map_ds,
+            batch_size=BATCH_SIZE,
+            shuffle=True,
+            num_workers=NUM_WORKERS,
+            persistent_workers=False,
+            pin_memory=True if device.type == "cuda" else False
+        )
 
         # ----------------------------
         # Model
         # ----------------------------
-        primitive_layer = PrimitiveLayer(embed_dim=128,distilled_path="bev_mobilenet_dino_init.pt",).to(device) 
-        # from pretrain_distill.py
-
+        primitive_layer = PrimitiveLayer(
+            embed_dim=128,
+            distilled_path="bev_mobilenet_dino_init.pt"
+        ).to(device)
 
         optimizer = torch.optim.Adam(
             primitive_layer.predictor.parameters(),
             lr=3e-4,
-            weight_decay=0.01,
+            weight_decay=0.01
         )
 
         global_step = 0
@@ -93,15 +115,22 @@ def main():
         # ----------------------------
         for epoch_idx in range(num_epochs):
 
+            # EMA schedule
             t = epoch_idx / max(1, num_epochs - 1)
             primitive_layer.ema_decay = float(EMA_DECAY + (1.0 - EMA_DECAY) * t)
 
-            pbar = tqdm(dataloader, desc=f"Epoch {epoch_idx+1}/{num_epochs}")
+            print(f"\n🚀 Epoch {epoch_idx + 1}/{num_epochs}")
+            pbar = tqdm(dataloader, mininterval=1.0)
 
             # ----------------------------
             # Batch Loop
             # ----------------------------
             for step_idx, batch in enumerate(pbar):
+
+                if IS_KAGGLE and step_idx >= MAX_STEPS:
+                    print(f"⏹ Early stop: step {step_idx}/{MAX_STEPS}")
+                    break
+
                 (
                     bev, mask_emp, mask_non_emp, mask_union,
                     mask_emp_np, mask_non_emp_np, mask_union_np,
@@ -109,8 +138,9 @@ def main():
                 ) = batch
 
                 B = bev.shape[0]
-                bev = bev.squeeze(1).to(device)
+                bev = bev.squeeze(1).to(device, non_blocking=True)
 
+                # mask handling
                 mask_emp_grid = mask_emp_np.to(device).view(B,1,32,32).bool()
                 mask_non_grid = mask_non_emp_np.to(device).view(B,1,32,32).bool()
                 mask_any_grid = mask_union_np.to(device).view(B,1,32,32).bool()
@@ -122,7 +152,7 @@ def main():
                 mask_emp_flat = mask_emp_up.view(B, -1)
                 mask_non_flat = mask_non_up.view(B, -1)
 
-                # JEPA forward pass
+                # JEPA forward
                 with autocast_ctx:
                     z_c, s_c, z_t = primitive_layer(
                         mask_emp.squeeze(1),
@@ -132,22 +162,21 @@ def main():
                         mask_any_up
                     )
 
-                    z_c_norm = F.normalize(z_c, dim=-1)
-                    s_c_norm = F.normalize(s_c, dim=-1)
-                    z_t_norm = F.normalize(z_t, dim=-1)
+                    z_c = F.normalize(z_c, dim=-1)
+                    s_c = F.normalize(s_c, dim=-1)
+                    z_t = F.normalize(z_t, dim=-1)
 
                     losses = compute_jepa_loss(
-                        s_c=s_c_norm, s_t=z_t_norm, z_c=z_c_norm,
+                        s_c=s_c, s_t=z_t, z_c=z_c,
                         mask_empty=mask_emp_flat,
                         mask_nonempty=mask_non_flat,
                         alpha0=ALPHA_0, alpha1=ALPHA_1,
                         beta1=BETA_1, beta2=BETA_2,
                         lambda_jepa=LAMBDA_JEPA,
                         lambda_reg=LAMBDA_REG,
-                        gamma=GAMMA,
+                        gamma=GAMMA
                     )
 
-                # Backprop
                 loss = losses["loss_total"] / ACCUM_STEPS
                 loss.backward()
 
@@ -155,66 +184,51 @@ def main():
                     torch.nn.utils.clip_grad_norm_(primitive_layer.parameters(), 1.0)
                     optimizer.step()
                     optimizer.zero_grad(set_to_none=True)
+
                     ema_update(
                         primitive_layer.context_encoder,
                         primitive_layer.target_encoder,
                         primitive_layer.ema_decay
                     )
 
-                # TQDM live logging
                 pbar.set_postfix({
                     "loss": f"{losses['loss_total'].item():.4f}",
                     "jepa": f"{losses['loss_jepa'].item():.4f}"
                 })
 
-                # Comet logging (frequent)
-                if global_step % 5 == 0:
-                    experiment.log_metric("loss_total_step", losses["loss_total"].item(), step=global_step)
-                    experiment.log_metric("loss_jepa_step", losses["loss_jepa"].item(), step=global_step)
-                    experiment.log_metric("loss_empty_step", losses["loss_P_empty"].item(), step=global_step)
-                    experiment.log_metric("loss_nonempty_step", losses["loss_Q_nonempty"].item(), step=global_step)
-                    experiment.log_metric("loss_reg_step", losses["loss_reg"].item(), step=global_step)
-
-                    tqdm.write(
-                        f"[step {global_step}] "
-                        f"loss={losses['loss_total'].item():.4f} | "
-                        f"jepa={losses['loss_jepa'].item():.4f}"
-                    )
+                if global_step % 10 == 0:
+                    experiment.log_metric("loss", losses["loss_total"].item(), step=global_step)
+                    experiment.log_metric("jepa_loss", losses["loss_jepa"].item(), step=global_step)
 
                 global_step += 1
 
-        # Normal save
+        # ----------------------------
+        # Save final model
+        # ----------------------------
         torch.save(primitive_layer.state_dict(), "primitive_layer.pt")
         experiment.log_asset("primitive_layer.pt")
         experiment.end()
 
     # ----------------------------
-    # FAIL-SAFE: Handle Crashes
+    # FAIL-SAFE Handling
     # ----------------------------
     except Exception as e:
-        print("\n❌ TRAINING FAILED — entering fail-safe mode...\n")
+        print("\n❌ TRAINING FAILED — fail-safe mode\n")
 
-        # Save emergency model checkpoint
         fail_path = "primitive_layer_fail.pt"
         try:
             torch.save(primitive_layer.state_dict(), fail_path)
-            print(f"💾 Saved fail-safe checkpoint → {fail_path}")
-            experiment.log_asset(fail_path)
+            print(f"💾 Saved fail-safe model → {fail_path}")
         except:
-            print("⚠️ Could not save fail-safe model.")
+            print("⚠️ Could not save fail-safe model")
 
-        # Save traceback
-        err_msg = traceback.format_exc()
         with open("training_error_log.txt", "w") as f:
-            f.write(err_msg)
+            f.write(traceback.format_exc())
 
-        print("📝 Error log written to training_error_log.txt")
         experiment.log_asset("training_error_log.txt")
-
-        print("⛔ Training ended due to error:")
-        print(err_msg)
-
         experiment.end()
+
+        raise
 
 
 if __name__ == "__main__":
