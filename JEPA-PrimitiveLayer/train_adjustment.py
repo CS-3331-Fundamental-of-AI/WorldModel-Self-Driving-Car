@@ -24,7 +24,7 @@ import traceback
 # Kaggle detection
 # ------------------------------------------------------------
 IS_KAGGLE = "KAGGLE_KERNEL_RUN_TYPE" in os.environ
-NUM_WORKERS = 0 if IS_KAGGLE else 2
+NUM_WORKERS = 2 # if IS_KAGGLE else  0
 BATCH_SIZE = 8 if IS_KAGGLE else 16
 MAX_STEPS = 300 if IS_KAGGLE else 999999
 

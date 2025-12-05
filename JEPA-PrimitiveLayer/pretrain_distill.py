@@ -22,7 +22,7 @@ load_dotenv()
 IS_KAGGLE = "KAGGLE_KERNEL_RUN_TYPE" in os.environ
 
 # Fewer workers on Kaggle to avoid weird hangs with multiprocessing
-DEFAULT_NUM_WORKERS = 0 if IS_KAGGLE else 2
+DEFAULT_NUM_WORKERS = 2 # 0 if IS_KAGGLE else 
 BATCH_SIZE = int(os.getenv("BATCH_SIZE", "32"))
 
 # On Kaggle, you can optionally cap epochs / steps per epoch
