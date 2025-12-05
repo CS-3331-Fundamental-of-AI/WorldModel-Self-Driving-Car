@@ -3,76 +3,73 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-class ConvBlock(nn.Module):
-    """Basic Conv → BN → GELU block"""
-    def __init__(self, in_ch, out_ch):
+# ------------------------------------------------------
+# MobileNet v1 Block (Depthwise 3×3 + Pointwise 1×1)
+# ------------------------------------------------------
+class MobileNetBlock(nn.Module):
+    def __init__(self, in_ch, out_ch, stride=1):
         super().__init__()
-        self.block = nn.Sequential(
-            nn.Conv2d(in_ch, out_ch, 3, padding=1),
-            nn.BatchNorm2d(out_ch),
-            nn.GELU(),
-        )
-    def forward(self, x):
-        return self.block(x)
 
+        self.depthwise = nn.Conv2d(
+            in_ch, in_ch,
+            kernel_size=3, stride=stride, padding=1,
+            groups=in_ch, bias=False
+        )
+        self.dw_bn = nn.BatchNorm2d(in_ch)
+
+        self.pointwise = nn.Conv2d(
+            in_ch, out_ch,
+            kernel_size=1, bias=False
+        )
+        self.pw_bn = nn.BatchNorm2d(out_ch)
+
+        self.act = nn.GELU()
+
+    def forward(self, x):
+        x = self.act(self.dw_bn(self.depthwise(x)))
+        x = self.act(self.pw_bn(self.pointwise(x)))
+        return x
+
+
+# ------------------------------------------------------
+# MobileNet-Style JEPA BEV Encoder (Tier-1)
+# ------------------------------------------------------
 class BEVJEPAEncoder2D(nn.Module):
-    """
-    2D JEPA Context/Target Encoder (replaces TokenMLPEncoder)
-    - 4 CNN stages (Zhu JEPA topological equivalent)
-    - Output: BEV tokens (B, HW, C)
-    """
-    def __init__(self, in_ch=3, base_dim=64):
+    def __init__(self, base_channels=[16, 32, 64, 128], width_mult=0.5):
         super().__init__()
 
-        C = base_dim
+        # width multiplier (MobileNet α)
+        C = [int(c * width_mult) for c in base_channels]
 
-        # -------- Stage 1 --------
         self.s1 = nn.Sequential(
-            ConvBlock(in_ch, C),
-            ConvBlock(C, C),
-            ConvBlock(C, C),
+            MobileNetBlock(3,  C[0], stride=1),
+            MobileNetBlock(C[0], C[0], stride=1),
         )
 
-        # -------- Stage 2 --------
         self.s2 = nn.Sequential(
-            nn.Conv2d(C, 2*C, kernel_size=3, stride=2, padding=1),
-            nn.GELU(),
-            ConvBlock(2*C, 2*C),
-            ConvBlock(2*C, 2*C),
+            MobileNetBlock(C[0], C[1], stride=2),
+            MobileNetBlock(C[1], C[1], stride=1),
         )
 
-        # -------- Stage 3 --------
         self.s3 = nn.Sequential(
-            nn.Conv2d(2*C, 4*C, kernel_size=3, stride=2, padding=1),
-            nn.GELU(),
-            ConvBlock(4*C, 4*C),
-            ConvBlock(4*C, 4*C),
+            MobileNetBlock(C[1], C[2], stride=2),
+            MobileNetBlock(C[2], C[2], stride=1),
         )
 
-        # -------- Stage 4 --------
         self.s4 = nn.Sequential(
-            nn.Conv2d(4*C, 8*C, kernel_size=3, stride=2, padding=1),
-            nn.GELU(),
-            ConvBlock(8*C, 8*C),
-            ConvBlock(8*C, 8*C),
+            MobileNetBlock(C[2], C[3], stride=2),
+            MobileNetBlock(C[3], C[3], stride=1),
         )
 
-        self.out_dim = 8 * C
+        self.out_dim = C[3]
 
     def forward(self, x):
-        """
-        x: (B, C, H, W)
-        returns:
-            tokens: (B, HW, C_out)
-            (H', W')
-        """
-        x = self.s1(x)
-        x = self.s2(x)
-        x = self.s3(x)
-        x = self.s4(x)
+        x = self.s1(x)   # (B, C1, H,   W)
+        x = self.s2(x)   # (B, C2, H/2, W/2)
+        x = self.s3(x)   # (B, C3, H/4, W/4)
+        x = self.s4(x)   # (B, C4, H/8, W/8)
 
-        B, C, H, W = x.shape
+        # JEPA EXPECTS: return (features, (H, W))
+        H, W = x.shape[-2], x.shape[-1]
 
-        tokens = x.flatten(2).transpose(1, 2)   # (B, H * W, C_out)
-
-        return tokens, (H, W)
+        return x, (H, W)

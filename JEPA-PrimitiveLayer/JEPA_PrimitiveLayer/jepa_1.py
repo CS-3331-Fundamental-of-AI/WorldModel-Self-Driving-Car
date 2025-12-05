@@ -10,9 +10,9 @@ class PrimitiveLayer(nn.Module):
     def __init__(self, embed_dim=128, ema_decay=EMA_DECAY):
         super().__init__()
 
-        self.context_encoder = BEVJEPAEncoder2D(in_ch=3, base_dim=embed_dim // 8)
-
-        self.target_encoder = BEVJEPAEncoder2D(in_ch=3, base_dim=embed_dim // 8)
+        self.context_encoder = BEVJEPAEncoder2D(width_mult=0.5)
+        self.target_encoder  = BEVJEPAEncoder2D(width_mult=0.5)
+        
         init_target_from_online(self.context_encoder, self.target_encoder)
 
         D = self.context_encoder.out_dim
@@ -64,7 +64,6 @@ class PrimitiveLayer(nn.Module):
 
       return z
 
-
     def _inject_tokens_target(self, z_t_raw, mask_empty_lat):
       z = z_t_raw.clone()
       B, HW, D = z.shape
@@ -98,38 +97,67 @@ class PrimitiveLayer(nn.Module):
         """
         masked_img:   (B,3,H,W)
         unmasked_img: (B,3,H,W)
-        mask_*_lat: (B, Hc*Wc)
+        mask_*_lat:   (B, Hc*Wc)
         """
 
         # ---- FORCE dtype/device consistency (BF16-safe) ----
-        dtype = next(self.context_encoder.parameters()).dtype  # bf16 under autocast
+        dtype = next(self.context_encoder.parameters()).dtype
         device = next(self.context_encoder.parameters()).device
 
         masked_img   = masked_img.to(device=device, dtype=dtype)
         unmasked_img = unmasked_img.to(device=device, dtype=dtype)
 
-        # masks should be on device; bool is fine
         mask_empty_lat = mask_empty_lat.to(device=device)
         mask_any_lat   = mask_any_lat.to(device=device)
-        mask_non_lat   = mask_non_lat.to(device=device)  # even if unused now
+        mask_non_lat   = mask_non_lat.to(device=device)
 
         # tokens must match dtype too
-        mask_token  = self.mask_token.to(dtype=dtype)
-        empty_token = self.empty_token.to(dtype=dtype)
+        self.mask_token  = self.mask_token.to(dtype=dtype)
+        self.empty_token = self.empty_token.to(dtype=dtype)
 
-        # 1) Context encoder
-        z_c_raw, (Hc, Wc) = self.context_encoder(masked_img)
+        # ----------------------------------------------------
+        # 1) Context encoder output normalization (Option B)
+        # ----------------------------------------------------
+        out_c = self.context_encoder(masked_img)
 
-        # 2) Insert tokens for context
+        # Encoder may return either:
+        #   (z, (H,W))  OR  z only
+        if isinstance(out_c, tuple):
+            feat_c, (Hc, Wc) = out_c
+        else:
+            feat_c = out_c
+            _, _, Hc, Wc = feat_c.shape
+
+        # Flatten → (B, HW, C)
+        B, Cc, Hc, Wc = feat_c.shape
+        z_c_raw = feat_c.reshape(B, Cc, Hc * Wc).permute(0, 2, 1)
+
+        # ----------------------------------------------------
+        # 2) Inject tokens for context branch
+        # ----------------------------------------------------
         z_c = self._inject_tokens_context(z_c_raw, mask_empty_lat, mask_any_lat)
 
-        # 3) Target encoder
-        z_t_raw, _ = self.target_encoder(unmasked_img)
+        # ----------------------------------------------------
+        # 3) Target encoder output normalization (Option B)
+        # ----------------------------------------------------
+        out_t = self.target_encoder(unmasked_img)
 
-        # 4) Insert empty tokens for target
+        if isinstance(out_t, tuple):
+            feat_t, _ = out_t
+        else:
+            feat_t = out_t
+
+        Bt, Ct, Ht, Wt = feat_t.shape
+        z_t_raw = feat_t.reshape(Bt, Ct, Ht * Wt).permute(0, 2, 1)
+
+        # ----------------------------------------------------
+        # 4) Inject empty tokens for target
+        # ----------------------------------------------------
         z_t = self._inject_tokens_target(z_t_raw, mask_empty_lat)
 
-        # 5) Predictor
+        # ----------------------------------------------------
+        # 5) Predictor: expects (B, HW, C)
+        # ----------------------------------------------------
         s_c = self.predictor(z_c, Hc, Wc)
 
         return z_c, s_c, z_t
