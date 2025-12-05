@@ -7,9 +7,10 @@ from config import LAMBDA_JEPA, LAMBDA_REG, ALPHA_0, ALPHA_1, BETA_1, BETA_2, GA
 import torch
 import torch.nn.functional as F
 from contextlib import nullcontext
-from JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer
+from JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer, load_dino_resnet50
 from Utils.losses import compute_jepa_loss
 from Utils.ema_buffer import ema_update
+from torchvision.models import resnet50
 from tqdm import tqdm
 import traceback
 
@@ -48,6 +49,8 @@ def main():
 
     print(f"👉 Final device used for training: {device}")
 
+    teacher = load_dino_resnet50()
+
     # Mixed precision context
     autocast_ctx = (
         torch.autocast(device_type=device.type, dtype=torch.bfloat16)
@@ -72,7 +75,9 @@ def main():
         # ----------------------------
         # Model
         # ----------------------------
-        primitive_layer = PrimitiveLayer(embed_dim=128).to(device)
+        primitive_layer = PrimitiveLayer(embed_dim=128,distilled_path="bev_mobilenet_dino_init.pt",).to(device) 
+        # from pretrain_distill.py
+
 
         optimizer = torch.optim.Adam(
             primitive_layer.predictor.parameters(),

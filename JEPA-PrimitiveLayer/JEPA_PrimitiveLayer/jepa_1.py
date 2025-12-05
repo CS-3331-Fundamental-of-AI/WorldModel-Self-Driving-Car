@@ -6,14 +6,36 @@ from .spatial_pred import SpatialPredictorCNN
 from Utils.ema_buffer import init_target_from_online, LatentBuffer
 from config import EMA_DECAY
 
+import torch
+import torch.nn as nn
+from torchvision.models import resnet50
+import os
+def load_dino_resnet50():
+    model = torch.hub.load("facebookresearch/dino:main", "dino_resnet50")
+    model.eval()
+    for p in model.parameters():
+        p.requires_grad = False
+    return model
+
 class PrimitiveLayer(nn.Module):
-    def __init__(self, embed_dim=128, ema_decay=EMA_DECAY):
+    def __init__(self, embed_dim=128, ema_decay=EMA_DECAY, distilled_path: str = "bev_mobilenet_dino_init.pt"):
         super().__init__()
 
         self.context_encoder = BEVJEPAEncoder2D(width_mult=0.5)
         self.target_encoder  = BEVJEPAEncoder2D(width_mult=0.5)
         
         init_target_from_online(self.context_encoder, self.target_encoder)
+
+        # 2) Load distilled MobileNet weights (if available)
+        if distilled_path is not None and os.path.exists(distilled_path):
+            state = torch.load(distilled_path, map_location="cpu")
+            missing, unexpected = self.context_encoder.load_state_dict(state, strict=False)
+            print(f"[Distill] Loaded distilled encoder from {distilled_path}")
+            print(f"[Distill] Missing: {missing}, Unexpected: {unexpected}")
+        else:
+            print(f"[Distill] No distilled weights found at {distilled_path}, "
+                  f"training JEPA from random init.")
+
 
         D = self.context_encoder.out_dim
         self.predictor = SpatialPredictorCNN(embed_dim=D)
@@ -92,6 +114,24 @@ class PrimitiveLayer(nn.Module):
 
       return z
 
+    def _distill_from_teacher(self):
+        """
+        Initialize context encoder weights using the DINO teacher encoder.
+        Only layers with matching shapes are copied.
+        """
+
+        teacher_state = self.teacher.state_dict()
+        student_state = self.context_encoder.state_dict()
+
+        copied = 0
+        for k_s, v_s in student_state.items():
+            if k_s in teacher_state and teacher_state[k_s].shape == v_s.shape:
+                student_state[k_s] = teacher_state[k_s]
+                copied += 1
+
+        self.context_encoder.load_state_dict(student_state, strict=False)
+        print(f"[Variation A] Copied {copied} matching weights from teacher → student.")
+      
     def forward(self, masked_img, unmasked_img,
             mask_empty_lat, mask_non_lat, mask_any_lat):
         """
