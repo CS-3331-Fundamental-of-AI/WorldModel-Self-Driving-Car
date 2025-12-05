@@ -104,6 +104,9 @@ def main():
         prefetch_factor=2 if 0 > 0 else None,
     )
 
+    print(f"Currently train on {DEVICE}")
+    if (DEVICE == "cuda"):
+        print("RUNNING ON CUDA")
     device = torch.device(DEVICE)
     primitive_layer = PrimitiveLayer(embed_dim=128).to(device)
     primitive_layer = transfer_yolo_weights(primitive_layer)
