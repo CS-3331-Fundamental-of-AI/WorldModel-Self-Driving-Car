@@ -26,7 +26,7 @@ DEFAULT_NUM_WORKERS = 2 # 0 if IS_KAGGLE else
 BATCH_SIZE = int(os.getenv("BATCH_SIZE", "32"))
 
 # On Kaggle, you can optionally cap epochs / steps per epoch
-KAGGLE_EPOCHS = int(os.getenv("KAGGLE_EPOCHS", "5"))
+KAGGLE_EPOCHS = int(os.getenv("KAGGLE_EPOCHS", "1"))
 KAGGLE_MAX_STEPS = int(os.getenv("KAGGLE_MAX_STEPS", "300"))  # per epoch
 
 
