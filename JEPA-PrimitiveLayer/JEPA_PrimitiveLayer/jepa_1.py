@@ -10,13 +10,66 @@ import torch.nn as nn
 from torchvision.models import resnet50
 import os
 
-def load_dino_resnet50():
-    model = torch.hub.load("facebookresearch/dino:main", "dino_resnet50")
-    model.eval()
-    for p in model.parameters():
-        p.requires_grad = False
-    return model
+# ---------------------------------------
+# Load DINO ResNet-50 → return 2048-D encoder
+# ---------------------------------------
+def load_dino_resnet50(device):
+    import torch
+    from torchvision.models import resnet50
 
+    # 1. Build a plain resnet
+    teacher = resnet50(weights=None)
+
+    # 2. Load your Kaggle DINO checkpoint
+    ckpt_path = "/kaggle/input/dino-resnet50-pretrain/dino_resnet50_pretrain.pth"
+    state = torch.load(ckpt_path, map_location="cpu")
+
+    # Some DINO checkpoints wrap weights in "state_dict"
+    if "state_dict" in state:
+        state = state["state_dict"]
+
+    # Remove possible 'module.' prefix
+    new_state = {}
+    for k, v in state.items():
+        k = k.replace("module.", "")
+        new_state[k] = v
+
+    # Load backbone weights only (fc is incompatible → skip)
+    teacher.load_state_dict(new_state, strict=False)
+
+    # 3. REMOVE classifier head so model outputs 2048-d features
+    teacher.fc = torch.nn.Identity()
+
+    # 4. Freeze for distillation
+    teacher.eval()
+    teacher.to(device)
+    for p in teacher.parameters():
+        p.requires_grad = False
+
+    print("✔ Loaded DINO teacher → output dim = 2048")
+    return teacher
+
+class ResNet50Backbone(nn.Module):
+    def __init__(self, resnet):
+        super().__init__()
+        # take everything except the classifier head
+        self.features = nn.Sequential(
+            resnet.conv1,
+            resnet.bn1,
+            resnet.relu,
+            resnet.maxpool,
+            resnet.layer1,
+            resnet.layer2,
+            resnet.layer3,
+            resnet.layer4,
+            resnet.avgpool
+        )
+
+    def forward(self, x):
+        x = self.features(x)
+        x = torch.flatten(x, 1)  # (B, 2048)
+        return x
+    
 class PrimitiveLayer(nn.Module):
     def __init__(self, embed_dim=128, ema_decay=EMA_DECAY, distilled_path: str = "bev_mobilenet_dino_init.pt"):
         super().__init__()

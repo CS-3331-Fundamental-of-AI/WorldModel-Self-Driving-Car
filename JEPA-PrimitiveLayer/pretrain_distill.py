@@ -85,7 +85,9 @@ def load_dino_resnet50(device):
         print(f"ℹ️ Loaded DINO ResNet-50 state_dict.")
         print(f"   Missing keys:   {len(missing)}")
         print(f"   Unexpected keys:{len(unexpected)}")
-
+    
+    # 🔥 CRITICAL FIX: remove the 1000-class head
+    model.fc = nn.Identity()
     model.to(device)
     model.eval()
     for p in model.parameters():
@@ -186,7 +188,6 @@ def main():
         # Teacher & Student
         # --------------------------
         teacher = load_dino_resnet50(device)
-
         student = StudentWithHead(width_mult=0.5, teacher_dim=2048).to(device)
 
         # Multi-GPU (if available)
