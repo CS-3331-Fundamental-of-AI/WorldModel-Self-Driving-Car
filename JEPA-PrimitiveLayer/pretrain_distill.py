@@ -60,6 +60,14 @@ class StudentWithHead(nn.Module):
 # 3. Training Loop
 # --------------------------
 def main():
+    from comet_ml import Experiment
+    experiment = Experiment(
+        api_key=os.getenv("API_KEY"),
+        project_name=os.getenv("PROJECT_NAME"),
+        workspace=os.getenv("WORK_SPACE"),
+    )
+    experiment.set_name("Distill-MobileNet-DINO")
+
     # Device selection (CPU/GPU/MPS)
     if torch.cuda.is_available():
         device = torch.device("cuda")
@@ -90,62 +98,83 @@ def main():
     # Student + head
     student = StudentWithHead(width_mult=0.5, teacher_dim=2048).to(device)
 
-    # Optimizer (only student is trainable)
-    optim = torch.optim.AdamW(student.parameters(), lr=3e-4, weight_decay=0.05)
+    if torch.cuda.device_count() > 1:
+        print(f"⚡ Using {torch.cuda.device_count()} GPUs with DataParallel")
+        student = nn.DataParallel(student)
+        teacher = nn.DataParallel(teacher)
 
-    # Training config
-    epochs = 5      # you can tune this
-    alpha_cos = 1.0 # weight for cosine loss
-    alpha_l2  = 1.0 # weight for L2 loss
+    try:
+        # Optimizer (only student is trainable)
+        optim = torch.optim.AdamW(student.parameters(), lr=3e-4, weight_decay=0.05)
 
-    for epoch in range(epochs):
-        pbar = tqdm(dataloader, desc=f"[Distill] Epoch {epoch+1}/{epochs}")
-        for batch in pbar:
-            # Your MapDataset returns:
-            # (bev, mask_emp, mask_non_emp, mask_union,
-            #  mask_emp_np, mask_non_emp_np, mask_union_np,
-            #  ph, pw, img)
-            # We want the raw RGB image "img"
-            (
-                bev, mask_emp, mask_non_emp, mask_union,
-                mask_emp_np, mask_non_emp_np, mask_union_np,
-                ph, pw, img
-            ) = batch
+        # Training config
+        epochs = 5      # you can tune this
+        alpha_cos = 1.0 # weight for cosine loss
+        alpha_l2  = 1.0 # weight for L2 loss
 
-            img = img.to(device)   # (B,3,H,W), same as JEPA
+        for epoch in range(epochs):
+            pbar = tqdm(dataloader, desc=f"[Distill] Epoch {epoch+1}/{epochs}")
+            for batch in pbar:
+                # Your MapDataset returns:
+                # (bev, mask_emp, mask_non_emp, mask_union,
+                #  mask_emp_np, mask_non_emp_np, mask_union_np,
+                #  ph, pw, img)
+                # We want the raw RGB image "img"
+                (
+                    bev, mask_emp, mask_non_emp, mask_union,
+                    mask_emp_np, mask_non_emp_np, mask_union_np,
+                    ph, pw, img
+                ) = batch
 
-            # Forward teacher
-            with torch.no_grad():
-                # DINO ResNet expects something like 224x224,
-                # but your img is likely 256x256 or similar;
-                # ResNet will still handle it (it is conv-only).
-                t_feat = teacher(img)           # (B, 2048)
-                t_feat = F.normalize(t_feat, dim=-1)
+                img = img.to(device)   # (B,3,H,W), same as JEPA
 
-            # Forward student
-            s_proj, s_vec = student(img)       # (B, 2048), (B, C)
-            s_proj = F.normalize(s_proj, dim=-1)
+                # Forward teacher
+                with torch.no_grad():
+                    # DINO ResNet expects something like 224x224,
+                    # but your img is likely 256x256 or similar;
+                    # ResNet will still handle it (it is conv-only).
+                    t_feat = teacher(img)           # (B, 2048)
+                    t_feat = F.normalize(t_feat, dim=-1)
 
-            # Distill loss: cosine + L2
-            cos_loss = 1.0 - (s_proj * t_feat).sum(dim=-1).mean()
-            l2_loss  = F.mse_loss(s_proj, t_feat)
+                # Forward student
+                s_proj, s_vec = student(img)       # (B, 2048), (B, C)
+                s_proj = F.normalize(s_proj, dim=-1)
 
-            loss = alpha_cos * cos_loss + alpha_l2 * l2_loss
+                # Distill loss: cosine + L2
+                cos_loss = 1.0 - (s_proj * t_feat).sum(dim=-1).mean()
+                l2_loss  = F.mse_loss(s_proj, t_feat)
 
-            optim.zero_grad()
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(student.parameters(), 1.0)
-            optim.step()
+                loss = alpha_cos * cos_loss + alpha_l2 * l2_loss
 
-            pbar.set_postfix({
-                "cos": f"{cos_loss.item():.4f}",
-                "l2": f"{l2_loss.item():.4f}",
-                "loss": f"{loss.item():.4f}",
-            })
+                optim.zero_grad()
+                loss.backward()
+                torch.nn.utils.clip_grad_norm_(student.parameters(), 1.0)
+                optim.step()
+
+                pbar.set_postfix({
+                    "cos": f"{cos_loss.item():.4f}",
+                    "l2": f"{l2_loss.item():.4f}",
+                    "loss": f"{loss.item():.4f}",
+                })
+
+                experiment.log_metric("loss", loss.item())
+                experiment.log_metric("cos_loss", cos_loss.item())
+                experiment.log_metric("l2_loss", l2_loss.item())
+
+    except Exception as e:
+        torch.save(student.module.encoder.state_dict() if isinstance(student, nn.DataParallel) else student.encoder.state_dict(), "distill_fail.pt")
+        with open("distill_error_log.txt", "w") as f:
+            f.write(str(e))
+        experiment.log_asset("distill_fail.pt")
+        experiment.log_text(str(e), metadata={"phase": "distill_fail"})
+        raise e
 
     # Save only the BEVJEPAEncoder2D weights
-    torch.save(student.encoder.state_dict(), "bev_mobilenet_dino_init.pt")
+    torch.save(student.module.encoder.state_dict() if isinstance(student, nn.DataParallel) else student.encoder.state_dict(), "bev_mobilenet_dino_init.pt")
     print("✅ Saved distilled MobileNet encoder → bev_mobilenet_dino_init.pt")
+
+    experiment.log_asset("bev_mobilenet_dino_init.pt")
+    experiment.end()
 
 if __name__ == "__main__":
     main()

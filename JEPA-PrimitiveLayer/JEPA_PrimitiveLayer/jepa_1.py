@@ -5,11 +5,11 @@ from .bev_jepa import BEVJEPAEncoder2D
 from .spatial_pred import SpatialPredictorCNN
 from Utils.ema_buffer import init_target_from_online, LatentBuffer
 from config import EMA_DECAY
-
 import torch
 import torch.nn as nn
 from torchvision.models import resnet50
 import os
+
 def load_dino_resnet50():
     model = torch.hub.load("facebookresearch/dino:main", "dino_resnet50")
     model.eval()
