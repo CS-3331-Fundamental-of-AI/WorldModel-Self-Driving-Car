@@ -1,5 +1,5 @@
 import torch
-EPOCH = 10
+EPOCH = 5
 ACCUM_STEPS = 4  # effective_batch = batch_size * ACCUM_STEPS
 USE_BF16 = torch.backends.mps.is_available()
 EMBED_DIM = 128
