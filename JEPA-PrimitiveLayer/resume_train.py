@@ -318,19 +318,22 @@ try:
 
                 pbar.set_postfix({
                     "loss": f"{losses['loss_total'].item():.4f}",
-                    "jepa": f"{losses['loss_jepa'].item():.4f}"
+                    "jepa": f"{losses['loss_jepa'].item():.4f}",
+                    "variance-reg-loss" : f"{losses['loss_reg'].item():.4f}"
                 })
 
                 if global_step % 10 == 0:
                     experiment.log_metric("loss", losses["loss_total"].item(), step=global_step)
                     experiment.log_metric("jepa_loss", losses["loss_jepa"].item(), step=global_step)
+                    experiment.log_metric("variance-reg-loss", losses["loss_reg"].item(), step=global_step)
+
 
                 global_step += 1
 
         avg_loss = epoch_loss / len(loader)
         print(f"✅ Epoch {global_epoch} complete. Avg Loss = {avg_loss:.6f}")
 
-        experiment.log_metric("loss", avg_loss, step=global_epoch)
+        experiment.log_metric("avg_loss_per_epoch", avg_loss, step=global_epoch)
 
         # 🔥 FAIL-SAFE: push checkpoint every epoch
         comet_safe_save(primitive_layer, global_epoch, tag="epoch")
