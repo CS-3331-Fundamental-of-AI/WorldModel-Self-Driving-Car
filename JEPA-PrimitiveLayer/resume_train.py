@@ -135,10 +135,10 @@ def load_checkpoint_version_safe(model, ckpt_path, key=None, device="cpu"):
 # ============================================================
 
 experiment = Experiment(
-    api_key=os.getenv("COMET_API_KEY", "dummy"),
-    project_name="jepa-tier-2",
-    workspace="dtj-tran"
-)
+        api_key=os.getenv("API_KEY"),
+        project_name=os.getenv("PROJECT_NAME"),
+        workspace=os.getenv("WORK_SPACE"),
+    )
 experiment.set_name("JEPA-Resume-Train")
 experiment.log_parameters({
     "batch_size": BATCH_SIZE,
