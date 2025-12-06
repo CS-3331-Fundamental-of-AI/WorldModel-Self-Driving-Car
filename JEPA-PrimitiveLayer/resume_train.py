@@ -224,6 +224,7 @@ autocast_ctx = (
 
 try:
     primitive_layer.train()
+    global_step = 0
     for local_epoch in range(EPOCH):
 
         # Calculate correct epoch number
