@@ -124,15 +124,7 @@ experiment.log_parameters({
 
 bev_backbone = BEVJEPAEncoder2D().to(device)
 
-primitive_layer = PrimitiveLayer(
-    bev_encoder=bev_backbone,
-    dim=128,
-    alpha0=ALPHA_0,
-    alpha1=ALPHA_1,
-    beta1=BETA_1,
-    beta2=BETA_2,
-    gamma=GAMMA
-).to(device)
+primitive_layer = PrimitiveLayer(distilled_path=CKPT_BEVDINO).to(device)
 
 
 # ============================================================
@@ -141,15 +133,15 @@ primitive_layer = PrimitiveLayer(
 
 if IS_KAGGLE:
 
-    if os.path.exists(CKPT_BEVDINO):
-        load_checkpoint_version_safe(
-            bev_backbone,
-            CKPT_BEVDINO,
-            key=None,
-            device=device
-        )
-    else:
-        print("⚠️ BEV checkpoint missing — training from scratch.")
+    # if os.path.exists(CKPT_BEVDINO):
+    #     load_checkpoint_version_safe(
+    #         bev_backbone,
+    #         CKPT_BEVDINO,
+    #         key=None,
+    #         device=device
+    #     )
+    # else:
+    #     print("⚠️ BEV checkpoint missing — training from scratch.")
 
     if os.path.exists(CKPT_PRIMITIVE):
         load_checkpoint_version_safe(
