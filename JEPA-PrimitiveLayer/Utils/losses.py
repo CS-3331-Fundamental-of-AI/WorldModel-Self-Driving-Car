@@ -92,7 +92,10 @@ def jepa_loss(
             vr1 = variance_regularization(zc_K, gamma=gamma)
             vr2 = variance_regularization(sc_Q, gamma=gamma)
 
-            L_reg += beta1 * vr1 + beta2 * vr2
+            cr1 = covariance_regularization(zc_K)
+            cr2 = covariance_regularization(sc_Q)
+
+            L_reg += beta1 * (vr1 + cr1) + beta2 * (vr2 + cr2) # Update with the covariance loss (for adding embedding diversity)
 
     L_reg = L_reg / B       # important: average per sample (per paper)
 
@@ -124,6 +127,23 @@ def drift_loss(z_c, prev_z_c):
     if prev_z_c is None:
         return torch.tensor(0.0, device=z_c.device)
     return F.mse_loss(z_c, prev_z_c)
+
+def covariance_regularization(z):
+    """
+    z: (M, D)
+    Returns Gram-matrix decorrelation penalty.
+    """
+    if z.numel() == 0:
+        return torch.tensor(0.0, device=z.device)
+
+    z_centered = z - z.mean(dim=0)
+    M, D = z_centered.shape
+
+    cov = (z_centered.T @ z_centered) / (M - 1)
+    cov = cov.clone()
+    cov.fill_diagonal_(0)
+
+    return (cov.pow(2).sum() / D)
 
 def vicreg_loss(z1, z2, sim_coeff=25.0, var_coeff=25.0, cov_coeff=1.0):
     sim_loss = F.mse_loss(z1, z2)

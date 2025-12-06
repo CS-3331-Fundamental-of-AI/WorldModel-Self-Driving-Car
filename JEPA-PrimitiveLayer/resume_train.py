@@ -225,6 +225,12 @@ autocast_ctx = (
 try:
     primitive_layer.train()
     global_step = 0
+    # EMA warm-up:
+    # Start with a lower EMA decay to prevent early representational collapse,
+    # then gradually increase toward EMA_DECAY for stability in late training.
+    tau_start = 0.90
+    tau_end = EMA_DECAY   # typically 0.99
+
     for local_epoch in range(EPOCH):
 
         # Calculate correct epoch number
@@ -235,9 +241,9 @@ try:
             global_epoch = local_epoch + 1
             print(f"\n🚀 Epoch {global_epoch}/{EPOCH}")
 
-        # EMA schedule
-        t = local_epoch / max(1, EPOCH - 1)
-        primitive_layer.ema_decay = float(EMA_DECAY + (1.0 - EMA_DECAY) * t)
+        t = local_epoch / max(1, EPOCH - 1) # change update to the EMA_DECAY
+        primitive_layer.ema_decay = float(tau_start + (tau_end - tau_start) * t)
+
 
         print(f"\n🚀 Epoch {local_epoch + 1}/{EPOCH}")
         pbar = tqdm(loader, mininterval=1.0)
