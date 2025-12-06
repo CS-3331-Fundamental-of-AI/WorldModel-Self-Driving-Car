@@ -228,7 +228,7 @@ try:
     # EMA warm-up:
     # Start with a lower EMA decay to prevent early representational collapse,
     # then gradually increase toward EMA_DECAY for stability in late training.
-    tau_start = 0.90
+    tau_start = 0.95
     tau_end = EMA_DECAY   # typically 0.99
 
     for local_epoch in range(EPOCH):

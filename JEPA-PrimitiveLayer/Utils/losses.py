@@ -92,10 +92,12 @@ def jepa_loss(
             vr1 = variance_regularization(zc_K, gamma=gamma)
             vr2 = variance_regularization(sc_Q, gamma=gamma)
 
-            cr1 = covariance_regularization(zc_K)
-            cr2 = covariance_regularization(sc_Q)
+            # cr1 = covariance_regularization(zc_K)
+            # cr2 = covariance_regularization(sc_Q)
 
-            L_reg += beta1 * (vr1 + cr1) + beta2 * (vr2 + cr2) # Update with the covariance loss (for adding embedding diversity)
+            # L_reg += beta1 * (vr1 + cr1) + beta2 * (vr2 + cr2) # Update with the covariance loss (for adding embedding diversity)
+            L_reg += beta1 * (vr1 ) + beta2 * (vr2) # Drop the covariance because it's worsen the embedding quality
+
 
     L_reg = L_reg / B       # important: average per sample (per paper)
 
