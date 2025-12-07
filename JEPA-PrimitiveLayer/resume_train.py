@@ -182,7 +182,7 @@ def main():
             load_checkpoint_version_safe(
                 primitive_layer,
                 CKPT_PRIMITIVE,
-                key=None,
+                key='state',
                 device=device
             )
             print(f"✅ Resuming PrimitiveLayer from epoch {PREV_FINISHED_EPOCH}")
