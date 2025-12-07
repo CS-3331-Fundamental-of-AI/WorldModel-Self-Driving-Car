@@ -57,10 +57,10 @@ print(f"👉 Final device used for training: {device}")
 
 IS_KAGGLE = os.path.exists("/kaggle/input")
 
-CKPT_BEVDINO = "/kaggle/input/jepa-1-checkpoint-6-dec-25/pytorch/10-epochs/1/bev_mobilenet_dino_init-240.pt"
-CKPT_PRIMITIVE = "/kaggle/input/jepa-1-checkpoint-6-dec-25/pytorch/10-epochs/1/primitive_layer-epoch10-final-10.pt"
+CKPT_BEVDINO = "/kaggle/input/jepa-1-checkpoint-6-dec-25/pytorch/15-epoch-2/1/bev_mobilenet_dino_init-240.pt"
+CKPT_PRIMITIVE = "/kaggle/input/jepa-1-checkpoint-6-dec-25/pytorch/15-epoch-2/1/primitive_layer-epoch15-final-15.pt"
 
-PREV_FINISHED_EPOCH = 10
+PREV_FINISHED_EPOCH = 15
 
 def comet_safe_save(model, epoch, tag="latest"):
     """
