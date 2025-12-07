@@ -4,7 +4,7 @@ import torch
 import random
 import math
 from torch.utils.data import Dataset
-from .kinematic import compute_windows_safe, pad_traj, load_gpickle
+from kinematic import compute_windows_safe, pad_traj, load_gpickle
 
 # ============================================================
 #  AUGMENTATION UTILITIES  (Safe for 8×6 delta matrices)
