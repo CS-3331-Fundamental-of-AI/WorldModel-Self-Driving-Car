@@ -6,6 +6,7 @@ class EDAINLayer(nn.Module):
     """
     Extended Deep Adaptive Input Normalization (stable for trajectory signals).
     Behaves like BatchNorm1d for temporal inputs: [B, T, D].
+    BASED ON: https://arxiv.org/pdf/2310.14720
     """
     def __init__(self, D, summary_dim=None):
         super().__init__()
