@@ -1,5 +1,7 @@
 # ============================================================
 # Tier-2 Test Script (Environment-Driven, Clean Rewrite)
+# NOTE: THIS SCRIPT IS FOR TESTING THE TRAJECTORY-TOKENIZER & 
+# LEARN ABOUT THE EMBEDDING CONFIGURATION FROM THE TIER-2
 # ============================================================
 
 import os
@@ -140,6 +142,8 @@ token_hist = torch.zeros(L, dtype=torch.long)
 val_bar = tqdm(val_loader, desc="[Test]")
 
 val_loss = val_recon = val_smooth = val_usage = 0.0
+
+# NOTE : HOW THE EDAIN & TRAJECTORY SHALL BE USED TO PROCESS THE DATASET
 
 with torch.no_grad():
     for batch in val_bar:

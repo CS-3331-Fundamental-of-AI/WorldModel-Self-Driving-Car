@@ -1,5 +1,9 @@
 # -------------------------------------------------------------
 # Tier-2 Module: Training Script with Comet Logging + Fail-Safe
+# NOTE: THIS SCRIPT NAME TRAIN - BUT ACTUALLY IT"S SHALL BE TRAIN WITH INV-AFFORDANCE
+# LAYER IN TIER-3 USING Slow update EMA (not the graident-descent training)
+# SO THIS JUST FOR THE SETTING-UP ON DATASET TESTING & INTEGRATION & ILLUSTRATION HOW TO USE 
+# THE TIER-2 LAYERS & THE DATASET
 # -------------------------------------------------------------
 import os
 import torch
@@ -121,7 +125,7 @@ def save_checkpoint_safely(epoch, model, optimizer, experiment):
         print("❗ Comet upload failed:", e)
 
 # -------------------------------------------------------------
-# 6. TRAINING LOOP
+# 6. TRAINING LOOP (HOW TO USE THE DATASET)
 # -------------------------------------------------------------
 print("🚀 Starting Tier-2 Training...")
 
@@ -153,7 +157,7 @@ try:
                 tau=config["tau"],
             )
 
-            # Simple JEPA-like latent alignment
+            # Simple JEPA-like latent alignment (THIS IS JUST MOCK_UP - DON"T USE IT)
             loss = criterion(out["fusion"], out["traj_emb"])
 
             optimizer.zero_grad()
