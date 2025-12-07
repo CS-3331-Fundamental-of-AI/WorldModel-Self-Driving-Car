@@ -34,349 +34,356 @@ IS_KAGGLE = "KAGGLE_KERNEL_RUN_TYPE" in os.environ
 NUM_WORKERS = 2 # if IS_KAGGLE else  0
 MAX_STEPS = 300 if IS_KAGGLE else 999999
 
-# ----------------------------
-# Auto Device Selection
-# ----------------------------
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-    print(f"🔥 Using CUDA GPU: {torch.cuda.get_device_name(0)}")
-    torch.backends.cudnn.benchmark = True
-elif torch.backends.mps.is_available():
-    device = torch.device("mps")
-    print("🍎 Using Apple Silicon MPS backend")
-else:
-    device = torch.device("cpu")
-    print("⚠️ No GPU detected — using CPU")
-
-print(f"👉 Final device used for training: {device}")
-
-
-# ============================================================
-#  DETECT KAGGLE + CHECKPOINT PATHS
-# ============================================================
-
-IS_KAGGLE = os.path.exists("/kaggle/input")
-
-CKPT_BEVDINO = "/kaggle/input/jepa-1-checkpoint-6-dec-25/pytorch/15-epoch-2/1/bev_mobilenet_dino_init-240.pt"
-CKPT_PRIMITIVE = "/kaggle/input/jepa-1-checkpoint-6-dec-25/pytorch/15-epoch-2/1/primitive_layer-epoch15-final-15.pt"
-
-PREV_FINISHED_EPOCH = 15
-
-def comet_safe_save(model, epoch, tag="latest"):
-    """
-    Fail-safe saving: always try to log a checkpoint to Comet.
-    Never crashes the main training process.
-    """
-    try:
-        save_path = f"primitive_layer-epoch{epoch}-{tag}.pt"
-        torch.save(
-            {
-                "version": 2,
-                "epoch": epoch,
-                "state": model.state_dict(),
-            },
-            save_path
-        )
-        experiment.log_model(
-            name=f"primitive_layer_{tag}",
-            file_or_folder=save_path
-        )
-        print(f"💾 Comet fail-safe: Checkpoint uploaded ({tag})")
-    except Exception as e:
-        print(f"❌ Comet fail-safe error: {e}")
-        torch.save(model.state_dict(), "primitive_layer.pt")
-        experiment.log_asset("primitive_layer.pt")
-        experiment.end()
-        print("Log asset and end experiment !")
-
-# ----------------------------
-# Upsample Helper
-# ----------------------------
-def up2(x):
-    return x.repeat_interleave(2, -1).repeat_interleave(2, -2)
-
-
-
-# ============================================================
-#  VERSION-SAFE WEIGHT LOADER
-# ============================================================
-
-def load_checkpoint_version_safe(model, ckpt_path, key=None, device="cpu"):
-    print(f"\n🔍 Loading checkpoint: {ckpt_path}")
-
-    ckpt = torch.load(ckpt_path, map_location=device)
-
-    if isinstance(ckpt, dict) and key is not None and key in ckpt:
-        print(f"🔢 Checkpoint version: {ckpt.get('version', 'unknown')}")
-        state = ckpt[key]
+def main():
+    # ----------------------------
+    # Auto Device Selection
+    # ----------------------------
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+        print(f"🔥 Using CUDA GPU: {torch.cuda.get_device_name(0)}")
+        torch.backends.cudnn.benchmark = True
+    elif torch.backends.mps.is_available():
+        device = torch.device("mps")
+        print("🍎 Using Apple Silicon MPS backend")
     else:
-        state = ckpt
+        device = torch.device("cpu")
+        print("⚠️ No GPU detected — using CPU")
 
-    model_state = model.state_dict()
-    loaded, skipped = 0, 0
+    print(f"👉 Final device used for training: {device}")
 
-    for name, param in state.items():
-        if name in model_state and model_state[name].shape == param.shape:
-            model_state[name] = param
-            loaded += 1
+
+    # ============================================================
+    #  DETECT KAGGLE + CHECKPOINT PATHS
+    # ============================================================
+
+    IS_KAGGLE = os.path.exists("/kaggle/input")
+
+    # CKPT_BEVDINO = "/kaggle/input/jepa-1-checkpoint-6-dec-25/pytorch/15-epoch-2/1/bev_mobilenet_dino_init-240.pt"
+    # CKPT_PRIMITIVE = "/kaggle/input/jepa-1-checkpoint-6-dec-25/pytorch/15-epoch-2/1/primitive_layer-epoch15-final-15.pt"
+
+    CKPT_BEVDINO = "./Models/Tier-1-5-Dec/bev_mobilenet_dino_init-240.pt"
+    CKPT_PRIMITIVE = "./Models/Tier-1-7-Dec/primitive_layer-epoch15-final-15.pt"
+
+    PREV_FINISHED_EPOCH = 15
+
+    def comet_safe_save(model, epoch, tag="latest"):
+        """
+        Fail-safe saving: always try to log a checkpoint to Comet.
+        Never crashes the main training process.
+        """
+        try:
+            save_path = f"primitive_layer-epoch{epoch}-{tag}.pt"
+            torch.save(
+                {
+                    "version": 2,
+                    "epoch": epoch,
+                    "state": model.state_dict(),
+                },
+                save_path
+            )
+            experiment.log_model(
+                name=f"primitive_layer_{tag}",
+                file_or_folder=save_path
+            )
+            print(f"💾 Comet fail-safe: Checkpoint uploaded ({tag})")
+        except Exception as e:
+            print(f"❌ Comet fail-safe error: {e}")
+            torch.save(model.state_dict(), "primitive_layer.pt")
+            experiment.log_asset("primitive_layer.pt")
+            experiment.end()
+            print("Log asset and end experiment !")
+
+    # ----------------------------
+    # Upsample Helper
+    # ----------------------------
+    def up2(x):
+        return x.repeat_interleave(2, -1).repeat_interleave(2, -2)
+
+
+
+    # ============================================================
+    #  VERSION-SAFE WEIGHT LOADER
+    # ============================================================
+
+    def load_checkpoint_version_safe(model, ckpt_path, key=None, device="cpu"):
+        print(f"\n🔍 Loading checkpoint: {ckpt_path}")
+
+        ckpt = torch.load(ckpt_path, map_location=device)
+
+        if isinstance(ckpt, dict) and key is not None and key in ckpt:
+            print(f"🔢 Checkpoint version: {ckpt.get('version', 'unknown')}")
+            state = ckpt[key]
         else:
-            skipped += 1
+            state = ckpt
 
-    model.load_state_dict(model_state, strict=False)
+        model_state = model.state_dict()
+        loaded, skipped = 0, 0
 
-    print(f"   ✔️ Loaded {loaded} params")
-    print(f"   ⚠️ Skipped {skipped} params (mismatch or new layer)")
+        for name, param in state.items():
+            if name in model_state and model_state[name].shape == param.shape:
+                model_state[name] = param
+                loaded += 1
+            else:
+                skipped += 1
 
-    return loaded, skipped
+        model.load_state_dict(model_state, strict=False)
+
+        print(f"   ✔️ Loaded {loaded} params")
+        print(f"   ⚠️ Skipped {skipped} params (mismatch or new layer)")
+
+        return loaded, skipped
 
 
-# ============================================================
-#  EXPERIMENT LOGGER (COMET)
-# ============================================================
+    # ============================================================
+    #  EXPERIMENT LOGGER (COMET)
+    # ============================================================
 
-experiment = Experiment(
-        api_key=os.getenv("API_KEY"),
-        project_name=os.getenv("PROJECT_NAME"),
-        workspace=os.getenv("WORK_SPACE"),
+    experiment = Experiment(
+            api_key=os.getenv("API_KEY"),
+            project_name=os.getenv("PROJECT_NAME"),
+            workspace=os.getenv("WORK_SPACE"),
+        )
+    experiment.set_name("JEPA-Resume-Train")
+    experiment.log_parameters({
+        "batch_size": BATCH_SIZE,
+        "lr": LR,
+        "epochs": EPOCH,
+        "lambda_jepa": LAMBDA_JEPA,
+        "lambda_reg": LAMBDA_REG
+    })
+
+
+    # ============================================================
+    #  BUILD MODELS
+    # ============================================================
+
+    bev_backbone = BEVJEPAEncoder2D().to(device)
+
+    primitive_layer = PrimitiveLayer(embed_dim=128,distilled_path=CKPT_BEVDINO).to(device)
+
+
+    # ============================================================
+    #  LOAD CHECKPOINTS IF ON KAGGLE
+    # ============================================================
+
+    if IS_KAGGLE:
+
+        if os.path.exists(CKPT_BEVDINO):
+            load_checkpoint_version_safe(
+                bev_backbone,
+                CKPT_BEVDINO,
+                key=None,
+                device=device
+            )
+        else:
+            print("⚠️ BEV checkpoint missing — training from scratch.")
+
+        if os.path.exists(CKPT_PRIMITIVE):
+            load_checkpoint_version_safe(
+                primitive_layer,
+                CKPT_PRIMITIVE,
+                key=None,
+                device=device
+            )
+            print(f"✅ Resuming PrimitiveLayer from epoch {PREV_FINISHED_EPOCH}")
+        else:
+            print("⚠️ PrimitiveLayer checkpoint missing — training from scratch.")
+
+
+    # ============================================================
+    #  OPTIMIZER
+    # ============================================================
+
+    optimizer = torch.optim.AdamW(
+        primitive_layer.parameters(),
+        lr=LR,
+        weight_decay=0.01
     )
-experiment.set_name("JEPA-Resume-Train")
-experiment.log_parameters({
-    "batch_size": BATCH_SIZE,
-    "lr": LR,
-    "epochs": EPOCH,
-    "lambda_jepa": LAMBDA_JEPA,
-    "lambda_reg": LAMBDA_REG
-})
 
 
-# ============================================================
-#  BUILD MODELS
-# ============================================================
+    # ============================================================
+    #  DATASET + LOADER
+    # ============================================================
 
-bev_backbone = BEVJEPAEncoder2D().to(device)
+    map_ds = MapDataset(map_csv_file=os.getenv("MAP_CSV"))
+    loader = DataLoader(
+                map_ds,
+                batch_size=BATCH_SIZE,
+                shuffle=True,
+                num_workers=NUM_WORKERS,
+                persistent_workers=False,
+                pin_memory=True if device.type == "cuda" else False
+            )
 
-primitive_layer = PrimitiveLayer(embed_dim=128,distilled_path=CKPT_BEVDINO).to(device)
-
-
-# ============================================================
-#  LOAD CHECKPOINTS IF ON KAGGLE
-# ============================================================
-
-if IS_KAGGLE:
-
-    # if os.path.exists(CKPT_BEVDINO):
-    #     load_checkpoint_version_safe(
-    #         bev_backbone,
-    #         CKPT_BEVDINO,
-    #         key=None,
-    #         device=device
-    #     )
-    # else:
-    #     print("⚠️ BEV checkpoint missing — training from scratch.")
-
-    if os.path.exists(CKPT_PRIMITIVE):
-        load_checkpoint_version_safe(
-            primitive_layer,
-            CKPT_PRIMITIVE,
-            key=None,
-            device=device
-        )
-        print(f"✅ Resuming PrimitiveLayer from epoch {PREV_FINISHED_EPOCH}")
-    else:
-        print("⚠️ PrimitiveLayer checkpoint missing — training from scratch.")
+    # Mixed precision context
+    autocast_ctx = (
+        torch.autocast(device_type=device.type, dtype=torch.bfloat16)
+        if USE_BF16 else nullcontext()
+    )
 
 
-# ============================================================
-#  OPTIMIZER
-# ============================================================
+    # ============================================================
+    #  TRAINING LOOP (FULL, NO SKIP, CONTINUATION) + WITH FAIL-SAVE
+    # ============================================================
 
-optimizer = torch.optim.AdamW(
-    primitive_layer.parameters(),
-    lr=LR,
-    weight_decay=0.01
-)
+    try:
+        primitive_layer.train()
+        global_step = 0
+        # EMA warm-up:
+        # Start with a lower EMA decay to prevent early representational collapse,
+        # then gradually increase toward EMA_DECAY for stability in late training.
+        tau_start = 0.95
+        tau_end = EMA_DECAY   # typically 0.99
 
+        for local_epoch in range(EPOCH):
 
-# ============================================================
-#  DATASET + LOADER
-# ============================================================
+            # Calculate correct epoch number
+            if IS_KAGGLE:
+                global_epoch = PREV_FINISHED_EPOCH + local_epoch + 1
+                print(f"\n🚀 Epoch {global_epoch} (continuation {local_epoch+1}/{EPOCH})")
+            else:
+                global_epoch = PREV_FINISHED_EPOCH + local_epoch + 1
+                print(f"\n🚀 Epoch {global_epoch}/{EPOCH}")
 
-map_ds = MapDataset(map_csv_file=os.getenv("MAP_CSV"))
-loader = DataLoader(
-            map_ds,
-            batch_size=BATCH_SIZE,
-            shuffle=True,
-            num_workers=NUM_WORKERS,
-            persistent_workers=False,
-            pin_memory=True if device.type == "cuda" else False
-        )
-
-# Mixed precision context
-autocast_ctx = (
-    torch.autocast(device_type=device.type, dtype=torch.bfloat16)
-    if USE_BF16 else nullcontext()
-)
+            t = local_epoch / max(1, EPOCH - 1) # change update to the EMA_DECAY
+            primitive_layer.ema_decay = float(tau_start + (tau_end - tau_start) * t)
 
 
-# ============================================================
-#  TRAINING LOOP (FULL, NO SKIP, CONTINUATION) + WITH FAIL-SAVE
-# ============================================================
+            print(f"\n🚀 Epoch {local_epoch + 1}/{EPOCH}")
+            pbar = tqdm(loader, mininterval=1.0)
 
-try:
-    primitive_layer.train()
-    global_step = 0
-    # EMA warm-up:
-    # Start with a lower EMA decay to prevent early representational collapse,
-    # then gradually increase toward EMA_DECAY for stability in late training.
-    tau_start = 0.95
-    tau_end = EMA_DECAY   # typically 0.99
+            epoch_loss = 0
 
-    for local_epoch in range(EPOCH):
+            pbar = tqdm(loader, desc=f"Training Epoch {global_epoch}")
 
-        # Calculate correct epoch number
-        if IS_KAGGLE:
-            global_epoch = PREV_FINISHED_EPOCH + local_epoch + 1
-            print(f"\n🚀 Epoch {global_epoch} (continuation {local_epoch+1}/{EPOCH})")
-        else:
-            global_epoch = local_epoch + 1
-            print(f"\n🚀 Epoch {global_epoch}/{EPOCH}")
+        
+            # ----------------------------
+            # Batch Loop
+            # ----------------------------
+            for step_idx, batch in enumerate(pbar):
 
-        t = local_epoch / max(1, EPOCH - 1) # change update to the EMA_DECAY
-        primitive_layer.ema_decay = float(tau_start + (tau_end - tau_start) * t)
+                    if IS_KAGGLE and step_idx >= MAX_STEPS:
+                        print(f"⏹ Early stop: step {step_idx}/{MAX_STEPS}")
+                        break
 
+                    (
+                        bev, mask_emp, mask_non_emp, mask_union,
+                        mask_emp_np, mask_non_emp_np, mask_union_np,
+                        ph, pw, img
+                    ) = batch
 
-        print(f"\n🚀 Epoch {local_epoch + 1}/{EPOCH}")
-        pbar = tqdm(loader, mininterval=1.0)
+                    B = bev.shape[0]
+                    bev = bev.squeeze(1).to(device, non_blocking=True)
 
-        epoch_loss = 0
+                    # mask handling
+                    mask_emp_grid = mask_emp_np.to(device).view(B,1,32,32).bool()
+                    mask_non_grid = mask_non_emp_np.to(device).view(B,1,32,32).bool()
+                    mask_any_grid = mask_union_np.to(device).view(B,1,32,32).bool()
 
-        pbar = tqdm(loader, desc=f"Training Epoch {global_epoch}")
+                    mask_emp_up = up2(mask_emp_grid)
+                    mask_non_up = up2(mask_non_grid)
+                    mask_any_up = up2(mask_any_grid)
 
-       
-        # ----------------------------
-        # Batch Loop
-        # ----------------------------
-        for step_idx, batch in enumerate(pbar):
+                    mask_emp_flat = mask_emp_up.view(B, -1)
+                    mask_non_flat = mask_non_up.view(B, -1)
 
-                if IS_KAGGLE and step_idx >= MAX_STEPS:
-                    print(f"⏹ Early stop: step {step_idx}/{MAX_STEPS}")
-                    break
+                    # JEPA forward
+                    with autocast_ctx:
+                        z_c, s_c, z_t = primitive_layer(
+                            mask_emp.squeeze(1),
+                            mask_non_emp.squeeze(1),
+                            mask_emp_up,
+                            mask_non_up,
+                            mask_any_up
+                        )
 
-                (
-                    bev, mask_emp, mask_non_emp, mask_union,
-                    mask_emp_np, mask_non_emp_np, mask_union_np,
-                    ph, pw, img
-                ) = batch
+                        z_c = F.normalize(z_c, dim=-1)
+                        s_c = F.normalize(s_c, dim=-1)
+                        z_t = F.normalize(z_t, dim=-1)
 
-                B = bev.shape[0]
-                bev = bev.squeeze(1).to(device, non_blocking=True)
+                        losses = compute_jepa_loss(
+                            s_c=s_c, s_t=z_t, z_c=z_c,
+                            mask_empty=mask_emp_flat,
+                            mask_nonempty=mask_non_flat,
+                            alpha0=ALPHA_0, alpha1=ALPHA_1,
+                            beta1=BETA_1, beta2=BETA_2,
+                            lambda_jepa=LAMBDA_JEPA,
+                            lambda_reg=LAMBDA_REG,
+                            gamma=GAMMA
+                        )
 
-                # mask handling
-                mask_emp_grid = mask_emp_np.to(device).view(B,1,32,32).bool()
-                mask_non_grid = mask_non_emp_np.to(device).view(B,1,32,32).bool()
-                mask_any_grid = mask_union_np.to(device).view(B,1,32,32).bool()
+                    loss = losses["loss_total"] / ACCUM_STEPS
+                    loss.backward()
 
-                mask_emp_up = up2(mask_emp_grid)
-                mask_non_up = up2(mask_non_grid)
-                mask_any_up = up2(mask_any_grid)
+                    if (step_idx + 1) % ACCUM_STEPS == 0:
+                        torch.nn.utils.clip_grad_norm_(primitive_layer.parameters(), 1.0)
+                        optimizer.step()
+                        optimizer.zero_grad(set_to_none=True)
 
-                mask_emp_flat = mask_emp_up.view(B, -1)
-                mask_non_flat = mask_non_up.view(B, -1)
+                        ema_update(
+                            primitive_layer.context_encoder,
+                            primitive_layer.target_encoder,
+                            primitive_layer.ema_decay
+                        )
 
-                # JEPA forward
-                with autocast_ctx:
-                    z_c, s_c, z_t = primitive_layer(
-                        mask_emp.squeeze(1),
-                        mask_non_emp.squeeze(1),
-                        mask_emp_up,
-                        mask_non_up,
-                        mask_any_up
-                    )
+                    pbar.set_postfix({
+                        "loss": f"{losses['loss_total'].item():.4f}",
+                        "jepa": f"{losses['loss_jepa'].item():.4f}",
+                        "variance-reg-loss" : f"{losses['loss_reg'].item():.4f}"
+                    })
 
-                    z_c = F.normalize(z_c, dim=-1)
-                    s_c = F.normalize(s_c, dim=-1)
-                    z_t = F.normalize(z_t, dim=-1)
-
-                    losses = compute_jepa_loss(
-                        s_c=s_c, s_t=z_t, z_c=z_c,
-                        mask_empty=mask_emp_flat,
-                        mask_nonempty=mask_non_flat,
-                        alpha0=ALPHA_0, alpha1=ALPHA_1,
-                        beta1=BETA_1, beta2=BETA_2,
-                        lambda_jepa=LAMBDA_JEPA,
-                        lambda_reg=LAMBDA_REG,
-                        gamma=GAMMA
-                    )
-
-                loss = losses["loss_total"] / ACCUM_STEPS
-                loss.backward()
-
-                if (step_idx + 1) % ACCUM_STEPS == 0:
-                    torch.nn.utils.clip_grad_norm_(primitive_layer.parameters(), 1.0)
-                    optimizer.step()
-                    optimizer.zero_grad(set_to_none=True)
-
-                    ema_update(
-                        primitive_layer.context_encoder,
-                        primitive_layer.target_encoder,
-                        primitive_layer.ema_decay
-                    )
-
-                pbar.set_postfix({
-                    "loss": f"{losses['loss_total'].item():.4f}",
-                    "jepa": f"{losses['loss_jepa'].item():.4f}",
-                    "variance-reg-loss" : f"{losses['loss_reg'].item():.4f}"
-                })
-
-                if global_step % 10 == 0:
-                    experiment.log_metric("loss", losses["loss_total"].item(), step=global_step)
-                    experiment.log_metric("jepa_loss", losses["loss_jepa"].item(), step=global_step)
-                    experiment.log_metric("variance-reg-loss", losses["loss_reg"].item(), step=global_step)
+                    if global_step % 10 == 0:
+                        experiment.log_metric("loss", losses["loss_total"].item(), step=global_step)
+                        experiment.log_metric("jepa_loss", losses["loss_jepa"].item(), step=global_step)
+                        experiment.log_metric("variance-reg-loss", losses["loss_reg"].item(), step=global_step)
 
 
-                global_step += 1
+                    global_step += 1
 
-        avg_loss = epoch_loss / len(loader)
-        print(f"✅ Epoch {global_epoch} complete. Avg Loss = {avg_loss:.6f}")
+            avg_loss = epoch_loss / len(loader)
+            print(f"✅ Epoch {global_epoch} complete. Avg Loss = {avg_loss:.6f}")
 
-        experiment.log_metric("avg_loss_per_epoch", avg_loss, step=global_epoch)
+            experiment.log_metric("avg_loss_per_epoch", avg_loss, step=global_epoch)
 
-        # 🔥 FAIL-SAFE: push checkpoint every epoch
-        comet_safe_save(primitive_layer, global_epoch, tag="epoch")
+            # 🔥 FAIL-SAFE: push checkpoint every epoch
+            comet_safe_save(primitive_layer, global_epoch, tag="epoch")
 
-except Exception as e:
-    print("\n❌ TRAINING FAILED with exception:", e)
-    print("⚠️ Uploading emergency checkpoint to Comet...")
+    except Exception as e:
+        print("\n❌ TRAINING FAILED with exception:", e)
+        print("⚠️ Uploading emergency checkpoint to Comet...")
 
-    # 🔥 Emergency checkpoint on failure
-    comet_safe_save(primitive_layer, global_epoch, tag="fail")
+        # 🔥 Emergency checkpoint on failure
+        comet_safe_save(primitive_layer, global_epoch, tag="fail")
 
-    raise e  # Optional re-throw for debugging
+        raise e  # Optional re-throw for debugging
 
-finally:
-    print("\n🏁 TRAINING FINISHED — running final fail-safe save")
+    finally:
+        print("\n🏁 TRAINING FINISHED — running final fail-safe save")
 
-    # 🔥 Final success checkpoint
-    comet_safe_save(primitive_layer, global_epoch, tag="final")
+        # 🔥 Final success checkpoint
+        comet_safe_save(primitive_layer, global_epoch, tag="final")
 
 
 
-# # ============================================================
-# #  SAVE CHECKPOINT AT END
-# # ============================================================
+    # # ============================================================
+    # #  SAVE CHECKPOINT AT END
+    # # ============================================================
 
-# SAVE_DIR = Path("./checkpoints")
-# SAVE_DIR.mkdir(exist_ok=True)
+    # SAVE_DIR = Path("./checkpoints")
+    # SAVE_DIR.mkdir(exist_ok=True)
 
-# save_path = SAVE_DIR / f"primitive_layer-continue-{global_epoch}.pt"
+    # save_path = SAVE_DIR / f"primitive_layer-continue-{global_epoch}.pt"
 
-# torch.save(
-#     {
-#         "version": 2,
-#         "epoch": global_epoch,
-#         "state": primitive_layer.state_dict(),
-#     },
-#     save_path
-# )
+    # torch.save(
+    #     {
+    #         "version": 2,
+    #         "epoch": global_epoch,
+    #         "state": primitive_layer.state_dict(),
+    #     },
+    #     save_path
+    # )
 
-# print(f"\n💾 Saved continuation checkpoint → {save_path}")
+    # print(f"\n💾 Saved continuation checkpoint → {save_path}")
+
+if __name__ == "__main__":
+    main()
