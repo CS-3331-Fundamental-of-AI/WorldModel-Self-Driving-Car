@@ -477,7 +477,7 @@ def main():
     load_checkpoint_version_safe(
         primitive_layer,
         args.ckpt,
-        key=None,
+        key='state',
         device=device
     )
 
