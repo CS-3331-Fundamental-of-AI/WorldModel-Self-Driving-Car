@@ -59,12 +59,12 @@ def main():
     IS_KAGGLE = os.path.exists("/kaggle/input")
 
     CKPT_BEVDINO = "/kaggle/input/jepa-1-checkpoint-6-dec-25/pytorch/15-epoch-2/1/bev_mobilenet_dino_init-240.pt"
-    CKPT_PRIMITIVE = "/kaggle/input/jepa-1-checkpoint-6-dec-25/pytorch/15-epoch-2/1/primitive_layer-epoch15-final-15.pt"
+    CKPT_PRIMITIVE = "/kaggle/input/jepa1-checkpoint/pytorch/default/1/primitive_layer-epoch20-final.pt"
 
     # CKPT_BEVDINO = "./Models/Tier-1-5-Dec/bev_mobilenet_dino_init-240.pt"
     # CKPT_PRIMITIVE = "./Models/Tier-1-7-Dec/primitive_layer-epoch15-final-15.pt"
 
-    PREV_FINISHED_EPOCH = 15
+    PREV_FINISHED_EPOCH = 20
 
     def comet_safe_save(model, epoch, tag="latest"):
         """
