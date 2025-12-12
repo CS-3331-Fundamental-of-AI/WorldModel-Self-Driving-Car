@@ -18,7 +18,7 @@ from config import (
     BETA_1, BETA_2, GAMMA, EPOCH, EMA_DECAY,
     ACCUM_STEPS, USE_BF16
 )
-from JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer
+from JEPA.JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer
 from Utils.losses import compute_jepa_loss
 from Utils.ema_buffer import ema_update
 from ultralytics import YOLO

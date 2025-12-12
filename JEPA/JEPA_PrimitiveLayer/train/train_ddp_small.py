@@ -14,7 +14,7 @@ from torch.utils.data import DataLoader, Subset
 from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm
 from Utils.dataset import MapDataset
-from JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer
+from JEPA.JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer
 from Utils.losses import compute_jepa_loss
 from Utils.ema_buffer import ema_update
 from ultralytics import YOLO

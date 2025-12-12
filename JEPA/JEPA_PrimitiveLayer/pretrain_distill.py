@@ -11,7 +11,7 @@ from torchvision.models import resnet50
 
 from comet_ml import Experiment
 
-from JEPA_PrimitiveLayer.bev_jepa import BEVJEPAEncoder2D
+from JEPA.JEPA_PrimitiveLayer.bev_jepa import BEVJEPAEncoder2D
 from Utils.dataset import MapDataset
 
 load_dotenv()

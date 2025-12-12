@@ -76,19 +76,38 @@ def make_env(config, render=False):
     )
     return env
 
-def evaluate(config, agent, env, episodes=5, render=True, *args):
-    """Run evaluation episodes."""
+def evaluate_metrics(config, agent, env, episodes=5, render=True, w_drive=(0.4,0.3,0.3)):
+    """
+    Evaluate agent with detailed metrics per episode.
+
+    Metrics:
+        collision_rate : Fraction of steps with collision
+        offroad_rate   : Fraction of steps off the road
+        success        : Goal reached without collisions
+        route_completion : % of planned route completed
+        lateral_deviation : Avg lateral deviation from lane center
+        avg_reward     : Total episode reward
+        minADE         : Mean error between predicted & true positions
+        driving_score  : Weighted score (collision/offroad/comfort)
+    """
     results = defaultdict(list)
-    
+
     for ep in range(episodes):
         obs, info = env.reset()
         agent.reset()
         done = False
         total_reward = 0
         steps = 0
-        
-        print(f"\nEpisode {ep + 1}/{episodes}")
-        
+
+        # Episode tracking variables
+        collision_frames = 0
+        offroad_frames = 0
+        lateral_devs = []
+        route_dist_traveled = 0
+        route_total_length = info.get("route_length", 1.0)
+        predicted_positions = []
+        true_positions = []
+
         while not done:
             # Get action from agent
             action = agent(obs)
@@ -96,34 +115,65 @@ def evaluate(config, agent, env, episodes=5, render=True, *args):
             # Step environment
             obs, reward, terminated, truncated, info = env.step(action)
             done = terminated or truncated
-            
             total_reward += reward
             steps += 1
-            
+
             # Print progress every 50 steps
             if steps % 50 == 0:
                 print(f"  Step {steps}: reward={total_reward:.2f}")
-        
-        # Episode finished
-        crashed = info.get("crashed", False)
-        status = "CRASHED" if crashed else "SURVIVED"
-        print(f"  Done: {steps} steps, reward={total_reward:.2f}, {status}")
-        
-        results["steps"].append(steps)
-        results["reward"].append(total_reward)
-        results["crashed"].append(crashed)
-    
-    # Print summary
-    print("\n" + "="*50)
-    print("EVALUATION SUMMARY")
-    print("="*50)
-    print(f"Episodes: {episodes}")
-    print(f"Avg Steps: {np.mean(results['steps']):.1f} ± {np.std(results['steps']):.1f}")
-    print(f"Avg Reward: {np.mean(results['reward']):.2f} ± {np.std(results['reward']):.2f}")
-    print(f"Crash Rate: {np.mean(results['crashed'])*100:.1f}%")
-    print("="*50)
-    
-    return results
+                
+            # --- Step-level metrics ---
+            collision_frames += int(info.get("crashed", False))
+            offroad_frames += int(info.get("off_road", False))
+
+            ego_pos = info.get("ego_position", None)
+            lane_center = info.get("lane_center", None)
+            if ego_pos is not None and lane_center is not None:
+                lateral_devs.append(np.linalg.norm(np.array(ego_pos) - np.array(lane_center)))
+
+            route_dist_traveled += info.get("route_progress", 0)
+
+            pred_pos = info.get("predicted_position", None)
+            true_pos = info.get("true_future_position", None)
+            if pred_pos is not None and true_pos is not None:
+                predicted_positions.append(np.array(pred_pos))
+                true_positions.append(np.array(true_pos))
+
+        # --- Episode metrics ---
+        collision_rate = collision_frames / max(steps,1)
+        offroad_rate = offroad_frames / max(steps,1)
+        success = int((collision_frames==0) and info.get("goal_reached", False))
+        route_completion = min(route_dist_traveled / max(route_total_length, 1e-6), 1.0) * 100
+        lateral_deviation = np.mean(lateral_devs) if lateral_devs else 0.0
+        avg_reward = total_reward
+
+        # minADE computation
+        if predicted_positions and true_positions:
+            pred = np.stack(predicted_positions)
+            true = np.stack(true_positions)
+            minADE = np.mean(np.linalg.norm(pred - true, axis=1))
+        else:
+            minADE = None
+
+        # Driving score (weighted combination)
+        comfort_index = info.get("comfort_index", 0.0)
+        driving_score = w_drive[0]*(1-collision_rate) + w_drive[1]*(1-offroad_rate) + w_drive[2]*comfort_index
+
+        # Save results
+        results["collision_rate"].append(collision_rate)
+        results["offroad_rate"].append(offroad_rate)
+        results["success"].append(success)
+        results["route_completion"].append(route_completion)
+        results["lateral_deviation"].append(lateral_deviation)
+        results["avg_reward"].append(avg_reward)
+        results["minADE"].append(minADE)
+        results["driving_score"].append(driving_score)
+
+        print(f"Episode {ep+1}: reward={total_reward:.2f}, success={success}, collision_rate={collision_rate:.2f}")
+
+    # Aggregate statistics
+    summary = {k: (np.mean(v), np.std(v)) for k,v in results.items()}
+    return summary
 
 class HanoiWrapper:
     """Wrapper for HANOI-WORLD agent for evaluation."""
@@ -222,11 +272,15 @@ def main():
     eval_agent = HanoiWrapper(agent=agent,
                               config=config)
     
-    results = evaluate(config=config,
-                       agent=eval_agent,
-                       env=env,
-                       episodes=args.episodes,
-                       render=True)
+    summary = evaluate_metrics(config=config,
+                               agent=eval_agent,
+                               env=env,
+                               episodes=args.episodes)
+    
+    print("\n=== Evaluation Metrics Summary ===")
+    for k, v in summary.items():
+        mean, std = v
+        print(f"{k}: {mean:.3f} ± {std:.3f}")
     
     env.close()
 

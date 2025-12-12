@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader, Subset
 from tqdm import tqdm
 
 from Utils.dataset import MapDataset
-from JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer
+from JEPA.JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer
 from Utils.losses import compute_jepa_loss
 from config import (
     LAMBDA_JEPA, LAMBDA_REG, ALPHA_0, ALPHA_1,

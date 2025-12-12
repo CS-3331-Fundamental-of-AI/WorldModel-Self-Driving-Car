@@ -12,8 +12,8 @@ from contextlib import nullcontext
 #  IMPORT MODELS + DATASET + LOSS
 # ============================================================
 
-from JEPA_PrimitiveLayer.bev_jepa import BEVJEPAEncoder2D
-from JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer
+from JEPA.JEPA_PrimitiveLayer.bev_jepa import BEVJEPAEncoder2D
+from JEPA.JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer
 from Utils.dataset import MapDataset
 from Utils.losses import compute_jepa_loss
 from Utils.ema_buffer import ema_update

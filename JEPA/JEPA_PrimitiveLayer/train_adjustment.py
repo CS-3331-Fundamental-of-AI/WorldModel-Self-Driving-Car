@@ -14,7 +14,7 @@ from config import (
 import torch
 import torch.nn.functional as F
 from contextlib import nullcontext
-from JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer, load_dino_resnet50
+from JEPA.JEPA_PrimitiveLayer.jepa_1 import PrimitiveLayer, load_dino_resnet50
 from Utils.losses import compute_jepa_loss
 from Utils.ema_buffer import ema_update
 from tqdm import tqdm
