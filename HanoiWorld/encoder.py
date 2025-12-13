@@ -47,12 +47,16 @@ class FrozenEncoder(nn.Module):
         # -------------------------------------------------
         masked_img = x
         unmasked_img = x
-        mask_empty = torch.zeros(B, 1, 1, 1, device=x.device)
-        mask_non = torch.zeros(B, 1, 1, 1, device=x.device)
-        mask_any = torch.ones(B, 1, 1, 1, device=x.device)
+        # Masks must align with JEPA token grid length. The BEV encoder uses 8x8 patches on 64x64 → 64 tokens by default.
+        token_count = (x.shape[2] // 8) * (x.shape[3] // 8) if x.dim() == 4 else 1
+        mask_shape = (B, token_count)
+        mask_empty = torch.zeros(mask_shape, device=x.device)
+        mask_non = torch.zeros(mask_shape, device=x.device)
+        mask_any = torch.ones(mask_shape, device=x.device)
 
         # Minimal dummy inputs for tier2 + tier3
-        traj = torch.zeros(B, 6, 256, device=x.device)
+        # Dummy trajectory: shape [B, T, 6] where T≈256 to match Tier2 expectations.
+        traj = torch.zeros(B, 256, 6, device=x.device)
         adj = torch.zeros(B, 13, 13, device=x.device)
         x_graph = torch.zeros(B, 13, 13, device=x.device)
         action = torch.zeros(B, 2, device=x.device)

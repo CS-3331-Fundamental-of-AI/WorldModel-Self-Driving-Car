@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from .bev_jepa import BEVJEPAEncoder2D
 from .spatial_pred import SpatialPredictorCNN
-from Utils.ema_buffer import init_target_from_online, LatentBuffer
+from .Utils.ema_buffer import init_target_from_online, LatentBuffer
 from config import EMA_DECAY
 import torch
 import torch.nn as nn

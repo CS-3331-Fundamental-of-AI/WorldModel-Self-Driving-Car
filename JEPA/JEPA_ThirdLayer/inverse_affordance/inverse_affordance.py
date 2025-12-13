@@ -5,11 +5,11 @@ import copy
 # ----------------------------------------------------------------------
 # Import project-level modules
 # ----------------------------------------------------------------------
-from kinematics import DeterministicKinematicBicycle
-from temporal_encoder import TemporalActionEncoder
-from spatial_film import SpatialEncoderFiLM
-from shared.predictors import PredictorMLP
-from utils import freeze
+from .kinematics import DeterministicKinematicBicycle
+from .temporal_encoder import TemporalActionEncoder
+from .spatial_film import SpatialEncoderFiLM
+from ..shared.predictors import PredictorMLP
+from .utils import freeze
 # ----------------------------------------------------------------------
 
 class JEPA_Tier3_InverseAffordance(nn.Module):
@@ -133,6 +133,12 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
           - Predict s_y and s_tg^
         """
         B = action.size(0)
+
+        # Ensure spatial input has expected channel count (FiLM backbone expects conv_in channels)
+        if spatial_x.dim() == 3:
+            spatial_x = spatial_x.unsqueeze(1)
+        if spatial_x.shape[1] == 1:
+            spatial_x = spatial_x.repeat(1, self.spatial_encoder.conv_in.in_channels, 1, 1)
 
         # --------------------------------------------------------------
         # 1. Kinematic rollout → (B, T, state_dim)

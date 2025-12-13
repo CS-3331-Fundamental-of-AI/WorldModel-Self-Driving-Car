@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 # ---------------------------------------------------------------------------
 # Gated Conv 1D block (two-filter conv + gating) that produces token-wise temporal features

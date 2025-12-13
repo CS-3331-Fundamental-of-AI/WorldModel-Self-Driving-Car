@@ -1,6 +1,6 @@
 from torch.utils.data import Dataset
 import pandas as pd
-from Utils.mask import masking, apply_mask
+from .mask import masking, apply_mask
 import os
 from dotenv import load_dotenv
 load_dotenv(".env")

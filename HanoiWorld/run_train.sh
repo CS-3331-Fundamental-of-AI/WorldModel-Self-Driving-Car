@@ -14,3 +14,4 @@ python train_actor_rssm.py \
   --logdir "$LOGDIR" \
   --steps "$STEPS" \
   --render_every "$RENDER_EVERY"
+

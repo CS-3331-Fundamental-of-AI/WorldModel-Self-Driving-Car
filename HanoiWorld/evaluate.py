@@ -76,12 +76,12 @@ def make_env(config, render=False):
     )
     return env
 
-def evaluate_metrics(config, agent, env, episodes=5, render=True, w_drive=(0.4,0.3,0.3)):
+def evaluate_metrics(config, agent, env, episodes=5, render=False, w_drive=(0.5,0.5,1.0)):
     """
     Evaluate agent with detailed metrics per episode.
 
     Metrics:
-        collision_rate : Fraction of steps with collision
+        collision_rate : Fraction of episodes with any collision
         offroad_rate   : Fraction of steps off the road
         success        : Goal reached without collisions
         route_completion : % of planned route completed
@@ -91,6 +91,7 @@ def evaluate_metrics(config, agent, env, episodes=5, render=True, w_drive=(0.4,0
         driving_score  : Weighted score (collision/offroad/comfort)
     """
     results = defaultdict(list)
+    minade_counts = []  # track whether minADE was available per episode
 
     for ep in range(episodes):
         obs, info = env.reset()
@@ -101,10 +102,12 @@ def evaluate_metrics(config, agent, env, episodes=5, render=True, w_drive=(0.4,0
 
         # Episode tracking variables
         collision_frames = 0
-        offroad_frames = 0
+        offroad_step = 0
         lateral_devs = []
         route_dist_traveled = 0
+        # print(f"total route {info["route_length"]}")
         route_total_length = info.get("route_length", 1.0)
+        # print(f"Total route_length {route_total_length}")
         predicted_positions = []
         true_positions = []
 
@@ -124,11 +127,16 @@ def evaluate_metrics(config, agent, env, episodes=5, render=True, w_drive=(0.4,0
                 
             # --- Step-level metrics ---
             collision_frames += int(info.get("crashed", False))
-            offroad_frames += int(info.get("off_road", False))
-
+            offroad_step += info["off_road"]
             ego_pos = info.get("ego_position", None)
             lane_center = info.get("lane_center", None)
-            if ego_pos is not None and lane_center is not None:
+            signed_lat = info.get("lateral_offset_signed", None)
+            # Prefer precomputed lateral offsets; fall back to center distance if absent.
+            if signed_lat is not None:
+                lateral_devs.append(abs(float(signed_lat)))
+            elif "lateral_offset_abs" in info:
+                lateral_devs.append(float(info["lateral_offset_abs"]))
+            elif ego_pos is not None and lane_center is not None:
                 lateral_devs.append(np.linalg.norm(np.array(ego_pos) - np.array(lane_center)))
 
             route_dist_traveled += info.get("route_progress", 0)
@@ -140,10 +148,16 @@ def evaluate_metrics(config, agent, env, episodes=5, render=True, w_drive=(0.4,0
                 true_positions.append(np.array(true_pos))
 
         # --- Episode metrics ---
-        collision_rate = collision_frames / max(steps,1)
-        offroad_rate = offroad_frames / max(steps,1)
-        success = int((collision_frames==0) and info.get("goal_reached", False))
-        route_completion = min(route_dist_traveled / max(route_total_length, 1e-6), 1.0) * 100
+        # Collision ends the episode; per-episode flag used for overall rate (#collision episodes / total).
+        collision_rate = 1.0 if collision_frames > 0 else 0.0
+        offroad_rate = offroad_step / max(steps,1)
+        print(f"the offroad_step {offroad_step}")
+        success_mode = getattr(config, "highway_success_mode", "goal_flag")
+        if success_mode == "no_collision_episode":
+            success = int((collision_frames == 0) and (offroad_step == 0))
+        else:
+            success = int((collision_frames==0) and info.get("goal_reached", False))
+        # route_completion = min(route_dist_traveled / max(route_total_length, 1e-6), 1.0) * 100
         lateral_deviation = np.mean(lateral_devs) if lateral_devs else 0.0
         avg_reward = total_reward
 
@@ -152,18 +166,30 @@ def evaluate_metrics(config, agent, env, episodes=5, render=True, w_drive=(0.4,0
             pred = np.stack(predicted_positions)
             true = np.stack(true_positions)
             minADE = np.mean(np.linalg.norm(pred - true, axis=1))
+            minade_counts.append(True)
         else:
-            minADE = None
+            minADE = np.nan
+            minade_counts.append(False)
 
         # Driving score (weighted combination)
-        comfort_index = info.get("comfort_index", 0.0)
-        driving_score = w_drive[0]*(1-collision_rate) + w_drive[1]*(1-offroad_rate) + w_drive[2]*comfort_index
+        # Comfort index may be absent; default to 0.0 to avoid None math.
+        comfort_index = float(info.get("comfort_index", 0.0) or 0.0)
+        # print(f" the comfort index {comfort_index}")
+
+        # Convert to discomfort
+        discomfort = -np.log(max(comfort_index, 1e-6))
+
+        # Map back to bounded goodness
+        comfort_term = 1.0 / (1.0 + discomfort)
+        # print(f"The comfort_term {comfort_term}")
+
+        driving_score = w_drive[0]*(1-collision_rate) + w_drive[1]*(1-offroad_rate) + w_drive[2]*comfort_term
 
         # Save results
         results["collision_rate"].append(collision_rate)
         results["offroad_rate"].append(offroad_rate)
         results["success"].append(success)
-        results["route_completion"].append(route_completion)
+        # results["route_completion"].append(route_completion)
         results["lateral_deviation"].append(lateral_deviation)
         results["avg_reward"].append(avg_reward)
         results["minADE"].append(minADE)
@@ -172,7 +198,16 @@ def evaluate_metrics(config, agent, env, episodes=5, render=True, w_drive=(0.4,0
         print(f"Episode {ep+1}: reward={total_reward:.2f}, success={success}, collision_rate={collision_rate:.2f}")
 
     # Aggregate statistics
-    summary = {k: (np.mean(v), np.std(v)) for k,v in results.items()}
+    # Convert missing values to NaN to avoid type issues in aggregation
+    summary = {}
+    for k, v in results.items():
+        arr = [np.nan if x is None else x for x in v]
+        if np.all(np.isnan(arr)):
+            summary[k] = (np.nan, np.nan)
+        else:
+            summary[k] = (np.nanmean(arr), np.nanstd(arr))
+
+    summary["minADE_available_episodes"] = (int(sum(minade_counts)), len(minade_counts))
     return summary
 
 class HanoiWrapper:
@@ -248,7 +283,7 @@ def main():
     print(f"Device: {config.device}")
     
     # Create environment
-    env = make_env(config)
+    env = make_env(config, render=getattr(config, "highway_visualize", False))
 
 
     acts = env.action_space
@@ -272,15 +307,25 @@ def main():
     eval_agent = HanoiWrapper(agent=agent,
                               config=config)
     
+    print(f"Number of evaluated ep: {args.episodes}")
     summary = evaluate_metrics(config=config,
                                agent=eval_agent,
                                env=env,
-                               episodes=args.episodes)
+                               episodes=args.episodes,
+                               render=False)
     
     print("\n=== Evaluation Metrics Summary ===")
     for k, v in summary.items():
+        if k == "minADE_available_episodes":
+            have, total = v
+            print(f"minADE coverage: {have}/{total} episodes with data")
+            continue
+
         mean, std = v
-        print(f"{k}: {mean:.3f} ± {std:.3f}")
+        if np.isnan(mean):
+            print(f"{k}: n/a (no data)")
+        else:
+            print(f"{k}: {mean:.3f} ± {std:.3f}")
     
     env.close()
 

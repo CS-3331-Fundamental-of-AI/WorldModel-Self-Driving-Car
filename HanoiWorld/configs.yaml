@@ -32,6 +32,7 @@ defaults:
   highway_obs_type: 'image'
   highway_action_type: 'discrete'
   highway_vehicles_count: 5
+  highway_success_mode: 'goal_flag'  # goal_flag | no_collision_episode
 
   # Model
   dyn_hidden: 512
@@ -246,7 +247,7 @@ highway_twoway:
   action_repeat: 1
   envs: 1
   train_ratio: 64
-  time_limit: 150
+  time_limit: 800
   eval_every: 5e3
   log_every: 1e3
   video_pred_log: true
@@ -259,6 +260,7 @@ highway_twoway:
   # Highway-env specific settings
   highway_obs_type: 'image'
   highway_action_type: 'discrete'
+  highway_visualize: False
   highway_vehicles_count: 20
   highway_vehicles_density: 1.2
   highway_reward_shaping: False  # Two-way task already uses constraint/reward internally
@@ -269,7 +271,7 @@ highway_local:
   action_repeat: 1
   envs: 1
   train_ratio: 64
-  time_limit: 150
+  time_limit: 800
   eval_every: 5e3
   log_every: 1e3
   video_pred_log: true
@@ -281,7 +283,7 @@ highway_local:
   imag_gradient: 'reinforce'
   # Highway-env specific settings
   highway_obs_type: 'image'
-  highway_visualize: True
+  highway_visualize: False
   highway_action_type: 'discrete'
   highway_vehicles_count: 50
   highway_vehicles_density: 1.0
@@ -293,13 +295,14 @@ highway_kinematics:
   action_repeat: 1
   envs: 1
   train_ratio: 512
-  time_limit: 200
+  time_limit: 800
   video_pred_log: false
   encoder: {mlp_keys: 'vector', cnn_keys: '$^', mlp_layers: 5, mlp_units: 1024}
   decoder: {mlp_keys: 'vector', cnn_keys: '$^', mlp_layers: 5, mlp_units: 1024}
   actor: {layers: 2, dist: 'onehot', std: 'none'}
   imag_gradient: 'reinforce'
   # Highway-env specific settings
+  highway_visualize: False
   highway_obs_type: 'kinematics'
   highway_action_type: 'continuous'
   highway_vehicles_count: 5
@@ -312,7 +315,7 @@ highway_continuous:
   train_ratio: 64
   eval_every: 5e3
   log_every: 1e3
-  time_limit: 200
+  time_limit: 800
   video_pred_log: true
   size: [64, 64]
   grayscale: False
@@ -321,6 +324,7 @@ highway_continuous:
   actor: {layers: 2, dist: 'normal', entropy: 3e-4}
   imag_gradient: 'dynamics' # differentiate through the dynamics model
   # Highway-env specific settings
+  highway_visualize: False
   highway_obs_type: 'image'
   highway_action_type: 'continuous'
 
@@ -332,7 +336,7 @@ intersection:
   train_ratio: 64
   eval_every: 5e3
   log_every: 1e3
-  time_limit: 200
+  time_limit: 800
   video_pred_log: true
   size: [64, 64]
   grayscale: False
@@ -342,6 +346,7 @@ intersection:
   imag_gradient: 'reinforce'
   highway_obs_type: 'image'
   highway_action_type: 'discrete'
+  highway_visualize: False
   # Intersection uses initial_vehicle_count (vehicles_count is converted)
   highway_vehicles_count: 15        # initial_vehicle_count (max ~20)
   highway_vehicles_density: 1.2     # Converted to spawn_probability
@@ -367,7 +372,7 @@ parking:
   train_ratio: 64
   eval_every: 5e3
   log_every: 1e3
-  time_limit: 300
+  time_limit: 800
   video_pred_log: true
   size: [64, 64]
   grayscale: False
@@ -378,6 +383,7 @@ parking:
   highway_obs_type: 'image'
   highway_action_type: 'continuous'
   highway_reward_shaping: True
+  highway_visualize: False
   highway_reward_config:
     collision_reward: -1.0
     safe_distance_reward: 0.1
@@ -397,7 +403,7 @@ merge:
   train_ratio: 64
   eval_every: 5e3
   log_every: 1e3
-  time_limit: 200
+  time_limit: 800
   video_pred_log: true
   size: [64, 64]
   encoder: {mlp_keys: '$^', cnn_keys: 'image'}
@@ -407,6 +413,7 @@ merge:
   highway_obs_type: 'image'
   highway_action_type: 'discrete'
   highway_reward_shaping: True
+  highway_visualize: False
   highway_reward_config:
     high_speed_reward: 0.35
     reward_speed_range: [20, 28]
@@ -430,7 +437,7 @@ roundabout:
   train_ratio: 64
   eval_every: 5e3
   log_every: 1e3
-  time_limit: 200
+  time_limit: 800
   video_pred_log: true
   size: [64, 64]
   encoder: {mlp_keys: '$^', cnn_keys: 'image'}
@@ -440,6 +447,7 @@ roundabout:
   highway_obs_type: 'image'
   highway_action_type: 'discrete'
   highway_reward_shaping: True
+  highway_visualize: False
   highway_reward_config:
     high_speed_reward: 0.25
     reward_speed_range: [8, 15]
@@ -463,7 +471,7 @@ racetrack:
   train_ratio: 64
   eval_every: 5e3
   log_every: 1e3
-  time_limit: 500
+  time_limit: 800
   video_pred_log: true
   size: [64, 64]
   grayscale: False

@@ -83,6 +83,16 @@ class HighwayEnv(gymnasium.Env):
         self._use_rgb_render = False
         self._offscreen_rendering = offscreen_rendering
         self.reward_range = [-np.inf, np.inf]
+        self.off_road_count = 0
+        self._was_on_road = True
+        self._just_went_off_road = False
+
+        self.prev_acc = 0.0
+        self.prev_steer = 0.0
+        self.jerk_sum = 0.0
+        self.steer_rate_sum = 0.0
+        self.lat_offsets = []
+        self.comfort_steps = 0
         
         # Setup reward configuration
         self._reward_config = get_reward_config(name, reward_config)
@@ -109,6 +119,9 @@ class HighwayEnv(gymnasium.Env):
         self._blocked_by_slow = False
         self._was_blocked = False
         self._vehicles_ahead_ids = set()
+        self.off_road_count = 0
+        self._was_on_road = True
+        self._just_went_off_road = False
 
     def _get_env_name(self, name):
         """Map short task name to full environment name."""
@@ -266,7 +279,11 @@ class HighwayEnv(gymnasium.Env):
         # 7. Heading alignment
         reward += self._compute_heading_reward(ego_vehicle, rc)
         
-        # 8. Terminal rewards
+        # 8. Lane centering / lateral deviation
+        res, _ = self._compute_lateral_deviation_reward(ego_vehicle, rc)
+        reward += res
+        
+        # 9. Terminal rewards
         if terminated or truncated:
             if not info.get("crashed", False):
                 reward += rc.get("success_reward", 0.3)
@@ -459,9 +476,17 @@ class HighwayEnv(gymnasium.Env):
     def _compute_on_road_reward(self, ego_vehicle, rc):
         """Compute reward for staying on road."""
         try:
+            self._update_off_road_count(ego_vehicle)
             on_road = getattr(ego_vehicle, 'on_road', True)
+            lane = ego_vehicle.lane
             if on_road:
-                return rc.get("on_road_reward", 0.02)
+                _, lateral = lane.local_coordinates(ego_vehicle.position)
+                half_width = lane.width / 2
+                deviation = abs(lateral) / half_width
+                if deviation >= 1.0:
+                    return rc.get("off_road_penalty", -0.5)
+                
+                return rc.get("on_road_reward", 0.02)  * (1.0 - deviation)
             else:
                 return rc.get("off_road_penalty", -0.5)
         except (AttributeError, TypeError):
@@ -502,6 +527,95 @@ class HighwayEnv(gymnasium.Env):
             return alignment_reward
         except (AttributeError, TypeError):
             return 0.0
+
+    def _compute_lateral_deviation_reward(self, ego_vehicle, rc):
+        """
+        Reward (or mild penalty) based on how far the ego vehicle is from the lane center.
+        
+        Uses lane.local_coordinates to get signed lateral offset:
+        - Near the center -> positive reward (up to lane_centering_reward).
+        - Outside lane bounds -> penalty that grows linearly past the edge.
+
+        - Return the lateral offset for later usage
+        """
+        try:
+            lane = getattr(ego_vehicle, "lane", None)
+            if lane is None or not hasattr(lane, "local_coordinates"):
+                return 0.0
+
+            _, lateral_offset = lane.local_coordinates(ego_vehicle.position)
+
+            # Estimate lane half-width; fall back to typical 4m if unavailable.
+            if hasattr(lane, "width_at"):
+                lane_width = float(lane.width_at(0))
+            else:
+                lane_width = float(getattr(lane, "width", 4.0))
+            half_width = max(1e-3, lane_width / 2.0)
+
+            center_weight = rc.get("lane_centering_reward", 0.0)
+            if center_weight == 0.0:
+                return 0.0, 0.0
+
+            normalized_offset = abs(lateral_offset) / half_width  # 0 at center, 1 at edge
+            reward = center_weight * (1.0 - normalized_offset)
+            if normalized_offset > 1.0:
+                # Outside the lane: dampen further based on how far out we are.
+                reward = center_weight * (1.0 - normalized_offset * 1.5)
+
+            return float(np.clip(reward, -center_weight, center_weight)), lateral_offset
+        except Exception:
+            return 0.0, 0.0
+
+    def _update_comfort_index(self, action, ego_vehicle, dt=0.5):
+        # Compute per-step level
+        acc, steer = action
+
+        # Longitudinal jerk
+        jerk = abs(acc - self.prev_acc) / dt
+        self.jerk_sum += jerk
+
+        # Steering rate
+        steer_rate = abs(steer - self.prev_steer) / dt
+        self.steer_rate_sum += steer_rate
+
+        # Lateral stability
+        lane = ego_vehicle.lane
+        if lane is not None:
+            _, lateral = lane.local_coordinates(ego_vehicle.position)
+            self.lat_offsets.append(lateral)
+
+        self.prev_acc = acc
+        self.prev_steer = steer
+        self.comfort_steps += 1
+
+    def _compute_comfort_index(self):
+        # Compute Episode Level
+        if self.comfort_steps == 0:
+            return 1.0
+
+        mean_jerk = self.jerk_sum / self.comfort_steps
+        mean_steer_rate = self.steer_rate_sum / self.comfort_steps
+        # Normalize lateral offsets by lane width
+        if self.lat_offsets:
+            lane = self.unwrapped.vehicle.lane
+            half_width = lane.width / 2 if lane else 1.0
+            norm_lat = np.array(self.lat_offsets) / half_width
+            lat_var = np.var(norm_lat)
+        else:
+            lat_var = 0.0
+        # Tunable weights (highway-env friendly)
+        alpha = 1.0    # jerk
+        beta = 0.5    # steering
+        gamma = 0.05  # lateral oscillation
+
+        discomfort = (
+            alpha * mean_jerk +
+            beta * mean_steer_rate +
+            gamma * lat_var
+        )
+
+        # Bounded (0, 1]
+        return float(np.exp(-discomfort))
 
     # =========================================================================
     # Gymnasium Interface
@@ -580,15 +694,71 @@ class HighwayEnv(gymnasium.Env):
         
         # Apply reward shaping
         shaped_reward = self._compute_shaped_reward(total_reward, info, terminated, truncated)
+
+        # Attach predicted/true positions for minADE (best-effort fallback).
+        try:
+            vehicle = getattr(self._env.unwrapped, "vehicle", None)
+            if vehicle is not None and hasattr(vehicle, "position"):
+                pos = np.array(vehicle.position, dtype=np.float32)
+                vel = np.array(getattr(vehicle, "velocity", np.zeros(2)), dtype=np.float32)
+                heading = float(getattr(vehicle, "heading", 0.0))
+                dt = 1.0 / float(getattr(self._env.unwrapped, "policy_frequency", 15))
+                speed = np.linalg.norm(vel)
+                pred_offset = speed * dt * np.array([np.cos(heading), np.sin(heading)], dtype=np.float32)
+                info["true_future_position"] = pos
+                info["predicted_position"] = pos + pred_offset
+        except Exception:
+            pass
         
+        info["comfort_index"] = None
+        try:
+            vehicle = getattr(self._env.unwrapped, "vehicle", None)
+            self._update_comfort_index(action, vehicle)
+            info["comfort_index"] = self._compute_comfort_index()
+        except Exception:
+            pass
+
+        # Attach ego position and lane center for lateral deviation (signed when available).
+        try:
+            vehicle = getattr(self._env.unwrapped, "vehicle", None)
+            if vehicle is not None and hasattr(vehicle, "position"):
+                ego_pos = np.array(vehicle.position, dtype=np.float32)
+                info["ego_position"] = ego_pos
+                lane = getattr(vehicle, "lane", None)
+                if lane is not None and hasattr(lane, "local_coordinates"):
+                    _, lateral_offset = lane.local_coordinates(ego_pos)
+                    info["lateral_offset_signed"] = float(lateral_offset)
+                    lane_width = float(getattr(lane, "width", 4.0))
+                    half_width = max(1e-3, lane_width / 2.0)
+                    info["lateral_offset_normalized"] = float(min(2.0, abs(lateral_offset) / half_width))
+        except Exception:
+            pass
+        
+        # Add the flag off_road for each step (always report actual state on step 0).
+        info["off_road"] = False
+        info["off_road_entered"] = False
+        try:
+            vehicle = getattr(self._env.unwrapped, "vehicle", None)
+            is_off_road = self._is_off_road(vehicle) if vehicle is not None else True
+            info["off_road"] = bool(is_off_road)
+            info["off_road_entered"] = bool(self._just_went_off_road)
+        except Exception:
+            pass
+
         # Process observation
         processed_obs = self._process_obs(obs, is_first=False, is_last=done, is_terminal=terminated)
         
+        # adding the off-road count for each step
+        try:
+            info["off_road_count"] = self.off_road_count
+        except Exception:
+            pass
         # Add info
         if "discount" not in info:
             info["discount"] = np.array(0.0 if terminated else 1.0, dtype=np.float32)
         info["original_reward"] = total_reward
         info["shaped_reward"] = shaped_reward
+        
         
         return processed_obs, shaped_reward, terminated, truncated, info
 
@@ -612,16 +782,23 @@ class HighwayEnv(gymnasium.Env):
         is_terminal = np.float32(is_terminal)
         
         if self._obs_type in ("image", "grayscale"):
-            # Always use render() for image observations (RGB)
-            image = self._env.render()
+            # Prefer direct observation pixels; avoid on-screen render in headless runs.
+            image = None
+            if isinstance(obs, dict) and "image" in obs:
+                image = obs["image"]
+            elif isinstance(obs, np.ndarray):
+                image = obs
+
             if image is None:
-                # Fallback to a blank frame if renderer fails (e.g., headless issues)
+                # Fallback to blank frame if no pixels are provided.
                 w, h = self._size
                 image = np.zeros((h, w, 3), dtype=np.uint8)
             
             # Ensure (H, W, C) format
             if image.ndim == 2:
                 image = image[:, :, None]
+            if image.shape[2] == 1:
+                image = np.repeat(image, 3, axis=2)
             
             # For grayscale, convert RGB to single channel
             if self._obs_type == "grayscale":
@@ -629,6 +806,9 @@ class HighwayEnv(gymnasium.Env):
                     # RGB to grayscale using standard weights
                     image = np.dot(image[..., :3], [0.2989, 0.5870, 0.1140])
                     image = image[:, :, None]
+            elif image.ndim == 3 and image.shape[2] == 1:
+                # Ensure RGB input for downstream encoders
+                image = np.repeat(image, 3, axis=2)
             
             # Resize if needed
             if image.shape[0] != self._size[1] or image.shape[1] != self._size[0]:
@@ -653,6 +833,23 @@ class HighwayEnv(gymnasium.Env):
                 "is_terminal": is_terminal,
             }
 
+    def _is_off_road(self, ego_vehicle):
+        lane = ego_vehicle.lane
+        if lane is None:
+            return True
+
+        _, lateral = lane.local_coordinates(ego_vehicle.position)
+        return abs(lateral) > lane.width / 2
+
+    def _update_off_road_count(self, ego_vehicle):
+        is_off_road = self._is_off_road(ego_vehicle)
+        # Count only on-road → off-road transition
+        self._just_went_off_road = bool(is_off_road and self._was_on_road)
+        if self._just_went_off_road:
+            self.off_road_count += 1
+
+        self._was_on_road = not is_off_road
+        
     def _resize_image(self, image):
         """Resize image to target size."""
         try:

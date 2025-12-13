@@ -97,14 +97,17 @@ class JEPA_Encoder(nn.Module):
         # -------------------------
         # JEPA-3 Inverse
         # -------------------------
-        inv_out = self.jepa3_inv(action, s_c_1)
+        spatial_x = s_c_1
+        if spatial_x.dim() == 4 and spatial_x.shape[1] == 1:
+            spatial_x = spatial_x.repeat(1, 64, 1, 1)
+        inv_out = self.jepa3_inv(action, spatial_x)
 
         # -------------------------
         # JEPA-3 Global
         # -------------------------
         glob_out = self.jepa3_glob(
             s_tg_hat=inv_out["s_tg_hat"],
-            s_c=s_fusion,
+            s_c=torch.cat([s_fusion, torch.zeros_like(s_fusion)], dim=-1) if s_fusion.shape[-1] == 128 else s_fusion,
             global_nodes=global_nodes,
             global_adj=global_adj,
             tokens_final=inv_out["tokens_final"],
