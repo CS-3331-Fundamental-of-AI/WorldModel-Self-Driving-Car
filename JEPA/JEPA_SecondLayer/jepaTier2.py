@@ -1,11 +1,11 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from TrajTokenizer import TrajectoryTokenizerFSQ
-from TokenEmbedding import TokenEmbedding
-from TrajectoryEnc import TrajEncoder
-from GCN import GCN
-from JointSynthesizerFusion import JointSynthesizerFusion
+from .TrajTokenizer import TrajectoryTokenizerFSQ
+from .TokenEmbedding import TokenEmbedding
+from .TrajectoryEnc import TrajEncoder
+from .GCN import GCN
+from .JointSynthesizerFusion import JointSynthesizerFusion
 
 # ---- Freeze utility ----
 def freeze(module: nn.Module):

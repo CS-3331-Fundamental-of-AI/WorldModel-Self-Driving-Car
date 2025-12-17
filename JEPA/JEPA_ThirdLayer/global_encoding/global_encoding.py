@@ -4,7 +4,7 @@ from typing import Optional
 
 from .gcn_pyg import GCN_PYG
 from .cube_mlp import CubeMLP
-from shared.predictors import PredictorMLP
+from ..shared.predictors import PredictorMLP
 
 
 class JEPA_Tier3_GlobalEncoding(nn.Module):

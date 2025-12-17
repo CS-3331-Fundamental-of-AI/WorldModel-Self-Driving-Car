@@ -3,8 +3,8 @@ import torch
 import torch.nn as nn
 
 # import the two branch implementations (adjust paths to your layout)
-from inverse_affordance.inverse_affordance import JEPA_Tier3_InverseAffordance
-from global_encoding.global_encoding import JEPA_Tier3_GlobalEncoding
+from .inverse_affordance.inverse_affordance import JEPA_Tier3_InverseAffordance
+from .global_encoding.global_encoding import JEPA_Tier3_GlobalEncoding
 
 class JEPA_Tier3(nn.Module):
     """
