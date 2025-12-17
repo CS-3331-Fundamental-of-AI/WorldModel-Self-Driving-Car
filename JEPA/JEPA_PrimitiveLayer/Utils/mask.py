@@ -1,4 +1,4 @@
-from config import MASK_RATIO, PATCH_SIZE
+from config.config import MASK_RATIO, PATCH_SIZE
 import torch
 import numpy as np
 import torch

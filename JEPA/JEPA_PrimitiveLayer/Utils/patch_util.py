@@ -1,4 +1,4 @@
-from config import PATCH_SIZE
+from config.config import PATCH_SIZE
 
 def patchify(imgs, patch_size=PATCH_SIZE):
     """

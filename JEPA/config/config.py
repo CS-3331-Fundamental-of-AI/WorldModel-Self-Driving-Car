@@ -39,7 +39,7 @@ LAMBDA_JEPA2 = 1.0
 LAMBDA_INV = 1.0
 LAMBDA_GLOB = 1.0
 
-# JEPA-1 loss params
+# JEPA-1 loss params & config
 ALPHA_0 = 1.0
 ALPHA_1 = 1.0
 BETA_1 = 1.0
@@ -48,6 +48,8 @@ GAMMA = 1.0
 LAMBDA_JEPA = 1.0
 LAMBDA_REG = 1.0
 
+MASK_RATIO = 0.5
+PATCH_SIZE = 16
 # -------------------------
 # Checkpoints
 # -------------------------
