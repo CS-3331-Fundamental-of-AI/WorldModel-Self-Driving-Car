@@ -1,5 +1,5 @@
 import torch
-from config import EMA_DECAY
+from config.config import EMA_JEPA1
 
 class LatentBuffer:
     def __init__(self, embed_dim, ema_decay=EMA_DECAY):
@@ -17,7 +17,7 @@ def init_target_from_online(online, target):
     for p in target.parameters():
         p.requires_grad = False
 
-def ema_update(online, target, decay=EMA_DECAY):
+def ema_update(online, target, decay=EMA_JEPA1):
     with torch.no_grad():
         for p_o, p_t in zip(online.parameters(), target.parameters()):
             p_t.data.mul_(decay).add_(p_o.data * (1 - decay))

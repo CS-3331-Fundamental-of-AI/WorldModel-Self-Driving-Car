@@ -4,7 +4,7 @@ import torch.nn.functional as F
 from .bev_jepa import BEVJEPAEncoder2D
 from .spatial_pred import SpatialPredictorCNN
 from .Utils.ema_buffer import init_target_from_online, LatentBuffer
-from config import EMA_DECAY
+from config.config import EMA_JEPA1
 import torch
 import torch.nn as nn
 from torchvision.models import resnet50
@@ -71,7 +71,7 @@ class ResNet50Backbone(nn.Module):
         return x
     
 class PrimitiveLayer(nn.Module):
-    def __init__(self, embed_dim=128, ema_decay=EMA_DECAY, distilled_path: str = "bev_mobilenet_dino_init.pt"):
+    def __init__(self, embed_dim=128, ema_decay=EMA_JEPA1, distilled_path: str = "bev_mobilenet_dino_init.pt"):
         super().__init__()
 
         self.context_encoder = BEVJEPAEncoder2D(width_mult=0.5)
