@@ -2,7 +2,7 @@ import torch
 from config.config import EMA_JEPA1
 
 class LatentBuffer:
-    def __init__(self, embed_dim, ema_decay=EMA_DECAY):
+    def __init__(self, embed_dim, ema_decay=EMA_JEPA1):
         self.prev_z_c = None
         self.ema_decay = ema_decay
 
