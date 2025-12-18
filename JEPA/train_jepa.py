@@ -145,7 +145,7 @@ def train():
         shuffle=True,
         num_workers=NUM_WORKERS,
         pin_memory=(DEVICE.type == "cuda"),
-        collate_fn=None  # We'll handle JEPA-2 collate inside training
+        collate_fn=unified_collate_fn  # unified collate handles jepa-2
     )
 
     pipeline, models = build_all(DEVICE)
@@ -170,16 +170,13 @@ def train():
             # Move JEPA-1 batch to device if exists
             if j1_batch is not None:
                 j1_batch = [maybe_to_device(x, DEVICE) for x in j1_batch]
+                batch["j1"] = j1_batch
 
-            # Move JEPA-2 batch to device if exists
+            # Move JEPA-2 tensors to device if exists
             if j2_batch is not None:
-                # JEPA-2 returns a tuple: (local_graph, deltas, meta, deltas_aug)
-                # Need to collate use tier2_collate_fn
-                j2_batch = tier2_collate_fn(j2_batch)
-                # Move all tensors to device
-                for key in ["graph_feats", "graph_adj", "graph_mask", "clean_deltas", "aug_deltas", "traj_mask"]:
+                for key in ["graph_feats", "graph_adj", "graph_mask",
+                            "clean_deltas", "aug_deltas", "traj_mask"]:
                     j2_batch[key] = j2_batch[key].to(DEVICE)
-                # **replace batch["j2"] with processed version**
                 batch["j2"] = j2_batch
 
 
