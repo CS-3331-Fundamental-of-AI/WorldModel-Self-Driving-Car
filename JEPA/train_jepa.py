@@ -48,7 +48,7 @@ from pipeline.jepa_pipeline import JEPAPipeline
 # Dataset
 # -------------------------
 from Utils.jepa1data import MapDataset
-from Utils.jepa2data import Tier2Dataset, tier2_collate_fn
+from Utils.jepa2data import Tier2Dataset, tier2_collate_fn, DATASET_PATH, get_scene_map
 from Utils.unified_dataset import UnifiedDataset
 from Utils.utilities import maybe_to_device
 
@@ -128,10 +128,9 @@ def train():
     # --------------------------
     # JEPA-2 dataset
     # --------------------------
-    scene_map = json.load(open(os.getenv("SCENE_MAP_JSON")))
     dataset_j2 = Tier2Dataset(
-        scene_map,
-        dataset_path=os.getenv("DATASET_PATH"),
+        scene_map=get_scene_map(),
+        dataset_path=DATASET_PATH,
         augment=True
     )
     

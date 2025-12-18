@@ -4,8 +4,23 @@ import torch
 import random
 import math
 from torch.utils.data import Dataset
-from JEPA_SecondLayer.kinematic import compute_windows_safe, pad_traj, load_gpickle
+from JEPA_SecondLayer.kinematic import compute_windows_safe, pad_traj, load_gpickle, build_scene_mapping_parallel
 
+# --------------------------
+# Dataset paths
+# --------------------------
+DATAROOT = os.getenv(
+    "DATAROOT", "/kaggle/input/a-crude-data-set-converted-from-nuscene/metadata"
+)
+DATASET_PATH = os.getenv(
+    "DATASET_PATH", "/kaggle/input/a-crude-data-set-converted-from-nuscene"
+)
+
+# --------------------------
+# Helper function to build scene map
+# --------------------------
+def get_scene_map():
+    return build_scene_mapping_parallel(DATAROOT)
 
 # ============================================================
 #  AUGMENTATION UTILITIES  (Safe for 8×6 delta matrices)
