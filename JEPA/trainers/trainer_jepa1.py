@@ -5,7 +5,7 @@ from contextlib import nullcontext
 
 from JEPA_PrimitiveLayer.Utils import compute_jepa_loss
 from JEPA_PrimitiveLayer.Utils import ema_update
-from utils.misc import up2
+from JEPA.Utils.spatial import up2
 
 from config.config import (
     ALPHA_0, ALPHA_1,
