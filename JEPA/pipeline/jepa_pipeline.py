@@ -23,19 +23,21 @@ class JEPAPipeline:
         # mask_emp_np, mask_non_emp_np, mask_union_np, ph, pw, img
         bev, mask_emp, mask_non_emp, mask_union, mask_emp_np, mask_non_emp_np, mask_union_np, ph, pw, img = batch
 
-        # Build dictionary for downstream trainers
+        # Build batch dict for trainers
         batch_dict = {
-            "masks": (mask_emp, mask_non_emp, mask_union, mask_emp_np, mask_non_emp_np, mask_union_np, bev),
-            "traj": (ph, pw, img),  # adjust if needed for JEPA-2
-            "action": None,          # fill if available
-            "spatial_x": None,       # fill if available
-            "graph": None,           # fill if available
+            # Pass **all 7 items** to JEPA-1
+            "masks": (mask_emp, mask_non_emp, mask_union,
+                    mask_emp_np, mask_non_emp_np, mask_union_np, bev),
+            "traj": (ph, pw, img),  # for JEPA-2
+            "action": None,
+            "spatial_x": None,
+            "graph": None,
         }
 
         # --------------------------------------------------
         # JEPA-1: context encoder (student vs frozen teacher)
         # --------------------------------------------------
-        out1 = self.t1.step(batch_dict["masks"][:3])  # updates JEPA-1 student only
+        out1 = self.t1.step(batch_dict["masks"])  # updates JEPA-1 student only
 
         # --------------------------------------------------
         # JEPA-2: trajectory / graph encoder + EMA target

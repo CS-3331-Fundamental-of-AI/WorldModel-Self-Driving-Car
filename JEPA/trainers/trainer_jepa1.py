@@ -20,12 +20,14 @@ class JEPA1Trainer:
         self.opt = optimizer
 
     def step(self, batch_masks):
-        mask_emp, mask_non, mask_union = batch_masks
+        # Unpack exactly as MapDataset returns
+        mask_emp, mask_non, mask_union, mask_emp_np, mask_non_np, mask_union_np, bev = batch_masks
         B = mask_emp.shape[0]
 
-        mask_emp_up = up2(mask_emp.view(B,1,32,32))
-        mask_non_up = up2(mask_non.view(B,1,32,32))
-        mask_any_up = up2(mask_union.view(B,1,32,32))
+        # upsample using *_np 
+        mask_emp_up = up2(mask_emp_np.view(B,1,32,32))
+        mask_non_up = up2(mask_non_np.view(B,1,32,32))
+        mask_any_up = up2(mask_union_np.view(B,1,32,32))
 
         z_c, s_c, z_t = self.model(
             mask_emp.squeeze(1),
