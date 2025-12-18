@@ -50,7 +50,7 @@ from pipeline.jepa_pipeline import JEPAPipeline
 from Utils.jepa1data import MapDataset
 from Utils.jepa2data import Tier2Dataset, tier2_collate_fn, DATASET_PATH, get_scene_map
 from Utils.unified_dataset import UnifiedDataset, unified_collate_fn
-from Utils.utilities import maybe_to_device
+from Utils.utilities import move_j1_to_device
 
 # -------------------------
 # Environment
@@ -169,8 +169,8 @@ def train():
 
             # Move JEPA-1 batch to device if exists
             if j1_batch is not None:
-                j1_batch = [maybe_to_device(x, DEVICE) for x in j1_batch]
-                batch["j1"] = j1_batch
+                batch["j1"] = move_j1_to_device(j1_batch, DEVICE)
+
 
             # Move JEPA-2 tensors to device if exists
             if j2_batch is not None:
