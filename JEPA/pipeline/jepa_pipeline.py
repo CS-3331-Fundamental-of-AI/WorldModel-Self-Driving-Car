@@ -35,7 +35,7 @@ class JEPAPipeline:
         # --------------------------------------------------
         # JEPA-1: context encoder (student vs frozen teacher)
         # --------------------------------------------------
-        out1 = self.t1.step(batch_dict["masks"])  # updates JEPA-1 student only
+        out1 = self.t1.step(batch_dict["masks"][:3])  # updates JEPA-1 student only
 
         # --------------------------------------------------
         # JEPA-2: trajectory / graph encoder + EMA target
