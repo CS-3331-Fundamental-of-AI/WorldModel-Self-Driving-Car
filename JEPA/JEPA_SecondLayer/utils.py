@@ -20,7 +20,8 @@ from pathlib import Path
 from concurrent.futures import ProcessPoolExecutor
 import multiprocessing
 import math
-from kinematic import load_json_worker
+from .kinematic import load_json_worker
+
 # ------------------------
 # EMA helper
 # ------------------------
