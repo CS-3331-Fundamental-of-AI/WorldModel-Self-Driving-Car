@@ -4,6 +4,7 @@ from Utils.mask import masking, apply_mask
 import os
 from dotenv import load_dotenv
 load_dotenv(".env")
+
 class MapDataset(Dataset):
 
     def __init__(self, map_csv_file: str):

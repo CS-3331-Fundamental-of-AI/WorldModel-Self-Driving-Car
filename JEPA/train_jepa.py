@@ -48,7 +48,7 @@ from pipeline.jepa_pipeline import JEPAPipeline
 # Dataset
 # -------------------------
 from Utils.dataset import MapDataset
-from utils.misc import maybe_to_device
+from Utils.utilities import maybe_to_device
 
 # -------------------------
 # Environment
