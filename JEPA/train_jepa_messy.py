@@ -94,7 +94,7 @@ from JEPA_ThirdLayer import (
 )
 
 # Dataset
-from Utils.dataset import MapDataset
+from JEPA.Utils.jepa1data import MapDataset
 
 # -------------------------
 # EMA helper (shadow) for JEPA-2

@@ -47,7 +47,9 @@ from pipeline.jepa_pipeline import JEPAPipeline
 # -------------------------
 # Dataset
 # -------------------------
-from Utils.dataset import MapDataset
+from Utils.jepa1data import MapDataset
+from Utils.jepa2data import Tier2Dataset, tier2_collate_fn
+from Utils.unified_dataset import UnifiedDataset
 from Utils.utilities import maybe_to_device
 
 # -------------------------
@@ -118,13 +120,33 @@ def train():
     )
     experiment.set_name("JEPA-FULL-3L-STEADY")
 
-    dataset = MapDataset(map_csv_file=os.getenv("MAP_CSV", "maps.csv"))
-    loader = DataLoader(
-        dataset,
+    # --------------------------
+    # JEPA-1 dataset
+    # --------------------------
+    dataset_j1 = MapDataset(map_csv_file=os.getenv("MAP_CSV", "maps.csv"))
+    
+    # --------------------------
+    # JEPA-2 dataset
+    # --------------------------
+    scene_map = json.load(open(os.getenv("SCENE_MAP_JSON")))
+    dataset_j2 = Tier2Dataset(
+        scene_map,
+        dataset_path=os.getenv("DATASET_PATH"),
+        augment=True
+    )
+    
+    # --------------------------
+    # Unified dataset
+    # --------------------------
+    unified_dataset = UnifiedDataset(jepa1_dataset=dataset_j1, jepa2_dataset=dataset_j2)
+    
+    unified_loader = DataLoader(
+        unified_dataset,
         batch_size=BATCH_SIZE,
         shuffle=True,
         num_workers=NUM_WORKERS,
         pin_memory=(DEVICE.type == "cuda"),
+        collate_fn=None  # We'll handle JEPA-2 collate inside training
     )
 
     pipeline, models = build_all(DEVICE)
@@ -138,11 +160,26 @@ def train():
     global_step = 0
 
     for epoch in range(EPOCHS):
-        pbar = tqdm(loader, desc=f"Epoch {epoch+1}/{EPOCHS}")
+        pbar = tqdm(unified_loader, desc=f"Epoch {epoch+1}/{EPOCHS}")
         epoch_loss = 0.0
 
         for batch in pbar:
-            batch = [maybe_to_device(x, DEVICE) for x in batch]
+            # Each batch is a dict with keys "j1" and/or "j2"
+            j1_batch = batch.get("j1", None)
+            j2_batch = batch.get("j2", None)
+
+            # Move JEPA-1 batch to device if exists
+            if j1_batch is not None:
+                j1_batch = [maybe_to_device(x, DEVICE) for x in j1_batch]
+
+            # Move JEPA-2 batch to device if exists
+            if j2_batch is not None:
+                # JEPA-2 returns a tuple: (local_graph, deltas, meta, deltas_aug)
+                # Need to collate manually or use tier2_collate_fn
+                j2_batch = tier2_collate_fn(j2_batch)
+                # Move all tensors to device
+                for key in ["graph_feats", "graph_adj", "graph_mask", "clean_deltas", "aug_deltas", "traj_mask"]:
+                    j2_batch[key] = j2_batch[key].to(DEVICE)
 
             with autocast_ctx:
                 out = pipeline.step(batch)
