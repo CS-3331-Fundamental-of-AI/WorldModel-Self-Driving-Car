@@ -1,6 +1,6 @@
 import torch
 import torch.nn.functional as F
-from utils import cosine_distance, vic_reg_loss
+from .utils import cosine_distance, vic_reg_loss
 
 # ---------------------------------------------------------
 # Inverse affordance losses
