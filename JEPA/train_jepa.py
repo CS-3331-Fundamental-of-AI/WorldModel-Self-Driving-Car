@@ -143,26 +143,9 @@ def train():
 
         for batch in pbar:
             batch = [maybe_to_device(x, DEVICE) for x in batch]
-            (
-                bev, mask_emp, mask_non_emp, mask_union,
-                mask_emp_np, mask_non_emp_np, mask_union_np,
-                ph, pw, img
-            ) = batch
-
 
             with autocast_ctx:
-                out = pipeline.step(
-                bev=bev,
-                mask_emp=mask_emp,
-                mask_non_emp=mask_non_emp,
-                mask_union=mask_union,
-                mask_emp_np=mask_emp_np,
-                mask_non_emp_np=mask_non_emp_np,
-                mask_union_np=mask_union_np,
-                ph=ph,
-                pw=pw,
-                img=img
-            )
+                out = pipeline.step(batch)
 
             loss_total = out["loss"]
             loss_j1 = out["loss_j1"]

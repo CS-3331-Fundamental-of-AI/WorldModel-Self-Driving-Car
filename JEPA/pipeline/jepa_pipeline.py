@@ -1,5 +1,3 @@
-# pipeline/jepa_pipeline.py
-
 class JEPAPipeline:
     """
     Steady-state parallel JEPA training pipeline.
@@ -18,16 +16,33 @@ class JEPAPipeline:
 
     def step(self, batch):
         # --------------------------------------------------
+        # Handle batch from MapDataset (tuple/list)
+        # --------------------------------------------------
+        # Expected order from MapDataset:
+        # bev, mask_emp, mask_non_emp, mask_union,
+        # mask_emp_np, mask_non_emp_np, mask_union_np, ph, pw, img
+        bev, mask_emp, mask_non_emp, mask_union, mask_emp_np, mask_non_emp_np, mask_union_np, ph, pw, img = batch
+
+        # Build dictionary for downstream trainers
+        batch_dict = {
+            "masks": (mask_emp, mask_non_emp, mask_union, mask_emp_np, mask_non_emp_np, mask_union_np, bev),
+            "traj": (ph, pw, img),  # adjust if needed for JEPA-2
+            "action": None,          # fill if available
+            "spatial_x": None,       # fill if available
+            "graph": None,           # fill if available
+        }
+
+        # --------------------------------------------------
         # JEPA-1: context encoder (student vs frozen teacher)
         # --------------------------------------------------
-        out1 = self.t1.step(batch["masks"])  # updates JEPA-1 student only
+        out1 = self.t1.step(batch_dict["masks"])  # updates JEPA-1 student only
 
         # --------------------------------------------------
         # JEPA-2: trajectory / graph encoder + EMA target
         # --------------------------------------------------
         out2 = self.t2.step(
-            batch["traj"],
-            batch.get("graph")
+            batch_dict["traj"],
+            batch_dict.get("graph")
         )  # updates JEPA-2 student only + EMA
 
         # --------------------------------------------------
@@ -40,11 +55,11 @@ class JEPAPipeline:
         # JEPA-3: inverse affordance + global consistency
         # --------------------------------------------------
         out3 = self.t3.step(
-            action=batch["action"],
-            spatial_x=batch["spatial_x"],
+            action=batch_dict["action"],
+            spatial_x=batch_dict["spatial_x"],
             s_c=s_c,
             s_tg=s_tg,
-            graph=batch.get("graph")
+            graph=batch_dict.get("graph")
         )  # updates JEPA-3 student only + optional EMA
 
         # --------------------------------------------------
