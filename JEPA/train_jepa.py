@@ -49,8 +49,7 @@ from pipeline.jepa_pipeline import JEPAPipeline
 # -------------------------
 from Utils.jepa1data import MapDataset
 from Utils.jepa2data import Tier2Dataset, tier2_collate_fn, DATASET_PATH, get_scene_map
-from Utils.unified_dataset import UnifiedDataset 
-from Utils import unified_collate_fn
+from Utils.unified_dataset import UnifiedDataset, unified_collate_fn
 from Utils.utilities import maybe_to_device
 
 # -------------------------
