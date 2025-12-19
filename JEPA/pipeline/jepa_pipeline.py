@@ -91,7 +91,7 @@ class JEPAPipeline:
 
             out2 = self.t2.step(
                 traj=traj,
-                graph=(x_graph, adj),
+                graph=x_graph,
                 adj=adj,
                 graph_mask=graph_mask,
                 traj_mask=traj_mask

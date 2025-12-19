@@ -12,19 +12,18 @@ class JEPA2Trainer:
         self.ema_model = ema_model
         self.opt = optimizer
 
-    def step(self, traj, graph, traj_mask=None, graph_mask=None):
+    def step(self, traj, x_graph, adj, traj_mask=None, graph_mask=None):
         """
-        traj       : [B, T, 6]
-        graph      : (graph_feats, adj)
-        graph_mask : [B, N]  (node validity mask)
+            traj (torch.Tensor): [B, T, 6] — input trajectories (e.g., delta positions/velocities) for the batch.
+            x_graph (torch.Tensor): [B, N, F] — node features for the graph, where N is number of nodes, F is feature dim.
+            adj (torch.Tensor): [B, N, N] — adjacency matrices representing graph connectivity for each batch.
+            traj_mask (torch.Tensor, optional): [B, T] — mask indicating valid trajectory timesteps.
+            graph_mask (torch.Tensor, optional): [B, N] — mask indicating valid graph nodes.
         """
-
-        graph_feats, adj = graph
-
         out = self.model(
             traj=traj,
             adj=adj,
-            x_graph=graph_feats,
+            x_graph=x_graph,
             traj_mask=traj_mask,
             graph_mask=graph_mask
         )
