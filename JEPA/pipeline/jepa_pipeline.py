@@ -1,3 +1,5 @@
+import torch
+
 class JEPAPipeline:
     """
     Steady-state parallel JEPA training pipeline compatible with UnifiedDataset.
