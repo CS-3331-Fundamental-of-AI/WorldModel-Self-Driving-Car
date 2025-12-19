@@ -49,9 +49,19 @@ class JEPAPipeline:
             mask_non_emp = torch.stack(mask_non_emp_list).to(device)
             mask_union = torch.stack(mask_union_list).to(device)
 
-            mask_emp_np = torch.stack(mask_emp_np_list).to(device)
-            mask_non_emp_np = torch.stack(mask_non_emp_np_list).to(device)
-            mask_union_np = torch.stack(mask_union_np_list).to(device)
+            # Convert numpy → torch, then stack
+            mask_emp_np = torch.stack(
+                [torch.from_numpy(x) for x in mask_emp_np_list]
+            ).to(device)
+
+            mask_non_emp_np = torch.stack(
+                [torch.from_numpy(x) for x in mask_non_emp_np_list]
+            ).to(device)
+
+            mask_union_np = torch.stack(
+                [torch.from_numpy(x) for x in mask_union_np_list]
+            ).to(device)
+
 
             out1 = self.t1.step(
                 (
