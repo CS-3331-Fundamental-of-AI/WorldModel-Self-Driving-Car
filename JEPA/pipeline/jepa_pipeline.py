@@ -26,13 +26,42 @@ class JEPAPipeline:
         # JEPA-1
         # ----------------------------
         if "j1" in batch and batch["j1"] is not None:
-            batch_j1 = batch["j1"]
-            bev, mask_emp, mask_non_emp, mask_union, mask_emp_np, mask_non_emp_np, mask_union_np, ph, pw, img = batch_j1
-            batch_dict_j1 = {
-                "masks": (mask_emp, mask_non_emp, mask_union,
-                          mask_emp_np, mask_non_emp_np, mask_union_np, bev)
-            }
-            out1 = self.t1.step(batch_dict_j1["masks"])  # updates JEPA-1 student only
+            (
+                bev_list,
+                mask_emp_list,
+                mask_non_emp_list,
+                mask_union_list,
+                mask_emp_np_list,
+                mask_non_emp_np_list,
+                mask_union_np_list,
+                ph_list,
+                pw_list,
+                img_list
+            ) = batch["j1"]
+
+            device = next(self.t1.model.parameters()).device
+
+            # Stack lists → tensors (THIS is what default collate used to do)
+            bev = torch.stack(bev_list).to(device)
+            mask_emp = torch.stack(mask_emp_list).to(device)
+            mask_non_emp = torch.stack(mask_non_emp_list).to(device)
+            mask_union = torch.stack(mask_union_list).to(device)
+
+            mask_emp_np = torch.stack(mask_emp_np_list).to(device)
+            mask_non_emp_np = torch.stack(mask_non_emp_np_list).to(device)
+            mask_union_np = torch.stack(mask_union_np_list).to(device)
+
+            out1 = self.t1.step(
+                (
+                    mask_emp,
+                    mask_non_emp,
+                    mask_union,
+                    mask_emp_np,
+                    mask_non_emp_np,
+                    mask_union_np,
+                    bev
+                )
+            )
 
         # ----------------------------
         # JEPA-2
