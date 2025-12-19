@@ -44,23 +44,25 @@ class UnifiedDataset(Dataset):
 def unified_collate_fn(batch):
     """
     Collate function for UnifiedDataset.
-    Args:
-        batch: list of dicts from UnifiedDataset.__getitem__()
-            each dict has keys "j1" and/or "j2"
-    Returns:
-        dict with collated "j1" and "j2"
+    Preserves batch alignment across JEPA-1 / JEPA-2.
     """
-    j1_list = [b["j1"] for b in batch if "j1" in b]
-    j2_list = [b["j2"] for b in batch if "j2" in b]
-
     collated = {}
 
-    # Collate JEPA-1: keep as list of tuples (like MapDataset returns)
-    if j1_list:
-        collated["j1"] = list(zip(*j1_list))
+    # --- JEPA-1 ---
+    j1_items = [b.get("j1", None) for b in batch]
+    if any(x is not None for x in j1_items):
+        # filter None, but keep relative order
+        j1_valid = [x for x in j1_items if x is not None]
+        collated["j1"] = list(zip(*j1_valid))
+    else:
+        collated["j1"] = None
 
-    # Collate JEPA-2 using the existing tier2_collate_fn
-    if j2_list:
-        collated["j2"] = tier2_collate_fn(j2_list)
+    # --- JEPA-2 ---
+    j2_items = [b.get("j2", None) for b in batch]
+    if any(x is not None for x in j2_items):
+        j2_valid = [x for x in j2_items if x is not None]
+        collated["j2"] = tier2_collate_fn(j2_valid)
+    else:
+        collated["j2"] = None
 
     return collated

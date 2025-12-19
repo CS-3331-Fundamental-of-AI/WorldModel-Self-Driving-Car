@@ -8,15 +8,37 @@ def up2(x):
 
 def move_j1_to_device(batch_j1, device):
     """
-    batch_j1: tuple of lists, e.g., (bev_list, mask_emp_list, ...)
-    Each element is a list of tensors for the batch.
+    Move JEPA-1 batch data to the target device (CPU / GPU).
+
+    Parameters
+    ----------
+    batch_j1 : tuple
+        A tuple where each element corresponds to one JEPA-1 field.
+        Each field is typically:
+        - a list of torch.Tensors (batch dimension not stacked yet), or
+        - a list of non-tensor data (numpy arrays, ints, metadata, etc.)
+
+    Returns
+    -------
+    tuple
+        Same structure as batch_j1, but with tensor lists moved to `device`.
+        No stacking is done here.
     """
+
     new_batch = []
-    for tensor_list in batch_j1:
-        if isinstance(tensor_list[0], torch.Tensor):
-            # stack along batch dimension and move to device
-            new_batch.append(torch.stack(tensor_list, dim=0).to(device))
+
+    for item in batch_j1:
+        # Case 1: this field is a list/tuple of torch.Tensors
+        # Example: [Tensor, Tensor, Tensor, ...]
+        if isinstance(item, (list, tuple)) and isinstance(item[0], torch.Tensor):
+            # Move each tensor in the list to the target device
+            new_batch.append([x.to(device) for x in item])
+
+        # Case 2: non-tensor data (numpy arrays, ints, metadata, etc.)
+        # Keep it unchanged
         else:
-            # numpy arrays or numbers: keep as list
-            new_batch.append(tensor_list)
+            new_batch.append(item)
+
+    # Return the same structure as input
     return tuple(new_batch)
+
