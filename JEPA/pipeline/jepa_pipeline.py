@@ -51,15 +51,15 @@ class JEPAPipeline:
 
             # Convert numpy → torch, then stack
             mask_emp_np = torch.stack(
-                [torch.from_numpy(x) for x in mask_emp_np_list]
+                [torch.from_numpy(x).bool() for x in mask_emp_np_list]
             ).to(device)
 
             mask_non_emp_np = torch.stack(
-                [torch.from_numpy(x) for x in mask_non_emp_np_list]
+                [torch.from_numpy(x).bool() for x in mask_non_emp_np_list]
             ).to(device)
 
             mask_union_np = torch.stack(
-                [torch.from_numpy(x) for x in mask_union_np_list]
+                [torch.from_numpy(x).bool() for x in mask_union_np_list]
             ).to(device)
 
 
@@ -82,18 +82,20 @@ class JEPAPipeline:
             batch_j2 = batch["j2"]
             device = next(self.t2.model.parameters()).device
 
-            traj = batch_j2["clean_deltas"].to(device)
-            traj_mask = batch_j2["traj_mask"].to(device)
-            graph_feats = batch_j2["graph_feats"].to(device)
-            graph_adj   = batch_j2["graph_adj"].to(device)
-            graph_mask  = batch_j2["graph_mask"].to(device)
+            traj       = batch_j2["clean_deltas"].to(device)
+            traj_mask  = batch_j2["traj_mask"].to(device)
+
+            x_graph    = batch_j2["graph_feats"].to(device)
+            adj        = batch_j2["graph_adj"].to(device)
+            graph_mask = batch_j2["graph_mask"].to(device)
 
             out2 = self.t2.step(
                 traj=traj,
-                graph=(graph_feats, graph_adj, graph_mask),
-                traj_mask=traj_mask,
-                graph_mask=graph_mask
-            )  # updates JEPA-2 student + EMA
+                x_graph=x_graph,
+                adj=adj,
+                graph_mask=graph_mask,
+                traj_mask=traj_mask
+            )
 
         # ----------------------------
         # Stop-gradient: prevent cross-tower backprop

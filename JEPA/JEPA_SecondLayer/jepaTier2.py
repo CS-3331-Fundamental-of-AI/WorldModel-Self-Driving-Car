@@ -72,7 +72,7 @@ class Tier2Module(nn.Module):
     # ------------------------------------------------------------
     # forward
     # ------------------------------------------------------------
-    def forward(self, traj, adj, x_graph, traj_mask=None, graph_mask=None, tau=1.0):
+    def forward(self, traj, adj, x_graph, traj_mask=None, graph_mask=None):
         """
         traj:        [B, T, 6]
         traj_mask:   [B, T]

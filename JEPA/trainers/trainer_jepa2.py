@@ -12,24 +12,22 @@ class JEPA2Trainer:
         self.ema_model = ema_model
         self.opt = optimizer
 
-    def step(self, traj, graph=None, traj_mask=None, graph_mask=None):
+    def step(self, traj, graph, traj_mask=None, graph_mask=None):
         """
-        traj       : [B, T, 6] trajectory tokens/deltas
-        graph      : tuple -> (graph_feats, adj, node_mask)
-        traj_mask  : [B, T] mask for padded trajectories
-        graph_mask : [B, N] mask for padded nodes
+        traj       : [B, T, 6]
+        graph      : (graph_feats, adj)
+        graph_mask : [B, N]  (node validity mask)
         """
-        if graph is not None:
-            graph_feats, adj, node_mask = graph
-            out = self.model(
-                traj=traj,
-                adj=adj,
-                x_graph=graph_feats,
-                traj_mask=traj_mask,
-                graph_mask=node_mask
-            )
-        else:
-            out = self.model(traj)
+
+        graph_feats, adj = graph
+
+        out = self.model(
+            traj=traj,
+            adj=adj,
+            x_graph=graph_feats,
+            traj_mask=traj_mask,
+            graph_mask=graph_mask
+        )
 
         loss_dict = total_tokenizer_loss_fsq(out)
         loss = loss_dict["total"]
@@ -39,15 +37,10 @@ class JEPA2Trainer:
         torch.nn.utils.clip_grad_norm_(self.model.parameters(), CLIP_NORM)
         self.opt.step()
 
-        # EMA update
-        update_ema(
-            ema_model=self.ema_model,
-            model=self.model,
-            momentum=EMA_JEPA2
-        )
+        update_ema(self.ema_model, self.model, EMA_JEPA2)
 
         return {
             "loss": loss.detach(),
-            "s_tg": out["s_tg"],  # student graph tokens
+            "s_tg": out["fusion"],  # or correct token if different
             "out": out
         }

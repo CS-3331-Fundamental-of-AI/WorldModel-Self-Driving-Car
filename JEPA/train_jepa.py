@@ -50,7 +50,7 @@ from pipeline.jepa_pipeline import JEPAPipeline
 from Utils.jepa1data import MapDataset
 from Utils.jepa2data import Tier2Dataset, tier2_collate_fn, DATASET_PATH, get_scene_map
 from Utils.unified_dataset import UnifiedDataset, unified_collate_fn
-from Utils.utilities import move_j1_to_device
+from Utils.utilities import move_j1_to_device, build_graph_batch
 
 # -------------------------
 # Environment
@@ -134,6 +134,28 @@ def train():
         augment=True
     )
     
+    # -------------------------
+    # JEPA-2 graph vocab
+    # -------------------------
+    TYPE_VALUES = ['agent', 'road']
+    CATEGORY_VALUES = [
+        'animal','human.pedestrian.adult','human.pedestrian.child',
+        'human.pedestrian.construction_worker','human.pedestrian.personal_mobility',
+        'human.pedestrian.police_officer','human.pedestrian.stroller',
+        'human.pedestrian.wheelchair','movable_object.barrier','movable_object.debris',
+        'movable_object.pushable_pullable','movable_object.trafficcone',
+        'static_object.bicycle_rack','vehicle.bicycle','vehicle.bus.bendy',
+        'vehicle.bus.rigid','vehicle.car','vehicle.construction',
+        'vehicle.emergency.ambulance','vehicle.emergency.police','vehicle.motorcycle',
+        'vehicle.trailer','vehicle.truck'
+    ]
+    LAYER_VALUES = ['lane']
+
+    type2id = {v: i for i, v in enumerate(TYPE_VALUES)}
+    category2id = {v: i for i, v in enumerate(CATEGORY_VALUES)}
+    layer2id = {v: i for i, v in enumerate(LAYER_VALUES)}
+
+    
     # --------------------------
     # Unified dataset
     # --------------------------
@@ -173,10 +195,32 @@ def train():
 
 
             # Move JEPA-2 tensors to device if exists
+            # -------------------------------------------------
+            # JEPA-2 preprocessing
+            # -------------------------------------------------
             if j2_batch is not None:
-                for key in ["graph_feats", "graph_adj", "graph_mask",
-                            "clean_deltas", "aug_deltas", "traj_mask"]:
+                graphs = j2_batch["graphs"]
+
+                # Build graph tensors HERE (explicit & safe)
+                graph_feats, graph_adj = build_graph_batch(
+                    graphs,
+                    type2id,
+                    category2id,
+                    layer2id
+                )
+
+                # Move to device
+                j2_batch["graph_feats"] = graph_feats.to(DEVICE)
+                j2_batch["graph_adj"] = graph_adj.to(DEVICE)
+
+                # Move remaining tensors
+                for key in ["graph_mask", "clean_deltas", "aug_deltas", "traj_mask"]:
                     j2_batch[key] = j2_batch[key].to(DEVICE)
+
+                # Safety check (kills 8 vs 13 bug immediately)
+                assert j2_batch["graph_feats"].shape[-1] == 13, \
+                    f"Expected 13 graph features, got {j2_batch['graph_feats'].shape[-1]}"
+
                 batch["j2"] = j2_batch
 
 
