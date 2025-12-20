@@ -1,9 +1,10 @@
-from Utils.jepa1data import MapDataset # replace with actual dataset class
+from Utils.jepa1data import MapDataset
 import torch
 from torch.utils.data import DataLoader
+import os
 
-# Load dataset
-dataset = MapDataset(csv_file="/kaggle/working/WorldModel-Self-Driving-Car/JEPA/JEPA_PrimitiveLayer/map_files_15k.csv")
+map_csv = "/kaggle/working/WorldModel-Self-Driving-Car/JEPA/JEPA_PrimitiveLayer/map_files_15k.csv"
+dataset = MapDataset(map_csv_file=map_csv)
 dataloader = DataLoader(dataset, batch_size=2, shuffle=True)
 
 # Take first batch
@@ -17,7 +18,7 @@ layer.eval()
 with torch.no_grad():
     z_c, s_c, z_t = layer(masked_img, unmasked_img, mask_empty_lat, mask_non_lat, mask_any_lat)
     
-    B, N, C = s_c.shape
+B, N, C = s_c.shape
 seq = s_c[0]  # first image in batch
 right_neighbor = seq[1:]
 left = seq[:-1]
