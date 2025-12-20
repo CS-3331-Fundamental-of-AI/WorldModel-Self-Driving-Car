@@ -9,19 +9,21 @@ class JEPAPipeline:
     - No cross-tower gradient flow
     - Cross-tower interaction happens only via detached representations
       and slow EMA evolution
-    """
+    """ 
 
-    def __init__(self, t1, t2, t3):
+    def __init__(self, t1, t2, t3, adapter):
         self.t1 = t1  # JEPA-1 trainer
         self.t2 = t2  # JEPA-2 trainer
-        self.t3 = t3  # JEPA-3 trainer
-
+        self.t3 = t3  # JEPA-3 trainers
+        self.adapter = adapter
+        
     def step(self, batch):
         """
         batch: dict with keys "j1" and/or "j2"
         - "j1" → tuple from MapDataset (JEPA-1)
         - "j2" → dict from Tier2Dataset (JEPA-2)
         """
+        batch = self.adapter.adapt(batch)
         out1, out2 = None, None
 
         # ----------------------------
@@ -109,15 +111,20 @@ class JEPAPipeline:
         # ----------------------------
         # JEPA-3: inverse affordance + global consistency
         # ----------------------------
-        # NOTE: adapt the input dict keys as per your actual JEPA-3 requirement
-        batch_j3 = batch.get("j3", {})  # optional
-        out3 = self.t3.step(
-            action=batch_j3.get("action"),
-            spatial_x=batch_j3.get("spatial_x"),
-            s_c=s_c,
-            s_tg=s_tg,
-            graph=batch_j2 if "j2" in batch else None
-        )
+        out3 = None
+
+        has_context = (s_c is not None) or (s_tg is not None)
+        has_j3 = ("j3" in batch) and (batch["j3"] is not None)
+
+        if has_context and has_j3:
+            batch_j3 = batch["j3"]
+
+            out3 = self.t3.step(
+                action=batch_j3.get("action"),
+                spatial_x=batch_j3.get("spatial_x"),
+                s_c=s_c,
+                s_tg=s_tg,
+            )
 
         # ----------------------------
         # Aggregate losses (for logging only)

@@ -43,14 +43,16 @@ from trainers.trainer_jepa1 import JEPA1Trainer
 from trainers.trainer_jepa2 import JEPA2Trainer
 from trainers.trainer_jepa3 import JEPA3Trainer
 from pipeline.jepa_pipeline import JEPAPipeline
+from pipeline.jepa_adapter import JEPAInputAdapter
+
 
 # -------------------------
 # Dataset
 # -------------------------
 from Utils.jepa1data import MapDataset
-from Utils.jepa2data import Tier2Dataset, tier2_collate_fn, DATASET_PATH, get_scene_map
+from Utils.jepa2data import Tier2Dataset, DATASET_PATH, get_scene_map
+from Utils.jepa3data import Tier3Dataset
 from Utils.unified_dataset import UnifiedDataset, unified_collate_fn
-from Utils.utilities import move_j1_to_device, build_graph_batch
 
 # -------------------------
 # Environment
@@ -59,10 +61,7 @@ load_dotenv()
 os.environ["COMET_LOG_PACKAGES"] = "0"
 
 
-# ============================================================
-# Build everything
-# ============================================================
-def build_all(device):
+def build_all(device, type2id, category2id, layer2id):
     # ---- models ----
     jepa1 = PrimitiveLayer().to(device)
     jepa2 = Tier2Module().to(device)
@@ -100,13 +99,46 @@ def build_all(device):
     t1 = JEPA1Trainer(jepa1, opt_j1)
     t2 = JEPA2Trainer(jepa2, jepa2_tgt, opt_j2)
     t3 = JEPA3Trainer(jepa3_inv, jepa3_glob, opt_j3)
+    
+    # -------------------------
+    # JEPA-2 graph vocab
+    # -------------------------
+    TYPE_VALUES = ['agent', 'road']
+    CATEGORY_VALUES = [
+        'animal','human.pedestrian.adult','human.pedestrian.child',
+        'human.pedestrian.construction_worker','human.pedestrian.personal_mobility',
+        'human.pedestrian.police_officer','human.pedestrian.stroller',
+        'human.pedestrian.wheelchair','movable_object.barrier','movable_object.debris',
+        'movable_object.pushable_pullable','movable_object.trafficcone',
+        'static_object.bicycle_rack','vehicle.bicycle','vehicle.bus.bendy',
+        'vehicle.bus.rigid','vehicle.car','vehicle.construction',
+        'vehicle.emergency.ambulance','vehicle.emergency.police','vehicle.motorcycle',
+        'vehicle.trailer','vehicle.truck'
+    ]
+    LAYER_VALUES = ['lane']
 
-    return JEPAPipeline(t1, t2, t3), {
+    type2id = {v: i for i, v in enumerate(TYPE_VALUES)}
+    category2id = {v: i for i, v in enumerate(CATEGORY_VALUES)}
+    layer2id = {v: i for i, v in enumerate(LAYER_VALUES)}
+
+    # ---- adapter ----
+    adapter = JEPAInputAdapter(
+        device=device,
+        type2id=type2id,
+        category2id=category2id,
+        layer2id=layer2id,
+    )
+
+    # ---- pipeline ----
+    pipeline = JEPAPipeline(t1, t2, t3, adapter)
+
+    return pipeline, {
         "jepa1": jepa1,
         "jepa2": jepa2,
         "jepa3_inv": jepa3_inv,
         "jepa3_glob": jepa3_glob,
     }
+
 
 
 # ============================================================
@@ -134,32 +166,18 @@ def train():
         augment=True
     )
     
-    # -------------------------
-    # JEPA-2 graph vocab
-    # -------------------------
-    TYPE_VALUES = ['agent', 'road']
-    CATEGORY_VALUES = [
-        'animal','human.pedestrian.adult','human.pedestrian.child',
-        'human.pedestrian.construction_worker','human.pedestrian.personal_mobility',
-        'human.pedestrian.police_officer','human.pedestrian.stroller',
-        'human.pedestrian.wheelchair','movable_object.barrier','movable_object.debris',
-        'movable_object.pushable_pullable','movable_object.trafficcone',
-        'static_object.bicycle_rack','vehicle.bicycle','vehicle.bus.bendy',
-        'vehicle.bus.rigid','vehicle.car','vehicle.construction',
-        'vehicle.emergency.ambulance','vehicle.emergency.police','vehicle.motorcycle',
-        'vehicle.trailer','vehicle.truck'
-    ]
-    LAYER_VALUES = ['lane']
-
-    type2id = {v: i for i, v in enumerate(TYPE_VALUES)}
-    category2id = {v: i for i, v in enumerate(CATEGORY_VALUES)}
-    layer2id = {v: i for i, v in enumerate(LAYER_VALUES)}
-
-    
     # --------------------------
     # Unified dataset
     # --------------------------
-    unified_dataset = UnifiedDataset(jepa1_dataset=dataset_j1, jepa2_dataset=dataset_j2)
+    unified_dataset = UnifiedDataset(
+    jepa1_dataset=MapDataset(map_csv_file=os.getenv("MAP_CSV", "maps.csv")),
+    jepa2_dataset=Tier2Dataset(
+        scene_map=get_scene_map(),
+        dataset_path=DATASET_PATH,
+        augment=True
+    ),
+    jepa3_dataset=Tier3Dataset(scene_map=get_scene_map()),
+)
     
     unified_loader = DataLoader(
         unified_dataset,
@@ -185,66 +203,38 @@ def train():
         epoch_loss = 0.0
 
         for batch in pbar:
-            # Each batch is a dict with keys "j1" and/or "j2"
-            j1_batch = batch.get("j1", None)
-            j2_batch = batch.get("j2", None)
-
-            # Move JEPA-1 batch to device if exists
-            if j1_batch is not None:
-                batch["j1"] = move_j1_to_device(j1_batch, DEVICE)
-
-
-            # Move JEPA-2 tensors to device if exists
-            # -------------------------------------------------
-            # JEPA-2 preprocessing
-            # -------------------------------------------------
-            if j2_batch is not None:
-                graphs = j2_batch["graphs"]
-
-                # Build graph tensors HERE (explicit & safe)
-                graph_feats, graph_adj = build_graph_batch(
-                    graphs,
-                    type2id,
-                    category2id,
-                    layer2id
-                )
-
-                # Move to device
-                j2_batch["graph_feats"] = graph_feats.to(DEVICE)
-                j2_batch["graph_adj"] = graph_adj.to(DEVICE)
-
-                # Move remaining tensors
-                for key in ["graph_mask", "clean_deltas", "aug_deltas", "traj_mask"]:
-                    j2_batch[key] = j2_batch[key].to(DEVICE)
-
-                # Safety check (kills 8 vs 13 bug immediately)
-                assert j2_batch["graph_feats"].shape[-1] == 13, \
-                    f"Expected 13 graph features, got {j2_batch['graph_feats'].shape[-1]}"
-
-                batch["j2"] = j2_batch
-
-
-            with autocast_ctx:
-                out = pipeline.step(batch)
-
-            loss_total = out["loss"]
-            loss_j1 = out["loss_j1"]
-            loss_j2 = out["loss_j2"]
-            loss_j3 = out["loss_j3"]
-
-            loss_total_val = float(loss_total.detach().cpu())
-            epoch_loss += loss_total_val
             global_step += 1
 
-            # ============================================================
-            # LOGGING (Comet)
-            # ============================================================
+            # -------------------------------------------------
+            # Forward
+            # -------------------------------------------------
+            with autocast_ctx:
+                out = pipeline.step(batch)
+                
+            # -------------------------------------------------
+            # Scalar extraction (IMPORTANT)
+            # -------------------------------------------------
+            loss_total = out["loss"]
+            loss_j1    = out["loss_j1"]
+            loss_j2    = out["loss_j2"]
+            loss_j3    = out["loss_j3"]
 
+            loss_total_val = float(loss_total)
+            loss_j1_val    = float(loss_j1)
+            loss_j2_val    = float(loss_j2)
+            loss_j3_val    = float(loss_j3)
+
+
+            epoch_loss += loss_total_val
+
+            # ============================================================
+            # LOGGING (Comet) — SAME AS BEFORE
+            # ============================================================
             if global_step % 10 == 0:
                 # ---- global loss ----
                 log_metrics(
                     experiment,
-                    {"total": loss_total},
+                    {"total": loss_total_val},
                     prefix="loss",
                     step=global_step,
                 )
@@ -252,7 +242,7 @@ def train():
                 # ---- JEPA-1 ----
                 log_metrics(
                     experiment,
-                    {"total": loss_j1},
+                    {"total": loss_j1_val},
                     prefix="loss/jepa1",
                     step=global_step,
                 )
@@ -260,7 +250,7 @@ def train():
                 # ---- JEPA-2 ----
                 log_metrics(
                     experiment,
-                    {"total": loss_j2},
+                    {"total": loss_j2_val},
                     prefix="loss/jepa2",
                     step=global_step,
                 )
@@ -268,20 +258,24 @@ def train():
                 # ---- JEPA-3 ----
                 log_metrics(
                     experiment,
-                    {"total": loss_j3},
+                    {"total": loss_j3_val},
                     prefix="loss/jepa3",
                     step=global_step,
                 )
 
-
+            # -------------------------------------------------
+            # tqdm display 
+            # -------------------------------------------------
             pbar.set_postfix({
-                "L": f"{loss_total_val:.4f}",
-                "L1": f"{float(loss_j1):.4f}",
-                "L2": f"{float(loss_j2):.4f}",
-                "L3": f"{float(loss_j3):.4f}",
+                "L":  f"{loss_total_val:.4f}",
+                "L1": f"{loss_j1_val:.4f}",
+                "L2": f"{loss_j2_val:.4f}",
+                "L3": f"{loss_j3_val:.4f}",
             })
 
-
+            # -------------------------------------------------
+            # Checkpointing 
+            # -------------------------------------------------
             if global_step % 500 == 0:
                 torch.save(
                     {
@@ -291,8 +285,12 @@ def train():
                     CKPT_DIR / f"jepa_step{global_step}.pt",
                 )
 
-        avg_loss = epoch_loss / max(len(loader), 1)
+        # -------------------------------------------------
+        # Epoch-level logging
+        # -------------------------------------------------
+        avg_loss = epoch_loss / max(len(unified_loader), 1)
         experiment.log_metric("epoch/avg_loss", avg_loss, step=epoch + 1)
+
         print(f"Epoch {epoch+1} done — avg loss {avg_loss:.6f}")
 
     experiment.end()
@@ -349,3 +347,4 @@ if __name__ == "__main__":
 
         raise
 
+ 
