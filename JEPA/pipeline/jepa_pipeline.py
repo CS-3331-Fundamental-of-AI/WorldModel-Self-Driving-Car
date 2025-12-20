@@ -87,21 +87,21 @@ class JEPAPipeline:
             device = s_c.device if s_c is not None else s_tg.device
 
             global_nodes_list = batch_j3.get("global_nodes")
-            global_adj_list = batch_j3.get("global_adj")
-            if global_nodes_list is not None and global_adj_list is not None:
+            global_edges_list = batch_j3.get("global_edges")
+            if global_nodes_list is not None and global_edges_list is not None:
                 # Use utility function to batch graphs
-                global_nodes_batch, global_adj_batch = batch_global_graphs(
-                    global_nodes_list, global_adj_list, device
+                global_nodes_batch, global_edges_batch = batch_global_graphs(
+                    global_nodes_list, global_edges_list, device
                 )
             else:
-                global_nodes_batch, global_adj_batch = None, None
+                global_nodes_batch, global_edges_batch = None, None
 
             out3 = self.t3.step(
                 action=batch_j3.get("action"),
                 s_c=s_c,
                 s_tg=s_tg,
                 global_nodes=global_nodes_batch,
-                global_adj=global_adj_batch,
+                global_edges=global_edges_batch,
             )
 
         # ----------------------------

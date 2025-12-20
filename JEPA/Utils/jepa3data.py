@@ -122,10 +122,10 @@ def tier3_collate_fn(batch, device=None):
 
     # Extract nodes and edges into separate lists
     global_nodes = [g["nodes"].to(device) if device else g["nodes"] for g in global_graphs]
-    global_adj   = [g["edges"].to(device) if device else g["edges"] for g in global_graphs]
+    global_edges  = [g["edges"].to(device) if device else g["edges"] for g in global_graphs]
 
     return {
         "action": action,
         "global_nodes": global_nodes,
-        "global_adj": global_adj,
+        "global_edges": global_edges,
     }

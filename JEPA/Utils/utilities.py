@@ -114,20 +114,20 @@ def build_graph_batch(graph_list, type2id, category2id, layer2id):
     
     return x_batch, adj_batch
 
-def batch_global_graphs(global_nodes_list, global_adj_list, device):
+def batch_global_graphs(global_nodes_list, global_edges_list, device):
     B = len(global_nodes_list)
     N_max = max([g.shape[0] for g in global_nodes_list])
     F = global_nodes_list[0].shape[1]
+    E_max = max([g.shape[0] for g in global_edges_list])  # max number of edges
 
     nodes_batch = torch.zeros(B, N_max, F, device=device)
-    adj_batch   = torch.zeros(B, N_max, N_max, device=device)
+    edges_batch = torch.zeros(B, E_max, 2, device=device, dtype=torch.long)
 
-    for i, (nodes, adj) in enumerate(zip(global_nodes_list, global_adj_list)):
+    for i, (nodes, edges) in enumerate(zip(global_nodes_list, global_edges_list)):
         n = nodes.shape[0]
+        e = edges.shape[0]
         nodes_batch[i, :n, :] = nodes
-        if adj.ndim == 2:
-            adj_batch[i, :n, :n] = adj
-        else:
-            raise ValueError("Adjacency must be [N,N]")
+        edges_batch[i, :e, :] = edges
 
-    return nodes_batch, adj_batch
+    return nodes_batch, edges_batch
+

@@ -30,7 +30,7 @@ class JEPA_Tier3(nn.Module):
         s_c: torch.Tensor,   
         # inputs for global encoding (s_c should come from JEPA-1 or JEPA-2)
         global_nodes: torch.Tensor = None,
-        global_adj: torch.Tensor = None,
+        global_edges: torch.Tensor = None,
         # optionally accept tokens to feed to global branch
         tokens_for_global: torch.Tensor = None,
         **kwargs
@@ -44,7 +44,7 @@ class JEPA_Tier3(nn.Module):
             s_tg_hat=inv_out["s_tg_hat"],
             s_c=s_c,
             global_nodes=global_nodes,
-            global_adj=global_adj,
+            global_edges=global_edges,
             tokens_final=tokens_for_global if tokens_for_global is not None else inv_out.get("tokens_final", None)
         )
 

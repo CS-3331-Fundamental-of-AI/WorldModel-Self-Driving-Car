@@ -41,7 +41,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         s_tg_hat: torch.Tensor,               # [B, D] or [B, L, D] OR pass tokens separately via tokens_final arg
         s_c: torch.Tensor,                    # (B, C) or (B, C, H, W)
         global_nodes: Optional[torch.Tensor] = None,
-        global_adj: Optional[torch.Tensor] = None,
+        global_edges: Optional[torch.Tensor] = None,
         tokens_final: Optional[torch.Tensor] = None # optional (B, T, D) from inverse module
     ):
         B = s_tg_hat.shape[0]
@@ -88,8 +88,8 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         # -----------------------------
         # Global map path via GCN -> context cube (stop-grad)
         # -----------------------------
-        if global_nodes is not None and global_adj is not None:
-            g_out = self.global_gcn(global_nodes, global_adj)  # [B, N, D]
+        if global_nodes is not None and global_edges is not None:
+            g_out = self.global_gcn(global_nodes, global_edges)  # [B, N, D]
             N = g_out.shape[1]
 
             # Partition nodes into M groups (robust to N < M)

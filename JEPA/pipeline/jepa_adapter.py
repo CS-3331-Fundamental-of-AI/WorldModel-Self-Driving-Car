@@ -51,9 +51,9 @@ class JEPAInputAdapter:
             j3 = out["j3"]
             j3_adapted = {
                 "action": j3["action"].to(self.device),
-                # global_nodes and global_adj are already lists from collate
+                # global_nodes and global_edges are already lists from collate
                 "global_nodes": [g.to(self.device) for g in j3["global_nodes"]],
-                "global_adj": [g.to(self.device) for g in j3["global_adj"]],
+                "global_edges": [g.to(self.device) for g in j3["global_edges"]],
             }
             out["j3"] = j3_adapted
 
