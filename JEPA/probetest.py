@@ -5,6 +5,8 @@ from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from IPython.display import Image, display
+import numpy as np
+
 # -------------------------------
 # Environment variables
 # -------------------------------
@@ -21,22 +23,16 @@ try:
     from JEPA_PrimitiveLayer import PrimitiveLayer
     from Utils.utilities import up2  # used in JEPA1Trainer
 
-    # Load dataset
     dataset = MapDataset(map_csv_file=map_csv)
     dataset.root_dir = map_root  # override root_dir to correct path
     dataloader = DataLoader(dataset, batch_size=1, shuffle=True)
 
-    # Take one batch
     batch = next(iter(dataloader))
     bev, mask_emp, mask_non, mask_union, mask_emp_np, mask_non_np, mask_union_np, ph, pw, img = batch
 
-    # Convert to tensors as JEPA1Trainer expects
-
     B = bev.shape[0]
-
-    # If bev has shape [B,1,C,H,W], squeeze the extra dim
     if bev.ndim == 5:
-        masked_img = bev.squeeze(1).float()  # shape [B,C,H,W]
+        masked_img = bev.squeeze(1).float()
         unmasked_img = bev.squeeze(1).float()
     else:
         masked_img = bev.float()
@@ -45,7 +41,6 @@ try:
     mask_empty_lat = up2(mask_emp_np.squeeze(1)).view(B, -1)
     mask_non_lat   = up2(mask_non_np.squeeze(1)).view(B, -1)
     mask_any_lat   = up2(mask_union_np.squeeze(1)).view(B, -1)
-
 
     use_dummy = False
     print("✅ Using real dataset batch")
@@ -89,19 +84,32 @@ cos = F.cosine_similarity(left, right_neighbor, dim=-1)
 print("Mean cosine similarity between sequential patches:", cos.mean().item())
 
 # -------------------------------
-# Heat map visualization
+# Heat map visualization: enhanced
 # -------------------------------
-Hc = Wc = int(N ** 0.5)  # assume square latent map
-feat = s_c[0].cpu().numpy()  # first image
+Hc = Wc = int(N ** 0.5)
+feat = s_c[0].cpu().numpy()
+
+# PCA to 3 components (RGB)
 feat_rgb = PCA(n_components=3).fit_transform(feat)
 feat_rgb = feat_rgb.reshape(Hc, Wc, 3)
 
-# Normalize to [0,1] for display
-feat_rgb = (feat_rgb - feat_rgb.min()) / (feat_rgb.max() - feat_rgb.min())
+# Stretch contrast
+feat_rgb = (feat_rgb - feat_rgb.min()) / (feat_rgb.max() - feat_rgb.min() + 1e-8)
 
+# Show as RGB heatmap
 plt.figure(figsize=(4,4))
 plt.imshow(feat_rgb)
 plt.axis('off')
-plt.savefig("/kaggle/working/s_c_heatmap.png")
-plt.close()  # close to avoid duplicate
-display(Image("/kaggle/working/s_c_heatmap.png"))
+plt.title("s_c Heatmap (PCA → RGB)")
+plt.savefig("/kaggle/working/s_c_heatmap_rgb.png")
+plt.close()
+display(Image("/kaggle/working/s_c_heatmap_rgb.png"))
+
+# Show first PCA component with colormap to highlight small differences
+plt.figure(figsize=(4,4))
+plt.imshow(feat_rgb[:,:,0], cmap='viridis', interpolation='nearest')
+plt.colorbar()
+plt.title("s_c First PCA Component")
+plt.savefig("/kaggle/working/s_c_heatmap_component0.png")
+plt.close()
+display(Image("/kaggle/working/s_c_heatmap_component0.png"))

@@ -104,6 +104,9 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         freeze(self.ema_target)
 
         self.n_res_blocks = n_res_blocks
+        
+        self.s_c_proj = nn.Linear(spatial_in_ch, film_dim)  # spatial_in_ch=64, film_dim=128
+
 
     # ======================================================================
     # FORWARD PASS
@@ -151,8 +154,10 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         # --------------------------------------------------------------
         beta = beta_t_film.mean(dim=1)    # (B,film_dim)
         gamma = gamma_film                # (B,film_dim)
+        
+        s_c_proj = self.s_c_proj(s_c)          # [B, film_dim]
 
-        s_c_mod = s_c * (1 + gamma) + beta   # FiLM on latent
+        s_c_mod = s_c_proj * (1 + gamma) + beta   # FiLM on latent
 
         # --------------------------------------------------------------
         # 6. Action embedding (mean pool tokens)
