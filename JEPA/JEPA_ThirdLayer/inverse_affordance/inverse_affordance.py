@@ -24,7 +24,7 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
                  kin_state_dim=64,
                  kin_k=6,
                  token_dim=128,
-                 s_c_dim=128,
+                 s_c_dim=4096,
                  film_dim=128,
                  pred_dim=128,
                  n_res_blocks=4,
