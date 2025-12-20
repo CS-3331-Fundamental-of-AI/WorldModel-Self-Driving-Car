@@ -6,18 +6,37 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 
 # -------------------------------
-# Try to use real dataset if available
+# Environment variables
+# -------------------------------
+map_csv = os.getenv("MAP_CSV", "/kaggle/working/WorldModel-Self-Driving-Car/JEPA/JEPA_PrimitiveLayer/map_files_15k.csv")
+map_root = os.getenv("MAP_ROOT", "/kaggle/input/a-crude-data-set-converted-from-nuscene/local_maps/")
+
+# -------------------------------
+# Try to use real dataset
 # -------------------------------
 use_dummy = True
 try:
     from Utils.jepa1data import MapDataset
     from torch.utils.data import DataLoader
-    map_csv = os.getenv("MAP_CSV", "/kaggle/working/WorldModel-Self-Driving-Car/JEPA/JEPA_PrimitiveLayer/map_files_15k.csv")
+
     dataset = MapDataset(map_csv_file=map_csv)
+    dataset.root_dir = map_root  # override root_dir to correct path
+
     dataloader = DataLoader(dataset, batch_size=1, shuffle=True)
-    masked_img, unmasked_img, mask_empty_lat, mask_non_lat, mask_any_lat = next(iter(dataloader))
+    # MapDataset returns: bev, mask_emp, mask_non, mask_union, mask_emp_np, mask_non_np, mask_union_np, ph, pw, img
+    batch = next(iter(dataloader))
+    bev, mask_emp, mask_non, mask_union, mask_emp_np, mask_non_np, mask_union_np, ph, pw, img = batch
+
+    # Convert to tensors expected by PrimitiveLayer
+    masked_img   = bev.float()
+    unmasked_img = bev.float()
+    mask_empty_lat = mask_emp.flatten(start_dim=1)
+    mask_non_lat   = mask_non.flatten(start_dim=1)
+    mask_any_lat   = mask_union.flatten(start_dim=1)
+
     use_dummy = False
     print("✅ Using real dataset batch")
+
 except Exception as e:
     print(f"⚠️ Real dataset not available, using dummy input: {e}")
 
@@ -60,7 +79,6 @@ print("Mean cosine similarity between sequential patches:", cos.mean().item())
 # -------------------------------
 # Heat map visualization
 # -------------------------------
-# Reduce embedding dim to 3 (RGB) using PCA
 Hc = Wc = int(N ** 0.5)  # assume square latent map
 feat = s_c[0].cpu().numpy()  # first image
 feat_rgb = PCA(n_components=3).fit_transform(feat)

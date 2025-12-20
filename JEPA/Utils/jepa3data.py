@@ -50,26 +50,29 @@ class Tier3Dataset(Dataset):
 
     def _load_global_graph(self, scene_name):
         if scene_name not in self.global_graphs:
-            path = os.path.join(GLOBAL_GRAPH_ROOT, f"{scene_name}.json")
-            if not os.path.exists(path):
-                raise FileNotFoundError(path)
+            graph_path = os.path.join(GLOBAL_GRAPH_ROOT, f"{scene_name}.json")
+            if not os.path.exists(graph_path):
+                raise FileNotFoundError(graph_path)
 
-            with open(path, "r") as f:
+            with open(graph_path, "r") as f:
                 data = json.load(f)
 
-             # Use 'root' if exists, else top-level dict
+            # Use 'root' if exists, else top-level dict
             graph_data = data.get("root", data)
 
-            nodes = torch.tensor(graph_data["nodes"], dtype=torch.float32)
+            # Convert list of dicts to float tensor
+            nodes_list = [
+                [node["x"], node["y"], node.get("z", 0.0)]  # default z=0 if missing
+                for node in graph_data["nodes"]
+            ]
+            nodes = torch.tensor(nodes_list, dtype=torch.float32)
+
             edges = torch.tensor(graph_data["edges"], dtype=torch.long)
 
-            # Save tensors
-            self.global_graphs[scene_name] = {
-                "nodes": nodes,
-                "edges": edges
-            }
+            self.global_graphs[scene_name] = {"nodes": nodes, "edges": edges}
 
         return self.global_graphs[scene_name]
+
 
     def __len__(self):
         return len(self.master_index)
