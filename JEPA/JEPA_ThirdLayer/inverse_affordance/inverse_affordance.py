@@ -24,6 +24,7 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
                  kin_state_dim=64,
                  kin_k=6,
                  token_dim=128,
+                 s_c_dim=128,
                  film_dim=128,
                  pred_dim=128,
                  n_res_blocks=4,
@@ -51,7 +52,7 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         self.action_proj = nn.Linear(token_dim, film_dim)
 
         # Spatial latent projection
-        self.s_c_proj = nn.LazyLinear(film_dim)  # inferred at first forward
+        self.s_c_proj = nn.Linear(s_c_dim, film_dim)
 
         # Joint latent
         self.z_proj = nn.Sequential(
