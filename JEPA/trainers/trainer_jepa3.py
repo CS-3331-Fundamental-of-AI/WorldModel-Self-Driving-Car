@@ -34,14 +34,14 @@ class JEPA3Trainer:
         self.ema_inv.assign_to(self.inv_tgt)
         self.ema_glob.assign_to(self.glob_tgt)
 
-    def step(self, action, s_c, s_tg=None, global_nodes=None, global_adj=None):
+    def step(self, action, s_c, s_tg=None, global_nodes=None, global_edges=None):
         """
         JEPA-3 training step:
         - action : [B, 2]
         - s_c    : context representation from JEPA-1 [B, C]
         - s_tg   : target representation from JEPA-2 [B, C] (optional)
         - global_nodes : list of node tensors per sample
-        - global_adj   : list of edge tensors per sample
+        - global_edges   : list of edge tensors per sample
         """
         # -----------------------------
         # Forward: inverse model
@@ -56,7 +56,7 @@ class JEPA3Trainer:
             inv_out["s_tg_hat"],  # predicted target from IA
             s_c,                  # raw context from JEPA-1
             global_nodes,
-            global_adj
+            global_edges
         )
 
         # -----------------------------
