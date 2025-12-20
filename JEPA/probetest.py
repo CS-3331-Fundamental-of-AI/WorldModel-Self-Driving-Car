@@ -1,5 +1,5 @@
 import torch
-from JEPA_PrimitiveLayer.PrimitiveLayer import PrimitiveLayer
+from JEPA_PrimitiveLayer import PrimitiveLayer
 import torch.nn.functional as F
 
 # -------------------------------
