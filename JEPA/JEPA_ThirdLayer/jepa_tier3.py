@@ -27,9 +27,8 @@ class JEPA_Tier3(nn.Module):
         self,
         # inputs for inverse-affordance
         action: torch.Tensor,
-        spatial_x: torch.Tensor,
+        s_c: torch.Tensor,   
         # inputs for global encoding (s_c should come from JEPA-1 or JEPA-2)
-        s_c: torch.Tensor,
         global_nodes: torch.Tensor = None,
         global_adj: torch.Tensor = None,
         # optionally accept tokens to feed to global branch
@@ -37,7 +36,7 @@ class JEPA_Tier3(nn.Module):
         **kwargs
     ):
         # 1) run inverse-affordance branch
-        inv_out = self.inv(action=action, spatial_x=spatial_x)
+        inv_out = self.inv(action=action, s_c=s_c)
         # inv_out contains keys: "s_y","s_tg_hat","z_ca","tokens_final","beta_t","gamma_t"
 
         # 2) run global encoding branch using s_tg_hat (and optional tokens)

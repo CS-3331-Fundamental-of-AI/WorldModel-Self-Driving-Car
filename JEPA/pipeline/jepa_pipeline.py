@@ -109,7 +109,7 @@ class JEPAPipeline:
             s_tg = out2["s_tg"].detach()
 
         # ----------------------------
-        # JEPA-3: inverse affordance + global consistency
+        # JEPA-3: inverse affordance + global encoding
         # ----------------------------
         out3 = None
 
@@ -121,9 +121,10 @@ class JEPAPipeline:
 
             out3 = self.t3.step(
                 action=batch_j3.get("action"),
-                spatial_x=batch_j3.get("spatial_x"),
                 s_c=s_c,
                 s_tg=s_tg,
+                global_nodes=batch_j3.get("global_nodes"),
+                global_adj=batch_j3.get("global_adj"),
             )
 
         # ----------------------------

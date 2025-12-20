@@ -7,7 +7,6 @@ import copy
 # ----------------------------------------------------------------------
 from .kinematics import DeterministicKinematicBicycle
 from .temporal_encoder import TemporalActionEncoder
-from .spatial_film import SpatialEncoderFiLM
 from ..shared.predictors import PredictorMLP
 from .utils import freeze
 # ----------------------------------------------------------------------
@@ -73,28 +72,14 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         # ------------------------------------------------------------------
         self.film_beta_proj = nn.Linear(token_dim, film_dim)
         self.film_gamma_proj = nn.Linear(token_dim, film_dim)
-
+        
         # ------------------------------------------------------------------
-        # 4. Spatial Encoder with FiLM applied INSIDE convolutional blocks
-        # ------------------------------------------------------------------
-        self.spatial_encoder = SpatialEncoderFiLM(
-            in_ch=spatial_in_ch,
-            base_ch=128,
-            out_dim=spatial_feat_dim,
-            n_res=n_res_blocks,
-            film_dim=film_dim
-        )
-
-        # Project spatial features to FiLM dim for fusion with tokens
-        self.spatial_proj = nn.Conv2d(spatial_feat_dim, film_dim, 1)
-
-        # ------------------------------------------------------------------
-        # 5. Action → embedding
+        # 4. Action → embedding
         # ------------------------------------------------------------------
         self.action_proj = nn.Linear(token_dim, film_dim)
 
         # ------------------------------------------------------------------
-        # 6. Merge spatial & action features → z_ca
+        # 5. Merge spatial & action features → z_ca
         # ------------------------------------------------------------------
         self.z_proj = nn.Sequential(
             nn.Linear(film_dim * 2, pred_dim),
@@ -103,17 +88,17 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         )
 
         # ------------------------------------------------------------------
-        # 7. Predictors
+        # 6. Predictors
         # ------------------------------------------------------------------
         # Predict intermediate representation s_y
-        self.pred_sy = PredictorMLP(spatial_feat_dim + pred_dim, pred_dim)
+        self.pred_sy = PredictorMLP(film_dim + pred_dim, pred_dim)
 
         # Predict target representation s_tg_hat
         self.pred_tg_1 = PredictorMLP(pred_dim, pred_dim)
         self.pred_tg_2 = PredictorMLP(pred_dim, pred_dim)
 
         # ------------------------------------------------------------------
-        # 8. EMA target encoder (BYOL/JEPA style)
+        # 7. EMA target encoder (BYOL/JEPA style)
         # ------------------------------------------------------------------
         self.ema_target = copy.deepcopy(self.temporal_enc)
         freeze(self.ema_target)
@@ -123,22 +108,16 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
     # ======================================================================
     # FORWARD PASS
     # ======================================================================
-    def forward(self, action, spatial_x):
+    def forward(self, action, s_c):
         """
         Forward computation:
-          - Rollout the kinematic model
-          - Encode temporal tokens
-          - Produce FiLM beta per layer, global gamma
-          - Run spatial encoder with FiLM modulation
-          - Predict s_y and s_tg^
+        - Rollout the kinematic model
+        - Encode temporal tokens
+        - Produce FiLM beta per layer, global gamma
+        - Modulate spatial latent (s_c) using FiLM
+        - Predict s_y and s_tg^
         """
         B = action.size(0)
-
-        # Ensure spatial input has expected channel count (FiLM backbone expects conv_in channels)
-        if spatial_x.dim() == 3:
-            spatial_x = spatial_x.unsqueeze(1)
-        if spatial_x.shape[1] == 1:
-            spatial_x = spatial_x.repeat(1, self.spatial_encoder.conv_in.in_channels, 1, 1)
 
         # --------------------------------------------------------------
         # 1. Kinematic rollout → (B, T, state_dim)
@@ -155,7 +134,7 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         B, T, D = tokens_final.shape
 
         # --------------------------------------------------------------
-        # 3. β (per token → per ResBlock FiLM beta)
+        # 3. β (per token → FiLM beta)
         # --------------------------------------------------------------
         beta_t_film = self.film_beta_proj(beta_t)  # (B,T,film_dim)
 
@@ -163,27 +142,17 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         # 4. γ uses only GLOBAL step
         #    gamma_t[:,0] is the "global" gamma vector
         # --------------------------------------------------------------
-        gamma_global = gamma_t[:, 0, :]              # (B,token_dim)
-        gamma_film = self.film_gamma_proj(gamma_global)  # (B,film_dim)
-
-        # Create per-block FiLM beta list
-        if T == self.n_res_blocks:
-            beta_list = [beta_t_film[:, i, :] for i in range(T)]
-        else:
-            # Uniform temporal sampling if blocks != tokens count
-            idxs = torch.linspace(0, T - 1, steps=self.n_res_blocks).long().to(beta_t.device)
-            beta_list = [beta_t_film[:, idx, :] for idx in idxs]
-
-        # Global gamma shared across all blocks
-        gamma_list = [gamma_film for _ in range(self.n_res_blocks)]
+        gamma_global = gamma_t[:, 0, :]                   # (B,token_dim)
+        gamma_film = self.film_gamma_proj(gamma_global)   # (B,film_dim)
 
         # --------------------------------------------------------------
-        # 5. Spatial encoder with FiLM modulation
+        # 5. Apply FiLM directly on spatial latent s_c
+        #    (s_c comes from JEPA-1, NOT image)
         # --------------------------------------------------------------
-        spatial_feat = self.spatial_encoder(spatial_x, beta_list, gamma_list)
+        beta = beta_t_film.mean(dim=1)    # (B,film_dim)
+        gamma = gamma_film                # (B,film_dim)
 
-        # Spatial feature pooled and projected
-        s_c = self.spatial_proj(spatial_feat).mean([2, 3])  # (B,film_dim)
+        s_c_mod = s_c * (1 + gamma) + beta   # FiLM on latent
 
         # --------------------------------------------------------------
         # 6. Action embedding (mean pool tokens)
@@ -193,12 +162,12 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         # --------------------------------------------------------------
         # 7. Joint latent z_ca
         # --------------------------------------------------------------
-        z_ca = self.z_proj(torch.cat([s_c, s_a], dim=-1))
+        z_ca = self.z_proj(torch.cat([s_c_mod, s_a], dim=-1))
 
         # --------------------------------------------------------------
         # 8. Predict s_y
         # --------------------------------------------------------------
-        feat_flat = torch.cat([spatial_feat.mean([2, 3]), z_ca], -1)
+        feat_flat = torch.cat([s_c_mod, z_ca], dim=-1)
         s_y = self.pred_sy(feat_flat)
 
         # --------------------------------------------------------------
