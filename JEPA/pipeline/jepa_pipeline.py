@@ -1,5 +1,5 @@
 import torch
-from Utils.utilities import build_graph_batch 
+from Utils.utilities import batch_global_graphs
 
 class JEPAPipeline:
     """
@@ -90,7 +90,7 @@ class JEPAPipeline:
             global_adj_list = batch_j3.get("global_adj")
             if global_nodes_list is not None and global_adj_list is not None:
                 # Use utility function to batch graphs
-                global_nodes_batch, global_adj_batch = build_graph_batch(
+                global_nodes_batch, global_adj_batch = batch_global_graphs(
                     global_nodes_list, global_adj_list, device
                 )
             else:
