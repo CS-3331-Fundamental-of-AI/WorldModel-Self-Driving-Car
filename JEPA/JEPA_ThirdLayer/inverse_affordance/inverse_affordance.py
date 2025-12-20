@@ -90,8 +90,10 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         gamma = self.film_gamma_proj(gamma_global)          # (B,film_dim)
 
         # 4. FiLM-modulated spatial latent (s_c only for IA)
-        s_c_flat = s_c.reshape(B, -1)
-        s_c_proj = self.s_c_proj(s_c_flat)
+        # spatial_feat from SpatialEncoderFiLM: (B, spatial_feat_dim, H, W)
+        s_c = self.spatial_proj(spatial_feat).mean([2,3])  # (B, film_dim)
+        # s_c now = (B, 128)
+        s_c_proj = self.s_c_proj(s_c)                       # Linear(128 → 128)
         s_c_mod = s_c_proj * (1 + gamma) + beta
 
         # 5. Action embedding
