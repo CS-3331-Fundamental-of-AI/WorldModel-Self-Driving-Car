@@ -61,7 +61,28 @@ load_dotenv()
 os.environ["COMET_LOG_PACKAGES"] = "0"
 
 
-def build_all(device, type2id, category2id, layer2id):
+def build_all(device, type2id=None, category2id=None, layer2id=None):
+    # -------------------------
+    # JEPA-2 graph vocab (default)
+    # -------------------------
+    TYPE_VALUES = ['agent', 'road']
+    CATEGORY_VALUES = [
+        'animal','human.pedestrian.adult','human.pedestrian.child',
+        'human.pedestrian.construction_worker','human.pedestrian.personal_mobility',
+        'human.pedestrian.police_officer','human.pedestrian.stroller',
+        'human.pedestrian.wheelchair','movable_object.barrier','movable_object.debris',
+        'movable_object.pushable_pullable','movable_object.trafficcone',
+        'static_object.bicycle_rack','vehicle.bicycle','vehicle.bus.bendy',
+        'vehicle.bus.rigid','vehicle.car','vehicle.construction',
+        'vehicle.emergency.ambulance','vehicle.emergency.police','vehicle.motorcycle',
+        'vehicle.trailer','vehicle.truck'
+    ]
+    LAYER_VALUES = ['lane']
+
+    type2id = type2id or {v: i for i, v in enumerate(TYPE_VALUES)}
+    category2id = category2id or {v: i for i, v in enumerate(CATEGORY_VALUES)}
+    layer2id = layer2id or {v: i for i, v in enumerate(LAYER_VALUES)}
+
     # ---- models ----
     jepa1 = PrimitiveLayer().to(device)
     jepa2 = Tier2Module().to(device)
@@ -100,27 +121,6 @@ def build_all(device, type2id, category2id, layer2id):
     t2 = JEPA2Trainer(jepa2, jepa2_tgt, opt_j2)
     t3 = JEPA3Trainer(jepa3_inv, jepa3_glob, opt_j3)
     
-    # -------------------------
-    # JEPA-2 graph vocab
-    # -------------------------
-    TYPE_VALUES = ['agent', 'road']
-    CATEGORY_VALUES = [
-        'animal','human.pedestrian.adult','human.pedestrian.child',
-        'human.pedestrian.construction_worker','human.pedestrian.personal_mobility',
-        'human.pedestrian.police_officer','human.pedestrian.stroller',
-        'human.pedestrian.wheelchair','movable_object.barrier','movable_object.debris',
-        'movable_object.pushable_pullable','movable_object.trafficcone',
-        'static_object.bicycle_rack','vehicle.bicycle','vehicle.bus.bendy',
-        'vehicle.bus.rigid','vehicle.car','vehicle.construction',
-        'vehicle.emergency.ambulance','vehicle.emergency.police','vehicle.motorcycle',
-        'vehicle.trailer','vehicle.truck'
-    ]
-    LAYER_VALUES = ['lane']
-
-    type2id = {v: i for i, v in enumerate(TYPE_VALUES)}
-    category2id = {v: i for i, v in enumerate(CATEGORY_VALUES)}
-    layer2id = {v: i for i, v in enumerate(LAYER_VALUES)}
-
     # ---- adapter ----
     adapter = JEPAInputAdapter(
         device=device,
@@ -141,6 +141,7 @@ def build_all(device, type2id, category2id, layer2id):
 
 
 
+
 # ============================================================
 # Training
 # ============================================================
@@ -151,20 +152,6 @@ def train():
         workspace=os.getenv("WORK_SPACE"),
     )
     experiment.set_name("JEPA-FULL-3L-STEADY")
-
-    # --------------------------
-    # JEPA-1 dataset
-    # --------------------------
-    dataset_j1 = MapDataset(map_csv_file=os.getenv("MAP_CSV", "maps.csv"))
-    
-    # --------------------------
-    # JEPA-2 dataset
-    # --------------------------
-    dataset_j2 = Tier2Dataset(
-        scene_map=get_scene_map(),
-        dataset_path=DATASET_PATH,
-        augment=True
-    )
     
     # --------------------------
     # Unified dataset
