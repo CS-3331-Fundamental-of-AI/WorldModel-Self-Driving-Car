@@ -100,13 +100,27 @@ plt.savefig("/kaggle/working/s_c_heatmap_component0.png")
 plt.close()
 display(Image("/kaggle/working/s_c_heatmap_component0.png"))
 
-# Show patch-to-patch differences
-diff = np.linalg.norm(seq[1:] - seq[:-1], axis=-1)  # length N-1
-diff_map = diff.reshape(Hc, Wc-1)                   # reshape to rows x (cols-1)
+# -------------------------------
+# Patch-to-patch difference maps
+# -------------------------------
+seq_2d = seq.reshape(Hc, Wc, C)  # (Hc, Wc, C)
+
+# Horizontal differences (row-wise)
+diff_h = np.linalg.norm(seq_2d[:,1:,:] - seq_2d[:,:-1,:], axis=-1)  # (Hc, Wc-1)
 plt.figure(figsize=(4,4))
-plt.imshow(diff_map, cmap='magma', interpolation='nearest')
+plt.imshow(diff_h, cmap='magma', interpolation='nearest')
 plt.colorbar()
-plt.title("Patch-to-Patch Difference")
-plt.savefig("/kaggle/working/s_c_patch_diff.png")
+plt.title("Patch-to-Patch Horizontal Difference")
+plt.savefig("/kaggle/working/s_c_diff_h.png")
 plt.close()
-display(Image("/kaggle/working/s_c_patch_diff.png"))
+display(Image("/kaggle/working/s_c_diff_h.png"))
+
+# Vertical differences (column-wise)
+diff_v = np.linalg.norm(seq_2d[1:,:,:] - seq_2d[:-1,:,:], axis=-1)  # (Hc-1, Wc)
+plt.figure(figsize=(4,4))
+plt.imshow(diff_v, cmap='magma', interpolation='nearest')
+plt.colorbar()
+plt.title("Patch-to-Patch Vertical Difference")
+plt.savefig("/kaggle/working/s_c_diff_v.png")
+plt.close()
+display(Image("/kaggle/working/s_c_diff_v.png"))

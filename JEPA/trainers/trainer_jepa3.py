@@ -46,14 +46,15 @@ class JEPA3Trainer:
         # -----------------------------
         # Forward: inverse model
         # -----------------------------
-        inv_out = self.inv(action, s_c)  # s_c required for FiLM modulation
+        inv_out = self.inv(action, s_c)  # s_c used internally by IA
 
         # -----------------------------
         # Forward: global encoding
         # -----------------------------
+        # Previously used s_c_mod, now just pass original s_c
         glob_out = self.glob(
-            inv_out["s_tg_hat"],
-            s_c,
+            inv_out["s_tg_hat"],  # predicted target from IA
+            s_c,                  # raw context from JEPA-1
             global_nodes,
             global_adj
         )
