@@ -27,6 +27,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         self.cube_target = CubeMLP(L=cube_L, M=cube_M, D=cube_D, out_dim=cube_out)
 
         # Global map GCN -> produce node embeddings of dim cube_D
+        self.node_embed = nn.Linear(3, 32)  # map 3-dim to GCN input dim
         self.global_gcn = GCN_PYG(in_feats=32, hidden=128, out_feats=cube_D, pool=None)
 
         # Small predictor from s_ctx -> s_tar (aux)
@@ -89,7 +90,9 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         # Global map path via GCN -> context cube (stop-grad)
         # -----------------------------
         if global_nodes is not None and global_edges is not None:
-            g_out = self.global_gcn(global_nodes, global_edges)  # [B, N, D]
+            # global_nodes: [B, N, 3]
+            x_nodes = self.node_embed(global_nodes)  # [B, N, 32]
+            g_out = self.global_gcn(x_nodes, global_edges)  # [B, N, cube_D]
             N = g_out.shape[1]
 
             # Partition nodes into M groups (robust to N < M)
