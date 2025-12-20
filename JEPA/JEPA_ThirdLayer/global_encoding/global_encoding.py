@@ -66,8 +66,10 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         # Prepare s_c -> y_modal and z_channels
         # -----------------------------
         # s_c may be (B, C) or (B, C, H, W)
-        if s_c.ndim == 4:
-            s_c_pool = s_c.mean(dim=(2, 3))  # (B, C)
+        if s_c.ndim == 3:           # NEW
+            s_c_pool = s_c.mean(dim=1)  # collapse patches → [B, D]
+        elif s_c.ndim == 4:
+            s_c_pool = s_c.mean(dim=(2, 3))
         elif s_c.ndim == 2:
             s_c_pool = s_c
         else:

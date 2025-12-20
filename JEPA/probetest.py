@@ -60,7 +60,8 @@ layer.eval()
 # -------------------------------
 with torch.no_grad():
     z_c, s_c, z_t = layer(masked_img, unmasked_img, mask_empty_lat, mask_non_lat, mask_any_lat)
-
+    
+print("s_c shape:", s_c.shape)
 # -------------------------------
 # Cosine similarity check
 # -------------------------------
