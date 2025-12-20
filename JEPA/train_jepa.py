@@ -92,7 +92,7 @@ def build_all(device, type2id=None, category2id=None, layer2id=None):
     # ---- EMA teachers ----
     jepa2_tgt = Tier2Module().to(device)
     jepa3_inv_tgt = JEPA_Tier3_InverseAffordance().to(device)
-    jepa3_glob_tgt = JEPA_Tier3_GlobalEncoding().to(device)
+    jepa3_glob_tgt = JEPA_Tier3_GlobalEncoding(s_c_dim=128).to(device)
 
     for tgt, src in [
         (jepa2_tgt, jepa2),
