@@ -119,7 +119,14 @@ def build_all(device, type2id=None, category2id=None, layer2id=None):
     # ---- trainers ----
     t1 = JEPA1Trainer(jepa1, opt_j1)
     t2 = JEPA2Trainer(jepa2, jepa2_tgt, opt_j2)
-    t3 = JEPA3Trainer(jepa3_inv, jepa3_glob, jepa3_glob_tgt, opt_j3)
+    t3 = JEPA3Trainer(
+        jepa3_inv,      # inv (student)
+        jepa3_glob,     # glob (student)
+        jepa3_inv_tgt,  # inv_tgt (EMA target)
+        jepa3_glob_tgt, # glob_tgt (EMA target)
+        opt_j3          # optimizer
+    )
+
     
     # ---- adapter ----
     adapter = JEPAInputAdapter(
