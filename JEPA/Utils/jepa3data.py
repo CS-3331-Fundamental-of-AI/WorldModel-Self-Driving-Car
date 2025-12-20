@@ -66,9 +66,11 @@ class Tier3Dataset(Dataset):
                 for node in graph_data["nodes"]
             ]
             nodes = torch.tensor(nodes_list, dtype=torch.float32)
-
-            edges = torch.tensor(graph_data["edges"], dtype=torch.long)
-
+            
+            edges_list = [[e["source"], e["target"]] for e in graph_data["edges"]]
+            edges = torch.tensor(edges_list, dtype=torch.long)
+            edge_weights = torch.tensor([e.get("weight", 1.0) for e in graph_data["edges"]], dtype=torch.float)
+            
             self.global_graphs[scene_name] = {"nodes": nodes, "edges": edges}
 
         return self.global_graphs[scene_name]
