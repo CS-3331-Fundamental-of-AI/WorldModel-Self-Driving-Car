@@ -77,6 +77,12 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         # 4. Action → embedding
         # ------------------------------------------------------------------
         self.action_proj = nn.Linear(token_dim, film_dim)
+        
+        # ------------------------------------------------------------------
+        # 5. Spatial latent projection → film_dim
+        # ------------------------------------------------------------------
+        self.s_c_proj = nn.LazyLinear(film_dim)  # Lazy: input dim inferred at first forward
+
 
         # ------------------------------------------------------------------
         # 5. Merge spatial & action features → z_ca
@@ -153,14 +159,10 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         gamma = gamma_film                # (B,film_dim)
         
         B = s_c.size(0)
-        s_c_flat = s_c.reshape(B, -1)                      # flatten all but batch, shape [B, C*H*W]
-        if not hasattr(self, "_s_c_proj_init"):
-            # dynamically initialize projection if spatial dims unknown at init
-            self.s_c_proj = nn.Linear(s_c_flat.size(1), self.s_c_proj.out_features).to(s_c.device)
-            self._s_c_proj_init = True
+        s_c_flat = s_c.reshape(B, -1)       # flatten all but batch
+        s_c_proj = self.s_c_proj(s_c_flat)  # project to [B, film_dim]
+        s_c_mod = s_c_proj * (1 + gamma) + beta  # FiLM modulation
 
-        s_c_proj = self.s_c_proj(s_c_flat)          # project to [B, film_dim]
-        s_c_mod = s_c_proj * (1 + gamma) + beta  
 
         # --------------------------------------------------------------
         # 6. Action embedding (mean pool tokens)

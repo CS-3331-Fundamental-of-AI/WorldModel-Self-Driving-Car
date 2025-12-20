@@ -101,8 +101,8 @@ plt.close()
 display(Image("/kaggle/working/s_c_heatmap_component0.png"))
 
 # Show patch-to-patch differences
-diff = np.linalg.norm(seq[1:].cpu().numpy() - seq[:-1].cpu().numpy(), axis=-1)
-diff_map = diff.reshape(Hc-1, Wc)
+diff = np.linalg.norm(seq[1:] - seq[:-1], axis=-1)  # length N-1
+diff_map = diff.reshape(Hc, Wc-1)                   # reshape to rows x (cols-1)
 plt.figure(figsize=(4,4))
 plt.imshow(diff_map, cmap='magma', interpolation='nearest')
 plt.colorbar()
