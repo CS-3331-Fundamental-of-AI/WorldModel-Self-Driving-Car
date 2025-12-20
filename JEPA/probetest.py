@@ -31,12 +31,21 @@ try:
     bev, mask_emp, mask_non, mask_union, mask_emp_np, mask_non_np, mask_union_np, ph, pw, img = batch
 
     # Convert to tensors as JEPA1Trainer expects
+
     B = bev.shape[0]
-    masked_img   = bev.float()
-    unmasked_img = bev.float()
-    mask_empty_lat = up2(mask_emp_np.view(B, 1, 32, 32)).view(B, -1)
-    mask_non_lat   = up2(mask_non_np.view(B, 1, 32, 32)).view(B, -1)
-    mask_any_lat   = up2(mask_union_np.view(B, 1, 32, 32)).view(B, -1)
+
+    # If bev has shape [B,1,C,H,W], squeeze the extra dim
+    if bev.ndim == 5:
+        masked_img = bev.squeeze(1).float()  # shape [B,C,H,W]
+        unmasked_img = bev.squeeze(1).float()
+    else:
+        masked_img = bev.float()
+        unmasked_img = bev.float()
+
+    mask_empty_lat = up2(mask_emp_np.squeeze(1)).view(B, -1)
+    mask_non_lat   = up2(mask_non_np.squeeze(1)).view(B, -1)
+    mask_any_lat   = up2(mask_union_np.squeeze(1)).view(B, -1)
+
 
     use_dummy = False
     print("✅ Using real dataset batch")

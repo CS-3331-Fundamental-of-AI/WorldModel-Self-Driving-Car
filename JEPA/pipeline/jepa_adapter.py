@@ -48,7 +48,6 @@ class JEPAInputAdapter:
             j3 = out["j3"]
             j3_adapted = {
                 "action": j3["action"].to(self.device),
-                "s_c": j3["s_c"].to(self.device),
                 "global_nodes": j3["global_graph"]["nodes"].to(self.device),
                 "global_adj": j3["global_graph"]["edges"].to(self.device),
             }
