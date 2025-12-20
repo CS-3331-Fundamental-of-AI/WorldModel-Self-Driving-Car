@@ -90,7 +90,18 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         gamma = self.film_gamma_proj(gamma_global)          # (B,film_dim)
 
         # 4. FiLM-modulated spatial latent (s_c only for IA)
-        s_c_pooled = s_c.mean(dim=(2,3))   # pool H,W → (B, C)
+        if s_c.ndim == 4:
+            # B, C, H, W → pool spatial
+            s_c_pooled = s_c.mean(dim=(2,3))
+        elif s_c.ndim == 3:
+            # B, C, L → pool over last dim
+            s_c_pooled = s_c.mean(dim=2)
+        elif s_c.ndim == 2:
+            # already B, C → use as is
+            s_c_pooled = s_c
+        else:
+            raise ValueError(f"s_c has unsupported ndim={s_c.ndim}")
+
         s_c_proj = self.s_c_proj(s_c_pooled)  # (B, film_dim)
         s_c_mod = s_c_proj * (1 + gamma) + beta
 
