@@ -107,8 +107,25 @@ class Tier3Dataset(Dataset):
             "global_graph": global_graph,
         }
 
-def tier3_collate_fn(batch):
+# --------------------------
+# Tier 3 collate
+# --------------------------
+def tier3_collate_fn(batch, device=None):
+    """
+    Collate function for JEPA-3 Dataset.
+    Converts a list of dicts into batched tensors/lists.
+    """
+    action = torch.stack([b["action"] for b in batch])  # [B, 2]
+
+    # For global graph, we keep a list of dicts per sample
+    global_graphs = [b["global_graph"] for b in batch]
+
+    # Extract nodes and edges into separate lists
+    global_nodes = [g["nodes"].to(device) if device else g["nodes"] for g in global_graphs]
+    global_adj   = [g["edges"].to(device) if device else g["edges"] for g in global_graphs]
+
     return {
-        "action": torch.stack([b["action"] for b in batch]),
-        "global_graph": [b["global_graph"] for b in batch],  # list of dicts with nodes & edges
+        "action": action,
+        "global_nodes": global_nodes,
+        "global_adj": global_adj,
     }

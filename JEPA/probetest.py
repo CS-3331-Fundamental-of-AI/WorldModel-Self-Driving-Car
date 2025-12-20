@@ -4,7 +4,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
-
+from IPython.display import Image, display
 # -------------------------------
 # Environment variables
 # -------------------------------
@@ -99,8 +99,9 @@ feat_rgb = feat_rgb.reshape(Hc, Wc, 3)
 # Normalize to [0,1] for display
 feat_rgb = (feat_rgb - feat_rgb.min()) / (feat_rgb.max() - feat_rgb.min())
 
-plt.figure(figsize=(4, 4))
+plt.figure(figsize=(4,4))
 plt.imshow(feat_rgb)
-plt.title("Heat map of s_c (PCA → RGB)")
 plt.axis('off')
-plt.show()
+plt.savefig("/kaggle/working/s_c_heatmap.png")
+plt.close()  # close to avoid duplicate
+display(Image("/kaggle/working/s_c_heatmap.png"))
