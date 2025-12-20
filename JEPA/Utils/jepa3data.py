@@ -57,8 +57,11 @@ class Tier3Dataset(Dataset):
             with open(path, "r") as f:
                 data = json.load(f)
 
-            nodes = torch.tensor(data["root"]["nodes"], dtype=torch.float32)
-            edges = torch.tensor(data["root"]["edges"], dtype=torch.long)
+             # Use 'root' if exists, else top-level dict
+            graph_data = data.get("root", data)
+
+            nodes = torch.tensor(graph_data["nodes"], dtype=torch.float32)
+            edges = torch.tensor(graph_data["edges"], dtype=torch.long)
 
             # Save tensors
             self.global_graphs[scene_name] = {
