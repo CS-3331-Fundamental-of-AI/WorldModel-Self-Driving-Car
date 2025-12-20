@@ -281,7 +281,7 @@ def tier2_collate_fn(batch):
         # (B) DELTAS: CLEAN VIEW
         # ===========================
         d_clean = deltas_clean
-        clean_deltas_list.append(torch.tensor(d_clean, dtype=torch.float32))
+        clean_deltas_list.append(d_clean.detach().clone().float())
 
         traj_mask = (d_clean.abs().sum(dim=1) > 0).float()
         traj_mask_list.append(traj_mask)
@@ -291,9 +291,9 @@ def tier2_collate_fn(batch):
         # ===========================
         if deltas_aug is None:
             # no augmentation → use clean copy
-            aug_deltas_list.append(torch.tensor(d_clean, dtype=torch.float32))
+            aug_deltas_list.append(d_clean.detach().clone().float())
         else:
-            aug_deltas_list.append(torch.tensor(deltas_aug, dtype=torch.float32))
+            aug_deltas_list.append(deltas_aug.detach().clone().float())
 
         graphs.append(G)
         metas.append(meta)
