@@ -107,6 +107,7 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         return {
             "s_y": s_y,
             "s_tg_hat": s_tg_hat,
+            "s_a_detached": s_a.detach(),
             "z_ca": z_ca,
             "tokens_final": tokens_final,
             "beta_t": beta_t,
