@@ -153,7 +153,7 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         gamma = gamma_film                # (B,film_dim)
         
         B = s_c.size(0)
-        s_c_flat = s_c.view(B, -1)                  # flatten all but batch, shape [B, C*H*W]
+        s_c_flat = s_c.reshape(B, -1)                      # flatten all but batch, shape [B, C*H*W]
         if not hasattr(self, "_s_c_proj_init"):
             # dynamically initialize projection if spatial dims unknown at init
             self.s_c_proj = nn.Linear(s_c_flat.size(1), self.s_c_proj.out_features).to(s_c.device)
