@@ -96,8 +96,8 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         # 5. Action embedding
         s_a = self.action_proj(tokens_final.mean(1))        # (B,film_dim)
 
-        # 6. Joint latent
-        z_ca = self.z_proj(torch.cat([s_c_mod, s_a], dim=-1))
+        # 6. Joint latent (combine raw s_c_proj and FiLM-modulated version)
+        z_ca = self.z_proj(torch.cat([s_c_proj, s_c_mod], dim=-1))
 
         # 7. Predictors
         feat_flat = torch.cat([s_c_mod, z_ca], dim=-1)
