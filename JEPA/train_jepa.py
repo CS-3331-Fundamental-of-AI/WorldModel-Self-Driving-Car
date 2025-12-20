@@ -84,15 +84,15 @@ def build_all(device, type2id=None, category2id=None, layer2id=None):
     layer2id = layer2id or {v: i for i, v in enumerate(LAYER_VALUES)}
 
     # ---- models ----
-    jepa1 = PrimitiveLayer(embed_dim=128).to(device)  # D1=128
+    jepa1 = PrimitiveLayer.to(device) 
     jepa2 = Tier2Module().to(device)
     jepa3_inv = JEPA_Tier3_InverseAffordance().to(device)
-    jepa3_glob = JEPA_Tier3_GlobalEncoding(s_c_dim=128).to(device)
+    jepa3_glob = JEPA_Tier3_GlobalEncoding(s_c_dim=64).to(device)
 
     # ---- EMA teachers ----
     jepa2_tgt = Tier2Module().to(device)
     jepa3_inv_tgt = JEPA_Tier3_InverseAffordance().to(device)
-    jepa3_glob_tgt = JEPA_Tier3_GlobalEncoding(s_c_dim=128).to(device)
+    jepa3_glob_tgt = JEPA_Tier3_GlobalEncoding(s_c_dim=64).to(device)
 
     for tgt, src in [
         (jepa2_tgt, jepa2),
