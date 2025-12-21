@@ -15,8 +15,6 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
       - FiLM-modulated spatial latent (s_c)
       - Fusion with action embedding → z_ca
       - Predict s_y and s_tg_hat
-
-    Note: IA only uses s_c internally; it does NOT prepare s_c for the global encoder.
     """
 
     def __init__(self,
@@ -27,27 +25,36 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
                  s_c_dim=4096,
                  film_dim=128,
                  pred_dim=128,
-                 n_res_blocks=4,
                  ema_decay=0.995):
         super().__init__()
 
-        # Kinematics
+        # -------------------------------------------------
+        # Kinematics + Temporal Encoder
+        # -------------------------------------------------
         self.kin = DeterministicKinematicBicycle(
             state_dim=kin_state_dim,
             action_dim=action_dim,
             k=kin_k
         )
 
-        # Temporal encoder
         self.temporal_enc = TemporalActionEncoder(
             state_dim=kin_state_dim,
             token_dim=token_dim
         )
 
+        self.ema_target = copy.deepcopy(self.temporal_enc)
+        freeze(self.ema_target)
+        
+        # -------------------------------------------------
         # FiLM projections
-        self.film_beta_proj = nn.Linear(token_dim, film_dim)
-        self.film_gamma_proj = nn.Linear(token_dim, film_dim)
+        # -------------------------------------------------
+        self.beta_proj  = nn.Linear(token_dim, film_dim)
+        self.gamma_proj = nn.Linear(token_dim, film_dim)
 
+        # -------------------------------------------------
+        # Latent projections
+        # -------------------------------------------------
+        
         # Action embedding
         self.action_proj = nn.Linear(token_dim, film_dim)
 
@@ -61,67 +68,73 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
             nn.Linear(pred_dim, pred_dim),
         )
 
+        # -------------------------------------------------
         # Predictors
-        self.pred_sy = PredictorMLP(film_dim + pred_dim, pred_dim)
-        self.pred_tg_1 = PredictorMLP(pred_dim, pred_dim)
-        self.pred_tg_2 = PredictorMLP(pred_dim, pred_dim)
-
-        # EMA target encoder
-        self.ema_target = copy.deepcopy(self.temporal_enc)
-        freeze(self.ema_target)
-
-        self.n_res_blocks = n_res_blocks
+        # -------------------------------------------------
+        self.pred_sy = PredictorMLP(pred_dim, pred_dim)
 
     def forward(self, action, s_c):
-        B = action.size(0)
+        # -----------------------------------------------
+        # 1. Rollout kinematics
+        # -----------------------------------------------
+        kin_seq = self.kin(action)
 
-        # 1. Kinematics rollout
-        kin_high = self.kin(action)
+        # -----------------------------------------------
+        # 2. Temporal encoding (last layer only)
+        # -----------------------------------------------
+        tokens, beta_t, gamma_t = self.temporal_enc(kin_seq)[-1]
 
-        # 2. Temporal encoding
-        layer_outputs = self.temporal_enc(kin_high)
-        tokens_final, beta_t, gamma_t = layer_outputs[-1]  # (B,T,D)
+        beta  = self.beta_proj(beta_t.mean(dim=1))
+        gamma = self.gamma_proj(gamma_t.mean(dim=1))  # (B,T,D)
 
+        
         # 3. FiLM projections
-        beta_t_film = self.film_beta_proj(beta_t)           # (B,T,film_dim)
-        beta = beta_t_film.mean(dim=1)                      # (B,film_dim)
+        #beta_t_film = self.film_beta_proj(beta_t)           # (B,T,film_dim)
+        #beta = beta_t_film.mean(dim=1)                      # (B,film_dim)
 
-        gamma_global = gamma_t[:, 0, :]                     # (B,token_dim)
-        gamma = self.film_gamma_proj(gamma_global)          # (B,film_dim)
-
-        # 4. FiLM-modulated spatial latent (s_c only for IA)
+        #gamma_global = gamma_t[:, 0, :]                     # (B,token_dim)
+        #gamma = self.film_gamma_proj(gamma_global)          # (B,film_dim)
+        
+        # -----------------------------------------------
+        # 3. Pool and project s_c
+        # -----------------------------------------------
         if s_c.ndim == 4:
-            # B, C, H, W → pool spatial
-            s_c_pooled = s_c.mean(dim=(2,3))
+            s_c_pooled = s_c.mean(dim=(2, 3))
         elif s_c.ndim == 3:
-            # B, C, L → pool over last dim
             s_c_pooled = s_c.mean(dim=2)
         elif s_c.ndim == 2:
             # already B, C → use as is
             s_c_pooled = s_c
         else:
-            raise ValueError(f"s_c has unsupported ndim={s_c.ndim}")
+            raise ValueError(f"s_c has unsupported ndim={s_c.ndim}")    
 
         s_c_proj = self.s_c_proj(s_c_pooled)  # (B, film_dim)
-        s_c_mod = s_c_proj * (1 + gamma) + beta
+        
+        # -----------------------------------------------
+        # 4. FiLM modulation
+        # -----------------------------------------------
+        s_c_mod = s_c_proj * (1.0 + gamma) + beta
 
-        # 5. Action embedding
-        s_a = self.action_proj(tokens_final.mean(1))        # (B,film_dim)
+        # -----------------------------------------------
+        # 5. Action embedding (JEPA teacher)
+        # -----------------------------------------------
+        s_a = self.s_a_proj(tokens.mean(dim=1))  # (B,film_dim)
 
-        # 6. Joint latent (combine raw s_c_proj and FiLM-modulated version)
-        z_ca = self.z_proj(torch.cat([s_c_proj, s_c_mod], dim=-1))
+        # -----------------------------------------------
+        # 6. Joint latent
+        # -----------------------------------------------
+        z_ca = self.z_proj(s_c_mod)
 
-        # 7. Predictors
-        feat_flat = torch.cat([s_c_mod, z_ca], dim=-1)
-        s_y = self.pred_sy(feat_flat)
-        s_tg_hat = self.pred_tg_2(self.pred_tg_1(s_y))
+        # -----------------------------------------------
+        # 7. Predict
+        # -----------------------------------------------
+        s_y = self.pred_sy(z_ca)
 
         return {
             "s_y": s_y,
-            "s_tg_hat": s_tg_hat,
             "s_a_detached": s_a.detach(),
             "z_ca": z_ca,
-            "tokens_final": tokens_final,
+            "tokens": tokens,
             "beta_t": beta_t,
             "gamma_t": gamma_t
         }

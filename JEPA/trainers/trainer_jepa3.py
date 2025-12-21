@@ -1,7 +1,6 @@
 # trainers/trainer_jepa3.py
 import torch
 from JEPA_ThirdLayer.losses import inverse_affordance_losses, global_encoding_losses
-from JEPA_ThirdLayer.utils import EMAHelper, freeze
 from config.config import CLIP_NORM
 
 class JEPA3Trainer:
@@ -9,37 +8,19 @@ class JEPA3Trainer:
         self,
         inv,            # student inverse model (JEPA_Tier3_InverseAffordance)
         glob,           # student global model (JEPA_Tier3_GlobalEncoding)
-        inv_tgt,        # EMA target inverse
-        glob_tgt,       # EMA target global
         optimizer,
-        ema_decay=0.999
     ):
         self.inv = inv
         self.glob = glob
-        self.inv_tgt = inv_tgt
-        self.glob_tgt = glob_tgt
         self.opt = optimizer
-
-        # Freeze EMA targets
-        freeze(self.inv_tgt)
-        freeze(self.glob_tgt)
-        self.inv_tgt.eval()
-        self.glob_tgt.eval()
-
-        # EMA helpers
-        self.ema_inv = EMAHelper(decay=ema_decay)
-        self.ema_glob = EMAHelper(decay=ema_decay)
-        self.ema_inv.register(self.inv)
-        self.ema_glob.register(self.glob)
-        self.ema_inv.assign_to(self.inv_tgt)
-        self.ema_glob.assign_to(self.glob_tgt)
 
     def step(self, action, s_c, s_tg=None, global_nodes=None, global_edges=None):
         """
         JEPA-3 training step:
         - action : [B, 2]
         - s_c    : context representation from JEPA-1 [B, C]
-        - s_tg   : target representation from JEPA-2 [B, C] (optional)
+        - s_tg   : target representation from JEPA-2 [B, C] 
+        - s_y    : predicted target from inverse model
         - global_nodes : list of node tensors per sample
         - global_edges   : list of edge tensors per sample
         """
@@ -47,16 +28,19 @@ class JEPA3Trainer:
         # Forward: inverse model
         # -----------------------------
         inv_out = self.inv(action, s_c)  # s_c used internally by IA
+        s_y = inv_out["s_y"]
 
         # -----------------------------
         # Forward: global encoding
         # -----------------------------
         # Previously used s_c_mod, now just pass original s_c
         glob_out = self.glob(
-            inv_out["s_tg_hat"],  # predicted target from IA
-            s_c,                  # raw context from JEPA-1
+            s_y,       # predicted target from IA
+            s_c,                # raw context from JEPA-1
+            s_tg,
             global_nodes,
-            global_edges
+            global_edges,
+            tokens_final=inv_out.get("tokens", None),
         )
 
         # -----------------------------
@@ -76,13 +60,10 @@ class JEPA3Trainer:
         self.opt.step()
 
         # -----------------------------
-        # EMA update
+        # EMA update (GLOBAL ENCODER)
         # -----------------------------
-        self.ema_inv.update(self.inv)
-        self.ema_glob.update(self.glob)
-        self.ema_inv.assign_to(self.inv_tgt)
-        self.ema_glob.assign_to(self.glob_tgt)
-
+        self.glob.update_ema()
+        
         return {
             "loss": loss_total.detach(),
             "loss_inv": loss_inv["total"].detach(),

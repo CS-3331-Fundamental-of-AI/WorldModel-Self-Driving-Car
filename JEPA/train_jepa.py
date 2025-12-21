@@ -91,13 +91,9 @@ def build_all(device, type2id=None, category2id=None, layer2id=None):
 
     # ---- EMA teachers ----
     jepa2_tgt = Tier2Module().to(device)
-    jepa3_inv_tgt = JEPA_Tier3_InverseAffordance().to(device)
-    jepa3_glob_tgt = JEPA_Tier3_GlobalEncoding(s_c_dim=64).to(device)
 
     for tgt, src in [
-        (jepa2_tgt, jepa2),
-        (jepa3_inv_tgt, jepa3_inv),
-        (jepa3_glob_tgt, jepa3_glob),
+        (jepa2_tgt, jepa2)
     ]:
         tgt.load_state_dict(src.state_dict())
         for p in tgt.parameters():
@@ -120,14 +116,11 @@ def build_all(device, type2id=None, category2id=None, layer2id=None):
     t1 = JEPA1Trainer(jepa1, opt_j1)
     t2 = JEPA2Trainer(jepa2, jepa2_tgt, opt_j2)
     t3 = JEPA3Trainer(
-        jepa3_inv,      # inv (student)
-        jepa3_glob,     # glob (student)
-        jepa3_inv_tgt,  # inv_tgt (EMA target)
-        jepa3_glob_tgt, # glob_tgt (EMA target)
+        jepa3_inv,      # inverse affordance
+        jepa3_glob,     # global encoding 
         opt_j3          # optimizer
     )
 
-    
     # ---- adapter ----
     adapter = JEPAInputAdapter(
         device=device,

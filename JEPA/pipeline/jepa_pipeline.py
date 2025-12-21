@@ -79,7 +79,7 @@ class JEPAPipeline:
         # JEPA-3
         # ----------------------------
         out3 = None
-        has_context = (s_c is not None) or (s_tg is not None)
+        has_context = (s_c is not None) and (s_tg is not None)
         has_j3 = ("j3" in batch) and (batch["j3"] is not None)
 
         if has_context and has_j3:

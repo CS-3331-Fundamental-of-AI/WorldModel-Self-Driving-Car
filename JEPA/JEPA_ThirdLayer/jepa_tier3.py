@@ -9,8 +9,8 @@ from .global_encoding.global_encoding import JEPA_Tier3_GlobalEncoding
 class JEPA_Tier3(nn.Module):
     """
     Top-level orchestrator for Tier-3: runs
-      - inverse-affordance branch (action -> s_tg_hat, tokens, ...)
-      - global-encoding branch (fuses s_tg_hat + world map -> s_tar, s_ctx)
+      - inverse-affordance branch: action + s_c -> s_y
+      - global-encoding branch (s_y, s_c, s_tg) + world map -> world latent
     Returns a unified dict for losses / downstream usage.
     """
 
@@ -28,32 +28,40 @@ class JEPA_Tier3(nn.Module):
         # inputs for inverse-affordance
         action: torch.Tensor,
         s_c: torch.Tensor,   
-        # inputs for global encoding (s_c should come from JEPA-1 or JEPA-2)
+        # inputs for global encoding (s_tg should come from JEPA-2)
+        s_tg: torch.Tensor,
         global_nodes: torch.Tensor = None,
         global_edges: torch.Tensor = None,
         # optionally accept tokens to feed to global branch
         tokens_for_global: torch.Tensor = None,
         **kwargs
     ):
-        # 1) run inverse-affordance branch
+        # --------------------------------------------------
+        # 1) Inverse affordance
+        # --------------------------------------------------
         inv_out = self.inv(action=action, s_c=s_c)
-        # inv_out contains keys: "s_y","s_tg_hat","z_ca","tokens_final","beta_t","gamma_t"
+        # inv_out contains keys: "s_y","s_a","z_ca","tokens","beta_t","gamma_t"
+        s_y = inv_out["s_y"]
 
-        # 2) run global encoding branch using s_tg_hat (and optional tokens)
+        # --------------------------------------------------
+        # 2) Global encoding
+        # --------------------------------------------------
         glob_out = self.glob(
-            s_tg_hat=inv_out["s_tg_hat"],
+            s_y=s_y,
             s_c=s_c,
+            s_tg=s_tg,
             global_nodes=global_nodes,
             global_edges=global_edges,
-            tokens_final=tokens_for_global if tokens_for_global is not None else inv_out.get("tokens_final", None)
+            tokens_final=tokens_for_global if tokens_for_global is not None else inv_out.get("tokens", None)
         )
 
-        # 3) aggregate useful outputs for downstream (training / metrics)
+        # --------------------------------------------------
+        # 3) Aggregate outputs
+        # --------------------------------------------------
         out = {
             "inv": inv_out,
             "glob": glob_out,
-            # convenience top-level things
-            "s_tg_hat": inv_out["s_tg_hat"],
+            "s_y": s_y,
             "z_ca": inv_out["z_ca"],
             "s_tar": glob_out["s_tar"],
             "s_ctx": glob_out["s_ctx"],

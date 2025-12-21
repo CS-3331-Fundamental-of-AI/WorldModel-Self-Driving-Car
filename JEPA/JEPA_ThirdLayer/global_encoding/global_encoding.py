@@ -6,6 +6,7 @@ from .gcn_pyg import GCN_PYG
 from .cube_mlp import CubeMLP
 from ..shared.predictors import PredictorMLP
 
+from JEPA_ThirdLayer.utils import EMAHelper, freeze
 
 class JEPA_Tier3_GlobalEncoding(nn.Module):
     def __init__(
@@ -22,52 +23,73 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         self.M = cube_M
         self.D = cube_D
 
-        # Cube modules
+        # -----------------------------
+        # Cube modules (online / target)
+        # -----------------------------
         self.cube_online = CubeMLP(L=cube_L, M=cube_M, D=cube_D, out_dim=cube_out)
         self.cube_target = CubeMLP(L=cube_L, M=cube_M, D=cube_D, out_dim=cube_out)
 
-        # Global map GCN -> produce node embeddings of dim cube_D
+        # -----------------------------
+        # Global map encoder
+        # -----------------------------
         self.node_embed = nn.Linear(3, 32)  # map 3-dim to GCN input dim
         self.global_gcn = GCN_PYG(in_feats=32, hidden=128, out_feats=cube_D, pool=None)
+        
+        # EMA from global cube online -> attention & modal fusing target
+        self.ema_helper = EMAHelper(decay=0.999)
+        self.ema_helper.register(self.cube_online)
+        freeze(self.cube_target)
+        self.ema_helper.assign_to(self.cube_target)
 
-        # Small predictor from s_ctx -> s_tar (aux)
+        # -----------------------------
+        # Aux predictor
+        # -----------------------------
         self.pred_from_ctx = PredictorMLP(in_dim=cube_out, out_dim=cube_out)
 
         # Project incoming s_c features to cube_D
-        self.s_c_dim = s_c_dim
         self.s_c_proj = nn.Linear(s_c_dim, cube_D)
+        
+    # =====================================================
+    # EMA UPDATE (THIS IS THE CORRECT PLACE)
+    # =====================================================
+    @torch.no_grad()
+    def update_ema(self):
+        self.ema_helper.update(self.cube_online)
+        self.ema_helper.assign_to(self.cube_target)
 
+    # =====================================================
+    # FORWARD
+    # =====================================================
     def forward(
         self,
-        s_tg_hat: torch.Tensor,               # [B, D] or [B, L, D] OR pass tokens separately via tokens_final arg
-        s_c: torch.Tensor,                    # (B, C) or (B, C, H, W)
+        s_y: torch.Tensor,          # inverse affordance latent
+        s_c: torch.Tensor,          # context
+        s_tg: torch.Tensor,         # EMA future target (JEPA-2)
         global_nodes: Optional[torch.Tensor] = None,
         global_edges: Optional[torch.Tensor] = None,
         tokens_final: Optional[torch.Tensor] = None # optional (B, T, D) from inverse module
     ):
-        B = s_tg_hat.shape[0]
-
-        # -----------------------------
-        # Prepare tokens for x (preferred: tokens_final if provided)
-        # -----------------------------
+        B = s_y.shape[0]
+        # --------------------------------------------------
+        # x_tokens ← s_y (primary hypothesis)
+        # --------------------------------------------------
         if tokens_final is not None:
             # use provided temporal tokens directly (preferred)
             x_tokens = tokens_final[:, :self.L, :self.D]  # [B, L, D]
         else:
-            # if s_tg_hat is already (B, L, D)
-            if s_tg_hat.ndim == 3:
-                x_tokens = s_tg_hat[:, :self.L, :self.D]
-            elif s_tg_hat.ndim == 2:
+            # if s_y is already (B, L, D)
+            if s_y.ndim == 3:
+                x_tokens = s_y[:, :self.L, :self.D]
+            elif s_y.ndim == 2:
                 # Expand single vector to L repeated tokens (simple fallback)
-                x_tokens = s_tg_hat.unsqueeze(1).expand(-1, self.L, -1)[:, :self.L, :self.D]
+                x_tokens = s_y.unsqueeze(1).expand(-1, self.L, -1)[:, :self.L, :self.D]
             else:
-                raise ValueError("s_tg_hat must be (B,D) or (B,L,D) when tokens_final not provided")
+                raise ValueError("s_y must be (B,D) or (B,L,D) when tokens_final not provided")
 
-        # -----------------------------
-        # Prepare s_c -> y_modal and z_channels
-        # -----------------------------
-        # s_c may be (B, C) or (B, C, H, W)
-        if s_c.ndim == 3:           # NEW
+        # --------------------------------------------------
+        # y_modal ← s_c (context → modal slots)
+        # --------------------------------------------------
+        if s_c.ndim == 3:           
             s_c_pool = s_c.mean(dim=1)  # collapse patches → [B, D]
         elif s_c.ndim == 4:
             s_c_pool = s_c.mean(dim=(2, 3))
@@ -77,9 +99,17 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
             raise ValueError(f"s_c has unsupported ndim={s_c.ndim}")
 
         s_c_proj = self.s_c_proj(s_c_pool)  # (B, D)
-        # Build M modality slots by simple replication; alternative: learned chunking
-        y_modal = s_c_proj.unsqueeze(1).expand(B, self.M, self.D).contiguous()   # [B, M, D]
-        z_channels = y_modal  # reuse; you could also apply a separate proj if desired
+        y_modal = s_c_proj.unsqueeze(1).expand(B, self.M, self.D)  # [B, M, D]
+        
+        # --------------------------------------------------
+        # z_channels ← s_tg (EMA future → gating)
+        # --------------------------------------------------
+        if s_tg.ndim == 2:
+            z_channels = s_tg.unsqueeze(1).expand(B, self.M, self.D)
+        elif s_tg.ndim == 3:
+            z_channels = s_tg[:, :self.M, :self.D]
+        else:
+            raise ValueError("s_tg must be (B,D) or (B,M,D)")
 
         # -----------------------------
         # Online cube -> target cube output
@@ -93,10 +123,10 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
             # global_nodes: [B, N, 3]
             x_nodes = self.node_embed(global_nodes)  # [B, N, 32]
             g_out = self.global_gcn(x_nodes, global_edges)  # [B, N, cube_D]
+            
             N = g_out.shape[1]
-
-            # Partition nodes into M groups (robust to N < M)
-            step = max(1, N // self.M)
+            step = max(1, N // self.M)  # Partition nodes into M groups (robust to N < M)
+            
             y_ctx_list = []
             for i in range(self.M):
                 start = i * step
@@ -109,9 +139,11 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
                     y_ctx_list.append(chunk.mean(dim=1))  # [B, D]
             y_ctx = torch.stack(y_ctx_list, dim=1)  # [B, M, D]
 
-            x_ctx = x_tokens[:, :self.cube_target.L, :self.D]
-            z_ctx = y_ctx
-            s_ctx = self.cube_target(x_ctx, y_ctx, z_ctx).detach()
+            s_ctx = self.cube_target(
+            x_tokens[:, :self.cube_target.L],
+            y_ctx,
+            z_channels
+        ).detach()
         else:
             s_ctx = torch.zeros_like(s_tar)
 

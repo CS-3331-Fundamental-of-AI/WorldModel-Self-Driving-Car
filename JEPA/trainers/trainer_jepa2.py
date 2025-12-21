@@ -71,7 +71,7 @@ class JEPA2Trainer:
         )
 
         # --------------------------------------------------
-        # 4. Optimization
+        # 4. Optimization 
         # --------------------------------------------------
         self.opt.zero_grad(set_to_none=True)
         loss.backward()
@@ -82,11 +82,24 @@ class JEPA2Trainer:
         # 5. EMA update
         # --------------------------------------------------
         update_ema(self.ema_model, self.model, EMA_JEPA2)
+        
+        # --------------------------------------------------
+        # 6. EMA forward → slow target for JEPA-3
+        # --------------------------------------------------
+        with torch.no_grad():
+            out_ema = self.ema_model(
+                traj=traj,
+                adj=adj,
+                x_graph=x_graph,
+                traj_mask=traj_mask,
+                graph_mask=graph_mask,
+            )
+            s_tg = out_ema["fusion"]   # EMA target for JEPA-3
 
         return {
             "loss": loss.detach(),
             "loss_inv": loss_inv.detach(),
             "loss_var": loss_var.detach(),
             "loss_cov": loss_cov.detach(),
-            "s_tg": z_clean.detach(),   # JEPA-3 input
+            "s_tg": s_tg.detach(),   # JEPA-3 input
         }
