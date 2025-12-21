@@ -59,7 +59,7 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
 
         # Joint latent
         self.z_proj = nn.Sequential(
-            nn.Linear(film_dim, pred_dim),
+            nn.Linear(film_dim*2, pred_dim),
             nn.ReLU(),
             nn.Linear(pred_dim, pred_dim),
         )
@@ -119,7 +119,8 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         # -----------------------------------------------
         # 6. Joint latent
         # -----------------------------------------------
-        z_ca = self.z_proj(s_c_mod)
+        z_in = torch.cat([s_c_mod, s_a], dim=-1)  # (B, film_dim * 2)
+        z_ca = self.z_proj(z_in)
         
         # -----------------------------------------------
         # 7. Predict
