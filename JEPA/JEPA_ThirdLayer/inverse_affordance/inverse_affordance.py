@@ -24,8 +24,7 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
                  token_dim=128,
                  s_c_dim=4096,
                  film_dim=128,
-                 pred_dim=128,
-                 ema_decay=0.995):
+                 pred_dim=128,):
         super().__init__()
 
         # -------------------------------------------------
@@ -42,9 +41,6 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
             token_dim=token_dim
         )
 
-        self.ema_target = copy.deepcopy(self.temporal_enc)
-        freeze(self.ema_target)
-        
         # -------------------------------------------------
         # FiLM projections
         # -------------------------------------------------
@@ -116,9 +112,9 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         s_c_mod = s_c_proj * (1.0 + gamma) + beta
 
         # -----------------------------------------------
-        # 5. Action embedding (JEPA teacher)
+        # 5. Action embedding
         # -----------------------------------------------
-        s_a = self.s_a_proj(tokens.mean(dim=1))  # (B,film_dim)
+        s_a = self.action_proj(tokens.mean(dim=1))  
 
         # -----------------------------------------------
         # 6. Joint latent
