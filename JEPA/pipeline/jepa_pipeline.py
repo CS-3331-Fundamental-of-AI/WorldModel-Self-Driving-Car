@@ -30,30 +30,7 @@ class JEPAPipeline:
         # JEPA-1 (NEW: V-JEPA-2)
         # ==================================================
         if "j1" in batch and batch["j1"] is not None:
-            """
-            Expected batch["j1"]:
-            {
-                "pixel_values": Tensor [B, 1, 3, H, W]
-            }
-            """
-            device = next(self.t1.model.parameters()).device
-
-            batch_j1 = batch["j1"]
-            pixel_values = batch_j1["pixel_values"].to(
-                device,
-                non_blocking=True
-            )
-
-            # JEPA-1 step (with no grad if frozen)
-            if not self.t1.trainable:
-                with torch.no_grad(), torch.autocast(
-                    device_type=self.device.type,
-                    enabled=False,
-                ):
-                    out1 = self.t1.step(batch_j1)
-            else:
-                out1 = self.t1.step(batch_j1)
-
+            out1 = self.t1.step(batch["j1"])
             s_c = out1["s_c"]
 
 
