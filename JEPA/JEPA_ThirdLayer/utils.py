@@ -27,7 +27,7 @@ class EMAHelper:
     def update(self, model: nn.Module):
         for name, p in model.named_parameters():
             if p.requires_grad and name in self.shadow:
-                self.shadow[name] = (1 - self.decay) * p.detach() + self.decay * self.shadow[name]
+                self.shadow[name] = (1 - self.decay) * p.detach() + self.decay * self.shadow[name].to(p.device)
 
     @torch.no_grad()
     def assign_to(self, target: nn.Module):
