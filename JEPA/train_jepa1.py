@@ -2,6 +2,8 @@
 """
 Stage-1: JEPA-1 pretraining using frozen V-JEPA-2 encoder.
 """
+
+from comet_ml import Experiment
 import signal
 import sys
 import os
@@ -12,7 +14,7 @@ import torch
 from torch.utils.data import DataLoader
 from sklearn.model_selection import train_test_split
 from dotenv import load_dotenv
-from comet_ml import Experiment
+
 
 # --------------------------------------------------
 # Environment
@@ -24,7 +26,7 @@ os.environ["COMET_LOG_PACKAGES"] = "0"
 # Paths
 # --------------------------------------------------
 ROOT = Path(__file__).resolve().parents[2]
-CKPT_DIR = ROOT / "checkpoints" / "jepa1_vjepa"
+CKPT_DIR = Path("/kaggle/output/checkpoints/jepa1_vjepa")
 CKPT_DIR.mkdir(parents=True, exist_ok=True)
 
 # --------------------------------------------------
@@ -236,12 +238,12 @@ def train():
                             ckpt_path,
                         )
 
-                        cleanup_old_checkpoints(CKPT_DIR, keep_last=2)
-
                         try:
                             experiment.log_asset(str(ckpt_path))
                         except Exception as e:
                             print(f"⚠️ Failed to upload checkpoint to Comet: {e}")
+                            
+                        cleanup_old_checkpoints(CKPT_DIR, keep_last=2)
 
                     except Exception as e:
                         print(f"❌ Checkpoint save failed at step {global_step}: {e}")
