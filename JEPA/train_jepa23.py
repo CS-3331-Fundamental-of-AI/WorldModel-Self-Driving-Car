@@ -181,9 +181,9 @@ def build_all():
 # ==================================================
 def train():
     experiment = Experiment(
-        api_key=os.getenv("QyLnRuj1INQl4us5SoyYulpae"),
-        project_name=os.getenv("jepa23-training"),
-        workspace=os.getenv("c-nguy-n-3886"),
+        api_key=os.getenv("API_KEY"),
+        project_name=os.getenv("PROJECT_NAME", "JEPA"),
+        workspace=os.getenv("WORK_SPACE"),
     )
     experiment.set_name("JEPA-Stage2-JEPA23")
 
