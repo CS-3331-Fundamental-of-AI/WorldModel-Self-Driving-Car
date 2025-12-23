@@ -176,12 +176,13 @@ def build():
 # ==================================================
 def train():
     experiment = Experiment(
-    api_key="QyLnRuj1INQl4us5SoyYulpae",
-    project_name="vjepa-2",
-    workspace="c-nguy-n-3886",
-    auto_param_logging=False,
-    auto_metric_logging=False,
+        api_key=os.getenv("API_KEY"),
+        project_name=os.getenv("PROJECT_NAME", "JEPA"),
+        workspace=os.getenv("WORK_SPACE"),
+        auto_param_logging=False,
+        auto_metric_logging=False,
     )
+    
     experiment.log_parameters({
         "model": "vjepa2-vitl-fpc64-256",
         "encoder_frozen": True,
@@ -210,7 +211,7 @@ def train():
         random_state=42,
         shuffle=True,
     )
-
+    
     train_loader = DataLoader(
         MapDataset(train_df, mask_ratio=0.3),
         batch_size=8,
