@@ -86,7 +86,7 @@ from Utils.jepa3data import Tier3Dataset
 # ==================================================
 # Build all modules
 # ==================================================
-def build_all():
+def build_all(device):
     # --------------------------------------------------
     # JEPA-1 (Frozen V-JEPA-2)
     # --------------------------------------------------
@@ -160,10 +160,36 @@ def build_all():
         opt_j3          # optimizer
     )
 
-    # --------------------------------------------------
+    # -------------------------
+    # Graph vocab for JEPA-2 (needed by adapter)
+    # -------------------------
+    TYPE_VALUES = ['agent', 'road']
+    CATEGORY_VALUES = [
+        'animal','human.pedestrian.adult','human.pedestrian.child',
+        'human.pedestrian.construction_worker','human.pedestrian.personal_mobility',
+        'human.pedestrian.police_officer','human.pedestrian.stroller',
+        'human.pedestrian.wheelchair','movable_object.barrier','movable_object.debris',
+        'movable_object.pushable_pullable','movable_object.trafficcone',
+        'static_object.bicycle_rack','vehicle.bicycle','vehicle.bus.bendy',
+        'vehicle.bus.rigid','vehicle.car','vehicle.construction',
+        'vehicle.emergency.ambulance','vehicle.emergency.police','vehicle.motorcycle',
+        'vehicle.trailer','vehicle.truck'
+    ]
+    LAYER_VALUES = ['lane']
+
+    type2id = {v: i for i, v in enumerate(TYPE_VALUES)}
+    category2id = {v: i for i, v in enumerate(CATEGORY_VALUES)}
+    layer2id = {v: i for i, v in enumerate(LAYER_VALUES)}
+
+    # -------------------------
     # Adapter + Pipeline
-    # --------------------------------------------------
-    adapter = JEPAInputAdapter(device=DEVICE)
+    # -------------------------
+    adapter = JEPAInputAdapter(
+        device=device,
+        type2id=type2id,
+        category2id=category2id,
+        layer2id=layer2id,
+    )
     pipeline = JEPAPipeline(t1, t2, t3, adapter)
 
     return pipeline, {
