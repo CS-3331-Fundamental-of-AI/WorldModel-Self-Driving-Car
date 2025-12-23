@@ -17,11 +17,13 @@ class JEPA1VJEPATrainer:
         model: torch.nn.Module,
         optimizer: torch.optim.Optimizer,
         device: torch.device,
+        trainable: bool = True,
         loss_cfg: Dict = None,
     ):
         self.model = model
         self.opt = optimizer
         self.device = device
+        self.trainable = trainable
 
         self.loss_cfg = loss_cfg or {
             "alpha": 1.0,
@@ -29,9 +31,17 @@ class JEPA1VJEPATrainer:
             "gamma": 0.1,
         }
 
-        self.model.train()
+        if self.trainable:
+            self.model.train()
+        else:
+            self.model.eval()
+
 
     def step(self, batch: Dict):
+        if not self.trainable:
+            with torch.no_grad():
+                return self.forward_only(batch)
+
         # --------------------------------------------------
         # 1) Inputs
         # --------------------------------------------------
@@ -74,7 +84,21 @@ class JEPA1VJEPATrainer:
                 "loss_align": loss_dict["loss_align"].detach(),
                 "loss_var":   loss_dict["loss_var"].detach(),
                 "loss_cov":   loss_dict["loss_cov"].detach(),
-                "z_hat_std":  z_hat.std().detach(),
-                "z_hat_mean": z_hat.mean().detach(),
+                "s_c_std":  z_hat.std().detach(),
+                "s_c_mean": z_hat.mean().detach(),
             }
         }
+        
+    def forward_only(self, batch: Dict):
+        px = batch["pixel_values"].to(
+            self.device,
+            dtype=torch.float16,
+            non_blocking=True,
+        )
+
+        z_hat, _ = self.model(px)
+
+        return {
+            "s_c": z_hat.detach(),
+        }
+

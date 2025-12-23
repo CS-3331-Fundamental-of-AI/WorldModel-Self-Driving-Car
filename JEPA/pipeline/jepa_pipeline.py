@@ -44,13 +44,21 @@ class JEPAPipeline:
                 non_blocking=True
             )
 
-            # Forward + (optional) predictor training
-            out1 = self.t1.step({
-                "pixel_values": pixel_values
-            })
+            # JEPA-1 step (with no grad if frozen)
+            if not self.t1.trainable:
+                with torch.no_grad(), torch.autocast(
+                    device_type=self.device.type,
+                    enabled=False,
+                ):
+                    out1 = self.t1.step(batch_j1)
+            else:
+                out1 = self.t1.step(batch_j1)
+
+            s_c = out1["s_c"]
+
 
         # ==================================================
-        # JEPA-2 (unchanged)
+        # JEPA-2 (trajectory / graph)
         # ==================================================
         if "j2" in batch and batch["j2"] is not None:
             batch_j2 = batch["j2"]

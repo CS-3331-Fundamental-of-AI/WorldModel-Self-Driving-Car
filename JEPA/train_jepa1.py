@@ -2,7 +2,8 @@
 """
 Stage-1: JEPA-1 pretraining using frozen V-JEPA-2 encoder.
 """
-
+import signal
+import sys
 import os
 from pathlib import Path
 from tqdm import tqdm
@@ -30,6 +31,50 @@ CKPT_DIR.mkdir(parents=True, exist_ok=True)
 # Device
 # --------------------------------------------------
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# --------------------------------------------------
+# Checkpointing Utilities
+# --------------------------------------------------
+def cleanup_old_checkpoints(ckpt_dir: Path, keep_last: int = 2):
+    ckpts = sorted(
+        ckpt_dir.glob("jepa1_step*.pt"),
+        key=lambda p: int(p.stem.split("step")[-1])
+    )
+    for p in ckpts[:-keep_last]:
+        try:
+            p.unlink()
+        except Exception as e:
+            print(f"⚠️ Failed to delete old checkpoint {p}: {e}")
+
+def atomic_torch_save(obj, final_path: Path):
+    tmp_path = final_path.with_suffix(".tmp")
+    torch.save(obj, tmp_path)
+    tmp_path.replace(final_path)
+
+def safe_save(trainer, step, experiment=None, tag="auto"):
+    print(f"\n💾 Saving checkpoint ({tag})")
+
+    try:
+        CKPT_DIR.mkdir(parents=True, exist_ok=True)
+        path = CKPT_DIR / f"{tag}_step{step}.pt"
+
+        atomic_torch_save(
+            {
+                "step": step,
+                "model": trainer.model.state_dict(),
+            },
+            path,
+        )
+
+        if experiment is not None:
+            try:
+                experiment.log_asset(str(path))
+                print("📤 Checkpoint uploaded to Comet")
+            except Exception as e:
+                print(f"⚠️ Comet upload failed: {e}")
+
+    except Exception as e:
+        print(f"❌ Safe save failed: {e}")
 
 # --------------------------------------------------
 # Dataset
@@ -151,44 +196,85 @@ def train():
     )
 
     global_step = 0
-    EPOCHS = int(os.getenv("EPOCHS", 10))
+    EPOCHS = int(os.getenv("EPOCHS", 2))
 
-    for epoch in range(EPOCHS):
-        pbar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{EPOCHS}")
+    try:
+        for epoch in range(EPOCHS):
+            pbar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{EPOCHS}")
 
-        for batch in pbar:
-            global_step += 1
-            out = trainer.step(batch)
+            for batch in pbar:
+                global_step += 1
+                out = trainer.step(batch)
 
-            loss = out["loss"].item()
-            stats = out["stats"]
+                loss = out["loss"].item()
+                stats = out["stats"]
 
-            if global_step % 10 == 0:
-                experiment.log_metrics({
-                    "loss/total": loss,
-                    "loss/align": stats["loss_align"].item(),
-                    "loss/var":   stats["loss_var"].item(),
-                    "loss/cov":   stats["loss_cov"].item(),
-                    "stats/z_std": stats["z_hat_std"].item(),
-                }, step=global_step)
+                if global_step % 10 == 0:
+                    experiment.log_metrics({
+                        "loss/total": loss,
+                        "loss/align": stats["loss_align"].item(),
+                        "loss/var":   stats["loss_var"].item(),
+                        "loss/cov":   stats["loss_cov"].item(),
+                        "stats/s_c_std": stats["s_c_std"].item(),
+                        "stats/s_c_mean": stats["s_c_mean"].item(),
+                    }, step=global_step)
 
-            pbar.set_postfix({"loss": f"{loss:.4f}"})
+                pbar.set_postfix({"loss": f"{loss:.4f}"})
 
-            if global_step % 500 == 0:
-                ckpt = CKPT_DIR / f"jepa1_step{global_step}.pt"
-                torch.save(
-                    {
-                        "step": global_step,
-                        "model": trainer.model.state_dict(),
-                    },
-                    ckpt,
-                )
-                experiment.log_asset(str(ckpt))
+                # -------------------------------
+                # SAFE CHECKPOINT
+                # -------------------------------
+                if global_step % 500 == 0:
+                    try:
+                        ckpt_path = CKPT_DIR / f"jepa1_step{global_step}.pt"
 
-        print(f"Epoch {epoch+1} finished")
+                        atomic_torch_save(
+                            {
+                                "step": global_step,
+                                "model": trainer.model.state_dict(),
+                            },
+                            ckpt_path,
+                        )
 
-    experiment.end()
-    print("✅ JEPA-1 pretraining finished")
+                        cleanup_old_checkpoints(CKPT_DIR, keep_last=2)
+
+                        try:
+                            experiment.log_asset(str(ckpt_path))
+                        except Exception as e:
+                            print(f"⚠️ Failed to upload checkpoint to Comet: {e}")
+
+                    except Exception as e:
+                        print(f"❌ Checkpoint save failed at step {global_step}: {e}")
+                        safe_save(
+                            trainer,
+                            global_step,
+                            experiment=experiment,
+                            tag="checkpoint_io_failure",
+                        )
+
+            experiment.log_metric("epoch", epoch + 1, step=global_step)
+            print(f"Epoch {epoch+1} finished")
+
+    # -------------------------------
+    # INTERRUPT / CRASH HANDLING
+    # -------------------------------
+    except KeyboardInterrupt:
+        print("\n⛔ KeyboardInterrupt detected")
+        safe_save(trainer, global_step, experiment, tag="interrupt")
+        raise
+
+    except Exception as e:
+        print("\n❌ Training crashed:", e)
+        safe_save(trainer, global_step, experiment, tag="crash")
+        raise
+
+    else:
+        # ✅ ONLY runs if training finished successfully
+        print("\n🎉 Training completed successfully")
+        safe_save(trainer, global_step, experiment, tag="final")
+
+    finally:
+        experiment.end()
 
 
 if __name__ == "__main__":
