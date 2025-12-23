@@ -322,3 +322,77 @@ def apply_mask(bev, mask_emp_np, mask_non_emp_np, mask_any_np, visualize = False
       plt.axis("off")
 
     return bev_masked_emp, bev_masked_non_emp, bev_masked_any
+
+from PIL import ImageDraw
+
+def patch_mask_to_token_mask(patch_mask, has_cls=False):
+    """
+    Spatial-only V-JEPA-2 masking (T = 1)
+
+    patch_mask: [B, Hp, Wp]  (True = masked)
+    returns:    [B, N]       where N = Hp * Wp
+    """
+    B, Hp, Wp = patch_mask.shape
+
+    token_mask = patch_mask.reshape(B, Hp * Wp).bool()
+
+    if has_cls:
+        cls = torch.zeros(B, 1, dtype=torch.bool, device=patch_mask.device)
+        token_mask = torch.cat([cls, token_mask], dim=1)
+
+    return token_mask
+
+def boolean_to_index_masks(bool_mask, pad_value=0):
+    """
+    bool_mask: [B, N] True = masked
+    """
+    B, N = bool_mask.shape
+    context_list, target_list = [], []
+
+    for b in range(B):
+        target = torch.nonzero(bool_mask[b], as_tuple=False).flatten()
+        context = torch.nonzero(~bool_mask[b], as_tuple=False).flatten()
+        context_list.append(context)
+        target_list.append(target)
+
+    def pad(idxs):
+        max_len = max(i.numel() for i in idxs)
+        max_len = max(max_len, 1)  # avoid zero-length
+        padded, valid = [], []
+
+        for i in idxs:
+            L = i.numel()
+            pad_len = max_len - L
+            padded.append(
+                torch.cat([i, torch.full((pad_len,), pad_value, device=i.device)])
+            )
+            valid.append(
+                torch.cat([torch.ones(L, dtype=torch.bool, device=i.device),
+                           torch.zeros(pad_len, dtype=torch.bool, device=i.device)])
+            )
+        return torch.stack(padded), torch.stack(valid)
+
+    context_idx, context_valid = pad(context_list)
+    target_idx, target_valid   = pad(target_list)
+
+    # safety clamp
+    context_idx = context_idx.clamp(0, N - 1)
+    target_idx  = target_idx.clamp(0, N - 1)
+
+    return context_idx.long(), target_idx.long(), context_valid, target_valid
+
+
+def mask_image(img, patch_mask, patch_size=16):
+    img = img.copy()
+    draw = ImageDraw.Draw(img)
+    Hp, Wp = patch_mask.shape
+
+    for y in range(Hp):
+        for x in range(Wp):
+            if patch_mask[y, x]:
+                x0, y0 = x * patch_size, y * patch_size
+                draw.rectangle(
+                    [x0, y0, x0 + patch_size, y0 + patch_size],
+                    fill=(127,127,127)
+                )
+    return img

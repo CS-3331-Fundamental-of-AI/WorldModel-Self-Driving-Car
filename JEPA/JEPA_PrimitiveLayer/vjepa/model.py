@@ -1,3 +1,44 @@
+import copy
+import torch
+import torch.nn as nn
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# Create EMA (teacher) model
+ema_model = copy.deepcopy(model)
+ema_model.to(device)
+
+# EMA model is always in eval mode
+ema_model.eval()
+
+# Disable gradients for EMA model
+for p in ema_model.parameters():
+    p.requires_grad = False
+    
+@torch.no_grad()
+def update_ema(student, teacher, tau=0.996):
+    for ps, pt in zip(student.parameters(), teacher.parameters()):
+        pt.data.mul_(tau).add_(ps.data, alpha=1.0 - tau)
+        
+class TokenProjector(nn.Module):
+    def __init__(self, in_dim=1024, out_dim=128):
+        super().__init__()
+        self.proj = nn.Linear(in_dim, out_dim)
+
+    def forward(self, z):
+        return self.proj(z)
+
+class SpatialPredictorCNN(nn.Module):
+    def __init__(self, embed_dim=128):
+        super().__init__()
+        self.conv = nn.Sequential(
+            nn.Conv2d(embed_dim, embed_dim, 3, padding=1),
+            nn.GELU(),
+            nn.Conv2d(embed_dim, embed_dim, 3, padding=1),
+            nn.GELU(),
+            nn.Conv2d(embed_dim, embed_dim, 1),
+        )
+
+    def forward(self, x):
+        return self.conv(x)
 class PrimitiveLayerJEPA(nn.Module):
     def __init__(
         self,
