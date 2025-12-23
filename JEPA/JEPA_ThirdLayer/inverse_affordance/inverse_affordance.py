@@ -22,7 +22,6 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
                  kin_state_dim=64,
                  kin_k=6,
                  token_dim=128,
-                 s_c_dim=4096,
                  film_dim=128,
                  pred_dim=128,):
         super().__init__()
@@ -55,7 +54,7 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         self.action_proj = nn.Linear(token_dim, film_dim)
 
         # Spatial latent projection
-        self.s_c_proj = nn.Linear(s_c_dim, film_dim)
+        self.s_c_proj = nn.Linear(pred_dim, film_dim)
 
         # Joint latent
         self.z_proj = nn.Sequential(
@@ -95,14 +94,7 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         # 3. Pool and project s_c
         # -----------------------------------------------
         # In JEPA_Tier3_InverseAffordance.forward
-        if s_c.ndim == 4:
-            s_c_pooled = s_c.flatten(1)   # flatten C*H*W → matches s_c_proj
-        elif s_c.ndim == 3:
-            s_c_pooled = s_c.flatten(1)
-        elif s_c.ndim == 2:
-            s_c_pooled = s_c
-        else:
-            raise ValueError(f"s_c has unsupported ndim={s_c.ndim}")    
+        s_c_pooled = s_c.mean(dim=1)  # [B, D], D = 128   
 
         s_c_proj = self.s_c_proj(s_c_pooled)  # (B, film_dim)
         
