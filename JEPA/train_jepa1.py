@@ -40,8 +40,13 @@ from Utils.jepa1vjepadata import (
     build_map_dataframe,
 )
 
-MAP_ROOT = os.getenv("MAP_ROOT")
-assert MAP_ROOT is not None, "MAP_ROOT must be set"
+MAP_ROOT = os.getenv(
+    "MAP_ROOT",
+    "/kaggle/input/a-crude-data-set-converted-from-nuscene/local_maps",
+)
+
+assert os.path.exists(MAP_ROOT), f"MAP_ROOT does not exist: {MAP_ROOT}"
+
 
 # --------------------------------------------------
 # Model
