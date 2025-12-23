@@ -24,7 +24,9 @@ class JEPAPipeline:
         if "j1" not in batch or batch["j1"] is None:
             return None
         out = self.t1.forward_only(batch["j1"])
-        return out["s_c"]
+        # wrap in dict so pipeline expects out1["s_c"]
+        return {"s_c": out["s_c"]}
+
 
     def step(self, batch):
         # --------------------------------------------------
