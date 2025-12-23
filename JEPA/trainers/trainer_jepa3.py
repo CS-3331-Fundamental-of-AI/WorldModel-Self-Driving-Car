@@ -27,6 +27,8 @@ class JEPA3Trainer:
         # -----------------------------
         # Forward: inverse model
         # -----------------------------
+        if s_c is None or action is None:
+            raise ValueError("s_c and action must not be None for JEPA-3 step")
         inv_out = self.inv(action, s_c)  # s_c used internally by IA
         s_y = inv_out["s_y"]
 

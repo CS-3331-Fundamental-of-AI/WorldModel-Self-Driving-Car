@@ -80,24 +80,27 @@ class JEPAPipeline:
         # ==================================================
         # JEPA-3 (contextual inverse + global)
         # ==================================================
+        out3 = None
         has_context = (s_c is not None) and (s_tg is not None)
         has_j3 = ("j3" in batch) and (batch["j3"] is not None)
 
         if has_context and has_j3:
             batch_j3 = batch["j3"]
-            device = s_tg.device
+            device = s_c.device if s_c is not None else s_tg.device
 
-            # -------- Global graph (optional) --------
-            global_nodes_batch, global_edges_batch = None, None
+            # -------- Global graph --------
             global_nodes_list = batch_j3.get("global_nodes")
             global_edges_list = batch_j3.get("global_edges")
 
             if global_nodes_list is not None and global_edges_list is not None:
+                # Use utility function to batch graphs
                 global_nodes_batch, global_edges_batch = batch_global_graphs(
                     global_nodes_list,
                     global_edges_list,
                     device,
                 )
+            else:
+                global_nodes_batch, global_edges_batch = None, None
 
             # -------- JEPA-3 step --------
             out3 = self.t3.step(
@@ -115,7 +118,6 @@ class JEPAPipeline:
         loss_j2_inv = out2.get("loss_inv", 0.0) if out2 else 0.0
         loss_j2_var = out2.get("loss_var", 0.0) if out2 else 0.0
         loss_j2_cov = out2.get("loss_cov", 0.0) if out2 else 0.0
-
 
         loss_j3 = out3["loss"] if out3 is not None else 0.0
         loss_j3_inv = out3.get("loss_inv", 0.0) if out3 else 0.0

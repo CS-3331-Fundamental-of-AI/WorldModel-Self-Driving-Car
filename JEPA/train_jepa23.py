@@ -280,34 +280,59 @@ def train():
             with autocast_ctx:
                 out = pipeline.step(batch)
 
-            loss = float(out["loss"])
-            epoch_loss += loss
+            # -------------------------------------------------
+            # Scalar extraction
+            # -------------------------------------------------
+            # -------------------------------------------------
+            # Extract losses safely
+            # -------------------------------------------------
+            loss_total      = float(out.get("loss", 0.0))
+            loss_j2         = float(out.get("loss_j2", 0.0))
+            loss_j2_inv     = float(out.get("loss_j2_inv", 0.0))
+            loss_j2_var     = float(out.get("loss_j2_var", 0.0))
+            loss_j2_cov     = float(out.get("loss_j2_cov", 0.0))
+            loss_j3         = float(out.get("loss_j3", 0.0))
+            loss_j3_inv     = float(out.get("loss_j3_inv", 0.0))
+            loss_j3_glob    = float(out.get("loss_j3_glob", 0.0))
 
+            # ============================================================
+            # LOGGING (Comet) 
+            # ============================================================
             if global_step % 100 == 0:
-                experiment.log_metrics({
-                    # =====================
-                    # Global
-                    # =====================
-                    "loss/total": loss,
+                # ---- global total loss ----
+                experiment.log_metrics({"total": loss_total}, step=global_step, prefix="loss")
 
-                    # =====================
-                    # JEPA-2 (VICReg, SSL)
-                    # =====================
-                    "loss/jepa2/total": out["loss_j2"],
-                    "loss/jepa2/vic_inv": out["loss_j2_inv"],
-                    "loss/jepa2/vic_var": out["loss_j2_var"],
-                    "loss/jepa2/vic_cov": out["loss_j2_cov"],
+                # ---- JEPA-2 losses ----
+                experiment.log_metrics(
+                    {
+                        "total": loss_j2,
+                        "vic_inv": loss_j2_inv,
+                        "vic_var": loss_j2_var,
+                        "vic_cov": loss_j2_cov,
+                    },
+                    step=global_step,
+                    prefix="loss/jepa2"
+                )
 
-                    # =====================
-                    # JEPA-3 (Task)
-                    # =====================
-                    "loss/jepa3/total": out["loss_j3"],
-                    "loss/jepa3/inv_total": out["loss_j3_inv"],
-                    "loss/jepa3/glob_total": out["loss_j3_glob"],
-                }, step=global_step)
+                # ---- JEPA-3 losses ----
+                experiment.log_metrics(
+                    {
+                        "total": loss_j3,
+                        "inv_total": loss_j3_inv,
+                        "glob_total": loss_j3_glob,
+                    },
+                    step=global_step,
+                    prefix="loss/jepa3"
+                )
 
-
-            pbar.set_postfix({"loss": f"{loss:.4f}"})
+            # -------------------------------------------------
+            # tqdm display
+            # -------------------------------------------------
+            pbar.set_postfix({
+                "L": f"{loss_total:.4f}",
+                "L2": f"{loss_j2:.4f}",
+                "L3": f"{loss_j3:.4f}",
+            })
 
             if global_step % 500 == 0:
                 torch.save(
@@ -317,7 +342,9 @@ def train():
                     },
                     CKPT_DIR / f"jepa23_step{global_step}.pt",
                 )
-
+        # -------------------------------------------------
+        # Epoch-level logging
+        # -------------------------------------------------
         avg_loss = epoch_loss / max(len(loader), 1)
         experiment.log_metric("epoch/avg_loss", avg_loss, step=epoch + 1)
         print(f"Epoch {epoch+1} done — avg loss {avg_loss:.6f}")
