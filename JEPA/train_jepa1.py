@@ -32,7 +32,21 @@ CKPT_DIR.mkdir(parents=True, exist_ok=True)
 # --------------------------------------------------
 # Device
 # --------------------------------------------------
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# ----------------------------
+# Auto Device Selection
+# ----------------------------
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    print(f"🔥 Using CUDA GPU: {torch.cuda.get_device_name(0)}")
+    torch.backends.cudnn.benchmark = True
+elif torch.backends.mps.is_available():
+    device = torch.device("mps")
+    print("🍎 Using Apple Silicon MPS backend")
+else:
+    device = torch.device("cpu")
+    print("⚠️ No GPU detected — using CPU")
+
+print(f"👉 Final device used for training: {device}")
 
 # --------------------------------------------------
 # Checkpointing Utilities
@@ -62,21 +76,23 @@ def safe_save(trainer, step, experiment=None, tag="auto"):
 
         atomic_torch_save(
             {
+                "version": 2,
                 "step": step,
-                "model": trainer.model.state_dict(),
+                "state": trainer.model.state_dict(),   # ✅ must be "state"
             },
             path,
         )
 
         if experiment is not None:
             try:
-                experiment.log_asset(str(path))
-                print("📤 Checkpoint uploaded to Comet")
+                experiment.log_model(str(path), name=f"jepa1_{tag}")  # ✅ use log_model
+                print("📤 Checkpoint uploaded as Kaggle model")
             except Exception as e:
                 print(f"⚠️ Comet upload failed: {e}")
 
     except Exception as e:
         print(f"❌ Safe save failed: {e}")
+
 
 # --------------------------------------------------
 # Dataset
@@ -115,7 +131,7 @@ def build():
     backbone = AutoModel.from_pretrained(
         "facebook/vjepa2-vitl-fpc64-256",
         torch_dtype=torch.float16,
-        device_map=DEVICE.type,
+        device_map=device.type,
     )
 
     backbone.eval()
@@ -128,7 +144,7 @@ def build():
         grid_w=16,
         enc_dim=1024,
         prim_dim=128,
-    ).to(DEVICE)
+    ).to(device)
 
     model.predictor.to(dtype=torch.float32)
     model.train()
@@ -142,7 +158,7 @@ def build():
     trainer = JEPA1VJEPATrainer(
         model=model,
         optimizer=optimizer,
-        device=DEVICE,
+        device=device,
     )
 
     return trainer
@@ -194,7 +210,7 @@ def train():
         shuffle=True,
         num_workers=2,
         collate_fn=collate_maps,
-        pin_memory=(DEVICE.type == "cuda"),
+        pin_memory=(device.type == "cuda"),
     )
 
     global_step = 0
