@@ -37,8 +37,20 @@ ROOT = Path(__file__).resolve().parents[2]
 CKPT_DIR = ROOT / "checkpoints" / "jepa23"
 CKPT_DIR.mkdir(parents=True, exist_ok=True)
 
-JEPA1_CKPT = os.getenv("JEPA1_CKPT")
-assert JEPA1_CKPT is not None, "JEPA1_CKPT must be set"
+JEPA1_DIR = Path("/kaggle/output/checkpoints/jepa1_vjepa")
+
+if "JEPA1_CKPT" in os.environ:
+    JEPA1_CKPT = os.environ["JEPA1_CKPT"]
+else:
+    ckpts = sorted(
+        JEPA1_DIR.glob("jepa1_step*.pt"),
+        key=lambda p: int(p.stem.split("step")[-1])
+    )
+    assert len(ckpts) > 0, f"No JEPA-1 checkpoints found in {JEPA1_DIR}"
+    JEPA1_CKPT = str(ckpts[-1])   # latest checkpoint
+
+print(f"✅ Using JEPA-1 checkpoint: {JEPA1_CKPT}")
+
 
 # ==================================================
 # Models
