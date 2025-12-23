@@ -125,7 +125,7 @@ def build_all(device):
         prim_dim=128,
     ).to(device)
 
-    ckpt = torch.load(JEPA1_CKPT, map_location="cpu")
+    ckpt = torch.load(JEPA1_CKPT, map_location=device)
     jepa1.load_state_dict(ckpt["state"], strict=True)
     
     jepa1 = jepa1.to(device)
