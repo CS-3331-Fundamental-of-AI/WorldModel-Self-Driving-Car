@@ -22,13 +22,14 @@ from dotenv import load_dotenv
 load_dotenv()
 os.environ["COMET_LOG_PACKAGES"] = "0"
 
-# --------------------------------------------------
-# Paths
-# --------------------------------------------------
+# ============================================================
+# CONFIG
+# ============================================================
 ROOT = Path(__file__).resolve().parents[2]
-CKPT_DIR = Path("/kaggle/output/checkpoints/jepa1_vjepa")
+CKPT_DIR = Path("/kaggle/input/jepa1-checkpoint/pytorch/default/1")
 CKPT_DIR.mkdir(parents=True, exist_ok=True)
-
+EPOCHS = int(os.getenv("EPOCHS", 2))
+BATCH_SIZE = 8
 # --------------------------------------------------
 # Device
 # --------------------------------------------------
@@ -48,9 +49,16 @@ else:
 
 print(f"👉 Final device used for training: {device}")
 
-# --------------------------------------------------
-# Checkpointing Utilities
-# --------------------------------------------------
+       
+# ============================================================
+# CHECKPOINT HELPERS
+# ============================================================
+
+def atomic_torch_save(obj, final_path: Path):
+    tmp_path = final_path.with_suffix(".tmp")
+    torch.save(obj, tmp_path)
+    tmp_path.replace(final_path)
+    
 def cleanup_old_checkpoints(ckpt_dir: Path, keep_last: int = 2):
     ckpts = sorted(
         ckpt_dir.glob("jepa1_step*.pt"),
@@ -61,11 +69,6 @@ def cleanup_old_checkpoints(ckpt_dir: Path, keep_last: int = 2):
             p.unlink()
         except Exception as e:
             print(f"⚠️ Failed to delete old checkpoint {p}: {e}")
-
-def atomic_torch_save(obj, final_path: Path):
-    tmp_path = final_path.with_suffix(".tmp")
-    torch.save(obj, tmp_path)
-    tmp_path.replace(final_path)
 
 def safe_save(trainer, step, experiment=None, tag="auto"):
     print(f"\n💾 Saving checkpoint ({tag})")
@@ -78,14 +81,17 @@ def safe_save(trainer, step, experiment=None, tag="auto"):
             {
                 "version": 2,
                 "step": step,
-                "state": trainer.model.state_dict(),   # ✅ must be "state"
+                "state": trainer.model.state_dict(),   #  must be "state"
             },
             path,
         )
 
         if experiment is not None:
             try:
-                experiment.log_model(str(path), name=f"jepa1_{tag}")  # ✅ use log_model
+                experiment.log_model(
+                    file_or_folder=str(path),
+                    name=f"jepa1_{tag}"
+                )
                 print("📤 Checkpoint uploaded as Kaggle model")
             except Exception as e:
                 print(f"⚠️ Comet upload failed: {e}")
@@ -214,7 +220,6 @@ def train():
     )
 
     global_step = 0
-    EPOCHS = int(os.getenv("EPOCHS", 2))
 
     try:
         for epoch in range(EPOCHS):
@@ -242,23 +247,14 @@ def train():
                 # -------------------------------
                 # SAFE CHECKPOINT
                 # -------------------------------
-                if global_step % 500 == 0:
+                if global_step % 1000 == 0:
                     try:
-                        ckpt_path = CKPT_DIR / f"jepa1_step{global_step}.pt"
-
-                        atomic_torch_save(
-                            {
-                                "step": global_step,
-                                "model": trainer.model.state_dict(),
-                            },
-                            ckpt_path,
-                        )
-
-                        try:
-                            experiment.log_asset(str(ckpt_path))
-                        except Exception as e:
-                            print(f"⚠️ Failed to upload checkpoint to Comet: {e}")
-                            
+                        safe_save(
+                            trainer,
+                            global_step,
+                            experiment=experiment,
+                            tag="checkpoint",
+                        )                           
                         cleanup_old_checkpoints(CKPT_DIR, keep_last=2)
 
                     except Exception as e:
