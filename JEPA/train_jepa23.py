@@ -92,7 +92,7 @@ def build_all(device):
     backbone = AutoModel.from_pretrained(
         "facebook/vjepa2-vitl-fpc64-256",
         torch_dtype=torch.float16,
-        device_map=DEVICE.type,
+        device_map=device.type,
     )
 
     backbone.eval()
@@ -105,7 +105,7 @@ def build_all(device):
         grid_w=16,
         enc_dim=1024,
         prim_dim=128,
-    ).to(DEVICE)
+    ).to(device)
 
     ckpt = torch.load(JEPA1_CKPT, map_location="cpu")
     jepa1.load_state_dict(ckpt["model"], strict=True)
@@ -117,15 +117,15 @@ def build_all(device):
     t1 = JEPA1VJEPATrainer(
         model=jepa1,
         optimizer=None,          # ❌ no optimizer
-        device=DEVICE,
+        device=device,
         trainable=False,         # IMPORTANT
     )
 
     # --------------------------------------------------
     # JEPA-2 (Student + EMA)
     # --------------------------------------------------
-    jepa2 = Tier2Module().to(DEVICE)
-    jepa2_tgt = Tier2Module().to(DEVICE)
+    jepa2 = Tier2Module().to(device)
+    jepa2_tgt = Tier2Module().to(device)
 
     jepa2_tgt.load_state_dict(jepa2.state_dict())
     for p in jepa2_tgt.parameters():
@@ -143,8 +143,8 @@ def build_all(device):
     # --------------------------------------------------
     # JEPA-3
     # --------------------------------------------------
-    jepa3_inv = JEPA_Tier3_InverseAffordance().to(DEVICE)
-    jepa3_glob = JEPA_Tier3_GlobalEncoding(s_c_dim=128).to(DEVICE)
+    jepa3_inv = JEPA_Tier3_InverseAffordance().to(device)
+    jepa3_glob = JEPA_Tier3_GlobalEncoding(s_c_dim=128).to(device)
 
     opt_j3 = torch.optim.AdamW(
         list(jepa3_inv.parameters()) +
