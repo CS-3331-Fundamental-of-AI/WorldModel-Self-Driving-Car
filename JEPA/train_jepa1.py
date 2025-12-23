@@ -26,10 +26,11 @@ os.environ["COMET_LOG_PACKAGES"] = "0"
 # CONFIG
 # ============================================================
 ROOT = Path(__file__).resolve().parents[2]
-CKPT_DIR = Path("/kaggle/output/checkpoints/jepa1_vjepa")
+CKPT_DIR = Path("/kaggle/working/checkpoints/jepa1_vjepa")
 CKPT_DIR.mkdir(parents=True, exist_ok=True)
 EPOCHS = int(os.getenv("EPOCHS", 1))
 BATCH_SIZE = 8
+
 # --------------------------------------------------
 # Device
 # --------------------------------------------------
@@ -245,26 +246,8 @@ def train():
                 pbar.set_postfix({"loss": f"{loss:.4f}"})
 
                 # -------------------------------
-                # SAFE CHECKPOINT
+                # SAFE CHECKPOINT (temporarily disabled)
                 # -------------------------------
-                if global_step % 1000 == 0:
-                    try:
-                        safe_save(
-                            trainer,
-                            global_step,
-                            experiment=experiment,
-                            tag="checkpoint",
-                        )                           
-                        cleanup_old_checkpoints(CKPT_DIR, keep_last=2)
-
-                    except Exception as e:
-                        print(f"❌ Checkpoint save failed at step {global_step}: {e}")
-                        safe_save(
-                            trainer,
-                            global_step,
-                            experiment=experiment,
-                            tag="checkpoint_io_failure",
-                        )
 
             experiment.log_metric("epoch", epoch + 1, step=global_step)
             print(f"Epoch {epoch+1} finished")
@@ -285,7 +268,7 @@ def train():
     else:
         # ✅ ONLY runs if training finished successfully
         print("\n🎉 Training completed successfully")
-        safe_save(trainer, global_step, experiment, tag="final")
+        safe_save(trainer, global_step, experiment, tag="jepa1_final")
 
     finally:
         experiment.end()
