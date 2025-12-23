@@ -23,16 +23,12 @@ from torch.utils.data import DataLoader
 # -------------------------
 from config.config import (
     DEVICE, EPOCHS, BATCH_SIZE, NUM_WORKERS,
-    CKPT_DIR, USE_BF16
+    CKPT_DIR, USE_BF16, ROOT
 )
 
 # ==================================================
 # Paths
 # ==================================================
-ROOT = Path(__file__).resolve().parents[2]
-# General checkpoint folder
-CKPT_DIR = ROOT / "checkpoints"
-CKPT_DIR.mkdir(exist_ok=True)
 
 JEPA1_DIR = Path("/kaggle/output/checkpoints/jepa1_vjepa")
 
@@ -108,9 +104,10 @@ def build_all(device):
         prim_dim=128,
     ).to(device)
 
-    ckpt = torch.load(JEPA1_CKPT, map_location=device)
+    ckpt = torch.load(JEPA1_CKPT, map_location="cpu")
     jepa1.load_state_dict(ckpt["model"], strict=True)
-
+    
+    jepa1 = jepa1.to(device)
     for p in jepa1.parameters():
         p.requires_grad = False
     jepa1.eval()
