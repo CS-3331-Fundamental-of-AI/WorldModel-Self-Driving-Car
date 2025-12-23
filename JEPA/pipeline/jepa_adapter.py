@@ -17,8 +17,14 @@ class JEPAInputAdapter:
         # JEPA-1
         # -----------------
         if out.get("j1") is not None:
-            # leave as-is (lists); pipeline will stack
-            pass
+            # Ensure each sample has a 'pixel_values' tensor and move to device
+            j1_list = out["j1"]
+            # If it's a list of tensors, stack into [B, C, H, W] batch
+            if isinstance(j1_list, list):
+                j1_batch = torch.stack([x["pixel_values"] for x in j1_list]).to(self.device)
+            else:
+                j1_batch = j1_list.to(self.device)
+            out["j1"] = {"pixel_values": j1_batch}
 
         # -----------------
         # JEPA-2
