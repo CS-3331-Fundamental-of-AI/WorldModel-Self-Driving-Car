@@ -1,7 +1,5 @@
-import copy
 import torch
 import torch.nn as nn
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
 class TokenProjector(nn.Module):
     def __init__(self, in_dim=1024, out_dim=128):
@@ -75,6 +73,6 @@ class PrimitiveLayerJEPA(nn.Module):
         # -----------------------------
         # 5) Back to tokens
         # -----------------------------
-        z_hat = delta.reshape(B, D, N).transpose(1, 2)
+        z_hat = delta.reshape(B, D, N).transpose(1, 2) # [B, N, 128] #s_c
 
-        return z_hat, z_proj
+        return z_hat, z_proj 

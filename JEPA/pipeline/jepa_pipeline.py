@@ -30,6 +30,7 @@ class JEPAPipeline:
         # JEPA-1 (NEW: V-JEPA-2)
         # ==================================================
         if "j1" in batch and batch["j1"] is not None:
+            #device = next(self.t1.model.parameters()).device
             out1 = self.t1.step(batch["j1"])
             s_c = out1["s_c"]
 
@@ -76,7 +77,7 @@ class JEPAPipeline:
 
         if has_context and has_j3:
             batch_j3 = batch["j3"]
-            device = s_c.device
+            device = s_tg.device
 
             # -------- Global graph (optional) --------
             global_nodes_batch, global_edges_batch = None, None
