@@ -18,17 +18,13 @@ from comet_ml import Experiment
 import torch
 from torch.utils.data import DataLoader
 
-# ==================================================
-# Environment
-# ==================================================
-load_dotenv()
-os.environ["COMET_LOG_PACKAGES"] = "0"
-
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-USE_BF16 = os.getenv("USE_BF16", "0") == "1"
-EPOCHS = int(os.getenv("EPOCHS", 5))
-BATCH_SIZE = int(os.getenv("BATCH_SIZE", 4))
-NUM_WORKERS = int(os.getenv("NUM_WORKERS", 4))
+# -------------------------
+# Config
+# -------------------------
+from config.config import (
+    DEVICE, EPOCHS, BATCH_SIZE, NUM_WORKERS,
+    CKPT_DIR, USE_BF16
+)
 
 # ==================================================
 # Paths
@@ -86,6 +82,9 @@ from Utils.jepa3data import Tier3Dataset
 # ==================================================
 # Build all modules
 # ==================================================
+load_dotenv()
+os.environ["COMET_LOG_PACKAGES"] = "0"
+
 def build_all(device):
     # --------------------------------------------------
     # JEPA-1 (Frozen V-JEPA-2)
