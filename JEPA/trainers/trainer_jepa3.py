@@ -33,9 +33,9 @@ class JEPA3Trainer:
         # -----------------------------
         # Forward: global encoding
         # -----------------------------
-        # Previously used s_c_mod, now just pass original s_c
+       
         glob_out = self.glob(
-            s_y,       # predicted target from IA
+            s_y,                # predicted target from IA
             s_c,                # raw context from JEPA-1
             s_tg,
             global_nodes,

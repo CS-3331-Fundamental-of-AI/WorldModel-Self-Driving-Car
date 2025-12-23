@@ -17,6 +17,14 @@ class JEPAPipeline:
         self.t2 = t2  # JEPA-2 (trajectory / graph)
         self.t3 = t3  # JEPA-3 (inverse / global)
         self.adapter = adapter
+        
+    @torch.no_grad()
+    def _get_s_c(self, batch):
+        """Get frozen JEPA-1 representation"""
+        if "j1" not in batch or batch["j1"] is None:
+            return None
+        out = self.t1.forward_only(batch["j1"])
+        return out["s_c"]
 
     def step(self, batch):
         # --------------------------------------------------
@@ -29,10 +37,10 @@ class JEPAPipeline:
         # ==================================================
         # JEPA-1 (NEW: V-JEPA-2)
         # ==================================================
-        if "j1" in batch and batch["j1"] is not None:
-            #device = next(self.t1.model.parameters()).device
-            out1 = self.t1.step(batch["j1"])
-            s_c = out1["s_c"]
+        # ----------------------------
+        # (frozen)
+        # ----------------------------
+        s_c = self._get_s_c(batch)
 
 
         # ==================================================
@@ -104,8 +112,12 @@ class JEPAPipeline:
         # Aggregate losses (no backward here!)
         # ==================================================
         loss_j2 = out2["loss"] if out2 is not None else 0.0
-        loss_j3 = out3["loss"] if out3 is not None else 0.0
+        loss_j2_inv = out2.get("loss_inv", 0.0) if out2 else 0.0
+        loss_j2_var = out2.get("loss_var", 0.0) if out2 else 0.0
+        loss_j2_cov = out2.get("loss_cov", 0.0) if out2 else 0.0
 
+
+        loss_j3 = out3["loss"] if out3 is not None else 0.0
         loss_j3_inv = out3.get("loss_inv", 0.0) if out3 else 0.0
         loss_j3_glob = out3.get("loss_glob", 0.0) if out3 else 0.0
 
@@ -116,7 +128,12 @@ class JEPAPipeline:
         return {
             "loss": total_loss,
             "loss_j1": loss_j1,
+            # JEPA-2 VICReg losses
             "loss_j2": loss_j2,
+            "loss_j2_inv": loss_j2_inv,
+            "loss_j2_var": loss_j2_var,
+            "loss_j2_cov": loss_j2_cov,
+            # JEPA-3 task losses
             "loss_j3": loss_j3,
             "loss_j3_inv": loss_j3_inv,
             "loss_j3_glob": loss_j3_glob,
