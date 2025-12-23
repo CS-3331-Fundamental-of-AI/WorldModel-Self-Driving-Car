@@ -26,7 +26,7 @@ os.environ["COMET_LOG_PACKAGES"] = "0"
 # CONFIG
 # ============================================================
 ROOT = Path(__file__).resolve().parents[2]
-CKPT_DIR = Path("/kaggle/input/jepa1-checkpoint/pytorch/default/1")
+CKPT_DIR = Path("/kaggle/output/checkpoints/jepa1_vjepa")
 CKPT_DIR.mkdir(parents=True, exist_ok=True)
 EPOCHS = int(os.getenv("EPOCHS", 1))
 BATCH_SIZE = 8
