@@ -52,6 +52,7 @@ else:
 print(f"✅ Using JEPA-1 checkpoint: {JEPA1_CKPT}")
 
 
+
 # ==================================================
 # Models
 # ==================================================
@@ -78,7 +79,7 @@ from pipeline.jepa_adapter import JEPAInputAdapter
 # Dataset
 # ==================================================
 from Utils.unified_dataset import UnifiedDataset, unified_collate_fn
-from Utils.jepa1vjepadata import MapDataset
+from Utils.jepa1vjepadata import MapDataset, build_map_dataframe
 from Utils.jepa2data import Tier2Dataset, DATASET_PATH, get_scene_map
 from Utils.jepa3data import Tier3Dataset
 
@@ -190,9 +191,15 @@ def train():
     # --------------------------------------------------
     # Dataset
     # --------------------------------------------------
+    MAP_ROOT = os.getenv("MAP_ROOT")
+    assert MAP_ROOT is not None, "MAP_ROOT must be set in .env"
+
+    df_maps = build_map_dataframe(MAP_ROOT)
+
     unified_dataset = UnifiedDataset(
         jepa1_dataset=MapDataset(
-            build_df=True, mask_ratio=0.0   # no masking for context
+            df=df_maps,
+            mask_ratio=0.0   # no masking for context
         ),
         jepa2_dataset=Tier2Dataset(
             scene_map=get_scene_map(),
