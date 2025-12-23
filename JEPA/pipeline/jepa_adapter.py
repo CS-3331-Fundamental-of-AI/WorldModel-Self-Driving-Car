@@ -17,8 +17,9 @@ class JEPAInputAdapter:
         # JEPA-1
         # -----------------
         if out.get("j1") is not None:
-            # leave as-is (lists); pipeline will stack
-            pass
+            j1 = out["j1"]
+            if isinstance(j1, dict) and "pixel_values" in j1:
+                out["j1"]["pixel_values"] = j1["pixel_values"].to(self.device)
 
         # -----------------
         # JEPA-2
