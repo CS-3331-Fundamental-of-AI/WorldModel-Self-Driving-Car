@@ -94,12 +94,12 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         # -----------------------------------------------
         # 3. Pool and project s_c
         # -----------------------------------------------
+        # In JEPA_Tier3_InverseAffordance.forward
         if s_c.ndim == 4:
-            s_c_pooled = s_c.mean(dim=(2, 3))
+            s_c_pooled = s_c.flatten(1)   # flatten C*H*W → matches s_c_proj
         elif s_c.ndim == 3:
-            s_c_pooled = s_c.mean(dim=2)
+            s_c_pooled = s_c.flatten(1)
         elif s_c.ndim == 2:
-            # already B, C → use as is
             s_c_pooled = s_c
         else:
             raise ValueError(f"s_c has unsupported ndim={s_c.ndim}")    
