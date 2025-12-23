@@ -26,22 +26,43 @@ from config.config import (
     CKPT_DIR, USE_BF16, ROOT
 )
 
-# ==================================================
-# Paths
-# ==================================================
-
-JEPA1_DIR = Path("/kaggle/output/checkpoints/jepa1_vjepa")
-
-if "JEPA1_CKPT" in os.environ:
-    JEPA1_CKPT = os.environ["JEPA1_CKPT"]
+# --------------------------------------------------
+# Device
+# --------------------------------------------------
+# ----------------------------
+# Auto Device Selection
+# ----------------------------
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    print(f"🔥 Using CUDA GPU: {torch.cuda.get_device_name(0)}")
+    torch.backends.cudnn.benchmark = True
+elif torch.backends.mps.is_available():
+    device = torch.device("mps")
+    print("🍎 Using Apple Silicon MPS backend")
 else:
-    ckpts = sorted(
-        JEPA1_DIR.glob("jepa1_step*.pt"),
-        key=lambda p: int(p.stem.split("step")[-1])
-    )
-    assert len(ckpts) > 0, f"No JEPA-1 checkpoints found in {JEPA1_DIR}"
-    JEPA1_CKPT = str(ckpts[-1])   # latest checkpoint
+    device = torch.device("cpu")
+    print("⚠️ No GPU detected — using CPU")
 
+print(f"👉 Final device used for training: {device}")
+
+# ==================================================
+# JEPA-1 checkpoint path
+# ==================================================
+
+#JEPA1_DIR = Path("/kaggle/output/checkpoints/jepa1_vjepa")
+
+#if "JEPA1_CKPT" in os.environ:
+#    JEPA1_CKPT = os.environ["JEPA1_CKPT"]
+#else:
+#    ckpts = sorted(
+#        JEPA1_DIR.glob("jepa1_step*.pt"),
+#        key=lambda p: int(p.stem.split("step")[-1])
+#    )
+#    assert len(ckpts) > 0, f"No JEPA-1 checkpoints found in {JEPA1_DIR}"
+#    JEPA1_CKPT = str(ckpts[-1])   # latest checkpoint
+
+JEPA1_CKPT = "/kaggle/input/jepa1-step7684/pytorch/default/1/final_step7684.pt"
+assert os.path.exists(JEPA1_CKPT), f"JEPA-1 checkpoint not found: {JEPA1_CKPT}"
 print(f"✅ Using JEPA-1 checkpoint: {JEPA1_CKPT}")
 
 
@@ -105,7 +126,7 @@ def build_all(device):
     ).to(device)
 
     ckpt = torch.load(JEPA1_CKPT, map_location="cpu")
-    jepa1.load_state_dict(ckpt["model"], strict=True)
+    jepa1.load_state_dict(ckpt["state"], strict=True)
     
     jepa1 = jepa1.to(device)
     for p in jepa1.parameters():
