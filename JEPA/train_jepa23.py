@@ -26,7 +26,7 @@ os.environ["COMET_LOG_PACKAGES"] = "0"
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 USE_BF16 = os.getenv("USE_BF16", "0") == "1"
-EPOCHS = int(os.getenv("EPOCHS", 20))
+EPOCHS = int(os.getenv("EPOCHS", 5))
 BATCH_SIZE = int(os.getenv("BATCH_SIZE", 4))
 NUM_WORKERS = int(os.getenv("NUM_WORKERS", 4))
 
@@ -139,11 +139,7 @@ def build_all():
         weight_decay=1e-2,
     )
 
-    t2 = JEPA2Trainer(
-        student=jepa2,
-        teacher=jepa2_tgt,
-        optimizer=opt_j2,
-    )
+    t2 = JEPA2Trainer(jepa2, jepa2_tgt, opt_j2)
 
     # --------------------------------------------------
     # JEPA-3
@@ -159,9 +155,9 @@ def build_all():
     )
 
     t3 = JEPA3Trainer(
-        jepa3_inv,
-        jepa3_glob,
-        opt_j3,
+        jepa3_inv,      # inverse affordance
+        jepa3_glob,     # global encoding 
+        opt_j3          # optimizer
     )
 
     # --------------------------------------------------
@@ -243,12 +239,29 @@ def train():
             loss = float(out["loss"])
             epoch_loss += loss
 
-            if global_step % 10 == 0:
+            if global_step % 100 == 0:
                 experiment.log_metrics({
+                    # =====================
+                    # Global
+                    # =====================
                     "loss/total": loss,
-                    "loss/jepa2": float(out["loss_j2"]),
-                    "loss/jepa3": float(out["loss_j3"]),
+
+                    # =====================
+                    # JEPA-2 (VICReg, SSL)
+                    # =====================
+                    "loss/jepa2/total": out["loss_j2"],
+                    "loss/jepa2/vic_inv": out["loss_j2_inv"],
+                    "loss/jepa2/vic_var": out["loss_j2_var"],
+                    "loss/jepa2/vic_cov": out["loss_j2_cov"],
+
+                    # =====================
+                    # JEPA-3 (Task)
+                    # =====================
+                    "loss/jepa3/total": out["loss_j3"],
+                    "loss/jepa3/inv_total": out["loss_j3_inv"],
+                    "loss/jepa3/glob_total": out["loss_j3_glob"],
                 }, step=global_step)
+
 
             pbar.set_postfix({"loss": f"{loss:.4f}"})
 
