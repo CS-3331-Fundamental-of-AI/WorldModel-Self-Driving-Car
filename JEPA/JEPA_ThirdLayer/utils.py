@@ -21,19 +21,19 @@ class EMAHelper:
     def register(self, model: nn.Module):
         for name, p in model.named_parameters():
             if p.requires_grad:
-                self.shadow[name] = p.data.clone()
+                self.shadow[name] = p.detach().clone()
 
+    @torch.no_grad()
     def update(self, model: nn.Module):
         for name, p in model.named_parameters():
             if p.requires_grad and name in self.shadow:
-                new = (1 - self.decay) * p.data + self.decay * self.shadow[name]
-                self.shadow[name] = new.clone()
+                self.shadow[name] = (1 - self.decay) * p.detach() + self.decay * self.shadow[name]
 
+    @torch.no_grad()
     def assign_to(self, target: nn.Module):
         for name, p in target.named_parameters():
             if name in self.shadow:
-                p.data.copy_(self.shadow[name])
-
+                p.copy_(self.shadow[name].to(p.device))
 
 # ---------------------------------------------------------
 # Cosine distance
