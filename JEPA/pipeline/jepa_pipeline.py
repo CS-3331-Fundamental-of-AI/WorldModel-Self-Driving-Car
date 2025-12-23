@@ -111,8 +111,8 @@ class JEPAPipeline:
         loss_j1 = out1["loss"] if out1 else 0.0
         loss_j2 = out2["loss"] if out2 else 0.0
         loss_j3 = out3["loss"] if out3 else 0.0
-        loss_j3_inv = out3.get("loss_inv", 0.0) if out3 else 0.0
-        loss_j3_glob = out3.get("loss_glob", 0.0) if out3 else 0.0
+        loss_j3_inv = out3["loss_inv"] if out3 else 0.0
+        loss_j3_glob = out3["loss_glob"] if out3 else 0.0
         total_loss = loss_j1 + loss_j2 + loss_j3
 
         return {
