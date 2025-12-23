@@ -288,7 +288,6 @@ def train():
             # -------------------------------------------------
             loss_total      = float(out.get("loss", 0.0))
             loss_j2         = float(out.get("loss_j2", 0.0))
-            loss_j2_inv     = float(out.get("loss_j2_inv", 0.0))
             loss_j2_var     = float(out.get("loss_j2_var", 0.0))
             loss_j2_cov     = float(out.get("loss_j2_cov", 0.0))
             loss_j3         = float(out.get("loss_j3", 0.0))
@@ -306,7 +305,6 @@ def train():
                 experiment.log_metrics(
                     {
                         "total": loss_j2,
-                        "vic_inv": loss_j2_inv,
                         "vic_var": loss_j2_var,
                         "vic_cov": loss_j2_cov,
                     },

@@ -110,7 +110,6 @@ class JEPAPipeline:
         # Aggregate losses (no backward here!)
         # ==================================================
         loss_j2 = out2["loss"] if out2 is not None else 0.0
-        loss_j2_inv = out2.get("loss_inv", 0.0) if out2 else 0.0
         loss_j2_var = out2.get("loss_var", 0.0) if out2 else 0.0
         loss_j2_cov = out2.get("loss_cov", 0.0) if out2 else 0.0
 
@@ -127,7 +126,6 @@ class JEPAPipeline:
             "loss_j1": loss_j1,
             # JEPA-2 VICReg losses
             "loss_j2": loss_j2,
-            "loss_j2_inv": loss_j2_inv,
             "loss_j2_var": loss_j2_var,
             "loss_j2_cov": loss_j2_cov,
             # JEPA-3 task losses
