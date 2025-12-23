@@ -30,8 +30,9 @@ from config.config import (
 # Paths
 # ==================================================
 ROOT = Path(__file__).resolve().parents[2]
-CKPT_DIR = ROOT / "checkpoints" / "jepa23"
-CKPT_DIR.mkdir(parents=True, exist_ok=True)
+# General checkpoint folder
+CKPT_DIR = ROOT / "checkpoints"
+CKPT_DIR.mkdir(exist_ok=True)
 
 JEPA1_DIR = Path("/kaggle/output/checkpoints/jepa1_vjepa")
 
@@ -107,7 +108,7 @@ def build_all(device):
         prim_dim=128,
     ).to(device)
 
-    ckpt = torch.load(JEPA1_CKPT, map_location="cpu")
+    ckpt = torch.load(JEPA1_CKPT, map_location=device)
     jepa1.load_state_dict(ckpt["model"], strict=True)
 
     for p in jepa1.parameters():
