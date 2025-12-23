@@ -67,15 +67,8 @@ class JEPAPipeline:
         # ==================================================
         # Stop-gradient barrier
         # ==================================================
-        s_c, s_tg = None, None
-
-        if out1 is not None:
-            # Global context from frozen V-JEPA-2
-            s_c = out1["s_c"].detach()
-
-        if out2 is not None:
-            # Temporal / goal representation
-            s_tg = out2["s_tg"].detach()
+        s_c = out1["s_c"].detach() if out1 is not None else None
+        s_tg = out2["s_tg"].detach() if out2 is not None else None
 
         # ==================================================
         # JEPA-3 (contextual inverse + global)
