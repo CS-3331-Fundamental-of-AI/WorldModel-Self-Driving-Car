@@ -212,11 +212,15 @@ def train():
             loss_j1    = out["loss_j1"]
             loss_j2    = out["loss_j2"]
             loss_j3    = out["loss_j3"]
+            loss_j3_inv = out["loss_j3_inv"]
+            loss_j3_glob = out["loss_j3_glob"]
 
             loss_total_val = float(loss_total)
             loss_j1_val    = float(loss_j1)
             loss_j2_val    = float(loss_j2)
             loss_j3_val    = float(loss_j3)
+            loss_j3_inv_val = float(loss_j3_inv)
+            loss_j3_glob_val = float(loss_j3_glob)
 
 
             epoch_loss += loss_total_val
@@ -249,11 +253,19 @@ def train():
                     step=global_step,
                 )
 
-                # ---- JEPA-3 ----
+                # ---- JEPA-3 total ----
                 log_metrics(
                     experiment,
                     {"total": loss_j3_val},
                     prefix="loss/jepa3",
+                    step=global_step,
+                )
+
+                # ---- JEPA-3 components ----
+                log_metrics(
+                    experiment,
+                    {"inv": loss_j3_inv_val, "glob": loss_j3_glob_val},
+                    prefix="loss/jepa3/components",
                     step=global_step,
                 )
 
@@ -265,6 +277,8 @@ def train():
                 "L1": f"{loss_j1_val:.4f}",
                 "L2": f"{loss_j2_val:.4f}",
                 "L3": f"{loss_j3_val:.4f}",
+                "L3_inv": f"{loss_j3_inv_val:.4f}",
+                "L3_glob": f"{loss_j3_glob_val:.4f}",
             })
 
             # -------------------------------------------------
