@@ -64,7 +64,7 @@ class JEPA3Trainer:
         # -----------------------------
         # EMA update (GLOBAL ENCODER)
         # -----------------------------
-        #self.glob.update_ema()
+        self.glob.update_ema()
         
         return {
             "loss": loss_total.detach(),

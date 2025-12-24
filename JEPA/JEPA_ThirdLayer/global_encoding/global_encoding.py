@@ -36,7 +36,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         self.global_gcn = GCN_PYG(in_feats=32, hidden=128, out_feats=cube_D, pool=None)
         
         # EMA from global cube online -> attention & modal fusing target
-        self.ema_helper = EMAHelper(decay=0.999)
+        self.ema_helper = EMAHelper(decay=0.995)
         freeze(self.cube_target)
 
         # -----------------------------
