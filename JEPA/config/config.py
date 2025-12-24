@@ -13,7 +13,7 @@ IS_KAGGLE = "KAGGLE_KERNEL_RUN_TYPE" in os.environ
 # -------------------------
 # Training
 # -------------------------
-EPOCHS = 5 if IS_KAGGLE else 200
+EPOCHS = 1 if IS_KAGGLE else 200
 BATCH_SIZE = 8 if IS_KAGGLE else 16
 NUM_WORKERS = 2 if IS_KAGGLE else 4
 
