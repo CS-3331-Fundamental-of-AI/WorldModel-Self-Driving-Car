@@ -9,18 +9,10 @@ class JEPA3Trainer:
         inv,            # student inverse model (JEPA_Tier3_InverseAffordance)
         glob,           # student global model (JEPA_Tier3_GlobalEncoding)
         optimizer,
-        ema_start: int = 1000,   # 👈 delay EMA
-        ema_warmup: int = 4000,  # 👈 schedule
-        ema_final: float = 0.999
     ):
         self.inv = inv
         self.glob = glob
         self.opt = optimizer
-        # EMA control
-        self.step_count = 0
-        self.ema_start = ema_start
-        self.ema_warmup = ema_warmup
-        self.ema_final = ema_final
 
     def step(self, action, s_c, s_tg=None, global_nodes=None, global_edges=None):
         """
@@ -72,24 +64,7 @@ class JEPA3Trainer:
         # -----------------------------
         # EMA update (GLOBAL ENCODER)
         # -----------------------------
-        self.step_count += 1
-
-        if self.step_count >= self.ema_start:
-            # ---- EMA decay schedule ----
-            if self.step_count < self.ema_warmup:
-                # ramp from ~0.99 → ema_final
-                progress = (
-                    (self.step_count - self.ema_start)
-                    / max(1, self.ema_warmup - self.ema_start)
-                )
-                decay = 0.99 + progress * (self.ema_final - 0.99)
-            else:
-                decay = self.ema_final
-
-            # set decay dynamically
-            self.glob.ema_helper.decay = decay
-
-            self.glob.update_ema()
+        #self.glob.update_ema()
         
         return {
             "loss": loss_total.detach(),
