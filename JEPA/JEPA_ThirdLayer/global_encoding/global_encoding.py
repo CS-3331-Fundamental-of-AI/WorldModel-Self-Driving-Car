@@ -37,9 +37,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         
         # EMA from global cube online -> attention & modal fusing target
         self.ema_helper = EMAHelper(decay=0.999)
-        self.ema_helper.register(self.cube_online)
         freeze(self.cube_target)
-        self.ema_helper.assign_to(self.cube_target)
 
         # -----------------------------
         # Aux predictor
@@ -50,11 +48,16 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         self.s_c_proj = nn.Linear(s_c_dim, cube_D)
         
     # =====================================================
-    # EMA UPDATE (THIS IS THE CORRECT PLACE)
+    # EMA UPDATE 
     # =====================================================
     @torch.no_grad()
     def update_ema(self):
         self.ema_helper.update(self.cube_online)
+        self.ema_helper.assign_to(self.cube_target)
+        
+    @torch.no_grad()
+    def init_ema(self):
+        self.ema_helper.register(self.cube_online)
         self.ema_helper.assign_to(self.cube_target)
 
     # =====================================================

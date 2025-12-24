@@ -164,6 +164,8 @@ def build_all(device):
     # --------------------------------------------------
     jepa3_inv = JEPA_Tier3_InverseAffordance().to(device)
     jepa3_glob = JEPA_Tier3_GlobalEncoding(s_c_dim=128).to(device)
+    # FIX: initialize EMA AFTER model is on device
+    jepa3_glob.init_ema()
 
     opt_j3 = torch.optim.AdamW(
         list(jepa3_inv.parameters()) +
