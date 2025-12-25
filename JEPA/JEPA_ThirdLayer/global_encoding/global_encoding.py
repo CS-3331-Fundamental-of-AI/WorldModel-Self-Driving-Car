@@ -63,64 +63,6 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
     # =====================================================
     # FORWARD
     # =====================================================
-    # =====================================================
-    # ONLINE: predict global latent at time t
-    # =====================================================
-    def forward_online(self, s_y, s_c, s_tg, tokens_final= None):
-        B = s_y.shape[0]
-
-        # x_tokens (same logic as old)
-        if tokens_final is not None:
-            x_tokens = tokens_final[:, :self.L, :self.D]
-        elif s_y.ndim == 3:
-            x_tokens = s_y[:, :self.L, :self.D]
-        else:
-            x_tokens = s_y.unsqueeze(1).expand(B, self.L, self.D)
-
-        # y_modal from s_c (EXACT old semantics)
-        if s_c.ndim == 3:
-            s_c_pool = s_c.mean(dim=1)
-        elif s_c.ndim == 4:
-            s_c_pool = s_c.mean(dim=(2, 3))
-        elif s_c.ndim == 2:
-            s_c_pool = s_c
-        else:
-            raise ValueError(f"s_c has unsupported ndim={s_c.ndim}")
-        
-        y_modal = self.s_c_proj(s_c_pool).unsqueeze(1).expand(B, self.M, self.D)
-
-        # z_channels from JEPA-2 target
-        if s_tg.ndim == 2:
-            z_channels = s_tg.unsqueeze(1).expand(B, self.M, self.D)
-        elif s_tg.ndim == 3:
-            z_channels = s_tg[:, :self.M, :self.D]
-        else:
-            raise ValueError("s_tg must be (B,D) or (B,M,D)")
-
-        return self.cube_online(x_tokens, y_modal, z_channels)
-
-    # =====================================================
-    # TARGET: predict FUTURE global latent (EMA, stop-grad)
-    # =====================================================
-    @torch.no_grad()
-    def forward_target(self, global_nodes, global_edges, s_tg):
-        x_nodes = self.node_embed(global_nodes)
-        g_out = self.global_gcn(x_nodes, global_edges)
-
-        B, N, _ = g_out.shape
-        step = max(1, N // self.M)
-
-        y_ctx = torch.stack(
-            [g_out[:, i*step:(i+1)*step].mean(dim=1) for i in range(self.M)],
-            dim=1
-        )
-
-        z_channels = s_tg.unsqueeze(1).expand(B, self.M, self.D)
-        dummy_tokens = torch.zeros(B, self.L, self.D, device=g_out.device)
-
-        return self.cube_target(dummy_tokens, y_ctx, z_channels)
-
-    #Not used for now, but keep for easier debugging later
     def forward(
         self,
         s_y: torch.Tensor,          # inverse affordance latent
@@ -175,7 +117,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         # -----------------------------
         # Online cube -> target cube output
         # -----------------------------
-        s_tar = self.cube_online(x_tokens, y_modal, z_channels)  # [B, cube_out]
+        #s_tar = self.cube_online(x_tokens, y_modal, z_channels)  # [B, cube_out]
 
         # -----------------------------
         # Global map path via GCN -> context cube (stop-grad)
@@ -206,15 +148,28 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
             z_channels
         ).detach()
         else:
-            s_ctx = torch.zeros_like(s_tar)
+            #s_ctx = torch.zeros_like(s_tar)
+            s_ctx = None
+            
+        #add stop-grad conditioning from s_ctx
+        # -----------------------------
+        # Stop-grad conditioning
+        # -----------------------------
+        if s_ctx is not None:
+            z_channels = z_channels + s_ctx.unsqueeze(1) if s_ctx.dim() == 2 else z_channels + s_ctx
 
         # -----------------------------
         # Auxiliary prediction: s_ctx -> s_tar
         # -----------------------------
-        pred_tar = self.pred_from_ctx(s_ctx)
+        #pred_tar = self.pred_from_ctx(s_ctx)
+        
+        # -----------------------------
+        # Online cube -> target cube output
+        # -----------------------------
+        s_tar = self.cube_online(x_tokens, y_modal, z_channels)  # [B, cube_out]
 
         return {
             "s_tar": s_tar,
             "s_ctx": s_ctx,
-            "pred_tar": pred_tar,
+            #"pred_tar": pred_tar,
         }
