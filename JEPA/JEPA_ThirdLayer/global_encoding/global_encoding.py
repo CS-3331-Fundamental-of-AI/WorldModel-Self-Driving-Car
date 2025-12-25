@@ -117,7 +117,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         # -----------------------------
         # Online cube -> target cube output
         # -----------------------------
-        #s_tar = self.cube_online(x_tokens, y_modal, z_channels)  # [B, cube_out]
+        s_tar = self.cube_online(x_tokens, y_modal, z_channels)  # [B, cube_out]
 
         # -----------------------------
         # Global map path via GCN -> context cube (stop-grad)
@@ -148,28 +148,15 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
             z_channels
         ).detach()
         else:
-            #s_ctx = torch.zeros_like(s_tar)
-            s_ctx = None
-            
-        #add stop-grad conditioning from s_ctx
-        # -----------------------------
-        # Stop-grad conditioning
-        # -----------------------------
-        if s_ctx is not None:
-            z_channels = z_channels + s_ctx.unsqueeze(1) if s_ctx.dim() == 2 else z_channels + s_ctx
+            s_ctx = torch.zeros_like(s_tar)
 
         # -----------------------------
         # Auxiliary prediction: s_ctx -> s_tar
         # -----------------------------
-        #pred_tar = self.pred_from_ctx(s_ctx)
-        
-        # -----------------------------
-        # Online cube -> target cube output
-        # -----------------------------
-        s_tar = self.cube_online(x_tokens, y_modal, z_channels)  # [B, cube_out]
+        pred_tar = self.pred_from_ctx(s_ctx)
 
         return {
             "s_tar": s_tar,
             "s_ctx": s_ctx,
-            #"pred_tar": pred_tar,
+            "pred_tar": pred_tar,
         }

@@ -49,7 +49,7 @@ class JEPA3Trainer:
         # Losses
         # -----------------------------
         loss_inv = inverse_affordance_losses(inv_out, s_tg)
-        loss_glob = global_encoding_losses(glob_out, s_tg)
+        loss_glob = global_encoding_losses(glob_out)
         loss_total = loss_inv["total"] + loss_glob["total"]
 
         # -----------------------------
