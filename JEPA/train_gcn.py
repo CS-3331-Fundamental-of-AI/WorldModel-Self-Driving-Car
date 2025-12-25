@@ -55,7 +55,7 @@ loader = DataLoader(
     batch_size=8,
     shuffle=True,
     num_workers=2,
-    collate_fn=lambda b: tier3_collate_fn(b, device=device),
+    collate_fn=tier3_collate_fn,
     pin_memory=(device.type == "cuda"),
 )
 
@@ -113,8 +113,9 @@ try:
         for batch in pbar:
             global_step += 1
 
-            global_nodes = batch["global_nodes"]   # list[T_i, 3]
-            global_edges = batch["global_edges"]   # list[E_i, 2]
+            global_nodes = [n.to(device) for n in batch["global_nodes"]]
+            global_edges = [e.to(device) for e in batch["global_edges"]]
+
 
             losses = []
 
