@@ -61,6 +61,80 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         self.ema_helper.assign_to(self.cube_target)
 
     # =====================================================
+    # PRETRAINED GCN LOADER
+    # =====================================================
+    def load_pretrained_gcn(
+        self,
+        ckpt_path: str,
+        freeze_gcn: bool = True,
+        strict: bool = False,
+        verbose: bool = True,
+    ):
+        """
+        Load pretrained global GCN weights (Stage-0 pretraining).
+
+        Expected checkpoint format:
+        {
+            "state": state_dict
+        }
+
+        Only loads:
+        - node_embed
+        - global_gcn
+
+        Args:
+            ckpt_path: path to *.pt checkpoint
+            freeze_gcn: whether to freeze GCN after loading
+            strict: strict loading (False recommended)
+            verbose: print loaded / skipped keys
+        """
+        ckpt = torch.load(ckpt_path, map_location="cpu")
+
+        if "state" not in ckpt:
+            raise KeyError("Checkpoint missing 'state' key")
+
+        state = ckpt["state"]
+
+        # --------------------------------------------------
+        # Filter compatible keys
+        # --------------------------------------------------
+        own_state = self.state_dict()
+        load_state = {}
+        skipped = []
+
+        for k, v in state.items():
+            if k.startswith("node_embed.") or k.startswith("global_gcn."):
+                if k in own_state and own_state[k].shape == v.shape:
+                    load_state[k] = v
+                else:
+                    skipped.append(k)
+
+        missing, unexpected = self.load_state_dict(load_state, strict=False)
+
+        # --------------------------------------------------
+        # Freeze if requested
+        # --------------------------------------------------
+        if freeze_gcn:
+            freeze(self.node_embed)
+            freeze(self.global_gcn)
+
+        # --------------------------------------------------
+        # Logging
+        # --------------------------------------------------
+        if verbose:
+            print(f"✅ Loaded pretrained GCN from: {ckpt_path}")
+            print(f"   Loaded keys: {len(load_state)}")
+
+            if skipped:
+                print(f"   ⚠️ Skipped (shape mismatch): {len(skipped)}")
+
+            if missing:
+                print(f"   ℹ️ Missing keys: {len(missing)}")
+
+            if unexpected:
+                print(f"   ℹ️ Unexpected keys: {len(unexpected)}")
+                
+    # =====================================================
     # FORWARD
     # =====================================================
     def forward(
@@ -160,16 +234,3 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
             "s_ctx": s_ctx,
             "pred_tar": pred_tar,
         }
-
-def load_pretrained_gcn(self, ckpt_path, device):
-    ckpt = torch.load(ckpt_path, map_location=device)
-
-    state = ckpt.get("state", ckpt)
-    self.gcn.load_state_dict(state, strict=True)
-
-    # 🔒 freeze GCN
-    for p in self.gcn.parameters():
-        p.requires_grad = False
-
-    self.gcn.eval()
-    print("🧊 Global GCN loaded & frozen")
