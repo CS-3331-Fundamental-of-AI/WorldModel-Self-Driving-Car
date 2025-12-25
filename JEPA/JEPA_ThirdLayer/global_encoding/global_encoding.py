@@ -160,3 +160,16 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
             "s_ctx": s_ctx,
             "pred_tar": pred_tar,
         }
+
+def load_pretrained_gcn(self, ckpt_path, device):
+    ckpt = torch.load(ckpt_path, map_location=device)
+
+    state = ckpt.get("state", ckpt)
+    self.gcn.load_state_dict(state, strict=True)
+
+    # 🔒 freeze GCN
+    for p in self.gcn.parameters():
+        p.requires_grad = False
+
+    self.gcn.eval()
+    print("🧊 Global GCN loaded & frozen")

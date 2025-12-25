@@ -65,6 +65,9 @@ JEPA1_CKPT = "/kaggle/input/jepa1-step7684/pytorch/default/1/final_step7684.pt"
 assert os.path.exists(JEPA1_CKPT), f"JEPA-1 checkpoint not found: {JEPA1_CKPT}"
 print(f"✅ Using JEPA-1 checkpoint: {JEPA1_CKPT}")
 
+GCN_CKPT = "/kaggle/input/gcn-pretrained/pytorch/default/1/gcn_global_final_step4163.pt"
+assert os.path.exists(GCN_CKPT), f"GCN checkpoint not found: {GCN_CKPT}"
+print(f"✅ Using pretrained GCN: {GCN_CKPT}")
 
 
 # ==================================================
@@ -164,8 +167,10 @@ def build_all(device):
     # --------------------------------------------------
     jepa3_inv = JEPA_Tier3_InverseAffordance().to(device)
     jepa3_glob = JEPA_Tier3_GlobalEncoding(s_c_dim=128).to(device)
+    jepa3_glob.load_pretrained_gcn(GCN_CKPT, device)
     # FIX: initialize EMA AFTER model is on device
     jepa3_glob.init_ema()
+    
 
     opt_j3 = torch.optim.AdamW(
         list(jepa3_inv.parameters()) +
