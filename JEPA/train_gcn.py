@@ -130,6 +130,8 @@ try:
                 masked_nodes, mask = mask_nodes(nodes, MASK_RATIO)
 
                 recon = model(masked_nodes, adj)
+                
+                mask = mask.unsqueeze(-1).expand_as(nodes)
 
                 loss = F.mse_loss(recon[mask], nodes[mask])
                 losses.append(loss)
