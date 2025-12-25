@@ -63,30 +63,35 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
     # =====================================================
     # FORWARD
     # =====================================================
-    def forward_online(self, s_y, s_c, s_tg, tokens_final=None):
-        """
-        Predict global latent at time t
-        """
+    # =====================================================
+    # ONLINE: predict global latent at time t
+    # =====================================================
+    def forward_online(self, s_y, s_c, s_tg, tokens_final= None):
         B = s_y.shape[0]
 
-        # tokens
+        # x_tokens (same logic as old)
         if tokens_final is not None:
             x_tokens = tokens_final[:, :self.L, :self.D]
+        elif s_y.ndim == 3:
+            x_tokens = s_y[:, :self.L, :self.D]
         else:
             x_tokens = s_y.unsqueeze(1).expand(B, self.L, self.D)
 
-        s_c_proj = self.s_c_proj(s_c)
-        y_modal = s_c_proj.unsqueeze(1).expand(B, self.M, self.D)
+        # y_modal from s_c (same as old)
+        if s_c.ndim > 2:
+            s_c = s_c.mean(dim=tuple(range(1, s_c.ndim)))
+        y_modal = self.s_c_proj(s_c).unsqueeze(1).expand(B, self.M, self.D)
 
+        # z_channels from JEPA-2 target
         z_channels = s_tg.unsqueeze(1).expand(B, self.M, self.D)
 
         return self.cube_online(x_tokens, y_modal, z_channels)
-    
+
+    # =====================================================
+    # TARGET: predict FUTURE global latent (EMA, stop-grad)
+    # =====================================================
     @torch.no_grad()
     def forward_target(self, global_nodes, global_edges, s_tg):
-        """
-        Produce future global latent (EMA target)
-        """
         x_nodes = self.node_embed(global_nodes)
         g_out = self.global_gcn(x_nodes, global_edges)
 
@@ -94,10 +99,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         step = max(1, N // self.M)
 
         y_ctx = torch.stack(
-            [
-                g_out[:, i*step:(i+1)*step].mean(dim=1)
-                for i in range(self.M)
-            ],
+            [g_out[:, i*step:(i+1)*step].mean(dim=1) for i in range(self.M)],
             dim=1
         )
 
