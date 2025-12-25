@@ -129,11 +129,11 @@ try:
 
                 masked_nodes, mask = mask_nodes(nodes, MASK_RATIO)
 
-                recon = model(masked_nodes, adj)
-                
-                # ---- masked node reconstruction loss ----
+                recon, _ = model(masked_nodes, adj)  # ✅ unpack
+
+                # per-node loss
                 node_loss = F.mse_loss(recon, nodes, reduction="none")  # [1, N, 3]
-                node_loss = node_loss.mean(dim=-1)                      # [1, N]
+                node_loss = node_loss.mean(dim=-1)  
 
                 loss = (node_loss * mask.float()).sum() / mask.sum().clamp(min=1)
                 losses.append(loss)
