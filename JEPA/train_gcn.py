@@ -131,9 +131,11 @@ try:
 
                 recon = model(masked_nodes, adj)
                 
-                mask = mask.unsqueeze(-1).expand_as(nodes)
+                # ---- masked node reconstruction loss ----
+                node_loss = F.mse_loss(recon, nodes, reduction="none")  # [1, N, 3]
+                node_loss = node_loss.mean(dim=-1)                      # [1, N]
 
-                loss = F.mse_loss(recon[mask], nodes[mask])
+                loss = (node_loss * mask.float()).sum() / mask.sum().clamp(min=1)
                 losses.append(loss)
 
             loss = torch.stack(losses).mean()
