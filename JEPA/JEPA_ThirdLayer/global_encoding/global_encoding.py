@@ -77,13 +77,25 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         else:
             x_tokens = s_y.unsqueeze(1).expand(B, self.L, self.D)
 
-        # y_modal from s_c (same as old)
-        if s_c.ndim > 2:
-            s_c = s_c.mean(dim=tuple(range(1, s_c.ndim)))
-        y_modal = self.s_c_proj(s_c).unsqueeze(1).expand(B, self.M, self.D)
+        # y_modal from s_c (EXACT old semantics)
+        if s_c.ndim == 3:
+            s_c_pool = s_c.mean(dim=1)
+        elif s_c.ndim == 4:
+            s_c_pool = s_c.mean(dim=(2, 3))
+        elif s_c.ndim == 2:
+            s_c_pool = s_c
+        else:
+            raise ValueError(f"s_c has unsupported ndim={s_c.ndim}")
+        
+        y_modal = self.s_c_proj(s_c_pool).unsqueeze(1).expand(B, self.M, self.D)
 
         # z_channels from JEPA-2 target
-        z_channels = s_tg.unsqueeze(1).expand(B, self.M, self.D)
+        if s_tg.ndim == 2:
+            z_channels = s_tg.unsqueeze(1).expand(B, self.M, self.D)
+        elif s_tg.ndim == 3:
+            z_channels = s_tg[:, :self.M, :self.D]
+        else:
+            raise ValueError("s_tg must be (B,D) or (B,M,D)")
 
         return self.cube_online(x_tokens, y_modal, z_channels)
 
