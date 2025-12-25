@@ -34,7 +34,10 @@ class JEPA3Trainer:
         
         # Online global prediction (t)
         s_tar_t = self.glob.forward_online(
-            s_y, s_c, s_tg, tokens_final
+            s_y=s_y,
+            s_c=s_c,
+            s_tg=s_tg,
+            tokens_final=inv_out.get("tokens", None),
         )
         
         # Target future global (t+k)
