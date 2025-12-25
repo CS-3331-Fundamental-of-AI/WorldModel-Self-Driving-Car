@@ -36,7 +36,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         self.global_gcn = GCN_PYG(in_feats=32, hidden=128, out_feats=cube_D, pool=None)
         
         # EMA from global cube online -> attention & modal fusing target
-        self.ema_helper = EMAHelper(decay=0.995)
+        self.ema_helper = EMAHelper(decay=0.999)
         freeze(self.cube_target)
 
         # -----------------------------
@@ -63,6 +63,50 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
     # =====================================================
     # FORWARD
     # =====================================================
+    def forward_online(self, s_y, s_c, s_tg, tokens_final=None):
+        """
+        Predict global latent at time t
+        """
+        B = s_y.shape[0]
+
+        # tokens
+        if tokens_final is not None:
+            x_tokens = tokens_final[:, :self.L, :self.D]
+        else:
+            x_tokens = s_y.unsqueeze(1).expand(B, self.L, self.D)
+
+        s_c_proj = self.s_c_proj(s_c)
+        y_modal = s_c_proj.unsqueeze(1).expand(B, self.M, self.D)
+
+        z_channels = s_tg.unsqueeze(1).expand(B, self.M, self.D)
+
+        return self.cube_online(x_tokens, y_modal, z_channels)
+    
+    @torch.no_grad()
+    def forward_target(self, global_nodes, global_edges, s_tg):
+        """
+        Produce future global latent (EMA target)
+        """
+        x_nodes = self.node_embed(global_nodes)
+        g_out = self.global_gcn(x_nodes, global_edges)
+
+        B, N, _ = g_out.shape
+        step = max(1, N // self.M)
+
+        y_ctx = torch.stack(
+            [
+                g_out[:, i*step:(i+1)*step].mean(dim=1)
+                for i in range(self.M)
+            ],
+            dim=1
+        )
+
+        z_channels = s_tg.unsqueeze(1).expand(B, self.M, self.D)
+        dummy_tokens = torch.zeros(B, self.L, self.D, device=g_out.device)
+
+        return self.cube_target(dummy_tokens, y_ctx, z_channels)
+
+    #Not used for now, but keep for easier debugging later
     def forward(
         self,
         s_y: torch.Tensor,          # inverse affordance latent

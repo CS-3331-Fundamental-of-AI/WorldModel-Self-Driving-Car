@@ -52,3 +52,27 @@ def global_encoding_losses(glob_out, s_tar_target=None, z=None):
     )
     losses["total"] = total
     return losses
+
+def global_future_loss(s_tar_t, s_tar_future):
+    """
+    JEPA-style temporal prediction loss for global encoding.
+    """
+
+    losses = {}
+
+    losses["cos_tar_future"] = cosine_distance(
+        s_tar_t, s_tar_future
+    ).mean()
+
+    losses["vic_tar"] = vic_reg_loss(s_tar_t)
+
+    total = (
+        losses["cos_tar_future"]
+        + 0.1 * losses["vic_tar"]
+    )
+
+    # ---- compatibility aliases ----
+    losses["cos_tar_ctx"] = losses["cos_tar_future"]  # legacy name
+    losses["total"] = total
+
+    return losses

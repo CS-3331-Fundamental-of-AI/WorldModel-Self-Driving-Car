@@ -1,6 +1,6 @@
 # trainers/trainer_jepa3.py
 import torch
-from JEPA_ThirdLayer.losses import inverse_affordance_losses, global_encoding_losses
+from JEPA_ThirdLayer.losses import inverse_affordance_losses, global_encoding_losses, global_future_loss
 from config.config import CLIP_NORM
 
 class JEPA3Trainer:
@@ -31,9 +31,26 @@ class JEPA3Trainer:
             raise ValueError("s_c and action must not be None for JEPA-3 step")
         inv_out = self.inv(action, s_c)  # s_c used internally by IA
         s_y = inv_out["s_y"]
+        
+        # Online global prediction (t)
+        s_tar_t = self.glob.forward_online(
+            s_y=s_y,
+            s_c=s_c,
+            s_tg=s_tg,
+            tokens_final=inv_out.get("tokens"),
+        )
+        
+        # Target future global (t+k)
+        with torch.no_grad():
+            s_tar_future = self.glob.forward_target(
+                global_nodes,
+                global_edges,
+                s_tg,
+            )
+
 
         # -----------------------------
-        # Forward: global encoding
+        # Forward: global encoding (temporarily disabled)
         # -----------------------------
        
         glob_out = self.glob(
@@ -49,7 +66,8 @@ class JEPA3Trainer:
         # Losses
         # -----------------------------
         loss_inv = inverse_affordance_losses(inv_out, s_tg)
-        loss_glob = global_encoding_losses(glob_out)
+        loss_glob = global_future_loss(s_tar_t, s_tar_future)
+        #loss_glob = global_encoding_losses(glob_out)
         loss_total = loss_inv["total"] + loss_glob["total"]
 
         # -----------------------------
