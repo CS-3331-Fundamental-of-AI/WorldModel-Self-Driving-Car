@@ -69,8 +69,9 @@ class JEPAPipeline:
         # ==================================================
         # Stop-gradient barrier
         # ==================================================
-        s_c = out1["s_c"].detach() if out1 is not None else None
-        s_tg = out2["s_tg"].detach() if out2 is not None else None
+        s_c = out1["s_c"].detach() if out1 else None
+        s_tg = out2["s_tg"].detach() if out2 else None
+        s_y  = out2["s_y"].detach() if out2 else None
 
         # ==================================================
         # JEPA-3 (contextual inverse + global)
@@ -102,6 +103,7 @@ class JEPAPipeline:
                 action=batch_j3.get("action"),
                 s_c=s_c,
                 s_tg=s_tg,
+                s_y=s_y,
                 global_nodes=global_nodes_batch,
                 global_edges=global_edges_batch,
             )
@@ -109,27 +111,29 @@ class JEPAPipeline:
         # ==================================================
         # Aggregate losses (no backward here!)
         # ==================================================
-        loss_j2 = out2["loss"] if out2 is not None else 0.0
-        loss_j2_var = out2.get("loss_var", 0.0) if out2 else 0.0
-        loss_j2_cov = out2.get("loss_cov", 0.0) if out2 else 0.0
+        if out2 is not None:
+            loss_j2 = out2["loss"]
+            loss_j2_pa = out2.get("loss_pa", 0.0)
+            loss_j2_ia = out2.get("loss_ia", 0.0)
+        else:
+            loss_j2 = loss_j2_pa = loss_j2_ia = 0.0
 
-        loss_j3 = out3["loss"] if out3 is not None else 0.0
-        loss_j3_inv = out3.get("loss_inv", 0.0) if out3 else 0.0
-        loss_j3_glob = out3.get("loss_glob", 0.0) if out3 else 0.0
+        # -------- JEPA-3 --------
+        if out3 is not None:
+            loss_j3 = out3["loss"]
+        else:
+            loss_j3 = 0.0
 
         loss_j1 = 0.0   # JEPA-1 frozen in this stage
         total_loss = loss_j2 + loss_j3
 
-
         return {
             "loss": total_loss,
             "loss_j1": loss_j1,
-            # JEPA-2 VICReg losses
+            # JEPA-2 (core)
             "loss_j2": loss_j2,
-            "loss_j2_var": loss_j2_var,
-            "loss_j2_cov": loss_j2_cov,
+            "loss_j2_pa": loss_j2_pa,
+            "loss_j2_ia": loss_j2_ia,
             # JEPA-3 task losses
             "loss_j3": loss_j3,
-            "loss_j3_inv": loss_j3_inv,
-            "loss_j3_glob": loss_j3_glob,
         }

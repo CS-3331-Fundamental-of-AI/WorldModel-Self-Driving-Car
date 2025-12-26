@@ -16,7 +16,7 @@ def freeze(module: nn.Module):
 # Tier2Module (Trajectory Encoder + GCN + Fusion)
 # ==========================================
 
-class Tier2Module(nn.Module):
+class JEPA_Tier2_PhysicalAffordance(nn.Module):
     def __init__(
         self,
         traj_dim=256,       # token embedding dim
@@ -116,7 +116,7 @@ class Tier2Module(nn.Module):
         return {
             "traj_emb": s_traj,         # main trajectory embedding
             "graph_emb": gcn_out,       # per-node graph embedding
-            "fusion": fused_out,        # [B, 128]
+            "fusion": fused_out,        # [B, 128] #s_tg
             "node_level": node_contrib, # per-node contributions
             "attn": attn_weights,       # [B, N]
             "fsq_tokens": fsq_tokens,   # (optional for logging)

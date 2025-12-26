@@ -1,21 +1,36 @@
+#JEPA/JEPA_ThirdLayer/global_encoding.py
 import torch
 import torch.nn as nn
 from typing import Optional
 
 from .gcn_pyg import GCN_PYG
 from .cube_mlp import CubeMLP
-from ..shared.predictors import PredictorMLP
+from .predictors import PredictorMLP
 
 from JEPA_ThirdLayer.utils import EMAHelper, freeze
 
 class JEPA_Tier3_GlobalEncoding(nn.Module):
+    """
+    JEPA-3 Global Encoding
+
+    Student (online):
+        s_ctx = cube_online(s_y, s_c, s_tg)
+
+    Teacher (EMA, stop-grad):
+        s_tar = cube_target(GCN(global_graph))
+
+    Loss:
+        pred(s_ctx) ≈ s_tar
+    """
+
     def __init__(
         self,
         cube_L: int = 6,
         cube_M: int = 4,
         cube_D: int = 128,
         cube_out: int = 128,
-        s_c_dim: int = 256,  # incoming context feature dim (from predictor/proj)
+        s_c_dim: int = 256,
+        ema_decay: float = 0.999,
     ):
         super().__init__()
 
@@ -36,7 +51,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         self.global_gcn = GCN_PYG(in_feats=32, hidden=128, out_feats=cube_D, pool=None)
         
         # EMA from global cube online -> attention & modal fusing target
-        self.ema_helper = EMAHelper(decay=0.999)
+        self.ema_helper = EMAHelper(decay=ema_decay)
         freeze(self.cube_target)
 
         # -----------------------------
@@ -148,7 +163,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
     ):
         B = s_y.shape[0]
         # --------------------------------------------------
-        # x_tokens ← s_y (primary hypothesis)
+        # x_tokens ← s_y (primary hypothesis) from IA
         # --------------------------------------------------
         if tokens_final is not None:
             # use provided temporal tokens directly (preferred)
@@ -164,7 +179,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
                 raise ValueError("s_y must be (B,D) or (B,L,D) when tokens_final not provided")
 
         # --------------------------------------------------
-        # y_modal ← s_c (context → modal slots)
+        # y_modal ← s_c (context → modal slots) from JEPA-1
         # --------------------------------------------------
         if s_c.ndim == 3:           
             s_c_pool = s_c.mean(dim=1)  # collapse patches → [B, D]
@@ -179,7 +194,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         y_modal = s_c_proj.unsqueeze(1).expand(B, self.M, self.D)  # [B, M, D]
         
         # --------------------------------------------------
-        # z_channels ← s_tg (EMA future → gating)
+        # z_channels ← s_tg (EMA future → gating) from JEPA-2
         # --------------------------------------------------
         if s_tg.ndim == 2:
             z_channels = s_tg.unsqueeze(1).expand(B, self.M, self.D)
@@ -188,46 +203,48 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         else:
             raise ValueError("s_tg must be (B,D) or (B,M,D)")
 
-        # -----------------------------
-        # Online cube -> target cube output
-        # -----------------------------
-        s_tar = self.cube_online(x_tokens, y_modal, z_channels)  # [B, cube_out]
+        # ==================================================
+        # STUDENT: s_ctx (cube_online)
+        # ==================================================
+        s_ctx = self.cube_online(
+            x_tokens,
+            y_modal,
+            z_channels,
+        )
 
-        # -----------------------------
-        # Global map path via GCN -> context cube (stop-grad)
-        # -----------------------------
-        if global_nodes is not None and global_edges is not None:
-            # global_nodes: [B, N, 3]
-            x_nodes = self.node_embed(global_nodes)  # [B, N, 32]
-            g_out = self.global_gcn(x_nodes, global_edges)  # [B, N, cube_D]
-            
-            N = g_out.shape[1]
-            step = max(1, N // self.M)  # Partition nodes into M groups (robust to N < M)
-            
-            y_ctx_list = []
-            for i in range(self.M):
-                start = i * step
-                end = min(N, (i + 1) * step)
-                if start >= end:
-                    # fallback: zeros
-                    y_ctx_list.append(torch.zeros(B, self.D, device=g_out.device, dtype=g_out.dtype))
-                else:
-                    chunk = g_out[:, start:end, :]        # [B, chunk, D]
-                    y_ctx_list.append(chunk.mean(dim=1))  # [B, D]
-            y_ctx = torch.stack(y_ctx_list, dim=1)  # [B, M, D]
+        has_graph = global_nodes is not None and global_edges is not None
+        
+        # ==================================================
+        # TEACHER: s_tar (GCN → cube_target, stop-grad)
+        # ==================================================
+        if has_graph:
+            with torch.no_grad():
+                x_nodes = self.node_embed(global_nodes)
+                g_out = self.global_gcn(x_nodes, global_edges)  # [B, N, D]
 
-            s_ctx = self.cube_target(
-            x_tokens[:, :self.cube_target.L],
-            y_ctx,
-            z_channels
-        ).detach()
-        else:
-            s_ctx = torch.zeros_like(s_tar)
+                # pool nodes → M slots
+                N = g_out.shape[1]
+                step = max(1, N // self.M)
 
-        # -----------------------------
+                y_tar = torch.stack(
+                    [
+                        g_out[:, i * step : min(N, (i + 1) * step)].mean(dim=1)
+                        for i in range(self.M)
+                    ],
+                    dim=1,
+                )
+
+                s_tar = self.cube_target(
+                    x_tokens[:, :self.cube_target.L],
+                    y_tar,
+                    z_channels,
+                )
+        else: 
+            s_tar = None
+
         # Auxiliary prediction: s_ctx -> s_tar
         # -----------------------------
-        pred_tar = self.pred_from_ctx(s_ctx)
+        pred_tar = self.pred_from_ctx(s_ctx) #z
 
         return {
             "s_tar": s_tar,

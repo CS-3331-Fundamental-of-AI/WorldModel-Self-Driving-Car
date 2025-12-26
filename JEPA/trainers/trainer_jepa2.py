@@ -1,105 +1,120 @@
 # trainers/trainer_jepa2.py
 
 import torch
-from JEPA_SecondLayer.losses import (
-    vicreg_invariance,
-    vicreg_variance,
-    vicreg_covariance,
+import torch.nn.functional as F
+
+from JEPA_SecondLayer.inverse_affordance.utils import update_ema
+from config.config import (
+    CLIP_NORM,
+    EMA_JEPA2,
+    LAMBDA_JEPA2,
+    LAMBDA_INV,
 )
-from JEPA_SecondLayer.utils import update_ema
-from config.config import CLIP_NORM, EMA_JEPA2
 
 
 class JEPA2Trainer:
-    def __init__(self, model, ema_model, optimizer, aug_fn=None,
-                 lambda_inv=1.0, lambda_var=1.0, lambda_cov=0.04):
-        """
-        JEPA-2 trainer:
-        - trains fused trajectory–graph representation
-        - FSQ tokenizer is frozen and NOT trained here
-        """
-        self.model = model
-        self.ema_model = ema_model
+    """
+    JEPA-2:
+    - PA = student (backprop)
+    - IA = online learner (aux loss)
+    - IA_ema = teacher (EMA of IA)
+
+    Losses:
+    - PA loss:   D(s_tg, s_y_ema)
+    - IA loss:   D(s_y, s_tg.detach())
+    """
+
+    def __init__(
+        self,
+        pa_model,
+        ia_model,
+        ia_ema_model,
+        optimizer,
+        dist_fn=None,
+    ):
+        self.pa = pa_model
+        self.ia = ia_model
+        self.ia_ema = ia_ema_model
         self.opt = optimizer
-        self.aug_fn = aug_fn
 
-        self.lambda_inv = lambda_inv
-        self.lambda_var = lambda_var
-        self.lambda_cov = lambda_cov
+        # distance function between latents
+        self.dist_fn = dist_fn or F.mse_loss
 
-    def step(self, traj, x_graph, adj, traj_mask=None, graph_mask=None):
+        # freeze EMA teacher
+        for p in self.ia_ema.parameters():
+            p.requires_grad = False
+        self.ia_ema.eval()
+
+    def step(
+        self,
+        traj,
+        x_graph,
+        adj,
+        action,
+        s_c,
+        traj_mask=None,
+        graph_mask=None,
+    ):
         # --------------------------------------------------
-        # 1. Clean forward
+        # 1. PA forward (student, grounded in data)
         # --------------------------------------------------
-        out_clean = self.model(
+        pa_out = self.pa(
             traj=traj,
             adj=adj,
             x_graph=x_graph,
             traj_mask=traj_mask,
             graph_mask=graph_mask,
         )
-        z_clean = out_clean["fusion"]  # [B, D]
+        s_tg = pa_out["fusion"]          # [B, D]
 
         # --------------------------------------------------
-        # 2. Augmented forward
+        # 2. IA EMA forward (teacher, no gradients)
         # --------------------------------------------------
-        if self.aug_fn is not None:
-            traj_aug = self.aug_fn(traj)
-        else:
-            traj_aug = traj + 0.01 * torch.randn_like(traj)
-
-        out_aug = self.model(
-            traj=traj_aug,
-            adj=adj,
-            x_graph=x_graph,
-            traj_mask=traj_mask,
-            graph_mask=graph_mask,
-        )
-        z_aug = out_aug["fusion"]
+        with torch.no_grad():
+            ia_ema_out = self.ia_ema(action, s_c)
+            s_y_ema = ia_ema_out["s_y"]
 
         # --------------------------------------------------
-        # 3. VICReg losses
+        # 3. PA loss (PA ← IA_ema)
         # --------------------------------------------------
-        loss_inv = vicreg_invariance(z_clean, z_aug)
-        loss_var = vicreg_variance(z_clean) + vicreg_variance(z_aug)
-        loss_cov = vicreg_covariance(z_clean) + vicreg_covariance(z_aug)
+        loss_pa = self.dist_fn(s_tg, s_y_ema)
 
+        # --------------------------------------------------
+        # 4. IA online forward (IA ← PA.detach)
+        # --------------------------------------------------
+        ia_out = self.ia(action, s_c)
+        s_y = ia_out["s_y"]
+
+        loss_ia = self.dist_fn(s_y, s_tg.detach())
+
+        # --------------------------------------------------
+        # 5. Total loss (weighted)
+        # --------------------------------------------------
         loss = (
-            self.lambda_inv * loss_inv
-            + self.lambda_var * loss_var
-            + self.lambda_cov * loss_cov
+            LAMBDA_JEPA2 * loss_pa
+            + LAMBDA_INV * loss_ia
         )
 
         # --------------------------------------------------
-        # 4. Optimization 
+        # 6. Optimize PA + IA
         # --------------------------------------------------
         self.opt.zero_grad(set_to_none=True)
         loss.backward()
-        torch.nn.utils.clip_grad_norm_(self.model.parameters(), CLIP_NORM)
+
+        torch.nn.utils.clip_grad_norm_(self.pa.parameters(), CLIP_NORM)
+        torch.nn.utils.clip_grad_norm_(self.ia.parameters(), CLIP_NORM)
+
         self.opt.step()
 
         # --------------------------------------------------
-        # 5. EMA update
+        # 7. EMA update (IA → IA_ema)
         # --------------------------------------------------
-        update_ema(self.ema_model, self.model, EMA_JEPA2)
-        
-        # --------------------------------------------------
-        # 6. EMA forward → slow target for JEPA-3
-        # --------------------------------------------------
-        with torch.no_grad():
-            out_ema = self.ema_model(
-                traj=traj,
-                adj=adj,
-                x_graph=x_graph,
-                traj_mask=traj_mask,
-                graph_mask=graph_mask,
-            )
-            s_tg = out_ema["fusion"]   # EMA target for JEPA-3
+        update_ema(self.ia_ema, self.ia, EMA_JEPA2)
 
         return {
             "loss": loss.detach(),
-            "loss_inv": loss_inv.detach(),
-            "loss_var": loss_var.detach(),
-            "loss_cov": loss_cov.detach(),
-            "s_tg": s_tg.detach(),   # JEPA-3 input
+            "loss_pa": loss_pa.detach(),
+            "loss_ia": loss_ia.detach(),
+            "s_tg": s_tg.detach(),
+            "s_y_ema": s_y_ema.detach(),
         }

@@ -49,18 +49,6 @@ print(f"👉 Final device used for training: {device}")
 # JEPA-1 checkpoint path
 # ==================================================
 
-#JEPA1_DIR = Path("/kaggle/output/checkpoints/jepa1_vjepa")
-
-#if "JEPA1_CKPT" in os.environ:
-#    JEPA1_CKPT = os.environ["JEPA1_CKPT"]
-#else:
-#    ckpts = sorted(
-#        JEPA1_DIR.glob("jepa1_step*.pt"),
-#        key=lambda p: int(p.stem.split("step")[-1])
-#    )
-#    assert len(ckpts) > 0, f"No JEPA-1 checkpoints found in {JEPA1_DIR}"
-#    JEPA1_CKPT = str(ckpts[-1])   # latest checkpoint
-
 JEPA1_CKPT = "/kaggle/input/jepa1-step7684/pytorch/default/1/final_step7684.pt"
 assert os.path.exists(JEPA1_CKPT), f"JEPA-1 checkpoint not found: {JEPA1_CKPT}"
 print(f"✅ Using JEPA-1 checkpoint: {JEPA1_CKPT}")
@@ -76,11 +64,8 @@ print(f"✅ Using pretrained GCN: {GCN_CKPT}")
 from transformers import AutoModel
 from JEPA_PrimitiveLayer.vjepa.model import PrimitiveLayerJEPA
 
-from JEPA_SecondLayer import Tier2Module
-from JEPA_ThirdLayer import (
-    JEPA_Tier3_InverseAffordance,
-    JEPA_Tier3_GlobalEncoding,
-)
+from JEPA_SecondLayer import JEPA_Tier2_InverseAffordance, JEPA_Tier2_PhysicalAffordance
+from JEPA_ThirdLayer import JEPA_Tier3_GlobalEncoding
 
 # ==================================================
 # Trainers & Pipeline
@@ -146,46 +131,49 @@ def build_all(device):
     # --------------------------------------------------
     # JEPA-2 (Student + EMA)
     # --------------------------------------------------
-    jepa2 = Tier2Module().to(device)
-    jepa2_tgt = Tier2Module().to(device)
+    jepa2_pa = JEPA_Tier2_PhysicalAffordance().to(device)
+    jepa2_ia = JEPA_Tier2_InverseAffordance().to(device)
+    jepa2_ia_ema = JEPA_Tier2_InverseAffordance().to(device)
 
-    jepa2_tgt.load_state_dict(jepa2.state_dict())
-    for p in jepa2_tgt.parameters():
+    jepa2_ia_ema.load_state_dict(jepa2_ia.state_dict())
+    for p in jepa2_ia_ema.parameters():
         p.requires_grad = False
-    jepa2_tgt.eval()
+    jepa2_ia_ema.eval()
 
     opt_j2 = torch.optim.AdamW(
-        jepa2.parameters(),
+        list(jepa2_pa.parameters()) + list(jepa2_ia.parameters()),
         lr=3e-4,
         weight_decay=1e-2,
     )
 
-    t2 = JEPA2Trainer(jepa2, jepa2_tgt, opt_j2)
+    t2 = JEPA2Trainer(
+        pa_model=jepa2_pa,
+        ia_model=jepa2_ia,
+        ia_ema_model=jepa2_ia_ema,
+        optimizer=opt_j2,
+    )
 
     # --------------------------------------------------
     # JEPA-3
     # --------------------------------------------------
-    jepa3_inv = JEPA_Tier3_InverseAffordance().to(device)
     jepa3_glob = JEPA_Tier3_GlobalEncoding(s_c_dim=128).to(device)
+
     jepa3_glob.load_pretrained_gcn(
         ckpt_path=GCN_CKPT,
         freeze_gcn=True,
     )
-    # FIX: initialize EMA AFTER model is on device
+
     jepa3_glob.init_ema()
-    
 
     opt_j3 = torch.optim.AdamW(
-        list(jepa3_inv.parameters()) +
-        list(jepa3_glob.parameters()),
+        jepa3_glob.parameters(),
         lr=3e-4,
         weight_decay=1e-2,
     )
 
     t3 = JEPA3Trainer(
-        jepa3_inv,      # inverse affordance
-        jepa3_glob,     # global encoding 
-        opt_j3          # optimizer
+        glob=jepa3_glob,
+        optimizer=opt_j3,
     )
 
     # -------------------------
@@ -222,9 +210,9 @@ def build_all(device):
 
     return pipeline, {
         "jepa1": jepa1,
-        "jepa2": jepa2,
-        "jepa3_inv": jepa3_inv,
-        "jepa3_glob": jepa3_glob,
+        "jepa2_pa": jepa2_pa,
+        "jepa2_ia": jepa2_ia,
+        "jepa3": jepa3_glob,
     }
 
 # ==================================================
@@ -298,11 +286,9 @@ def train():
             # -------------------------------------------------
             loss_total      = float(out.get("loss", 0.0))
             loss_j2         = float(out.get("loss_j2", 0.0))
-            loss_j2_var     = float(out.get("loss_j2_var", 0.0))
-            loss_j2_cov     = float(out.get("loss_j2_cov", 0.0))
+            loss_j2_pa     = float(out.get("loss_j2_pa", 0.0))
+            loss_j2_ia     = float(out.get("loss_j2_ia", 0.0))
             loss_j3         = float(out.get("loss_j3", 0.0))
-            loss_j3_inv     = float(out.get("loss_j3_inv", 0.0))
-            loss_j3_glob    = float(out.get("loss_j3_glob", 0.0))
 
             # ============================================================
             # LOGGING (Comet) 
@@ -315,8 +301,8 @@ def train():
                 experiment.log_metrics(
                     {
                         "total": loss_j2,
-                        "vic_var": loss_j2_var,
-                        "vic_cov": loss_j2_cov,
+                        "vic_var": loss_j2_pa,
+                        "vic_cov": loss_j2_ia,
                     },
                     step=global_step,
                     prefix="loss/jepa2"
@@ -326,8 +312,6 @@ def train():
                 experiment.log_metrics(
                     {
                         "total": loss_j3,
-                        "inv_total": loss_j3_inv,
-                        "glob_total": loss_j3_glob,
                     },
                     step=global_step,
                     prefix="loss/jepa3"

@@ -22,15 +22,6 @@ import multiprocessing
 import math
 from .kinematic import load_json_worker
 
-# ------------------------
-# EMA helper
-# ------------------------
-@torch.no_grad()
-def update_ema(ema_model: nn.Module, model: nn.Module, momentum: float):
-    # Update ema_model parameters to be: ema = ema * m + (1-m) * param
-    for ema_p, p in zip(ema_model.parameters(), model.parameters()):
-        ema_p.data.mul_(momentum).add_(p.data, alpha=1.0 - momentum)
-
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 

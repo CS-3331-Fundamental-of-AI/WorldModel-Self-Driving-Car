@@ -17,7 +17,7 @@ from dataset import Tier2Dataset, tier2_collate_fn
 from losses import total_tokenizer_loss_fsq
 from kinematic import build_scene_mapping_parallel
 from utils import build_graph_batch
-from jepaTier2 import Tier2Module
+from JEPA.JEPA_SecondLayer.physical_affordance.physical_affordance import Tier2Module
 # ------------------------------------------------------------
 # 0. LOAD ENV + DEVICE
 # ------------------------------------------------------------

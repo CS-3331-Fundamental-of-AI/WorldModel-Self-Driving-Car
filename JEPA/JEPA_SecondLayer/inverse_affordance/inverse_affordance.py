@@ -1,15 +1,16 @@
+#JEPA/JEPA_SecondLayer/inverse_affordance/inverse_affordance.py
 import torch
 import torch.nn as nn
 import copy
 
 from .kinematics import DeterministicKinematicBicycle
 from .temporal_encoder import TemporalActionEncoder
-from ..shared.predictors import PredictorMLP
+from .predictors import PredictorMLP
 from .utils import freeze
 
-class JEPA_Tier3_InverseAffordance(nn.Module):
+class JEPA_Tier2_InverseAffordance(nn.Module):
     """
-    JEPA Tier-3 Inverse Affordance (IA):
+    JEPA Tier-2 Inverse Affordance (IA):
       - Rollout kinematics (action → latent states)
       - Temporal token encoding
       - FiLM-modulated spatial latent (s_c)
@@ -93,7 +94,7 @@ class JEPA_Tier3_InverseAffordance(nn.Module):
         # -----------------------------------------------
         # 3. Pool and project s_c
         # -----------------------------------------------
-        # In JEPA_Tier3_InverseAffordance.forward
+        # In JEPA_Tier2_InverseAffordance.forward
         s_c_pooled = s_c.mean(dim=1)  # [B, D], D = 128   
 
         s_c_proj = self.s_c_proj(s_c_pooled)  # (B, film_dim)
