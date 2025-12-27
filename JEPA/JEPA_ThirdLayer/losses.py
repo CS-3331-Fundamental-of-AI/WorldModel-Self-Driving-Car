@@ -5,8 +5,6 @@ from .utils import cosine_distance, vic_reg_loss
 
 def global_encoding_losses(
     glob_out,
-    w_cos=1.0,
-    w_l1=0.5,
     w_var=0.1,
     w_cov=0.01,
 ):
@@ -29,7 +27,7 @@ def global_encoding_losses(
     # Invariance losses
     # -----------------------------
     cos_loss = cosine_distance(pred_tar, s_tar).mean()
-    l1_loss = F.l1_loss(pred_tar, s_tar)
+    #l1_loss = F.l1_loss(pred_tar, s_tar)
 
     # -----------------------------
     # VICReg regularization (FULL)
@@ -43,15 +41,10 @@ def global_encoding_losses(
     # -----------------------------
     # Total
     # -----------------------------
-    total = (
-        w_cos * cos_loss
-        + w_l1 * l1_loss
-        + vic_loss
-    )
+    total = (cos_loss + vic_loss)
 
     return {
         "total": total,
         "cos_pred_tar": cos_loss,
-        "l1_pred_tar": l1_loss,
         "vic_pred_tar": vic_loss,
     }

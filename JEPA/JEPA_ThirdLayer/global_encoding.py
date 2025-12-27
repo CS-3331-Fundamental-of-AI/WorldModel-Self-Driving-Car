@@ -65,9 +65,9 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         # -----------------------------
         # LayerNorms (Fix-1)
         # -----------------------------
-        #self.norm_x = nn.LayerNorm(cube_D)
-        #self.norm_y = nn.LayerNorm(cube_D)
-        #self.norm_z = nn.LayerNorm(cube_D)
+        self.norm_x = nn.LayerNorm(cube_D)
+        self.norm_y = nn.LayerNorm(cube_D)
+        self.norm_z = nn.LayerNorm(cube_D)
         
     # =====================================================
     # EMA UPDATE 
@@ -215,9 +215,9 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         # -----------------------------
         # LayerNorm (Fix-1)
         # -----------------------------
-        #x_tokens = self.norm_x(x_tokens)
-        #y_modal = self.norm_y(y_modal)
-        #z_channels = self.norm_z(z_channels)
+        x_tokens = self.norm_x(x_tokens)
+        y_modal = self.norm_y(y_modal)
+        z_channels = self.norm_z(z_channels)
 
         # ==================================================
         # STUDENT: s_ctx (cube_online)

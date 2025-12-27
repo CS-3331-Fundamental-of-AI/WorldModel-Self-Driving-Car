@@ -18,6 +18,44 @@ from comet_ml import Experiment
 import torch
 from torch.utils.data import DataLoader
 
+def atomic_torch_save(obj, final_path: Path):
+    final_path.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = final_path.with_suffix(".tmp")
+    torch.save(obj, tmp_path)
+    tmp_path.replace(final_path)
+
+# ============================================================
+# CHECKPOINT HELPERS (Stage-2)
+# ============================================================
+
+def save_jepa2_checkpoint(t2, step: int, tag: str):
+    path = CKPT_DIR / f"jepa2_{tag}_step{step}.pt"
+    atomic_torch_save(
+        {
+            "version": 1,
+            "step": step,
+            "state": {
+                "pa": t2.pa.state_dict(),
+                "ia": t2.ia.state_dict(),
+            },
+        },
+        path,
+    )
+    print(f"💾 Saved JEPA-2 checkpoint → {path}")
+
+
+def save_jepa3_checkpoint(t3, step: int, tag: str):
+    path = CKPT_DIR / f"jepa3_{tag}_step{step}.pt"
+    atomic_torch_save(
+        {
+            "version": 1,
+            "step": step,
+            "state": t3.glob.state_dict(),   # ONLINE ONLY
+        },
+        path,
+    )
+    print(f"💾 Saved JEPA-3 checkpoint → {path}")
+
 # -------------------------
 # Config
 # -------------------------
@@ -84,6 +122,7 @@ from Utils.unified_dataset import UnifiedDataset, unified_collate_fn
 from Utils.jepa1vjepadata import MapDataset, build_map_dataframe
 from Utils.jepa2data import Tier2Dataset, DATASET_PATH, get_scene_map
 from Utils.jepa3data import Tier3Dataset
+from Utils.utilities import to_float
 
 # ==================================================
 # Build all modules
@@ -214,6 +253,26 @@ def build_all(device):
         "jepa2_ia": jepa2_ia,
         "jepa3": jepa3_glob,
     }
+    
+def export_rssm_checkpoint(pipeline, path: Path):
+    """
+    Export JEPA-2 / JEPA-3 representation state for RSSM.
+    EMA (teacher) weights only.
+    """
+    ckpt = {
+        "version": 1,
+
+        "jepa2": {
+            "state": pipeline.t2.ia_ema_model.state_dict(),
+        },
+
+        "jepa3": {
+            "state": pipeline.t3.glob.ema_state_dict(),
+        },
+    }
+
+    atomic_torch_save(ckpt, path)
+    print(f"💾 RSSM checkpoint saved to: {path}")
 
 # ==================================================
 # Training
@@ -268,107 +327,110 @@ def train():
 
     global_step = 0
 
-    for epoch in range(EPOCHS):
-        pbar = tqdm(loader, desc=f"Epoch {epoch+1}/{EPOCHS}")
-        epoch_loss = 0.0
+    try:
+        for epoch in range(EPOCHS):
+            pbar = tqdm(loader, desc=f"Epoch {epoch+1}/{EPOCHS}")
+            epoch_loss = 0.0
 
-        for batch in pbar:
-            global_step += 1
+            for batch in pbar:
+                global_step += 1
 
-            with autocast_ctx:
-                out = pipeline.step(batch)
+                with autocast_ctx:
+                    out = pipeline.step(batch)
 
-            # -------------------------------------------------
-            # Scalar extraction
-            # -------------------------------------------------
-            # -------------------------------------------------
-            # Extract losses safely
-            # -------------------------------------------------
-            loss_total      = float(out.get("loss", 0.0))
-            loss_j2         = float(out.get("loss_j2", 0.0))
-            loss_j2_pa     = float(out.get("loss_j2_pa", 0.0))
-            loss_j2_ia     = float(out.get("loss_j2_ia", 0.0))
-            loss_j3         = float(out.get("loss_j3", 0.0))
-            loss_j3_cos     = float(out.get("loss_j3_cos", 0.0))
-            loss_j3_l1      = float(out.get("loss_j3_l1", 0.0))
-            loss_j3_vic     = float(out.get("loss_j3_vic", 0.0))
-            grad_j2_pa = float(out.get("grad_j2_pa", 0.0))
-            grad_j2_ia = float(out.get("grad_j2_ia", 0.0))
+                # -----------------------------
+                # Scalar extraction
+                # -----------------------------
+                loss_total = to_float(out.get("loss", 0.0))
+                epoch_loss += loss_total
 
-            vic_j2_pa_var = float(out.get("vic_j2_pa_var", 0.0))
-            vic_j2_ia_var = float(out.get("vic_j2_ia_var", 0.0))
+                loss_j2     = to_float(out.get("loss_j2", 0.0))
+                loss_j2_pa  = to_float(out.get("loss_j2_pa", 0.0))
+                loss_j2_ia  = to_float(out.get("loss_j2_ia", 0.0))
 
+                loss_j3     = to_float(out.get("loss_j3", 0.0))
+                loss_j3_cos = to_float(out.get("loss_j3_cos", 0.0))
+                loss_j3_vic = to_float(out.get("loss_j3_vic", 0.0))
 
-            # ============================================================
-            # LOGGING (Comet) 
-            # ============================================================
-            if global_step % 100 == 0:
-                # ---- global total loss ----
-                experiment.log_metrics({"total": loss_total}, step=global_step, prefix="loss")
+                grad_j2_pa = to_float(out.get("grad_j2_pa", 0.0))
+                grad_j2_ia = to_float(out.get("grad_j2_ia", 0.0))
 
-                # ---- JEPA-2 losses ----
-                experiment.log_metrics(
-                    {
-                        "total": loss_j2,
-                        "pa": loss_j2_pa,
-                        "ia": loss_j2_ia,
-                    },
-                    step=global_step,
-                    prefix="loss/jepa2"
-                )
-                # ---- JEPA-2 gradients ----
-                experiment.log_metrics(
-                    {
-                        "pa": grad_j2_pa,
-                        "ia": grad_j2_ia,
-                    },
-                    step=global_step,
-                    prefix="grad/jepa2"
-                )
-                # ---- JEPA-2 VICReg variance ----
-                experiment.log_metrics(
-                    {
-                        "pa_var": vic_j2_pa_var,
-                        "ia_var": vic_j2_ia_var,
-                    },
-                    step=global_step,
-                    prefix="vicreg/jepa2"
-                )
+                vic_j2_pa_var = to_float(out.get("vic_j2_pa_var", 0.0))
+                vic_j2_ia_var = to_float(out.get("vic_j2_ia_var", 0.0))
 
-                # ---- JEPA-3 losses ----
-                experiment.log_metrics({
-                    "total": loss_j3,
-                    "cos_pred_tar": loss_j3_cos,
-                    "l1_pred_tar": loss_j3_l1,
-                    "vic_pred_tar": loss_j3_vic,
-                }, step=global_step, prefix="loss/jepa3")
+                # -----------------------------
+                # Logging
+                # -----------------------------
+                if global_step % 100 == 0:
+                    experiment.log_metrics(
+                        {"total": loss_total},
+                        step=global_step,
+                        prefix="loss"
+                    )
 
-            # -------------------------------------------------
-            # tqdm display
-            # -------------------------------------------------
-            pbar.set_postfix({
-                "L": f"{loss_total:.4f}",
-                "L2": f"{loss_j2:.4f}",
-                "L3": f"{loss_j3:.4f}",
-            })
+                    experiment.log_metrics(
+                        {"total": loss_j2, "pa": loss_j2_pa, "ia": loss_j2_ia},
+                        step=global_step,
+                        prefix="loss/jepa2"
+                    )
 
-            if global_step % 500 == 0:
-                torch.save(
-                    {
-                        "step": global_step,
-                        **{k: v.state_dict() for k, v in models.items()},
-                    },
-                    CKPT_DIR / f"jepa23_step{global_step}.pt",
-                )
-        # -------------------------------------------------
-        # Epoch-level logging
-        # -------------------------------------------------
-        avg_loss = epoch_loss / max(len(loader), 1)
-        experiment.log_metric("epoch/avg_loss", avg_loss, step=epoch + 1)
-        print(f"Epoch {epoch+1} done — avg loss {avg_loss:.6f}")
+                    experiment.log_metrics(
+                        {"pa": grad_j2_pa, "ia": grad_j2_ia},
+                        step=global_step,
+                        prefix="grad/jepa2"
+                    )
 
-    experiment.end()
-    print("✅ Stage-2 training finished")
+                    experiment.log_metrics(
+                        {"pa_var": vic_j2_pa_var, "ia_var": vic_j2_ia_var},
+                        step=global_step,
+                        prefix="vicreg/jepa2"
+                    )
+
+                    experiment.log_metrics(
+                        {
+                            "total": loss_j3,
+                            "cos_pred_tar": loss_j3_cos,
+                            "vic_pred_tar": loss_j3_vic,
+                        },
+                        step=global_step,
+                        prefix="loss/jepa3"
+                    )
+
+                pbar.set_postfix({
+                    "L": f"{loss_total:.4f}",
+                    "L2": f"{loss_j2:.4f}",
+                    "L3": f"{loss_j3:.4f}",
+                })
+
+                if global_step % 500 == 0:
+                    save_jepa2_checkpoint(pipeline.t2, global_step, tag="auto")
+                    save_jepa3_checkpoint(pipeline.t3, global_step, tag="auto")
+
+            avg_loss = epoch_loss / max(len(loader), 1)
+            experiment.log_metric("epoch/avg_loss", avg_loss, step=epoch + 1)
+            print(f"Epoch {epoch+1} done — avg loss {avg_loss:.6f}")
+
+    except KeyboardInterrupt:
+        print("\n⛔ KeyboardInterrupt detected")
+        save_jepa2_checkpoint(pipeline.t2, global_step, tag="interrupt")
+        save_jepa3_checkpoint(pipeline.t3, global_step, tag="interrupt")
+        raise
+
+    except Exception:
+        print("\n❌ Training crashed")
+        save_jepa2_checkpoint(pipeline.t2, global_step, tag="crash")
+        save_jepa3_checkpoint(pipeline.t3, global_step, tag="crash")
+        raise
+
+    else:
+        print("\n🎉 Training completed successfully")
+        save_jepa2_checkpoint(pipeline.t2, global_step, tag="final")
+        save_jepa3_checkpoint(pipeline.t3, global_step, tag="final")
+
+    finally:
+        experiment.end()
+        print("🧹 Experiment closed")
+
 
 # ==================================================
 # Entrypoint

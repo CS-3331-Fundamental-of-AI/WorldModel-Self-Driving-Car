@@ -36,7 +36,7 @@ EMA_JEPA3 = 0.995
 # -------------------------
 LAMBDA_JEPA1 = 1.0
 LAMBDA_JEPA2 = 1.0
-LAMBDA_INV = 1.0
+LAMBDA_INV = 0.25
 LAMBDA_GLOB = 1.0
 
 # JEPA-1 loss params & config
