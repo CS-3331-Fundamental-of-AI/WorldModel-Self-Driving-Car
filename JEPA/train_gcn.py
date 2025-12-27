@@ -21,13 +21,9 @@ from comet_ml import Experiment
 # --------------------------------------------------
 # Env
 # --------------------------------------------------
-load_dotenv(".env")
-api_key = os.getenv("API_KEY")
-if api_key is None:
-    raise ValueError("API_KEY not found in environment or .env")
+load_dotenv()  # load .env from working directory
+os.environ["COMET_LOG_PACKAGES"] = "0"
 
-# Set COMET_API_KEY in env (Comet also reads this automatically)
-os.environ["COMET_API_KEY"] = api_key
 # --------------------------------------------------
 # Device (same logic as JEPA-1)
 # --------------------------------------------------
