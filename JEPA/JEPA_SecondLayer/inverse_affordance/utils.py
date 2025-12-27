@@ -34,14 +34,35 @@ def cosine_distance(a, b):
     return 1.0 - cos
 
 
-# VIC-Reg placeholder (regularization on embeddings)
-def vic_reg_loss(x):
-    # x: (B, D)
-    # use simple variance and covariance penalties as in VICReg
-    x = x - x.mean(dim=0, keepdim=True)
-    var = x.var(dim=0).mean()
-    cov = (x.T @ x) / (x.shape[0] - 1)
+#---------------------------------------------------------
+# VICReg loss
+# ---------------------------------------------------------
+def vic_reg_loss(x, eps=1e-4, var_weight=1.0, cov_weight=1.0):
+    """
+    Full VICReg regularization on embeddings x
+    Args:
+        x: [B, D] embedding tensor
+        eps: small number to avoid sqrt(0)
+        var_weight: weight for variance term
+        cov_weight: weight for covariance term
+    Returns:
+        scalar VICReg loss
+    """
+    # Centered embeddings
+    x = x - x.mean(dim=0, keepdim=True)  # [B, D]
+
+    # -----------------------------
+    # Variance term: encourage std > 1
+    # -----------------------------
+    std = torch.sqrt(x.var(dim=0) + eps)  # [D]
+    var_loss = torch.mean(F.relu(1 - std))
+
+    # -----------------------------
+    # Covariance term: decorrelate features
+    # -----------------------------
+    B, D = x.shape
+    cov = (x.T @ x) / (B - 1)  # [D, D]
     off_diag = cov - torch.diag(torch.diag(cov))
-    cov_loss = (off_diag ** 2).sum() / x.shape[1]
-    return var * 0.1 + cov_loss * 0.1
-    
+    cov_loss = (off_diag ** 2).sum() / D
+
+    return var_weight * var_loss + cov_weight * cov_loss

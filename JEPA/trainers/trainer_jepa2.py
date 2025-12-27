@@ -11,6 +11,21 @@ from config.config import (
     LAMBDA_INV,
     LAMBDA_REG
 )
+def grad_norm(module):
+    total_norm = 0.0
+    for p in module.parameters():
+        if p.grad is not None:
+            param_norm = p.grad.data.norm(2)
+            total_norm += param_norm.item() ** 2
+    return total_norm ** 0.5
+
+
+def vicreg_var_term(x, eps=1e-4):
+    # Center
+    x = x - x.mean(dim=0, keepdim=True)
+    std = torch.sqrt(x.var(dim=0) + eps)
+    var_loss = torch.mean(F.relu(1 - std))
+    return var_loss
 
 
 class JEPA2Trainer:
@@ -93,6 +108,10 @@ class JEPA2Trainer:
         # --------------------------------------------------
         vicreg_pa = vic_reg_loss(s_tg)
         vicreg_ia = vic_reg_loss(s_y)
+        
+        # Variance-only diagnostics
+        vicreg_pa_var = vicreg_var_term(s_tg)
+        vicreg_ia_var = vicreg_var_term(s_y)
 
         # --------------------------------------------------
         # 6. Total loss
@@ -104,10 +123,14 @@ class JEPA2Trainer:
         )
 
         # --------------------------------------------------
-        # 6. Optimize PA + IA
+        # 7. Optimize PA + IA
         # --------------------------------------------------
         self.opt.zero_grad(set_to_none=True)
         loss.backward()
+        
+        # ---- Gradient norms (before clipping) ----
+        grad_norm_pa = grad_norm(self.pa)
+        grad_norm_ia = grad_norm(self.ia)
 
         torch.nn.utils.clip_grad_norm_(self.pa.parameters(), CLIP_NORM)
         torch.nn.utils.clip_grad_norm_(self.ia.parameters(), CLIP_NORM)
@@ -115,7 +138,7 @@ class JEPA2Trainer:
         self.opt.step()
 
         # --------------------------------------------------
-        # 7. EMA update (IA → IA_ema)
+        # 8. EMA update (IA → IA_ema)
         # --------------------------------------------------
         update_ema(self.ia_ema, self.ia, EMA_JEPA2)
 
@@ -123,6 +146,15 @@ class JEPA2Trainer:
             "loss": loss.detach(),
             "loss_pa": loss_pa.detach(),
             "loss_ia": loss_ia.detach(),
+            # VICReg diagnostics
+            "vicreg_pa": vicreg_pa.detach(),
+            "vicreg_ia": vicreg_ia.detach(),
+            "vicreg_pa_var": vicreg_pa_var.detach(),
+            "vicreg_ia_var": vicreg_ia_var.detach(),
+            # Gradient diagnostics
+            "grad_norm_pa": torch.tensor(grad_norm_pa),
+            "grad_norm_ia": torch.tensor(grad_norm_ia),
+            #Latents (detached)
             "s_tg": s_tg.detach(),
             "s_y": s_y.detach(),
         }

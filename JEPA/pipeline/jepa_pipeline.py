@@ -107,6 +107,13 @@ class JEPAPipeline:
         loss_j2 = out2["loss"] if out2 else 0.0
         loss_j2_pa = out2.get("loss_pa", 0.0) if out2 else 0.0
         loss_j2_ia = out2.get("loss_ia", 0.0) if out2 else 0.0
+        # ---- JEPA-2 diagnostics ----
+        grad_j2_pa = out2.get("grad_norm_pa", 0.0) if out2 else 0.0
+        grad_j2_ia = out2.get("grad_norm_ia", 0.0) if out2 else 0.0
+
+        vic_pa_var = out2.get("vicreg_pa_var", 0.0) if out2 else 0.0
+        vic_ia_var = out2.get("vicreg_ia_var", 0.0) if out2 else 0.0
+
         
         # JEPA-3 losses: individual + total
         loss_j3      = out3.get("total", 0.0)
@@ -126,4 +133,12 @@ class JEPAPipeline:
             "loss_j3_cos": loss_j3_cos,
             "loss_j3_l1": loss_j3_l1,
             "loss_j3_vic": loss_j3_vic,
+            
+            # ----------------
+            # diagnostics
+            # ----------------
+            "grad_j2_pa": grad_j2_pa,
+            "grad_j2_ia": grad_j2_ia,
+            "vic_j2_pa_var": vic_pa_var,
+            "vic_j2_ia_var": vic_ia_var,
         }

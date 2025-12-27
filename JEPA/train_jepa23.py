@@ -292,6 +292,12 @@ def train():
             loss_j3_cos     = float(out.get("loss_j3_cos", 0.0))
             loss_j3_l1      = float(out.get("loss_j3_l1", 0.0))
             loss_j3_vic     = float(out.get("loss_j3_vic", 0.0))
+            grad_j2_pa = float(out.get("grad_j2_pa", 0.0))
+            grad_j2_ia = float(out.get("grad_j2_ia", 0.0))
+
+            vic_j2_pa_var = float(out.get("vic_j2_pa_var", 0.0))
+            vic_j2_ia_var = float(out.get("vic_j2_ia_var", 0.0))
+
 
             # ============================================================
             # LOGGING (Comet) 
@@ -309,6 +315,24 @@ def train():
                     },
                     step=global_step,
                     prefix="loss/jepa2"
+                )
+                # ---- JEPA-2 gradients ----
+                experiment.log_metrics(
+                    {
+                        "pa": grad_j2_pa,
+                        "ia": grad_j2_ia,
+                    },
+                    step=global_step,
+                    prefix="grad/jepa2"
+                )
+                # ---- JEPA-2 VICReg variance ----
+                experiment.log_metrics(
+                    {
+                        "pa_var": vic_j2_pa_var,
+                        "ia_var": vic_j2_ia_var,
+                    },
+                    step=global_step,
+                    prefix="vicreg/jepa2"
                 )
 
                 # ---- JEPA-3 losses ----
