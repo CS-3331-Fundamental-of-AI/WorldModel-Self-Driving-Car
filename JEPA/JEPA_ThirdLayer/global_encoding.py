@@ -62,6 +62,14 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         # Project incoming s_c features to cube_D
         self.s_c_proj = nn.Linear(s_c_dim, cube_D)
         
+        # -----------------------------
+        # LayerNorms (Fix-1)
+        # -----------------------------
+        self.norm_x = nn.LayerNorm(cube_D)
+        self.norm_y = nn.LayerNorm(cube_D)
+        self.norm_z = nn.LayerNorm(cube_D)
+        self.norm_out = nn.LayerNorm(cube_out)
+        
     # =====================================================
     # EMA UPDATE 
     # =====================================================
@@ -204,6 +212,13 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
             z_channels = s_tg[:, :self.M, :self.D]
         else:
             raise ValueError("s_tg must be (B,D) or (B,M,D)")
+        
+        # -----------------------------
+        # LayerNorm (Fix-1)
+        # -----------------------------
+        x_tokens = self.norm_x(x_tokens)
+        y_modal = self.norm_y(y_modal)
+        z_channels = self.norm_z(z_channels)
 
         # ==================================================
         # STUDENT: s_ctx (cube_online)
