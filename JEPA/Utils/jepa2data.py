@@ -4,7 +4,7 @@ import torch
 import random
 import math
 from torch.utils.data import Dataset
-from JEPA_SecondLayer.inverse_affordance.kinematics import (
+from JEPA_SecondLayer.physical_affordance.kinematic import (
     compute_windows_safe,
     pad_traj,
     load_gpickle,
