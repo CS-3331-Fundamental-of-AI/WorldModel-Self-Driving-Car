@@ -3,12 +3,13 @@
 import torch
 import torch.nn.functional as F
 
-from JEPA_SecondLayer.inverse_affordance.utils import update_ema
+from JEPA_SecondLayer.inverse_affordance.utils import update_ema, vic_reg_loss
 from config.config import (
     CLIP_NORM,
     EMA_JEPA2,
     LAMBDA_JEPA2,
     LAMBDA_INV,
+    LAMBDA_REG
 )
 
 
@@ -77,7 +78,7 @@ class JEPA2Trainer:
         # --------------------------------------------------
         # 3. PA loss (PA ← IA_ema)
         # --------------------------------------------------
-        loss_pa = self.dist_fn(s_tg, s_y_ema)
+        loss_pa = F.l1_loss(s_tg, s_y_ema)
 
         # --------------------------------------------------
         # 4. IA online forward (IA ← PA.detach)
@@ -85,14 +86,21 @@ class JEPA2Trainer:
         ia_out = self.ia(action, s_c)
         s_y = ia_out["s_y"]
 
-        loss_ia = self.dist_fn(s_y, s_tg.detach())
+        loss_ia = F.l1_loss(s_y, s_tg.detach())
+        
+        # --------------------------------------------------
+        # 5. VICReg regularization (anti-collapse)
+        # --------------------------------------------------
+        vicreg_pa = vic_reg_loss(s_tg)
+        vicreg_ia = vic_reg_loss(s_y)
 
         # --------------------------------------------------
-        # 5. Total loss (weighted)
+        # 6. Total loss
         # --------------------------------------------------
         loss = (
             LAMBDA_JEPA2 * loss_pa
             + LAMBDA_INV * loss_ia
+            + LAMBDA_REG * (vicreg_pa + vicreg_ia)
         )
 
         # --------------------------------------------------
