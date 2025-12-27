@@ -53,7 +53,7 @@ JEPA1_CKPT = "/kaggle/input/jepa1-step7684/pytorch/default/1/final_step7684.pt"
 assert os.path.exists(JEPA1_CKPT), f"JEPA-1 checkpoint not found: {JEPA1_CKPT}"
 print(f"✅ Using JEPA-1 checkpoint: {JEPA1_CKPT}")
 
-GCN_CKPT = "/kaggle/input/gcn-pretrained/pytorch/default/1/gcn_global_final_step4163.pt"
+GCN_CKPT = "/kaggle/input/gcn-pretrained/pytorch/default/2/gcn_pretrain_step8215.pt"
 assert os.path.exists(GCN_CKPT), f"GCN checkpoint not found: {GCN_CKPT}"
 print(f"✅ Using pretrained GCN: {GCN_CKPT}")
 
