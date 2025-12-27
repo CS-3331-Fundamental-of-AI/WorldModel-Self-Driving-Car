@@ -110,11 +110,9 @@ class JEPAPipeline:
         
         # JEPA-3 losses: individual + total
         loss_j3      = out3.get("total", 0.0)
-        loss_j3_cos  = out3.get("cos_tar_ctx", 0.0)
-        loss_j3_l1   = out3.get("l1_tar_ctx", 0.0)
-        loss_j3_vic  = out3.get("vic_tar", 0.0)
-        loss_j3_cos_true = out3.get("cos_tar_true", 0.0)
-        loss_j3_l1_true  = out3.get("l1_tar_true", 0.0)
+        loss_j3_cos  = out3.get("cos_pred_tar", 0.0)
+        loss_j3_l1   = out3.get("l1_pred_tar", 0.0)
+        loss_j3_vic  = out3.get("vic_pred_tar", 0.0)
 
         total_loss = loss_j2 + loss_j3
 
@@ -128,6 +126,4 @@ class JEPAPipeline:
             "loss_j3_cos": loss_j3_cos,
             "loss_j3_l1": loss_j3_l1,
             "loss_j3_vic": loss_j3_vic,
-            "loss_j3_cos_true": loss_j3_cos_true,
-            "loss_j3_l1_true": loss_j3_l1_true,
         }

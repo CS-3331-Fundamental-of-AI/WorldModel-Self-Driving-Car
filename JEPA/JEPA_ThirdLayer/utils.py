@@ -48,14 +48,34 @@ def cosine_distance(a, b):
 
 
 # ---------------------------------------------------------
-# VICReg placeholder
+# VICReg loss
 # ---------------------------------------------------------
-def vic_reg_loss(x):
-    x = x - x.mean(dim=0, keepdim=True)
-    var = x.var(dim=0).mean()
+def vic_reg_loss(x, eps=1e-4, var_weight=1.0, cov_weight=1.0):
+    """
+    Full VICReg regularization on embeddings x
+    Args:
+        x: [B, D] embedding tensor
+        eps: small number to avoid sqrt(0)
+        var_weight: weight for variance term
+        cov_weight: weight for covariance term
+    Returns:
+        scalar VICReg loss
+    """
+    # Centered embeddings
+    x = x - x.mean(dim=0, keepdim=True)  # [B, D]
 
-    cov = (x.T @ x) / (x.size(0) - 1)
+    # -----------------------------
+    # Variance term: encourage std > 1
+    # -----------------------------
+    std = torch.sqrt(x.var(dim=0) + eps)  # [D]
+    var_loss = torch.mean(F.relu(1 - std))
+
+    # -----------------------------
+    # Covariance term: decorrelate features
+    # -----------------------------
+    B, D = x.shape
+    cov = (x.T @ x) / (B - 1)  # [D, D]
     off_diag = cov - torch.diag(torch.diag(cov))
-    cov_loss = (off_diag ** 2).sum() / x.size(1)
+    cov_loss = (off_diag ** 2).sum() / D
 
-    return 0.1 * var + 0.1 * cov_loss
+    return var_weight * var_loss + cov_weight * cov_loss

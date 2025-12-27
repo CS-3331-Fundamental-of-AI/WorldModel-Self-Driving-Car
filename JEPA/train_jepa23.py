@@ -292,8 +292,6 @@ def train():
             loss_j3_cos     = float(out.get("loss_j3_cos", 0.0))
             loss_j3_l1      = float(out.get("loss_j3_l1", 0.0))
             loss_j3_vic     = float(out.get("loss_j3_vic", 0.0))
-            loss_j3_cos_true= float(out.get("loss_j3_cos_true", 0.0))
-            loss_j3_l1_true = float(out.get("loss_j3_l1_true", 0.0))
 
             # ============================================================
             # LOGGING (Comet) 
@@ -316,11 +314,9 @@ def train():
                 # ---- JEPA-3 losses ----
                 experiment.log_metrics({
                     "total": loss_j3,
-                    "cos_tar_ctx": loss_j3_cos,
-                    "l1_tar_ctx": loss_j3_l1,
-                    "vic_tar": loss_j3_vic,
-                    "cos_tar_true": loss_j3_cos_true,
-                    "l1_tar_true": loss_j3_l1_true
+                    "cos_pred_tar": loss_j3_cos,
+                    "l1_pred_tar": loss_j3_l1,
+                    "vic_pred_tar": loss_j3_vic,
                 }, step=global_step, prefix="loss/jepa3")
 
             # -------------------------------------------------
