@@ -68,8 +68,6 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         self.norm_x = nn.LayerNorm(cube_D)
         self.norm_y = nn.LayerNorm(cube_D)
         self.norm_z = nn.LayerNorm(cube_D)
-        self.norm_tar = nn.LayerNorm(cube_D)
-        self.norm_out = nn.LayerNorm(cube_out)
         
     # =====================================================
     # EMA UPDATE 
@@ -251,8 +249,6 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
                     ],
                     dim=1,
                 )
-                
-                y_tar = self.norm_tar(y_tar)  # normalize teacher pooled slots
 
                 s_tar = self.cube_target(
                     x_tokens[:, :self.cube_target.L],
@@ -265,7 +261,6 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         # Auxiliary prediction: s_ctx -> s_tar
         # -----------------------------
         pred_tar = self.pred_from_ctx(s_ctx) #z
-        pred_tar = self.norm_out(pred_tar)
 
         return {
             "s_tar": s_tar,

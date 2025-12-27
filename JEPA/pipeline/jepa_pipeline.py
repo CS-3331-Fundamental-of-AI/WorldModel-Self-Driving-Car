@@ -107,7 +107,14 @@ class JEPAPipeline:
         loss_j2 = out2["loss"] if out2 else 0.0
         loss_j2_pa = out2.get("loss_pa", 0.0) if out2 else 0.0
         loss_j2_ia = out2.get("loss_ia", 0.0) if out2 else 0.0
-        loss_j3 = out3["loss"] if out3 else 0.0
+        
+        # JEPA-3 losses: individual + total
+        loss_j3      = out3.get("total", 0.0)
+        loss_j3_cos  = out3.get("cos_tar_ctx", 0.0)
+        loss_j3_l1   = out3.get("l1_tar_ctx", 0.0)
+        loss_j3_vic  = out3.get("vic_tar", 0.0)
+        loss_j3_cos_true = out3.get("cos_tar_true", 0.0)
+        loss_j3_l1_true  = out3.get("l1_tar_true", 0.0)
 
         total_loss = loss_j2 + loss_j3
 
@@ -118,4 +125,9 @@ class JEPAPipeline:
             "loss_j2_pa": loss_j2_pa,
             "loss_j2_ia": loss_j2_ia,
             "loss_j3": loss_j3,
+            "loss_j3_cos": loss_j3_cos,
+            "loss_j3_l1": loss_j3_l1,
+            "loss_j3_vic": loss_j3_vic,
+            "loss_j3_cos_true": loss_j3_cos_true,
+            "loss_j3_l1_true": loss_j3_l1_true,
         }

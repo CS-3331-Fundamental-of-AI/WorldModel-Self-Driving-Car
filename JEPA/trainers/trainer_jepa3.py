@@ -36,16 +36,18 @@ class JEPA3Trainer:
         # -----------------------------
         # Loss
         # -----------------------------
+        losses_dict = {}
         if s_tar is not None:
-            loss = global_encoding_losses(out)["total"]
+            losses_dict = global_encoding_losses(out)
+            loss_total = losses_dict["total"]
         else:
-            loss = 0.0 * pred_tar.sum()  # zero loss if no graph
+            loss_total = 0.0 * pred_tar.sum() if pred_tar is not None else torch.tensor(0.0)  # zero loss if no graph
 
         # -----------------------------
         # Optimize
         # -----------------------------
         self.opt.zero_grad(set_to_none=True)
-        loss.backward()
+        loss_total.backward()
         torch.nn.utils.clip_grad_norm_(self.glob.parameters(), CLIP_NORM)
         self.opt.step()
 
@@ -55,6 +57,5 @@ class JEPA3Trainer:
         if s_tar is not None:
             self.glob.update_ema()
 
-        return {
-            "loss": loss.detach(),
-        }
+        # Return all individual losses + total
+        return {**losses_dict, "loss": loss_total.detach()}

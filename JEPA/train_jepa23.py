@@ -289,6 +289,11 @@ def train():
             loss_j2_pa     = float(out.get("loss_j2_pa", 0.0))
             loss_j2_ia     = float(out.get("loss_j2_ia", 0.0))
             loss_j3         = float(out.get("loss_j3", 0.0))
+            loss_j3_cos     = float(out.get("loss_j3_cos", 0.0))
+            loss_j3_l1      = float(out.get("loss_j3_l1", 0.0))
+            loss_j3_vic     = float(out.get("loss_j3_vic", 0.0))
+            loss_j3_cos_true= float(out.get("loss_j3_cos_true", 0.0))
+            loss_j3_l1_true = float(out.get("loss_j3_l1_true", 0.0))
 
             # ============================================================
             # LOGGING (Comet) 
@@ -309,13 +314,14 @@ def train():
                 )
 
                 # ---- JEPA-3 losses ----
-                experiment.log_metrics(
-                    {
-                        "total": loss_j3,
-                    },
-                    step=global_step,
-                    prefix="loss/jepa3"
-                )
+                experiment.log_metrics({
+                    "total": loss_j3,
+                    "cos_tar_ctx": loss_j3_cos,
+                    "l1_tar_ctx": loss_j3_l1,
+                    "vic_tar": loss_j3_vic,
+                    "cos_tar_true": loss_j3_cos_true,
+                    "l1_tar_true": loss_j3_l1_true
+                }, step=global_step, prefix="loss/jepa3")
 
             # -------------------------------------------------
             # tqdm display
