@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
+from comet_ml import Experiment
 
 # --------------------------------------------------
 # Env
@@ -34,6 +35,7 @@ else:
     device = torch.device("cpu")
 
 print(f"👉 Using device: {device}")
+
 
 # --------------------------------------------------
 # Paths / Checkpoints
@@ -100,13 +102,14 @@ def safe_save(model, step, tag="auto"):
 # --------------------------------------------------
 # Comet log
 # --------------------------------------------------
-from comet_ml import Experiment
+
 experiment = Experiment(
     api_key=os.getenv("API_KEY"),
     project_name=os.getenv("PROJECT_NAME", "JEPA"),
     workspace=os.getenv("WORK_SPACE")
 )
 experiment.set_name("GCN-Stage0-Pretrain")
+
 # --------------------------------------------------
 # Training
 # --------------------------------------------------
@@ -116,6 +119,7 @@ global_step = 0
 
 try:
     for epoch in range(EPOCHS):
+        epoch_loss = 0.0
         model.train()
         pbar = tqdm(loader, desc=f"Epoch {epoch+1}/{EPOCHS}")
 
