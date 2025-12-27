@@ -62,7 +62,7 @@ loader = DataLoader(
 # --------------------------------------------------
 # Model
 # --------------------------------------------------
-from JEPA.JEPA_ThirdLayer.gcn_pretrain import GCNPretrainModel
+from JEPA_ThirdLayer.gcn_pretrain import GCNPretrainModel
 from Utils.gcn_utils import edges_to_adj, mask_nodes
 
 model = GCNPretrainModel(
