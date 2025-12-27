@@ -196,7 +196,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         y_modal = s_c_proj.unsqueeze(1).expand(B, self.M, self.D)  # [B, M, D]
         
         # --------------------------------------------------
-        # z_channels ← s_tg (EMA future → gating) from JEPA-2
+        # z_channels ← s_tg (physical constraint signal) from JEPA-2
         # --------------------------------------------------
         if s_tg.ndim == 2:
             z_channels = s_tg.unsqueeze(1).expand(B, self.M, self.D)

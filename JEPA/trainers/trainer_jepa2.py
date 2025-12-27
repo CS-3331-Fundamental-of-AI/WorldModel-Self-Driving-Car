@@ -116,5 +116,5 @@ class JEPA2Trainer:
             "loss_pa": loss_pa.detach(),
             "loss_ia": loss_ia.detach(),
             "s_tg": s_tg.detach(),
-            "s_y_ema": s_y_ema.detach(),
+            "s_y": s_y.detach(),
         }
