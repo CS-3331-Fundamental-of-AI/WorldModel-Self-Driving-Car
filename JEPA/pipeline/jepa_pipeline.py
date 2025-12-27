@@ -13,20 +13,17 @@ class JEPAPipeline:
     """
 
     def __init__(self, t1, t2, t3, adapter):
-        self.t1 = t1  # JEPA-1 (V-JEPA-2 based)
-        self.t2 = t2  # JEPA-2 (trajectory / graph)
-        self.t3 = t3  # JEPA-3 (inverse / global)
+        self.t1 = t1  # JEPA-1 (V-JEPA-2)
+        self.t2 = t2  # JEPA-2 (PA + IA + EMA)
+        self.t3 = t3  # JEPA-3
         self.adapter = adapter
-        
+
     @torch.no_grad()
     def _get_s_c(self, batch):
-        """Get frozen JEPA-1 representation"""
         if "j1" not in batch or batch["j1"] is None:
             return None
         out = self.t1.forward_only(batch["j1"])
-        # wrap in dict so pipeline expects out1["s_c"]
         return {"s_c": out["s_c"]}
-
 
     def step(self, batch):
         # --------------------------------------------------
@@ -37,104 +34,88 @@ class JEPAPipeline:
         out1, out2, out3 = None, None, None
 
         # ==================================================
-        # JEPA-1 (NEW: V-JEPA-2)
+        # JEPA-1 (frozen)
         # ==================================================
-        # ----------------------------
-        # (frozen)
-        # ----------------------------
         out1 = self._get_s_c(batch)
 
-
         # ==================================================
-        # JEPA-2 (trajectory / graph)
+        # JEPA-2 (PA + IA)
         # ==================================================
-        if "j2" in batch and batch["j2"] is not None:
+        if batch.get("j2") is not None:
             batch_j2 = batch["j2"]
-            device = next(self.t2.model.parameters()).device
 
-            traj = batch_j2["clean_deltas"].to(device)
+            device = next(self.t2.pa.parameters()).device
+
+            traj       = batch_j2["clean_deltas"].to(device)
             traj_mask = batch_j2["traj_mask"].to(device)
-            x_graph = batch_j2["graph_feats"].to(device)
-            adj = batch_j2["graph_adj"].to(device)
+            x_graph   = batch_j2["graph_feats"].to(device)
+            adj       = batch_j2["graph_adj"].to(device)
             graph_mask = batch_j2["graph_mask"].to(device)
+
+            # IA input
             action = batch_j2["action"].to(device)
-            
+
+            s_c = out1["s_c"].detach() if out1 else None
+
             out2 = self.t2.step(
                 traj=traj,
-                action=action,
                 x_graph=x_graph,
                 adj=adj,
-                graph_mask=graph_mask,
                 traj_mask=traj_mask,
+                graph_mask=graph_mask,
+                action=action,
+                s_c=s_c,
             )
 
         # ==================================================
         # Stop-gradient barrier
         # ==================================================
-        s_c = out1["s_c"].detach() if out1 else None
+        s_c  = out1["s_c"].detach() if out1 else None
         s_tg = out2["s_tg"].detach() if out2 else None
         s_y  = out2["s_y"].detach() if out2 else None
 
         # ==================================================
-        # JEPA-3 (contextual inverse + global)
+        # JEPA-3
         # ==================================================
-        out3 = None
-        has_context = (s_c is not None) and (s_tg is not None)
-        has_j3 = ("j3" in batch) and (batch["j3"] is not None)
-
-        if has_context and has_j3:
+        if s_c is not None and s_tg is not None and batch.get("j3") is not None:
             batch_j3 = batch["j3"]
-            device = s_c.device if s_c is not None else s_tg.device
+            device = s_c.device
 
-            # -------- Global graph --------
             global_nodes_list = batch_j3.get("global_nodes")
             global_edges_list = batch_j3.get("global_edges")
 
-            if global_nodes_list is not None and global_edges_list is not None:
-                # Use utility function to batch graphs
-                global_nodes_batch, global_edges_batch = batch_global_graphs(
+            if global_nodes_list is not None:
+                global_nodes, global_edges = batch_global_graphs(
                     global_nodes_list,
                     global_edges_list,
                     device,
                 )
             else:
-                global_nodes_batch, global_edges_batch = None, None
+                global_nodes = global_edges = None
 
-            # -------- JEPA-3 step --------
             out3 = self.t3.step(
                 s_c=s_c,
                 s_tg=s_tg,
                 s_y=s_y,
-                global_nodes=global_nodes_batch,
-                global_edges=global_edges_batch,
+                global_nodes=global_nodes,
+                global_edges=global_edges,
             )
 
         # ==================================================
-        # Aggregate losses (no backward here!)
+        # Aggregate losses
         # ==================================================
-        if out2 is not None:
-            loss_j2 = out2["loss"]
-            loss_j2_pa = out2.get("loss_pa", 0.0)
-            loss_j2_ia = out2.get("loss_ia", 0.0)
-        else:
-            loss_j2 = loss_j2_pa = loss_j2_ia = 0.0
+        loss_j2 = out2["loss"] if out2 else 0.0
+        loss_j2_pa = out2.get("loss_pa", 0.0) if out2 else 0.0
+        loss_j2_ia = out2.get("loss_ia", 0.0) if out2 else 0.0
+        loss_j3 = out3["loss"] if out3 else 0.0
 
-        # -------- JEPA-3 --------
-        if out3 is not None:
-            loss_j3 = out3["loss"]
-        else:
-            loss_j3 = 0.0
-
-        loss_j1 = 0.0   # JEPA-1 frozen in this stage
         total_loss = loss_j2 + loss_j3
 
         return {
             "loss": total_loss,
-            "loss_j1": loss_j1,
-            # JEPA-2 (core)
+            "loss_j1": 0.0,
             "loss_j2": loss_j2,
             "loss_j2_pa": loss_j2_pa,
             "loss_j2_ia": loss_j2_ia,
-            # JEPA-3 task losses
             "loss_j3": loss_j3,
         }
