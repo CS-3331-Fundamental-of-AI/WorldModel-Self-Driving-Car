@@ -97,7 +97,16 @@ def safe_save(model, step, tag="auto"):
         },
         path,
     )
-
+# --------------------------------------------------
+# Comet log
+# --------------------------------------------------
+from comet_ml import Experiment
+experiment = Experiment(
+    api_key=os.getenv("API_KEY"),
+    project_name=os.getenv("PROJECT_NAME", "JEPA"),
+    workspace=os.getenv("WORK_SPACE")
+)
+experiment.set_name("GCN-Stage0-Pretrain")
 # --------------------------------------------------
 # Training
 # --------------------------------------------------
@@ -139,14 +148,21 @@ try:
                 losses.append(loss)
 
             loss = torch.stack(losses).mean()
+            epoch_loss += loss.item()
 
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
 
+            # ----------------- Comet per-step logging -----------------
+            experiment.log_metric("loss_step", loss.item(), step=global_step)
+
             pbar.set_postfix({"loss": f"{loss.item():.5f}"})
 
-        print(f"Epoch {epoch+1} finished")
+        # ----------------- Comet epoch logging -----------------
+        avg_loss = epoch_loss / max(len(loader), 1)
+        experiment.log_metric("loss_epoch_avg", avg_loss, step=epoch+1)
+        print(f"Epoch {epoch+1} finished — avg loss: {avg_loss:.5f}")
 
 except KeyboardInterrupt:
     print("\n⛔ Interrupted")
