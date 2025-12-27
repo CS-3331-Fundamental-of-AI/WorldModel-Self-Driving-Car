@@ -139,12 +139,14 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         if verbose:
             print(f"✅ Loaded pretrained GCN from: {ckpt_path}")
             print(f"   Loaded keys: {len(load_state)}")
+            print(f"   Keys loaded are for 'node_embed' and 'global_gcn' only.")
 
             if skipped:
                 print(f"   ⚠️ Skipped (shape mismatch): {len(skipped)}")
 
             if missing:
                 print(f"   ℹ️ Missing keys: {len(missing)}")
+                print(f"   Ignore missing keys of other modules.")
 
             if unexpected:
                 print(f"   ℹ️ Unexpected keys: {len(unexpected)}")

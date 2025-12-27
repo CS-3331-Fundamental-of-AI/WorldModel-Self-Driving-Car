@@ -57,9 +57,11 @@ class JEPAPipeline:
             x_graph = batch_j2["graph_feats"].to(device)
             adj = batch_j2["graph_adj"].to(device)
             graph_mask = batch_j2["graph_mask"].to(device)
-
+            action = batch_j2["action"].to(device)
+            
             out2 = self.t2.step(
                 traj=traj,
+                action=action,
                 x_graph=x_graph,
                 adj=adj,
                 graph_mask=graph_mask,
@@ -100,7 +102,6 @@ class JEPAPipeline:
 
             # -------- JEPA-3 step --------
             out3 = self.t3.step(
-                action=batch_j3.get("action"),
                 s_c=s_c,
                 s_tg=s_tg,
                 s_y=s_y,

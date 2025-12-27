@@ -301,8 +301,8 @@ def train():
                 experiment.log_metrics(
                     {
                         "total": loss_j2,
-                        "vic_var": loss_j2_pa,
-                        "vic_cov": loss_j2_ia,
+                        "pa": loss_j2_pa,
+                        "ia": loss_j2_ia,
                     },
                     step=global_step,
                     prefix="loss/jepa2"
