@@ -1,10 +1,13 @@
 import torch
 import torch.nn.functional as F
-from .utils import cosine_distance, vic_reg_loss
+from .utils import cosine_distance, vic_reg_loss, info_nce_loss_temp_free, info_nce_loss_temp_schedule
 
 
 def global_encoding_losses(
     glob_out,
+    step,
+    total_steps,
+    use_temp_free=False,
     w_var=0.1,
     w_cov=0.01,
 ):
@@ -26,9 +29,17 @@ def global_encoding_losses(
     # -----------------------------
     # Invariance losses
     # -----------------------------
-    cos_loss = cosine_distance(pred_tar, s_tar).mean()
-    #l1_loss = F.l1_loss(pred_tar, s_tar)
-
+    #cos_loss = cosine_distance(pred_tar, s_tar).mean()
+    # choose contrastive loss
+    if use_temp_free:
+        cos_loss = info_nce_loss_temp_free(pred_tar, s_tar)
+    else:
+        cos_loss = info_nce_loss_temp_schedule(
+            pred_tar,
+            s_tar,
+            step=step,
+            total_steps=total_steps
+        )
     # -----------------------------
     # VICReg regularization (FULL)
     # -----------------------------
@@ -48,3 +59,4 @@ def global_encoding_losses(
         "cos_pred_tar": cos_loss,
         "vic_pred_tar": vic_loss,
     }
+

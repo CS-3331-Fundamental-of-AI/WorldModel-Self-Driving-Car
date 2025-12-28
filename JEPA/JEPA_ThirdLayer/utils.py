@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import math
 
 # ---------------------------------------------------------
 # Freeze module
@@ -79,3 +80,47 @@ def vic_reg_loss(x, eps=1e-4, var_weight=1.0, cov_weight=1.0):
     cov_loss = (off_diag ** 2).sum() / D
 
     return var_weight * var_loss + cov_weight * cov_loss
+
+def info_nce_loss_temp_schedule(z_pred, z_tar, tau_min=0.05, tau_max=0.2, step=0, total_steps=10000):
+    """
+    Temperature-scheduled InfoNCE.
+    tau follows cosine schedule between tau_min and tau_max.
+    """
+    # normalize
+    z_pred = F.normalize(z_pred, dim=-1)
+    z_tar = F.normalize(z_tar, dim=-1)
+    
+    # compute cosine similarity matrix [B, B]
+    sim = torch.matmul(z_pred, z_tar.T)
+
+    # schedule tau (cosine annealing)
+    progress = step / total_steps
+    tau = tau_min + 0.5 * (tau_max - tau_min) * (1 + torch.cos(torch.pi * progress))
+
+    # logits = SIM / tau
+    logits = sim / tau
+
+    # labels: positives on diagonal
+    labels = torch.arange(sim.size(0), device=sim.device)
+
+    return F.cross_entropy(logits, labels)
+
+def info_nce_loss_temp_free(z_pred, z_tar, eps=1e-6):
+    """
+    Temperature-free InfoNCE using 2 * arctanh(cos similarity).
+    """
+    # normalize
+    z_pred = F.normalize(z_pred, dim=-1)
+    z_tar = F.normalize(z_tar, dim=-1)
+    
+    # cosine similarity matrix
+    sim = torch.matmul(z_pred, z_tar.T)
+
+    # clamp for numerical stability (cosine in (-1+eps, 1-eps))
+    sim = sim.clamp(-1 + eps, 1 - eps)
+
+    # logit mapping: 2 * arctanh(sim)
+    logits = 2 * torch.atanh(sim)
+
+    labels = torch.arange(sim.size(0), device=sim.device)
+    return F.cross_entropy(logits, labels)
