@@ -317,7 +317,7 @@ def train():
         collate_fn=unified_collate_fn,
     )
 
-    pipeline = build_all(DEVICE)
+    pipeline, models = build_all(DEVICE)
 
     autocast_ctx = (
         torch.autocast(device_type=DEVICE.type, dtype=torch.bfloat16)
