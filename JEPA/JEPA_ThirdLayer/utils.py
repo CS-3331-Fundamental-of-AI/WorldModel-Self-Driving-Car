@@ -112,7 +112,7 @@ def info_nce_loss_temp_schedule(
     sim = sim.clamp(-1 + 1e-6, 1 - 1e-6)  # optional safety clamp
 
     # horizon-free cosine annealing
-    progress = min(step / tau_timescale, 1.0)
+    progress = torch.tensor(min(step / tau_timescale, 1.0), device=z_pred.device)
     tau = tau_end + 0.5 * (tau_start - tau_end) * (1 + torch.cos(torch.pi * progress))
 
     # compute InfoNCE loss
