@@ -87,7 +87,7 @@ def info_nce_loss_temp_schedule(
     step: int,
     tau_start: float = 0.2,
     tau_end: float = 0.07,
-    tau_timescale: int = 5000,
+    tau_timescale: int = 7500,
 ):
     """
     Cosine-similarity InfoNCE with horizon-free temperature schedule.

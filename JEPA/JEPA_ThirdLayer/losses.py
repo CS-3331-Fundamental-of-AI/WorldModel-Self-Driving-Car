@@ -5,7 +5,7 @@ from .utils import cosine_distance, vic_reg_loss, info_nce_loss_temp_free, info_
 def global_encoding_losses(
     glob_out,
     global_step: int,
-    use_temp_free: bool = True,
+    use_temp_free: bool = False,
     lambda_cos: float = 1.0,
     lambda_n_max: float = 0.5,
     warmup_steps: int = 300,
