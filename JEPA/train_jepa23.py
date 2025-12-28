@@ -351,12 +351,16 @@ def train():
                 loss_j3     = to_float(out.get("loss_j3", 0.0))
                 loss_j3_cos = to_float(out.get("loss_j3_cos", 0.0))
                 loss_j3_vic = to_float(out.get("loss_j3_vic", 0.0))
+                loss_j3_nce = to_float(out.get("loss_j3_nce", 0.0))
+                tau = to_float(out.get("tau", None))
 
                 grad_j2_pa = to_float(out.get("grad_j2_pa", 0.0))
                 grad_j2_ia = to_float(out.get("grad_j2_ia", 0.0))
 
                 vic_j2_pa_var = to_float(out.get("vic_j2_pa_var", 0.0))
                 vic_j2_ia_var = to_float(out.get("vic_j2_ia_var", 0.0))
+                
+                
 
                 # -----------------------------
                 # Logging
@@ -389,13 +393,15 @@ def train():
                     experiment.log_metrics(
                         {
                             "total": loss_j3,
-                            "cos_pred_tar": loss_j3_cos,
-                            "vic_pred_tar": loss_j3_vic,
+                            "cos": loss_j3_cos,
+                            "nce": loss_j3_nce,
+                            "vicreg": loss_j3_vic,
+                            "tau": tau,
                         },
                         step=global_step,
                         prefix="loss/jepa3"
                     )
-
+            
                 pbar.set_postfix({
                     "L": f"{loss_total:.4f}",
                     "L2": f"{loss_j2:.4f}",

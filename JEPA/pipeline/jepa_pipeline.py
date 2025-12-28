@@ -115,11 +115,12 @@ class JEPAPipeline:
         vic_ia_var = out2.get("vicreg_ia_var", 0.0) if out2 else 0.0
 
         
-        # JEPA-3 losses: individual + total
+        # JEPA-3 losses
         loss_j3      = out3.get("total", 0.0)
-        loss_j3_cos  = out3.get("cos_pred_tar", 0.0)
-        loss_j3_l1   = out3.get("l1_pred_tar", 0.0)
-        loss_j3_vic  = out3.get("vic_pred_tar", 0.0)
+        loss_j3_cos  = out3.get("cos", 0.0)
+        loss_j3_nce  = out3.get("nce", 0.0)
+        loss_j3_vic  = out3.get("vicreg", 0.0)
+        tau          = out3.get("tau", float('nan'))
 
         total_loss = loss_j2 + loss_j3
 
@@ -131,8 +132,9 @@ class JEPAPipeline:
             "loss_j2_ia": loss_j2_ia,
             "loss_j3": loss_j3,
             "loss_j3_cos": loss_j3_cos,
-            "loss_j3_l1": loss_j3_l1,
+            "loss_j3_nce": loss_j3_nce,
             "loss_j3_vic": loss_j3_vic,
+            "tau": tau,
             
             # ----------------
             # diagnostics

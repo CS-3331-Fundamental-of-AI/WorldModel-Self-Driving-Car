@@ -81,29 +81,46 @@ def vic_reg_loss(x, eps=1e-4, var_weight=1.0, cov_weight=1.0):
 
     return var_weight * var_loss + cov_weight * cov_loss
 
-def info_nce_loss_temp_schedule(z_pred, z_tar, tau_min=0.05, tau_max=0.2, step=0, total_steps=10000):
+def info_nce_loss_temp_schedule(
+    z_pred,
+    z_tar,
+    step: int,
+    tau_start: float = 0.2,
+    tau_end: float = 0.07,
+    tau_timescale: int = 5000,
+):
     """
-    Temperature-scheduled InfoNCE.
-    tau follows cosine schedule between tau_min and tau_max.
-    """
-    # normalize
-    z_pred = F.normalize(z_pred, dim=-1)
-    z_tar = F.normalize(z_tar, dim=-1)
+    Cosine-similarity InfoNCE with horizon-free temperature schedule.
+
+    - z_pred: [B, D] predicted embeddings
+    - z_tar:  [B, D] target embeddings
+    - step: current training step
+    - tau_start: initial temperature (high → exploration)
+    - tau_end: final temperature (low → sharper alignment)
+    - tau_timescale: timescale for temperature annealing (horizon-free)
     
-    # compute cosine similarity matrix [B, B]
+    Returns:
+        loss: InfoNCE loss
+        tau:  current temperature
+    """
+    # normalize embeddings
+    z_pred = F.normalize(z_pred, dim=-1)
+    z_tar  = F.normalize(z_tar, dim=-1)
+
+    # cosine similarity matrix
     sim = torch.matmul(z_pred, z_tar.T)
+    sim = sim.clamp(-1 + 1e-6, 1 - 1e-6)  # optional safety clamp
 
-    # schedule tau (cosine annealing)
-    progress = step / total_steps
-    tau = tau_min + 0.5 * (tau_max - tau_min) * (1 + torch.cos(torch.pi * progress))
+    # horizon-free cosine annealing
+    progress = min(step / tau_timescale, 1.0)
+    tau = tau_end + 0.5 * (tau_start - tau_end) * (1 + torch.cos(torch.pi * progress))
 
-    # logits = SIM / tau
+    # compute InfoNCE loss
     logits = sim / tau
-
-    # labels: positives on diagonal
     labels = torch.arange(sim.size(0), device=sim.device)
+    loss = F.cross_entropy(logits, labels)
 
-    return F.cross_entropy(logits, labels)
+    return loss, tau
 
 def info_nce_loss_temp_free(z_pred, z_tar, eps=1e-6):
     """
@@ -123,4 +140,47 @@ def info_nce_loss_temp_free(z_pred, z_tar, eps=1e-6):
     logits = 2 * torch.atanh(sim)
 
     labels = torch.arange(sim.size(0), device=sim.device)
+    return F.cross_entropy(logits, labels)
+
+def temperature_schedule(
+    step: int,
+    tau_start: float = 0.2,
+    tau_end: float = 0.07,
+    tau_timescale: int = 5000,
+):
+    """
+    Horizon-free cosine annealing temperature.
+
+    - High τ early → exploration
+    - Low τ later → sharper alignment
+    - No assumption about total training length
+    """
+    progress = min(step / tau_timescale, 1.0)
+
+    tau = tau_end + 0.5 * (tau_start - tau_end) * (
+        1 + torch.cos(torch.pi * progress)
+    )
+    return tau
+
+
+def info_nce_loss_with_tau(
+    z_pred,
+    z_tar,
+    tau,
+):
+    """
+    Cosine-similarity InfoNCE with external temperature.
+    """
+    z_pred = F.normalize(z_pred, dim=-1)
+    z_tar  = F.normalize(z_tar, dim=-1)
+
+    # cosine similarity matrix
+    sim = torch.matmul(z_pred, z_tar.T)
+
+    # optional safety clamp (recommended with EMA teachers)
+    sim = sim.clamp(-1 + 1e-6, 1 - 1e-6)
+
+    logits = sim / tau
+    labels = torch.arange(sim.size(0), device=sim.device)
+
     return F.cross_entropy(logits, labels)

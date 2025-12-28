@@ -6,11 +6,10 @@ from config.config import CLIP_NORM
 
 
 class JEPA3Trainer:
-    def __init__(self, glob, optimizer, total_steps = 2000, use_temp_free=False):
+    def __init__(self, glob, optimizer):
         self.glob = glob
         self.opt = optimizer
-        self.total_steps = total_steps
-        self.use_temp_free = use_temp_free
+        self.global_step = 0
         
     def step(
         self,
@@ -42,13 +41,12 @@ class JEPA3Trainer:
         if s_tar is not None:
             losses_dict = global_encoding_losses(
                 out,
-                step=self.global_step,
-                total_steps=self.total_steps,
-                use_temp_free=self.use_temp_free,
+                global_step=self.global_step,
             )
             loss_total = losses_dict["total"]
         else:
             loss_total = 0.0 * pred_tar.sum() if pred_tar is not None else torch.tensor(0.0)  # zero loss if no graph
+            losses_dict = {"cos": torch.tensor(0.0), "nce": torch.tensor(0.0), "vicreg": torch.tensor(0.0), "tau": torch.tensor(float('nan'))}
 
         # -----------------------------
         # Optimize
