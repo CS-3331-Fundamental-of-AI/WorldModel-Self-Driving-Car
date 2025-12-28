@@ -9,9 +9,6 @@ def global_encoding_losses(
     lambda_cos: float = 1.0,
     lambda_n_max: float = 0.5,
     warmup_steps: int = 300,
-    tau_start: float = 0.2,
-    tau_end: float = 0.07,
-    tau_timescale: int = 5000,
     w_var: float = 0.1,
     w_cov: float = 0.01,
 ):
@@ -44,9 +41,6 @@ def global_encoding_losses(
             pred_tar,
             s_tar,
             step=global_step,
-            tau_start=tau_start,
-            tau_end=tau_end,
-            tau_timescale=tau_timescale,
         )
     
     # -----------------------------
