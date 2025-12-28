@@ -20,6 +20,7 @@ class JEPA3Trainer:
         global_edges,
         tokens_final=None,
     ):
+        self.global_step += 1
         # -----------------------------
         # Forward
         # -----------------------------
