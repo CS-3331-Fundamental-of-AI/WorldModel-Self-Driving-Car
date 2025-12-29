@@ -12,7 +12,7 @@ JEPA_DIR = Path(__file__).parent.parent / "JEPA"
 sys.path.append(str(JEPA_DIR))
 from JEPA.jepa_encoder import JEPA_Encoder
 
-CKPT_ROOT = "kaggle/input/5k"
+CKPT_ROOT = "/kaggle/input/jepa-ckpt-5k/pytorch/default/1"
 
 class FrozenEncoder(nn.Module):
     """
@@ -71,9 +71,20 @@ class FrozenEncoder(nn.Module):
     # Load checkpoints
     # ======================================================
     def _load_checkpoints(self, root):
-        ckpt1 = torch.load(f"{root}/jepa1_final.pt", map_location="cpu")
-        ckpt2 = torch.load(f"{root}/jepa2_final.pt", map_location="cpu")
-        ckpt3 = torch.load(f"{root}/jepa3_final.pt", map_location="cpu")
+        root = Path(root)
+
+        assert root.exists(), f"JEPA ckpt root not found: {root}"
+
+        ckpt1_path = root / "jepa1_final.pt"
+        ckpt2_path = root / "jepa2_final.pt"
+        ckpt3_path = root / "jepa3_final.pt"
+
+        for p in [ckpt1_path, ckpt2_path, ckpt3_path]:
+            assert p.exists(), f"Missing checkpoint: {p}"
+
+        ckpt1 = torch.load(ckpt1_path, map_location="cpu")
+        ckpt2 = torch.load(ckpt2_path, map_location="cpu")
+        ckpt3 = torch.load(ckpt3_path, map_location="cpu")
 
         self.encoder.jepa1.load_state_dict(ckpt1["state"], strict=False)
 
@@ -86,8 +97,7 @@ class FrozenEncoder(nn.Module):
 
         self.encoder.jepa3.load_state_dict(ckpt3["state"], strict=False)
 
-        print("✅ Loaded JEPA-1, JEPA-2 (PA+IA), JEPA-3 checkpoints")
-
+        print("✅ Loaded JEPA-1, JEPA-2 (PA + IA), JEPA-3 checkpoints")
     # ======================================================
     # Forward
     # ======================================================
