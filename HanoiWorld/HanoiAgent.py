@@ -81,7 +81,19 @@ class HanoiAgent(nn.Module):
         obs = self._prepare_obs(obs, latent is None)
 
         # Produce embedding with frozen encoder
-        embed = self.encoder(obs["image"])
+        obs_images = obs["image"]
+        if obs_images.dim() == 5:  # (B, T, H, W, C)
+            b, t, h, w, c = obs_images.shape
+            # Flatten batch and time for encoder
+            img_in = obs_images.view(b * t, h, w, c)
+            with torch.no_grad():
+                embed_flat = self.encoder(img_in)
+            # Reshape back to (B, T, embed)
+            embed = embed_flat.view(b, t, -1)
+        else:
+            with torch.no_grad():
+                embed = self.encoder(obs_images)
+
         print("=== Debug: encoder output shape ===", embed.shape)
         obs["embed"] = embed
 
