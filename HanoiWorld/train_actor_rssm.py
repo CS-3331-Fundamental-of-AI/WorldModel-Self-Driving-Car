@@ -93,7 +93,29 @@ def main():
 
     # Replay buffer stored as episodes (OrderedDict of arrays).
     replay = OrderedDict()
-    
+
+    # Dataset generator: sample full episodes then slice to batch_length.
+    generator = tools.sample_episodes(replay, cfg.batch_length, seed=cfg.seed)
+    dataset = tools.from_generator(generator, cfg.batch_size)
+    # grab a batch and print shapes
+    batch = next(dataset)
+    print("=== Debug: batch shapes from generator ===")
+    for k, v in batch.items():
+        print(f"{k}: {v.shape}")
+
+    # stop here for now to check
+    import sys; sys.exit(0)
+
+    jepa_ckpt_root = CKPT_ROOT
+    logger = tools.Logger(cfg.logdir, step=0)
+    encoder = FrozenEncoder(
+        ckpt_root=jepa_ckpt_root,
+        out_dim=cfg.embed,
+        device=cfg.device,
+    )
+    agent = HanoiAgent(config=cfg, logger=logger, dataset=dataset, encoder=encoder)
+    agent_state = None
+
     # Optional prefill with random actions to avoid empty replay deadlock.
     prefill = int(getattr(cfg, "prefill", 0))
     if prefill > 0:
@@ -132,28 +154,6 @@ def main():
             prefill -= 1
             prefill_progress.update(1)
         prefill_progress.close()
-
-    # Dataset generator: sample full episodes then slice to batch_length.
-    generator = tools.sample_episodes(replay, cfg.batch_length, seed=cfg.seed)
-    dataset = tools.from_generator(generator, cfg.batch_size)
-
-    # stop here for now to check
-    import sys; sys.exit(0)
-
-    jepa_ckpt_root = CKPT_ROOT
-    logger = tools.Logger(cfg.logdir, step=0)
-    encoder = FrozenEncoder(
-        ckpt_root=jepa_ckpt_root,
-        out_dim=cfg.embed,
-        device=cfg.device,
-    )
-    
-    batch = next(dataset)
-    print("=== Debug: batch shapes from generator ===")
-    for k, v in batch.items():
-        print(f"{k}: {v.shape}")
-    agent = HanoiAgent(config=cfg, logger=logger, dataset=dataset, encoder=encoder)
-    agent_state = None
 
     step = 0
     episode_idx = 0
