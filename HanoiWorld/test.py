@@ -20,6 +20,11 @@ config = SimpleNamespace(
     eval_state_mean=False,
     num_actions=3,
     actor={"dist": "onehot_gumble"},
+    # --- Required by HanoiWorld ---
+    dyn_discrete=True,
+    num_discs=3,
+    max_steps=100,
+    reward_type="sparse",
 )
 
 # ----------------------------
@@ -55,6 +60,7 @@ assert obs_dict["image"].shape[1] in [1, 3], "Channels should be 1 or 3 (C,H,W)"
 # Forward through encoder
 # ----------------------------
 z = encoder(obs_dict["image"])
+print("Encoder output shape:", z.shape)
 
 # ----------------------------
 # RSSM step
