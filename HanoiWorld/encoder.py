@@ -5,8 +5,9 @@ from transformers import AutoModel
 import sys
 import os
 from pathlib import Path
-# Add the parent folder (WorldModel-Self-Driving-Car) to sys.path
-sys.path.append(str(Path(__file__).resolve().parents[1]))
+
+JEPA_DIR = Path(__file__).parent.parent / "JEPA"
+sys.path.append(str(JEPA_DIR))
 from JEPA.jepa_encoder import JEPA_Encoder
 
 CKPT_ROOT = "kaggle/input/5k"
