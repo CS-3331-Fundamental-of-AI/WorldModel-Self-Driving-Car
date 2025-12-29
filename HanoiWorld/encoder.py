@@ -6,6 +6,8 @@ import sys
 import os
 from pathlib import Path
 
+ROOT_DIR = Path(__file__).parent.parent  # HanoiWorld's parent
+sys.path.append(str(ROOT_DIR))
 JEPA_DIR = Path(__file__).parent.parent / "JEPA"
 sys.path.append(str(JEPA_DIR))
 from JEPA.jepa_encoder import JEPA_Encoder
