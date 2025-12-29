@@ -125,6 +125,7 @@ class FrozenEncoder(nn.Module):
         """
         B = x.size(0)
         device = x.device
+        print("Encoder input shape:", x.shape)
 
         # -------------------------------
         # Convert input to [B, T, C, H, W] for V-JEPA
