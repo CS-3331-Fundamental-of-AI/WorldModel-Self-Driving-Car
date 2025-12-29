@@ -82,6 +82,7 @@ class HanoiAgent(nn.Module):
 
         # Produce embedding with frozen encoder
         embed = self.encoder(obs["image"])
+        print("=== Debug: encoder output shape ===", embed.shape)
         obs["embed"] = embed
 
         latent, _ = self._wm.rssm.obs_step(latent, action, embed, obs["is_first"])
