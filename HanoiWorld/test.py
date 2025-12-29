@@ -20,8 +20,12 @@ config = SimpleNamespace(
     eval_state_mean=False,
     num_actions=3,
     actor={"dist": "onehot_gumble"},
-    # --- Required by HanoiWorld ---
-    dyn_discrete=True,
+    
+    # ------ Required by HanoiWorld / RSSM ------
+    dyn_discrete=32,   # categorical size of stochastic latent
+    dyn_stoch=32,      # dimension of stochastic latent
+    dyn_deter=128,     # dimension of deterministic latent (LSTM hidden)
+    dyn_hidden=256,    # hidden units in RSSM
     num_discs=3,
     max_steps=100,
     reward_type="sparse",
