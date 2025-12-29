@@ -81,12 +81,10 @@ class HanoiAgent(nn.Module):
         obs = self._prepare_obs(obs, latent is None)
 
         # Produce embedding with frozen encoder
-        obs_images = obs["image"]
-        embed = self.encode_images(obs_images)  # always (B, T, embed)
+        embed = self.encode_images(obs["image"])  # (B, embed)
         obs["embed"] = embed
 
         print("=== Debug: encoder output shape ===", embed.shape)
-        obs["embed"] = embed
 
         latent, _ = self._wm.rssm.obs_step(latent, action, embed, obs["is_first"])
         if getattr(self._config, "eval_state_mean", False):
@@ -118,8 +116,9 @@ class HanoiAgent(nn.Module):
         # Prepare embeddings for the batch
         if "image" in data and "embed" not in data:
             img = torch.tensor(data["image"], device=self._config.device)
-            print("=== DEBUG: batch image shape ===", img.shape)
-            embed = self.encode_images(img)
+            if img.dtype == torch.uint8:
+                img = img.float() / 255.0
+            embed = self.encode_images(img)  # (B, T, embed) if sequence
             data["embed"] = embed
 
         post, context, mets = self._wm._train(data)
