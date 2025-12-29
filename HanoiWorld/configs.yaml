@@ -27,7 +27,7 @@ defaults:
   action_repeat: 2
   time_limit: 1000
   grayscale: False
-  prefill: 100 #2500 initially
+  prefill: 2500 # 2500 initially
   reward_EMA: True
 
   # Highway-env defaults (used when suite is 'highway')
