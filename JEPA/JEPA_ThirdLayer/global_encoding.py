@@ -29,7 +29,7 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         cube_M: int = 4,
         cube_D: int = 128,
         cube_out: int = 128,
-        s_c_dim: int = 256,
+        s_c_dim: int = 128,
         ema_decay: float = 0.995,
     ):
         super().__init__()

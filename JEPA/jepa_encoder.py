@@ -65,7 +65,7 @@ class JEPA_Encoder(nn.Module):
             cube_M=4,
             cube_D=128,
             cube_out=128,
-            s_c_dim=256,
+            s_c_dim=128,
         )
 
     # =====================================================
