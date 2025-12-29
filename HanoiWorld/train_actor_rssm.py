@@ -109,7 +109,6 @@ def main():
 
     # Optional prefill with random actions to avoid empty replay deadlock.
     prefill = int(getattr(cfg, "prefill", 0))
-    prefill = 0
     if prefill > 0:
         print(f"Prefilling replay with {prefill} random steps...")
         prefill_progress = tqdm(total=prefill, desc="Prefill", unit="step")
