@@ -97,6 +97,15 @@ def main():
     # Dataset generator: sample full episodes then slice to batch_length.
     generator = tools.sample_episodes(replay, cfg.batch_length, seed=cfg.seed)
     dataset = tools.from_generator(generator, cfg.batch_size)
+    # grab a batch and print shapes
+    batch = next(dataset)
+    print("=== Debug: batch shapes from generator ===")
+    for k, v in batch.items():
+        print(f"{k}: {v.shape}")
+
+    # stop here for now to check
+    import sys; sys.exit(0)
+
     jepa_ckpt_root = CKPT_ROOT
     logger = tools.Logger(cfg.logdir, step=0)
     encoder = FrozenEncoder(
@@ -104,6 +113,14 @@ def main():
         out_dim=cfg.embed,
         device=cfg.device,
     )
+    original_forward = encoder.forward
+
+    def debug_forward(x):
+        out = original_forward(x)
+        print("=== DEBUG: encoder output shape ===", out.shape)
+        return out
+
+    encoder.forward = debug_forward
     agent = HanoiAgent(config=cfg, logger=logger, dataset=dataset, encoder=encoder)
     agent_state = None
 
