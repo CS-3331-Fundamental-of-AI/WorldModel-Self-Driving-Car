@@ -82,14 +82,6 @@ class JEPA_Tier2_InverseAffordance(nn.Module):
 
         beta  = self.beta_proj(beta_t.mean(dim=1))
         gamma = self.gamma_proj(gamma_t.mean(dim=1))  # (B,T,D)
-
-        
-        # 3. FiLM projections
-        #beta_t_film = self.film_beta_proj(beta_t)           # (B,T,film_dim)
-        #beta = beta_t_film.mean(dim=1)                      # (B,film_dim)
-
-        #gamma_global = gamma_t[:, 0, :]                     # (B,token_dim)
-        #gamma = self.film_gamma_proj(gamma_global)          # (B,film_dim)
         
         # -----------------------------------------------
         # 3. Pool and project s_c
