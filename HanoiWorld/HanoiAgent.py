@@ -127,6 +127,7 @@ class HanoiAgent(nn.Module):
         # Prepare embeddings for the batch
         if "image" in data and "embed" not in data:
             img = torch.tensor(data["image"], device=self._config.device)
+            print("=== DEBUG: batch image shape ===", img.shape)
             if img.dtype == torch.uint8:
                 img = img.float() / 255.0
             # Handle (B, T, H, W, C) by flattening time into batch for encoder, then reshape back.

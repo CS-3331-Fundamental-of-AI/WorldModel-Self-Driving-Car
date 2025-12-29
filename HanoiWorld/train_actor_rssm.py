@@ -233,10 +233,10 @@ def main():
 def build_transition(obs, action, reward, discount):
     """Standardize a transition dict for replay."""
     out = dict(obs)
-    out["reward"] = np.array(reward, dtype=np.float32)
-    out["discount"] = np.array(discount, dtype=np.float32)
+    out["reward"] = np.array([reward], dtype=np.float32)
+    out["discount"] = np.array([discount], dtype=np.float32)
     if action is not None:
-        out["action"] = np.array(action)
+        out["action"] = np.array(action, dtype=np.float32)
     return out
 
 

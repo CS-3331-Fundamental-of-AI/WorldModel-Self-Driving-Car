@@ -48,8 +48,8 @@ class FrozenEncoder(nn.Module):
         backbone = AutoModel.from_pretrained(
             "facebook/vjepa2-vitl-fpc64-256",
             torch_dtype=torch.float16,
-        ).to(self.device)
-
+            device_map="cpu",
+        )
         backbone.eval()
         for p in backbone.parameters():
             p.requires_grad = False
