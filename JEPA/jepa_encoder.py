@@ -1,33 +1,42 @@
 import torch
 import torch.nn as nn
 
-from .JEPA_PrimitiveLayer import PrimitiveLayer
-from .JEPA_SecondLayer import Tier2Module
-from .JEPA_ThirdLayer import JEPA_Tier3_InverseAffordance, JEPA_Tier3_GlobalEncoding
-
+from JEPA_PrimitiveLayer.vjepa.model import PrimitiveLayerJEPA
+from .JEPA_SecondLayer import (
+    JEPA_Tier2_PhysicalAffordance,
+    JEPA_Tier2_InverseAffordance,
+)
+from .JEPA_ThirdLayer import JEPA_Tier3_GlobalEncoding
 
 
 class JEPA_Encoder(nn.Module):
     """
-    Full 3-layer JEPA World Model.
+    Full JEPA World Encoder (inference-safe)
 
-    JEPA-1: visual primitive encoder
-    JEPA-2: trajectory + local graph encoder
-    JEPA-3: inverse affordance + global world encoder
+    JEPA-1: Visual primitives
+    JEPA-2a: Physical affordance (trajectory + graph)
+    JEPA-2b: Inverse affordance (action-conditioned)
+    JEPA-3: Global world encoding
     """
 
-    def __init__(self):
+    def __init__(self, vision_encoder):
         super().__init__()
 
-        # -------------------------
-        # JEPA-1 (Primitive)
-        # -------------------------
-        self.jepa1 = PrimitiveLayer()
+        # -------------------------------------------------
+        # JEPA-1
+        # -------------------------------------------------
+        self.jepa1 = PrimitiveLayerJEPA(
+            encoder=vision_encoder,
+            grid_h=16,
+            grid_w=16,
+            enc_dim=1024,
+            prim_dim=128,
+        )
 
-        # -------------------------
-        # JEPA-2 (Trajectory + Graph)
-        # -------------------------
-        self.jepa2 = Tier2Module(
+        # -------------------------------------------------
+        # JEPA-2 Physical
+        # -------------------------------------------------
+        self.jepa2_phys = JEPA_Tier2_PhysicalAffordance(
             traj_dim=256,
             traj_out=128,
             node_feat_dim=13,
@@ -36,24 +45,22 @@ class JEPA_Encoder(nn.Module):
             fusion_hidden=256,
         )
 
-        # -------------------------
-        # JEPA-3a (Inverse Affordance)
-        # -------------------------
-        self.jepa3_inv = JEPA_Tier3_InverseAffordance(
+        # -------------------------------------------------
+        # JEPA-2 Inverse
+        # -------------------------------------------------
+        self.jepa2_inv = JEPA_Tier2_InverseAffordance(
             action_dim=2,
             kin_state_dim=64,
             kin_k=6,
             token_dim=128,
-            spatial_in_ch=64,
-            spatial_feat_dim=256,
             film_dim=128,
             pred_dim=128,
         )
 
-        # -------------------------
-        # JEPA-3b (Global Encoding)
-        # -------------------------
-        self.jepa3_glob = JEPA_Tier3_GlobalEncoding(
+        # -------------------------------------------------
+        # JEPA-3 Global
+        # -------------------------------------------------
+        self.jepa3 = JEPA_Tier3_GlobalEncoding(
             cube_L=6,
             cube_M=4,
             cube_D=128,
@@ -61,68 +68,67 @@ class JEPA_Encoder(nn.Module):
             s_c_dim=256,
         )
 
-
+    # =====================================================
+    # Forward
+    # =====================================================
     def forward(
         self,
-        masked_img,
-        unmasked_img,
-        mask_empty,
-        mask_non,
-        mask_any,
-        traj,
-        adj,
-        x_graph,
-        action,
+        pixel_values,      # [B, C, H, W]
+        traj,              # [B, T, 6]
+        adj,               # [B, N, N]
+        x_graph,           # [B, N, 13]
+        action,            # [B, 2]
         global_nodes=None,
-        global_adj=None,
+        global_edges=None,
     ):
-        # -------------------------
-        # JEPA-1
-        # -------------------------
-        _, s_c_1, tokens_1 = self.jepa1(
-            masked_img,
-            unmasked_img,
-            mask_empty,
-            mask_non,
-            mask_any,
+        # -------------------------------------------------
+        # JEPA-1: primitives
+        # -------------------------------------------------
+        s_c_tokens, s_c_proj = self.jepa1(pixel_values)
+        # s_c_tokens: [B, N, 128]  ← tokens
+        # s_c_proj:   [B, N, 128]
+
+        # -------------------------------------------------
+        # JEPA-2a: physical affordance
+        # -------------------------------------------------
+        phys_out = self.jepa2_phys(traj, adj, x_graph)
+        s_traj = phys_out["traj_emb"]        # [B, 128]
+        s_tg = phys_out["fusion"]            # [B, 256]
+
+        # -------------------------------------------------
+        # JEPA-2b: inverse affordance
+        # -------------------------------------------------
+        inv_out = self.jepa2_inv(
+            action=action,
+            s_c=s_c_tokens,
         )
 
-        # -------------------------
-        # JEPA-2
-        # -------------------------
-        tier2_out = self.jepa2(traj, adj, x_graph)
-        s_traj = tier2_out["traj_emb"]
-        s_fusion = tier2_out["fusion"]
+        s_y = inv_out["s_y"]                 # [B, 128]
+        tokens_final = inv_out["tokens"]     # [B, T, 128]
 
-        # -------------------------
-        # JEPA-3 Inverse
-        # -------------------------
-        spatial_x = s_c_1
-        if spatial_x.dim() == 4 and spatial_x.shape[1] == 1:
-            spatial_x = spatial_x.repeat(1, 64, 1, 1)
-        inv_out = self.jepa3_inv(action, spatial_x)
-
-        # -------------------------
-        # JEPA-3 Global
-        # -------------------------
-        glob_out = self.jepa3_glob(
-            s_tg_hat=inv_out["s_tg_hat"],
-            s_c=torch.cat([s_fusion, torch.zeros_like(s_fusion)], dim=-1) if s_fusion.shape[-1] == 128 else s_fusion,
+        # -------------------------------------------------
+        # JEPA-3: global world encoding
+        # -------------------------------------------------
+        glob_out = self.jepa3(
+            s_y=s_y,
+            s_c=s_tg,
+            s_tg=s_tg,
             global_nodes=global_nodes,
-            global_adj=global_adj,
-            tokens_final=inv_out["tokens_final"],
+            global_edges=global_edges,
+            tokens_final=tokens_final,
         )
 
         return {
-            "s_c_1": s_c_1,
-            "tokens_1": tokens_1,
+            # primitives
+            "s_c_tokens": s_c_tokens,
 
+            # tier2
             "traj_emb": s_traj,
-            "fusion_emb": s_fusion,
+            "s_tg": s_tg,
+            "s_y": s_y,
 
-            "s_tg_hat": inv_out["s_tg_hat"],
-
-            "world_latent": glob_out["s_tar"],  # final world embedding
-            "world_context": glob_out["s_ctx"],
-            "world_pred": glob_out["pred_tar"],
+            # world
+            "world_tgt": glob_out["s_tar"],   # target (EMA, if graph exists)
+            "world_ctx": glob_out["s_ctx"],     # student
+            "world_latent": glob_out["pred_tar"],   # predicted target (RSSM input)
         }

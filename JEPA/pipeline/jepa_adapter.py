@@ -1,5 +1,5 @@
 # --------------------------
-# JEPA Input Adapter (FIXED)
+# JEPA Input Adapter
 # --------------------------
 from Utils.utilities import build_graph_batch
 

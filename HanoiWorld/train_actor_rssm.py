@@ -17,6 +17,7 @@ import pathlib
 from collections import OrderedDict
 
 import numpy as np
+from HanoiWorld.encoder import FrozenEncoder
 import torch
 from tqdm import tqdm
 
@@ -91,8 +92,12 @@ def main():
     dataset = tools.from_generator(generator, cfg.batch_size)
 
     logger = tools.Logger(cfg.logdir, step=0)
-
-    agent = HanoiAgent(config=cfg, logger=logger, dataset=dataset, encoder=None)
+    encoder = FrozenEncoder(
+        ckpt_root=cfg.jepa_ckpt_root,
+        out_dim=cfg.embed,
+        device=cfg.device,
+    )
+    agent = HanoiAgent(config=cfg, logger=logger, dataset=dataset, encoder=encoder)
     agent_state = None
 
     # Optional prefill with random actions to avoid empty replay deadlock.

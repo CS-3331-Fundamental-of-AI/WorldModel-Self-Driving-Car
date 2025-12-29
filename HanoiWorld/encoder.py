@@ -1,36 +1,90 @@
 import torch
 import torch.nn as nn
-
+from transformers import AutoModel
 from JEPA.jepa_encoder import JEPA_Encoder
+from JEPA.JEPA_PrimitiveLayer.vjepa.model import build_vision_encoder
 
 
 class FrozenEncoder(nn.Module):
     """
-    Encoder wrapper that replaces ResNet with your full JEPA encoder.
-    Only outputs a fixed-size embedding for RSSM (default 128 dim).
+    Frozen JEPA encoder (JEPA-1 + JEPA-2 + JEPA-3).
+    Outputs world_latent from JEPA-3.
     """
 
-    def __init__(self, out_dim=128, device=None):
+    def __init__(
+        self,
+        out_dim=128,
+        device=None,
+        ckpt_root="HanoiWorld/checkpoints/5k",
+    ):
         super().__init__()
         self.device = device if device is not None else torch.device("cpu")
 
-        # -----------------------
-        # Use full JEPA instead of ResNet
-        # -----------------------
-        self.encoder = JEPA_Encoder().to(self.device)
+        # --------------------------------------------------
+        # Vision backbone (MUST match JEPA-1 training)
+        # --------------------------------------------------
+        backbone = AutoModel.from_pretrained(
+            "facebook/vjepa2-vitl-fpc64-256",
+            torch_dtype=torch.float16,
+            device_map="cpu",
+        )
+        backbone.eval()
+        for p in backbone.parameters():
+            p.requires_grad = False
 
-        # JEPA world_latent is 128, but let's keep general
-        self.proj = nn.Linear(128, out_dim).to(self.device)
+        vision_encoder = backbone.encoder
+        
+        # --------------------------------------------------
+        # JEPA Encoder (full stack)
+        # --------------------------------------------------
+        self.encoder = JEPA_Encoder(
+            vision_encoder=vision_encoder
+        ).to(self.device)
 
-        # No freezing (unless you want)
-        self.out_dim = out_dim
+        # --------------------------------------------------
+        # Load pretrained checkpoints
+        # --------------------------------------------------
+        self._load_checkpoints(ckpt_root)
+
+        # --------------------------------------------------
+        # Optional projection (RSSM compatibility)
+        # --------------------------------------------------
+        self.proj = nn.Linear(128, out_dim)
+
+        # --------------------------------------------------
+        # Freeze everything
+        # --------------------------------------------------
         self.eval()
         for p in self.parameters():
             p.requires_grad = False
 
+    # ======================================================
+    # Load checkpoints
+    # ======================================================
+    def _load_checkpoints(self, root):
+        ckpt1 = torch.load(f"{root}/jepa1_final.pt", map_location="cpu")
+        ckpt2 = torch.load(f"{root}/jepa2_final.pt", map_location="cpu")
+        ckpt3 = torch.load(f"{root}/jepa3_final.pt", map_location="cpu")
+
+        self.encoder.jepa1.load_state_dict(ckpt1["state"], strict=False)
+
+        self.encoder.jepa2_phys.load_state_dict(
+            ckpt2["state"]["pa"], strict=False
+        )
+        self.encoder.jepa2_inv.load_state_dict(
+            ckpt2["state"]["ia"], strict=False
+        )
+
+        self.encoder.jepa3.load_state_dict(ckpt3["state"], strict=False)
+
+        print("✅ Loaded JEPA-1, JEPA-2 (PA+IA), JEPA-3 checkpoints")
+
+    # ======================================================
+    # Forward
+    # ======================================================
     def forward(self, x):
         """
-        x: (B, C, H, W) — standard env frame.
+        x: (B, C, H, W) or (B, H, W, C)
         """
         if x.dim() == 4 and x.shape[1] not in (1, 3):
             x = x.permute(0, 3, 1, 2)
@@ -39,43 +93,29 @@ class FrozenEncoder(nn.Module):
             x = x.float() / 255.0
 
         B = x.size(0)
+        device = x.device
 
-        # -------------------------------------------------
-        # JEPA expects masked/unmasked images + masks
-        # For RSSM, we treat input frame as "unmasked"
-        # and the masked_img = unmasked_img (identity)
-        # -------------------------------------------------
-        masked_img = x
-        unmasked_img = x
-        # Masks must align with JEPA token grid length. The BEV encoder uses 8x8 patches on 64x64 → 64 tokens by default.
-        token_count = (x.shape[2] // 8) * (x.shape[3] // 8) if x.dim() == 4 else 1
-        mask_shape = (B, token_count)
-        mask_empty = torch.zeros(mask_shape, device=x.device)
-        mask_non = torch.zeros(mask_shape, device=x.device)
-        mask_any = torch.ones(mask_shape, device=x.device)
+        # --------------------------------------------------
+        # Minimal dummy inputs (RSSM inference)
+        # --------------------------------------------------
+        traj    = torch.zeros(B, 256, 6, device=device)
+        adj     = torch.zeros(B, 13, 13, device=device)
+        x_graph = torch.zeros(B, 13, 13, device=device)
+        action  = torch.zeros(B, 2, device=device)
 
-        # Minimal dummy inputs for tier2 + tier3
-        # Dummy trajectory: shape [B, T, 6] where T≈256 to match Tier2 expectations.
-        traj = torch.zeros(B, 256, 6, device=x.device)
-        adj = torch.zeros(B, 13, 13, device=x.device)
-        x_graph = torch.zeros(B, 13, 13, device=x.device)
-        action = torch.zeros(B, 2, device=x.device)
+        # --------------------------------------------------
+        # JEPA forward
+        # --------------------------------------------------
+        with torch.no_grad():
+            out = self.encoder(
+                pixel_values=x,
+                traj=traj,
+                adj=adj,
+                x_graph=x_graph,
+                action=action,
+                global_nodes=None,
+                global_edges=None,
+            )
 
-        outputs = self.encoder(
-            masked_img,
-            unmasked_img,
-            mask_empty,
-            mask_non,
-            mask_any,
-            traj,
-            adj,
-            x_graph,
-            action,
-        )
-
-        # Final world latent from JEPA-3
-        world_latent = outputs["world_latent"]  # (B, 128)
-
-        # Map to RSSM embedding dim
-        emb = self.proj(world_latent)
-        return emb
+        world_latent = out["world_latent"]  # [B, 128]
+        return self.proj(world_latent)
