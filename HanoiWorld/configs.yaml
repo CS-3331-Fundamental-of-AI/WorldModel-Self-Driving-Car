@@ -17,6 +17,8 @@ defaults:
   precision: 32
   debug: False
   video_pred_log: True
+  jepa_ckpt_root: /kaggle/input/5k
+  embed: 128
 
   # Environment
   task: 'dmc_walker_walk'
