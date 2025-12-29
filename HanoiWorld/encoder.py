@@ -117,9 +117,11 @@ class FrozenEncoder(nn.Module):
     def forward(self, x):
         """
         x: torch.Tensor
-           Either:
-           - 5D: [B, T, H, W, C] (video)
-           - 4D: [B, C, H, W] (single image)
+        Either:
+        - 5D: [B, T, H, W, C] (video)
+        - 4D: [B, H, W, C] (single image)
+        Returns:
+        world_latent: [B, T, out_dim] or [B, 1, out_dim]
         """
         B = x.size(0)
         device = x.device
@@ -129,31 +131,35 @@ class FrozenEncoder(nn.Module):
         # -------------------------------
         if x.dim() == 5:  # [B, T, H, W, C]
             x = x.permute(0, 1, 4, 2, 3)  # [B, T, C, H, W]
+            B, T, C, H, W = x.shape
+            x_flat = x.reshape(B*T, C, H, W)  # merge batch + time
         elif x.dim() == 4:  # [B, H, W, C] or [B, C, H, W]
             if x.shape[1] not in (1, 3):  # assume last dim is channel
-                x = x.permute(0, 3, 1, 2)
-            x = x.unsqueeze(1)  # [B, 1, C, H, W] for V-JEPA
+                x = x.permute(0, 3, 1, 2)  # [B, C, H, W]
+            x = x.unsqueeze(1)  # [B, 1, C, H, W]
+            B, T, C, H, W = x.shape
+            x_flat = x.reshape(B*T, C, H, W)
         else:
             raise ValueError(f"Unsupported input shape: {x.shape}")
 
         # Normalize if needed
-        if x.dtype == torch.uint8:
-            x = x.float() / 255.0
-            
+        if x_flat.dtype == torch.uint8:
+            x_flat = x_flat.float() / 255.0
+
         # --------------------------------------------------
         # Minimal dummy inputs (RSSM inference)
         # --------------------------------------------------
-        traj    = torch.zeros(B, 256, 6, device=device)
-        adj     = torch.zeros(B, 13, 13, device=device)
-        x_graph = torch.zeros(B, 13, 13, device=device)
-        action  = torch.zeros(B, 2, device=device)
+        traj    = torch.zeros(B*T, 256, 6, device=device)
+        adj     = torch.zeros(B*T, 13, 13, device=device)
+        x_graph = torch.zeros(B*T, 13, 13, device=device)
+        action  = torch.zeros(B*T, 2, device=device)
 
         # --------------------------------------------------
         # JEPA forward
         # --------------------------------------------------
         with torch.no_grad():
             out = self.encoder(
-                pixel_values=x,
+                pixel_values=x_flat,
                 traj=traj,
                 adj=adj,
                 x_graph=x_graph,
@@ -162,5 +168,8 @@ class FrozenEncoder(nn.Module):
                 global_edges=None,
             )
 
-        world_latent = out["world_latent"]  # [B, 128]
-        return self.proj(world_latent)
+        world_latent_flat = out["world_latent"]  # [B*T, 128]
+        world_latent = world_latent_flat.view(B, T, -1)  # restore sequence: [B, T, 128]
+
+        return self.proj(world_latent)  # [B, T, out_dim]
+
