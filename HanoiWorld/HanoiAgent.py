@@ -82,17 +82,8 @@ class HanoiAgent(nn.Module):
 
         # Produce embedding with frozen encoder
         obs_images = obs["image"]
-        if obs_images.dim() == 5:  # (B, T, H, W, C)
-            b, t, h, w, c = obs_images.shape
-            # Flatten batch and time for encoder
-            img_in = obs_images.view(b * t, h, w, c)
-            with torch.no_grad():
-                embed_flat = self.encoder(img_in)
-            # Reshape back to (B, T, embed)
-            embed = embed_flat.view(b, t, -1)
-        else:
-            with torch.no_grad():
-                embed = self.encoder(obs_images)
+        embed = self.encode_images(obs_images)  # always (B, T, embed)
+        obs["embed"] = embed
 
         print("=== Debug: encoder output shape ===", embed.shape)
         obs["embed"] = embed
@@ -128,18 +119,8 @@ class HanoiAgent(nn.Module):
         if "image" in data and "embed" not in data:
             img = torch.tensor(data["image"], device=self._config.device)
             print("=== DEBUG: batch image shape ===", img.shape)
-            if img.dtype == torch.uint8:
-                img = img.float() / 255.0
-            # Handle (B, T, H, W, C) by flattening time into batch for encoder, then reshape back.
-            if img.dim() == 5:
-                b, t, h, w, c = img.shape
-                img_in = img.view(b * t, h, w, c)
-                with torch.no_grad():
-                    emb = self.encoder(img_in).detach().view(b, t, -1)
-            else:
-                with torch.no_grad():
-                    emb = self.encoder(img).detach()
-            data["embed"] = emb
+            embed = self.encode_images(img)
+            data["embed"] = embed
 
         post, context, mets = self._wm._train(data)
         metrics.update(mets)
@@ -184,3 +165,25 @@ class HanoiAgent(nn.Module):
         if "discount" not in obs_dict:
             obs_dict["discount"] = torch.ones_like(obs_dict["is_first"])
         return obs_dict
+    
+    def encode_images(self, x):
+        """
+        x: (B, H, W, C) or (B, T, H, W, C)
+        returns: (B, T, embed) or (B, embed)
+        """
+        if x.dtype == torch.uint8:
+            x = x.float() / 255.0
+
+        if x.dim() == 5:  # (B, T, H, W, C)
+            b, t, h, w, c = x.shape
+            x_flat = x.view(b * t, h, w, c)
+            with torch.no_grad():
+                emb_flat = self.encoder(x_flat)
+            return emb_flat.view(b, t, -1)
+        elif x.dim() == 4:  # (B, H, W, C)
+            with torch.no_grad():
+                emb = self.encoder(x)
+            return emb.unsqueeze(1)  # make it (B, 1, embed) for RSSM
+        else:
+            raise ValueError(f"Unsupported input shape {x.shape}")
+

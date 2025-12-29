@@ -11,7 +11,7 @@ This is a lightweight loop that:
 It is intentionally simple (single env, no multiprocessing) to keep it easy to
 adapt or extend.
 """
-
+from comet_ml import Experiment
 import argparse
 import pathlib
 from collections import OrderedDict
@@ -24,7 +24,7 @@ from tqdm import tqdm
 import tools
 from HanoiAgent import HanoiAgent
 from evaluate import load_config, make_env  # reuse helpers
-from comet_ml import Experiment
+
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -146,7 +146,7 @@ def main():
             prefill -= 1
             prefill_progress.update(1)
         prefill_progress.close()
-   
+    
     step = 0
     episode_idx = 0
     done = True
@@ -233,29 +233,11 @@ def main():
 def build_transition(obs, action, reward, discount):
     """Standardize a transition dict for replay."""
     out = dict(obs)
-
-    # Ensure image is np array and has consistent shape (H,W,C)
-    img = np.array(obs["image"])
-    if img.ndim == 2:  # grayscale H x W
-        img = img[..., None]
-    elif img.ndim == 3 and img.shape[2] not in [1,3]:
-        # rare case: extra channels? force 3
-        img = img[..., :3]
-    out["image"] = img.astype(np.uint8)  # consistent dtype
-
-    # Rewards and discount
-    out["reward"] = np.array([reward], dtype=np.float32)
-    out["discount"] = np.array([discount], dtype=np.float32)
-
-    # Actions
+    out["reward"] = np.array(reward, dtype=np.float32)
+    out["discount"] = np.array(discount, dtype=np.float32)
     if action is not None:
-        act_arr = np.array(action, dtype=np.float32)
-        if act_arr.ndim == 0:
-            act_arr = act_arr[None]  # always at least 1D
-        out["action"] = act_arr
-
+        out["action"] = np.array(action)
     return out
-
 
 
 def add_transition(replay, episode_id, transition, dataset_size):
