@@ -81,6 +81,7 @@ class JEPA_Encoder(nn.Module):
         global_nodes=None,
         global_edges=None,
     ):
+        B = pixel_values.size(0)
         # -------------------------------------------------
         # JEPA-1: primitives
         # -------------------------------------------------

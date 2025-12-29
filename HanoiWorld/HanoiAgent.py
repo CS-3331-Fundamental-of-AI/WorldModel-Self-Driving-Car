@@ -173,21 +173,13 @@ class HanoiAgent(nn.Module):
     def encode_images(self, x):
         """
         x: (B, H, W, C) or (B, T, H, W, C)
-        returns: (B, T, embed) or (B, embed)
+        returns: (B, T, embed) or (B, 1, embed)
         """
         if x.dtype == torch.uint8:
             x = x.float() / 255.0
 
-        if x.dim() == 5:  # (B, T, H, W, C)
-            b, t, h, w, c = x.shape
-            x_flat = x.view(b * t, h, w, c)
-            with torch.no_grad():
-                emb_flat = self.encoder(x_flat)
-            return emb_flat.view(b, t, -1)
-        elif x.dim() == 4:  # (B, H, W, C)
-            with torch.no_grad():
-                emb = self.encoder(x)
-            return emb
-        else:
-            raise ValueError(f"Unsupported input shape {x.shape}")
+        with torch.no_grad():
+            emb = self.encoder(x)  # pass x as-is
+        return emb
+
 
