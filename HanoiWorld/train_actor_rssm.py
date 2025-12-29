@@ -233,11 +233,29 @@ def main():
 def build_transition(obs, action, reward, discount):
     """Standardize a transition dict for replay."""
     out = dict(obs)
+
+    # Ensure image is np array and has consistent shape (H,W,C)
+    img = np.array(obs["image"])
+    if img.ndim == 2:  # grayscale H x W
+        img = img[..., None]
+    elif img.ndim == 3 and img.shape[2] not in [1,3]:
+        # rare case: extra channels? force 3
+        img = img[..., :3]
+    out["image"] = img.astype(np.uint8)  # consistent dtype
+
+    # Rewards and discount
     out["reward"] = np.array([reward], dtype=np.float32)
     out["discount"] = np.array([discount], dtype=np.float32)
+
+    # Actions
     if action is not None:
-        out["action"] = np.array(action, dtype=np.float32)
+        act_arr = np.array(action, dtype=np.float32)
+        if act_arr.ndim == 0:
+            act_arr = act_arr[None]  # always at least 1D
+        out["action"] = act_arr
+
     return out
+
 
 
 def add_transition(replay, episode_id, transition, dataset_size):
