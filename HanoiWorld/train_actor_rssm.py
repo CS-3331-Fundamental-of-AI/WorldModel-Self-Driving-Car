@@ -148,10 +148,12 @@ def main():
         device=cfg.device,
     )
     original_forward = encoder.forward
-    def debug_forward(x):
-        out = original_forward(x)
+
+    def debug_forward(*args, **kwargs):
+        out = original_forward(*args, **kwargs)
         print("=== DEBUG: encoder output shape ===", out.shape)
         return out
+
     encoder.forward = debug_forward
     
     batch = next(dataset)
