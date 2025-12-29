@@ -84,7 +84,12 @@ class HanoiAgent(nn.Module):
         embed = self.encode_images(obs["image"])  # (B, embed)
         obs["embed"] = embed
 
-        print("=== Debug: encoder output shape ===", embed.shape)
+        # --- Debug prints ---
+        print("embed:", embed.shape)
+        print("latent before RSSM:", None if latent is None else {k: v.shape for k, v in latent.items()})
+        print("action before RSSM:", None if action is None else action.shape)
+        print("is_first:", obs["is_first"].shape)
+        # ------------------
 
         latent, _ = self._wm.rssm.obs_step(latent, action, embed, obs["is_first"])
         if getattr(self._config, "eval_state_mean", False):
@@ -182,7 +187,7 @@ class HanoiAgent(nn.Module):
         elif x.dim() == 4:  # (B, H, W, C)
             with torch.no_grad():
                 emb = self.encoder(x)
-            return emb.unsqueeze(1)  # make it (B, 1, embed) for RSSM
+            return emb
         else:
             raise ValueError(f"Unsupported input shape {x.shape}")
 
