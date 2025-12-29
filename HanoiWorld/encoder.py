@@ -4,7 +4,7 @@ import torch.nn as nn
 from transformers import AutoModel
 import sys
 import os
-
+from pathlib import Path
 # Add the parent folder (WorldModel-Self-Driving-Car) to sys.path
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 from JEPA.jepa_encoder import JEPA_Encoder
