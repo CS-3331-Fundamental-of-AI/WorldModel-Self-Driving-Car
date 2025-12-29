@@ -84,17 +84,21 @@ class JEPA_Encoder(nn.Module):
         # -------------------------------------------------
         # JEPA-1: primitives
         # -------------------------------------------------
-        # 🔑 Ensure video shape for V-JEPA
-        if pixel_values.dim() == 4:
-            # [B, C, H, W] → [B, 1, C, H, W]
-            pixel_values = pixel_values.unsqueeze(1)
-        elif pixel_values.dim() != 5:
-            raise ValueError(
-                f"pixel_values must be 4D or 5D, got {pixel_values.dim()}"
-            )
-        s_c_tokens, s_c_proj = self.jepa1(pixel_values)
-        # s_c_tokens: [B, N, 128]  ← tokens
-        # s_c_proj:   [B, N, 128]
+        if pixel_values.dim() == 4:  # [B, C, H, W]
+            pixel_values = pixel_values.unsqueeze(1)  # [B, 1, C, H, W]
+        elif pixel_values.dim() == 5:  # [B, T, H, W, C] → [B, T, C, H, W]
+            pixel_values = pixel_values.permute(0, 1, 4, 2, 3)
+        else:
+            raise ValueError(f"pixel_values must be 4D or 5D, got {pixel_values.dim()}")
+
+        B, T, C, H, W = pixel_values.shape
+        x_flat = pixel_values.reshape(B*T, C, H, W)  # merge batch + time
+        s_c_tokens_flat, s_c_proj_flat = self.jepa1(x_flat)  # [B*T, N, 128]
+
+        # Restore sequence dimension
+        N, D = s_c_tokens_flat.shape[1], s_c_tokens_flat.shape[2]
+        s_c_tokens = s_c_tokens_flat.view(B, T, N, D)  # [B, T, N, 128]
+        s_c_proj   = s_c_proj_flat.view(B, T, N, D)
 
         # -------------------------------------------------
         # JEPA-2a: physical affordance
