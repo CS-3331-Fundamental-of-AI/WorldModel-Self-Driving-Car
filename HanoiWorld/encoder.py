@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 from transformers import AutoModel
 from JEPA.jepa_encoder import JEPA_Encoder
-from JEPA.JEPA_PrimitiveLayer.vjepa.model import build_vision_encoder
 
+CKPT_ROOT = "kaggle/input/5k"
 
 class FrozenEncoder(nn.Module):
     """
@@ -15,7 +15,7 @@ class FrozenEncoder(nn.Module):
         self,
         out_dim=128,
         device=None,
-        ckpt_root="HanoiWorld/checkpoints/5k",
+        ckpt_root=CKPT_ROOT,
     ):
         super().__init__()
         self.device = device if device is not None else torch.device("cpu")

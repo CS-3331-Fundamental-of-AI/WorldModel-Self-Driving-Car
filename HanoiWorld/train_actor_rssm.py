@@ -17,7 +17,7 @@ import pathlib
 from collections import OrderedDict
 
 import numpy as np
-from HanoiWorld.encoder import FrozenEncoder
+from .encoder import FrozenEncoder
 import torch
 from tqdm import tqdm
 
