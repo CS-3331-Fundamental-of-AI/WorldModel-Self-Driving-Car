@@ -17,7 +17,6 @@ defaults:
   precision: 32
   debug: False
   video_pred_log: True
-  jepa_ckpt_root: /kaggle/input/jepa-ckpt-5k/pytorch/default/1
 
   embed: 128
 

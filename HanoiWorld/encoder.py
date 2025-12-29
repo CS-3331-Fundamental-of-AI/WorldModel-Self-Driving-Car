@@ -5,6 +5,7 @@ from transformers import AutoModel
 import sys
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 ROOT_DIR = Path(__file__).parent.parent  # HanoiWorld's parent
 sys.path.append(str(ROOT_DIR))
@@ -12,7 +13,19 @@ JEPA_DIR = Path(__file__).parent.parent / "JEPA"
 sys.path.append(str(JEPA_DIR))
 from JEPA.jepa_encoder import JEPA_Encoder
 
-CKPT_ROOT = "/kaggle/input/jepa-ckpt-5k/pytorch/default/1"
+# --------------------------------------------------
+# Load environment variables
+# --------------------------------------------------
+load_dotenv()  # loads .env from project root if present
+
+CKPT_ROOT = os.getenv("JEPA_CKPT_ROOT")
+
+if CKPT_ROOT is None:
+    raise RuntimeError(
+        "JEPA_CKPT_ROOT is not set. "
+        "Please define it in .env or environment variables."
+    )
+
 
 class FrozenEncoder(nn.Module):
     """

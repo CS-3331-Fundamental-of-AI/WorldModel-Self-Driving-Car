@@ -29,6 +29,13 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+CKPT_ROOT = os.getenv("JEPA_CKPT_ROOT")
+
+if CKPT_ROOT is None:
+    raise RuntimeError(
+        "JEPA_CKPT_ROOT is not set. "
+        "Please define it in .env or environment variables."
+    )
 
 def main():
     parser = argparse.ArgumentParser(description="Train RSSM + Actor on HanoiWorld")
@@ -90,10 +97,10 @@ def main():
     # Dataset generator: sample full episodes then slice to batch_length.
     generator = tools.sample_episodes(replay, cfg.batch_length, seed=cfg.seed)
     dataset = tools.from_generator(generator, cfg.batch_size)
-
+    jepa_ckpt_root = CKPT_ROOT
     logger = tools.Logger(cfg.logdir, step=0)
     encoder = FrozenEncoder(
-        ckpt_root=cfg.jepa_ckpt_root,
+        ckpt_root=jepa_ckpt_root,
         out_dim=cfg.embed,
         device=cfg.device,
     )
