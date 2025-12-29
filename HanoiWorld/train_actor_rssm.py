@@ -146,14 +146,7 @@ def main():
             prefill -= 1
             prefill_progress.update(1)
         prefill_progress.close()
-    # grab a batch and print shapes
-    batch = next(dataset)
-    print("=== Debug: batch shapes from generator ===")
-    for k, v in batch.items():
-        print(f"{k}: {v.shape}")
-
-    # stop here for now to check
-    import sys; sys.exit(0)
+   
     step = 0
     episode_idx = 0
     done = True
