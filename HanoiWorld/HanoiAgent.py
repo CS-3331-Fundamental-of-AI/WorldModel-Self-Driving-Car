@@ -81,8 +81,10 @@ class HanoiAgent(nn.Module):
         obs = self._prepare_obs(obs, latent is None)
 
         # Produce embedding with frozen encoder
-        embed = self.encoder(obs["image"])
+        embed = self.encode_images(obs["image"])  # (B, embed)
         obs["embed"] = embed
+
+        print("=== Debug: encoder output shape ===", embed.shape)
 
         latent, _ = self._wm.rssm.obs_step(latent, action, embed, obs["is_first"])
         if getattr(self._config, "eval_state_mean", False):
@@ -116,16 +118,8 @@ class HanoiAgent(nn.Module):
             img = torch.tensor(data["image"], device=self._config.device)
             if img.dtype == torch.uint8:
                 img = img.float() / 255.0
-            # Handle (B, T, H, W, C) by flattening time into batch for encoder, then reshape back.
-            if img.dim() == 5:
-                b, t, h, w, c = img.shape
-                img_in = img.view(b * t, h, w, c)
-                with torch.no_grad():
-                    emb = self.encoder(img_in).detach().view(b, t, -1)
-            else:
-                with torch.no_grad():
-                    emb = self.encoder(img).detach()
-            data["embed"] = emb
+            embed = self.encode_images(img)  # (B, T, embed) if sequence
+            data["embed"] = embed
 
         post, context, mets = self._wm._train(data)
         metrics.update(mets)
@@ -170,3 +164,25 @@ class HanoiAgent(nn.Module):
         if "discount" not in obs_dict:
             obs_dict["discount"] = torch.ones_like(obs_dict["is_first"])
         return obs_dict
+    
+    def encode_images(self, x):
+        """
+        x: (B, H, W, C) or (B, T, H, W, C)
+        returns: (B, T, embed) or (B, embed)
+        """
+        if x.dtype == torch.uint8:
+            x = x.float() / 255.0
+
+        if x.dim() == 5:  # (B, T, H, W, C)
+            b, t, h, w, c = x.shape
+            x_flat = x.view(b * t, h, w, c)
+            with torch.no_grad():
+                emb_flat = self.encoder(x_flat)
+            return emb_flat.view(b, t, -1)
+        elif x.dim() == 4:  # (B, H, W, C)
+            with torch.no_grad():
+                emb = self.encoder(x)
+            return emb.unsqueeze(1)  # make it (B, 1, embed) for RSSM
+        else:
+            raise ValueError(f"Unsupported input shape {x.shape}")
+
