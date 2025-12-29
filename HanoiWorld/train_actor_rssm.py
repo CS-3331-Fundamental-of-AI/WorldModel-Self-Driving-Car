@@ -146,7 +146,7 @@ def main():
             prefill -= 1
             prefill_progress.update(1)
         prefill_progress.close()
-    
+
     step = 0
     episode_idx = 0
     done = True

@@ -116,17 +116,30 @@ class FrozenEncoder(nn.Module):
     # ======================================================
     def forward(self, x):
         """
-        x: (B, C, H, W) or (B, H, W, C)
+        x: torch.Tensor
+           Either:
+           - 5D: [B, T, H, W, C] (video)
+           - 4D: [B, C, H, W] (single image)
         """
-        if x.dim() == 4 and x.shape[1] not in (1, 3):
-            x = x.permute(0, 3, 1, 2)
-
-        if x.dtype == torch.uint8:
-            x = x.float() / 255.0
-
         B = x.size(0)
         device = x.device
 
+        # -------------------------------
+        # Convert input to [B, T, C, H, W] for V-JEPA
+        # -------------------------------
+        if x.dim() == 5:  # [B, T, H, W, C]
+            x = x.permute(0, 1, 4, 2, 3)  # [B, T, C, H, W]
+        elif x.dim() == 4:  # [B, H, W, C] or [B, C, H, W]
+            if x.shape[1] not in (1, 3):  # assume last dim is channel
+                x = x.permute(0, 3, 1, 2)
+            x = x.unsqueeze(1)  # [B, 1, C, H, W] for V-JEPA
+        else:
+            raise ValueError(f"Unsupported input shape: {x.shape}")
+
+        # Normalize if needed
+        if x.dtype == torch.uint8:
+            x = x.float() / 255.0
+            
         # --------------------------------------------------
         # Minimal dummy inputs (RSSM inference)
         # --------------------------------------------------
