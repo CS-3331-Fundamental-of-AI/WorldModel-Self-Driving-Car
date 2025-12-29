@@ -1,6 +1,12 @@
+from click import Path
 import torch
 import torch.nn as nn
 from transformers import AutoModel
+import sys
+import os
+
+# Add the parent folder (WorldModel-Self-Driving-Car) to sys.path
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 from JEPA.jepa_encoder import JEPA_Encoder
 
 CKPT_ROOT = "kaggle/input/5k"

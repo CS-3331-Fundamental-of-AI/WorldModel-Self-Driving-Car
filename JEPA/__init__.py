@@ -1,10 +1,10 @@
-from .JEPA_PrimitiveLayer import PrimitiveLayer
-from .JEPA_SecondLayer import Tier2Module
-from .JEPA_ThirdLayer import JEPA_Tier3_InverseAffordance, JEPA_Tier3_GlobalEncoding
+from .JEPA_PrimitiveLayer.vjepa.model import PrimitiveLayerJepa
+from .JEPA_SecondLayer import JEPA_Tier2_InverseAffordance, JEPA_Tier2_PhysicalAffordance
+from .JEPA_ThirdLayer import JEPA_Tier3_GlobalEncoding
 
 __all__ = [
-    "PrimitiveLayer",
-    "Tier2Module",
-    "JEPA_Tier3_InverseAffordance",
+    "PrimitiveLayerJepa",
+    "JEPA_Tier2_InverseAffordance",
+    "JEPA_Tier2_PhysicalAffordance",
     "JEPA_Tier3_GlobalEncoding",
 ]
