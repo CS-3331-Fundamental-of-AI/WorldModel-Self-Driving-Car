@@ -19,13 +19,17 @@ config = SimpleNamespace(
     pretrain=1,
     eval_state_mean=False,
     num_actions=3,
-    actor={"dist": "onehot_gumble"},
+    actor={
+        "dist": "onehot_gumble",
+        "layers": 2,      # number of hidden layers in actor MLP
+        "units": 256,     # hidden units per layer
+    },
     
     # ------ Required by HanoiWorld / RSSM ------
-    dyn_discrete=32,   # categorical size of stochastic latent
-    dyn_stoch=32,      # dimension of stochastic latent
-    dyn_deter=128,     # dimension of deterministic latent (LSTM hidden)
-    dyn_hidden=256,    # hidden units in RSSM
+    dyn_discrete=32,
+    dyn_stoch=32,
+    dyn_deter=128,
+    dyn_hidden=256,
     num_discs=3,
     max_steps=100,
     reward_type="sparse",
