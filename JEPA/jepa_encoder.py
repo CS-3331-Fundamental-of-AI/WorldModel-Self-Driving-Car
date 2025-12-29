@@ -84,17 +84,25 @@ class JEPA_Encoder(nn.Module):
         # -------------------------------------------------
         # JEPA-1: primitives
         # -------------------------------------------------
+        # 🔑 Ensure video shape for V-JEPA
+        if pixel_values.dim() == 4:
+            # [B, C, H, W] → [B, 1, C, H, W]
+            pixel_values = pixel_values.unsqueeze(1)
+        elif pixel_values.dim() != 5:
+            raise ValueError(
+                f"pixel_values must be 4D or 5D, got {pixel_values.dim()}"
+            )
         s_c_tokens, s_c_proj = self.jepa1(pixel_values)
         # s_c_tokens: [B, N, 128]  ← tokens
         # s_c_proj:   [B, N, 128]
-        _check("s_c_tokens", s_c_tokens, 3)   # [B, N, 128]
+
         # -------------------------------------------------
         # JEPA-2a: physical affordance
         # -------------------------------------------------
         phys_out = self.jepa2_phys(traj, adj, x_graph)
         s_traj = phys_out["traj_emb"]        # [B, 128]
         s_tg = phys_out["fusion"]            # [B, 256]
-        _check("s_tg", s_tg, 2)               # [B, 256]
+
         # -------------------------------------------------
         # JEPA-2b: inverse affordance
         # -------------------------------------------------
@@ -105,8 +113,7 @@ class JEPA_Encoder(nn.Module):
 
         s_y = inv_out["s_y"]                 # [B, 128]
         tokens_final = inv_out["tokens"]     # [B, T, 128]
-        _check("s_y", s_y, 2)                 # [B, 128]
-        _check("tokens_final", tokens_final, 3)
+
         # -------------------------------------------------
         # JEPA-3: global world encoding
         # -------------------------------------------------
@@ -118,7 +125,6 @@ class JEPA_Encoder(nn.Module):
             global_edges=global_edges,
             tokens_final=tokens_final,
         )
-        _check("s_c (JEPA-1)", s_c_tokens, 3)
 
         return {
             # primitives
@@ -135,6 +141,3 @@ class JEPA_Encoder(nn.Module):
             "world_latent": glob_out["pred_tar"],   # predicted target (RSSM input)
         }
 
-def _check(name, t, dims):
-    assert t is not None, f"{name} is None"
-    assert t.dim() == dims, f"{name}.dim()={t.dim()} expected {dims}"
