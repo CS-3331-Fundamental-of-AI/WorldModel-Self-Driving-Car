@@ -132,11 +132,13 @@ class FrozenEncoder(nn.Module):
         # -------------------------------
         if x.dim() == 5:  # [B, T, H, W, C]
             x = x.permute(0, 1, 4, 2, 3).contiguous()  # [B, T, C, H, W]
+            B, T, C, H, W = x.shape
             x_flat = x  # Keep 5D, pass directly
         elif x.dim() == 4:  # single images
             if x.shape[1] not in (1, 3):
                 x = x.permute(0, 3, 1, 2)
             x = x.unsqueeze(1)  # [B, 1, C, H, W]
+            B, T, C, H, W = x.shape
             x_flat = x
         else:
             raise ValueError(f"Unsupported input shape: {x.shape}")
