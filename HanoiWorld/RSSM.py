@@ -152,7 +152,8 @@ class RSSM(nn.Module):
 
     def get_feat(self, state):
         stoch = state["stoch"]
-        if self._discrete:
+        print("stoch before reshape:", stoch.shape)
+        if self._discrete and stoch.dim() == 3:
             shape = list(stoch.shape[:-2]) + [self._stoch * self._discrete]
             stoch = stoch.reshape(shape)
         return torch.cat([stoch, state["deter"]], -1)
@@ -209,7 +210,7 @@ class RSSM(nn.Module):
         # (batch, stoch, discrete_num) - the transition model/ prior - the way model predict next
         # latent state | prev latent & action & no observation
         prev_stoch = prev_state["stoch"]
-        if self._discrete:
+        if self._discrete and prev_stoch.dim() > 2:
             shape = list(prev_stoch.shape[:-2]) + [self._stoch * self._discrete]
             # (batch, stoch, discrete_num) -> (batch, stoch * discrete_num)
             prev_stoch = prev_stoch.reshape(shape)
