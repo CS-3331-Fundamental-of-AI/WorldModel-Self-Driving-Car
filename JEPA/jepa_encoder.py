@@ -100,8 +100,6 @@ class JEPA_Encoder(nn.Module):
         # JEPA-2a: physical affordance
         # -------------------------------------------------
         phys_out = self.jepa2_phys(traj, adj, x_graph)
-        for k, v in phys_out.items():
-            print(f"phys_out {k} shape:", v.shape)
         s_traj = phys_out["traj_emb"]        # [B, 128]
         s_tg = phys_out["fusion"]            # [B, 256]
 
@@ -112,11 +110,11 @@ class JEPA_Encoder(nn.Module):
             action=action,
             s_c=s_c_tokens,
         )
-        for k, v in inv_out.items():
-            print(f"inv_out {k} shape:", v.shape)
         s_y = inv_out["s_y"]                 # [B, 128]
         tokens_final = inv_out["tokens"]     # [B, T, 128]
-
+        print ("s_y shape (after JEPA2b):", s_y.shape)
+        print ("tokens_final shape (after JEPA2b):", tokens_final.shape)
+        
         # -------------------------------------------------
         # JEPA-3: global world encoding
         # -------------------------------------------------
