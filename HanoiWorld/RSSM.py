@@ -151,12 +151,36 @@ class RSSM(nn.Module):
         return prior
 
     def get_feat(self, state):
+        """
+        Concatenate stochastic + deterministic latent.
+        Supports both single-step {B, stoch, ...} and sequence {B, T, stoch, ...}.
+        """
         stoch = state["stoch"]
-        print("stoch before reshape:", stoch.shape)
-        if self._discrete and stoch.dim() == 3:
-            shape = list(stoch.shape[:-2]) + [self._stoch * self._discrete]
-            stoch = stoch.reshape(shape)
-        return torch.cat([stoch, state["deter"]], -1)
+        deter = state["deter"]
+
+        # Flatten discrete if needed
+        if self.discrete:
+            if stoch.dim() == 4:  # (B, T, stoch, discrete)
+                B, T, S, D = stoch.shape
+                stoch = stoch.reshape(B, T, S * D)
+            elif stoch.dim() == 3:  # (B, stoch, discrete)
+                B, S, D = stoch.shape
+                stoch = stoch.reshape(B, S * D)
+
+        # Handle time dimension for deterministic state
+        if deter.dim() == 3 and stoch.dim() == 3:
+            # sequence (B, T, deter) already matches stoch (B, T, stoch_total)
+            pass
+        elif deter.dim() == 2 and stoch.dim() == 2:
+            # single-step (B, deter) matches (B, stoch_total)
+            pass
+        elif deter.dim() == 3 and stoch.dim() == 2:
+            # add time dim to stoch
+            stoch = stoch.unsqueeze(1)
+
+        feat = torch.cat([stoch, deter], dim=-1)
+        return feat  # shape: (B, T?, stoch+deter)
+
 
     def get_dist(self, state, dtype=None):
         if self._discrete:
