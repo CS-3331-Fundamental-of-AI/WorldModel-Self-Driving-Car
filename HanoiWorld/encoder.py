@@ -72,7 +72,7 @@ class FrozenEncoder(nn.Module):
         # --------------------------------------------------
         # Optional projection (RSSM compatibility)
         # --------------------------------------------------
-        self.proj = nn.Linear(128, out_dim)
+        self.proj = nn.Linear(128, out_dim).to(self.device)
 
         # --------------------------------------------------
         # Freeze everything
