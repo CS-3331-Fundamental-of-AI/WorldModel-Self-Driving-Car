@@ -102,7 +102,7 @@ class JEPA_Encoder(nn.Module):
         phys_out = self.jepa2_phys(traj, adj, x_graph)
         s_traj = phys_out["traj_emb"]        # [B, 128]
         s_tg = phys_out["fusion"]            # [B, 256]
-
+        print("s_tg shape (after JEPA2a):", s_tg.shape)
         # -------------------------------------------------
         # JEPA-2b: inverse affordance
         # -------------------------------------------------
