@@ -162,14 +162,6 @@ class FrozenEncoder(nn.Module):
         # Restore batch + time
         x_flat = x_flat_reshaped.view(B, T, C, x_flat_reshaped.shape[-2], x_flat_reshaped.shape[-1])
         print("Downsampled pixel_values shape:", x_flat.shape)
-        # --------------------------------------------------
-        # Minimal dummy inputs (RSSM inference)
-        # --------------------------------------------------
-        traj    = torch.zeros(B, T, 256, 6, device=device)
-        adj     = torch.zeros(B, T, 13, 13, device=device)
-        x_graph = torch.zeros(B, T, 13, 13, device=device)
-        action  = torch.zeros(B, T, 2, device=device)
-
 
         # --------------------------------------------------
         # JEPA forward
@@ -177,10 +169,10 @@ class FrozenEncoder(nn.Module):
         with torch.no_grad():
             out = self.encoder(
                 pixel_values=x_flat,
-                traj=traj,
-                adj=adj,
-                x_graph=x_graph,
-                action=action,
+                traj=None,
+                adj=None,
+                x_graph=None,
+                action=None,
                 global_nodes=None,
                 global_edges=None,
             )

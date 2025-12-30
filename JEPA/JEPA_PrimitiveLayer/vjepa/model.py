@@ -71,7 +71,7 @@ class PrimitiveLayerJEPA(nn.Module):
             z_proj = torch.nn.functional.adaptive_avg_pool1d(
                 z_proj, N_target
             )                                             # [B, D, 256]
-            print("z_proj shape before adaptive_avg_pool1d:", z_proj.shape)
+            print("z_proj shape after adaptive_avg_pool1d:", z_proj.shape)
             z_proj = z_proj.transpose(1, 2)              # [B, 256, D]
 
         x = z_proj.transpose(1, 2).reshape(B, D, H, W)
