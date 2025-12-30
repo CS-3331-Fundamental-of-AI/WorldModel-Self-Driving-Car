@@ -27,8 +27,8 @@ class JEPA_Encoder(nn.Module):
         # -------------------------------------------------
         self.jepa1 = PrimitiveLayerJEPA(
             encoder=vision_encoder,
-            grid_h=64,
-            grid_w=64,
+            grid_h=16,
+            grid_w=16,
             enc_dim=1024,
             prim_dim=128,
         )

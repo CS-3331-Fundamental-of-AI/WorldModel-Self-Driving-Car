@@ -4,6 +4,7 @@ import torch.nn as nn
 from transformers import AutoModel
 import sys
 import os
+import torch.nn.functional as F
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -147,6 +148,20 @@ class FrozenEncoder(nn.Module):
         if x_flat.dtype == torch.uint8:
             x_flat = x_flat.float() / 255.0
         print("Encoder input pixel_values shape:", x_flat.shape)
+        
+        #-------------------------------
+        # Downsample to match JEPA-1 grid size
+        # -------------------------------
+        # Flatten batch + time for pooling
+        B, T, C, H, W = x_flat.shape
+        x_flat_reshaped = x_flat.view(B*T, C, H, W)
+
+        # Resize to something small the encoder expects (e.g., 32x32)
+        x_flat_reshaped = F.adaptive_avg_pool2d(x_flat_reshaped, (32, 32))
+
+        # Restore batch + time
+        x_flat = x_flat_reshaped.view(B, T, C, x_flat_reshaped.shape[-2], x_flat_reshaped.shape[-1])
+        print("Downsampled pixel_values shape:", x_flat.shape)
         # --------------------------------------------------
         # Minimal dummy inputs (RSSM inference)
         # --------------------------------------------------
