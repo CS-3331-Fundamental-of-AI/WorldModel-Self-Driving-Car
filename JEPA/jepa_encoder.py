@@ -110,6 +110,7 @@ class JEPA_Encoder(nn.Module):
         # -------------------------------------------------
         B, T, k, a = action.shape
         action_flat = action.view(B*T, k, a)
+        print("action_flat shape:", action_flat.shape)
         inv_out = self.jepa2_inv(
             action=action_flat,
             s_c=s_c_tokens,
