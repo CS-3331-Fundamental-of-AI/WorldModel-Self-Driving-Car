@@ -87,7 +87,8 @@ class HanoiAgent(nn.Module):
         obs = self._prepare_obs(obs, latent is None)
 
         # Produce embedding with frozen encoder
-        embed = self.encode_images(obs["image"])  # (B, embed)
+        embed = self.encode_images(obs["image"])  # (B, 1, E)
+        embed = embed[:, 0]                       # (B, E)
         print("policy image:", obs["image"].shape)
         obs["embed"] = embed
 
