@@ -147,7 +147,6 @@ class FrozenEncoder(nn.Module):
         # Normalize if needed
         if x_flat.dtype == torch.uint8:
             x_flat = x_flat.float() / 255.0
-        print("Encoder input pixel_values shape:", x_flat.shape)
         
         #-------------------------------
         # Downsample to match JEPA-1 grid size
@@ -161,7 +160,6 @@ class FrozenEncoder(nn.Module):
 
         # Restore batch + time
         x_flat = x_flat_reshaped.view(B, T, C, x_flat_reshaped.shape[-2], x_flat_reshaped.shape[-1])
-        print("Downsampled pixel_values shape:", x_flat.shape)
         
         # --------------------------------------------------
         # Minimal dummy inputs (RSSM inference)
