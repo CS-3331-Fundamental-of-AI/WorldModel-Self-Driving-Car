@@ -50,13 +50,13 @@ class PrimitiveLayerJEPA(nn.Module):
             z = self.encoder(
                 pixel_values_videos=pixel_values
             ).last_hidden_state  # [B, N, 1024]
-
+        print("z shape after encoder:", z.shape)
         # -----------------------------
         # 2) Project to primitive dim
         # -----------------------------
         z = z.float()                    # FP32 safety
         z_proj = self.project(z)         # [B, N, 128]
-
+        print("z_proj shape after projection:", z_proj.shape)
         # -----------------------------
         # 3) Reshape to grid
         # -----------------------------
@@ -67,21 +67,26 @@ class PrimitiveLayerJEPA(nn.Module):
         if N != N_target:
             # adaptive average pooling over token dimension
             z_proj = z_proj.transpose(1, 2)              # [B, D, N]
+            print("z_proj shape before adaptive_avg_pool1d:", z_proj.shape)
             z_proj = torch.nn.functional.adaptive_avg_pool1d(
                 z_proj, N_target
             )                                             # [B, D, 256]
+            print("z_proj shape before adaptive_avg_pool1d:", z_proj.shape)
             z_proj = z_proj.transpose(1, 2)              # [B, 256, D]
 
         x = z_proj.transpose(1, 2).reshape(B, D, H, W)
+        print("x shape before spatial predictor:", x.shape)
         
         # -----------------------------
         # 4) Spatial predictor
         # -----------------------------
         delta = self.predictor(x)
+        print("delta shape after spatial predictor:", delta.shape)
 
         # -----------------------------
         # 5) Back to tokens
         # -----------------------------
         z_hat = delta.reshape(B, D, H*W).transpose(1, 2) # [B, N, 128] 
+        print("z_hat shape:", z_hat.shape)
 
         return z_hat, z_proj #z_hat = s_c
