@@ -82,7 +82,7 @@ class HanoiAgent(nn.Module):
     def _policy(self, obs, state, training):
         # state carries (latent, prev_action)
         latent, action = state if state is not None else (None, None)
-        print("Initial action:", latent.shape if latent is not None else None)
+        print("Initial latent:", latent.shape if latent is not None else None)
         print("Initial action:", action.shape if action is not None else None)
         obs = self._prepare_obs(obs, latent is None)
 
@@ -128,6 +128,7 @@ class HanoiAgent(nn.Module):
         img = torch.tensor(data["image"], device=self._config.device)
         emb = self.encode_images(img)   # (B, T, embed)
         print("train image:", img.shape)
+        print("train embed:", emb.shape)
         data["embed"] = emb
 
         post, context, mets = self._wm._train(data)
