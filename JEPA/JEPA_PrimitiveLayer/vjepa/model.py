@@ -82,6 +82,6 @@ class PrimitiveLayerJEPA(nn.Module):
         # -----------------------------
         # 5) Back to tokens
         # -----------------------------
-        z_hat = delta.reshape(B, D, H*W).transpose(1, 2) # [B, N, 128] 
+        z_hat = delta.reshape(B, D, N).transpose(1, 2) # [B, N, 128] 
 
         return z_hat, z_proj #z_hat = s_c

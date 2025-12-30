@@ -118,7 +118,7 @@ class FrozenEncoder(nn.Module):
         """
         x: torch.Tensor
         Either:
-        - 5D: [B, T, H, W, C] (video)
+        - 5D: [B, T, H, W, C] (sequqences)
         - 4D: [B, H, W, C] (single image)
         Returns:
         world_latent: [B, T, out_dim] or [B, 1, out_dim]
@@ -131,15 +131,13 @@ class FrozenEncoder(nn.Module):
         # Convert input to [B, T, C, H, W] for V-JEPA
         # -------------------------------
         if x.dim() == 5:  # [B, T, H, W, C]
-            x = x.permute(0, 1, 4, 2, 3)  # [B, T, C, H, W]
-            B, T, C, H, W = x.shape
-            x_flat = x.reshape(B*T, C, H, W)  # merge batch + time
-        elif x.dim() == 4:  # [B, H, W, C] or [B, C, H, W]
-            if x.shape[1] not in (1, 3):  # assume last dim is channel
-                x = x.permute(0, 3, 1, 2)  # [B, C, H, W]
+            x = x.permute(0, 1, 4, 2, 3).contiguous()  # [B, T, C, H, W]
+            x_flat = x  # Keep 5D, pass directly
+        elif x.dim() == 4:  # single images
+            if x.shape[1] not in (1, 3):
+                x = x.permute(0, 3, 1, 2)
             x = x.unsqueeze(1)  # [B, 1, C, H, W]
-            B, T, C, H, W = x.shape
-            x_flat = x.reshape(B*T, C, H, W)
+            x_flat = x
         else:
             raise ValueError(f"Unsupported input shape: {x.shape}")
 
@@ -150,10 +148,11 @@ class FrozenEncoder(nn.Module):
         # --------------------------------------------------
         # Minimal dummy inputs (RSSM inference)
         # --------------------------------------------------
-        traj    = torch.zeros(B*T, 256, 6, device=device)
-        adj     = torch.zeros(B*T, 13, 13, device=device)
-        x_graph = torch.zeros(B*T, 13, 13, device=device)
-        action  = torch.zeros(B*T, 2, device=device)
+        traj    = torch.zeros(B, T, 256, 6, device=device)
+        adj     = torch.zeros(B, T, 13, 13, device=device)
+        x_graph = torch.zeros(B, T, 13, 13, device=device)
+        action  = torch.zeros(B, T, 2, device=device)
+
 
         # --------------------------------------------------
         # JEPA forward
