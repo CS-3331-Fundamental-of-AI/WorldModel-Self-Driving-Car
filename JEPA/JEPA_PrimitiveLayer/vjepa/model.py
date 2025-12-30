@@ -60,25 +60,28 @@ class PrimitiveLayerJEPA(nn.Module):
         # -----------------------------
         # 3) Reshape to grid
         # -----------------------------
-        B_flat, N, D = z_proj.shape
-        H_grid, W_grid = self.grid_h, self.grid_w
-        N_target = H_grid * W_grid
+        B, N, D = z_proj.shape
+        H, W = self.grid_h, self.grid_w
+        N_target = H * W  # 256
 
         if N != N_target:
-            z_proj = z_proj.transpose(1, 2)
-            z_proj = torch.nn.functional.adaptive_avg_pool1d(z_proj, N_target)
-            z_proj = z_proj.transpose(1, 2)
+            # adaptive average pooling over token dimension
+            z_proj = z_proj.transpose(1, 2)              # [B, D, N]
+            z_proj = torch.nn.functional.adaptive_avg_pool1d(
+                z_proj, N_target
+            )                                             # [B, D, 256]
+            z_proj = z_proj.transpose(1, 2)              # [B, 256, D]
 
-        x_grid = z_proj.transpose(1, 2).reshape(B_flat, D, H_grid, W_grid)
+        x = z_proj.transpose(1, 2).reshape(B, D, H, W)
         
         # -----------------------------
         # 4) Spatial predictor
         # -----------------------------
-        delta = self.predictor(x_grid)
+        delta = self.predictor(x)
 
         # -----------------------------
         # 5) Back to tokens
         # -----------------------------
-        z_hat = delta.reshape(B_flat, D, N_target).transpose(1, 2) # [B_flat, N, 128]
+        z_hat = delta.reshape(B, D, N).transpose(1, 2) # [B, N, 128] 
 
         return z_hat, z_proj #z_hat = s_c
