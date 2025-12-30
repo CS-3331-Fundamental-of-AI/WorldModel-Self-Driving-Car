@@ -109,12 +109,10 @@ class JEPA_Encoder(nn.Module):
         # JEPA-2b: inverse affordance
         # -------------------------------------------------
         kin_k = self.jepa2_inv.kin.k
-        s_c_tokens_for_ia = s_c_tokens.mean(dim=2, keepdim=True).expand(-1, s_c_tokens.shape[1], kin_k)
-        print("s_c_tokens_for_ia shape (for JEPA2 InvAff):", s_c_tokens_for_ia.shape)
         
         inv_out = self.jepa2_inv(
             action=action,
-            s_c=s_c_tokens_for_ia,
+            s_c=s_c_tokens,
         )
         for k, v in inv_out.items():
             print(f"inv_out {k} shape:", v.shape)
