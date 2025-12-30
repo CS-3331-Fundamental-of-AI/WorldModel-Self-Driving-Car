@@ -111,9 +111,7 @@ class JEPA_Encoder(nn.Module):
             s_c=s_c_tokens,
         )
         s_y = inv_out["s_y"]                 # [B, 128]
-        tokens_final = inv_out["tokens"]     # [B, T, 128]
         print ("s_y shape (after JEPA2b):", s_y.shape)
-        print ("tokens_final shape (after JEPA2b):", tokens_final.shape)
         
         # -------------------------------------------------
         # JEPA-3: global world encoding
@@ -124,7 +122,6 @@ class JEPA_Encoder(nn.Module):
             s_tg=s_tg,
             global_nodes=global_nodes,
             global_edges=global_edges,
-            tokens_final=tokens_final,
         )
 
         return {
