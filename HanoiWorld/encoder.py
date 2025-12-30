@@ -156,8 +156,8 @@ class FrozenEncoder(nn.Module):
         B, T, C, H, W = x_flat.shape
         x_flat_reshaped = x_flat.view(B*T, C, H, W)
 
-        # Resize to something small the encoder expects (e.g., 32x32)
-        x_flat_reshaped = F.adaptive_avg_pool2d(x_flat_reshaped, (32, 32))
+        # Resize to something small the encoder expects (e.g., 16x16)
+        x_flat_reshaped = F.adaptive_avg_pool2d(x_flat_reshaped, (16, 16))
 
         # Restore batch + time
         x_flat = x_flat_reshaped.view(B, T, C, x_flat_reshaped.shape[-2], x_flat_reshaped.shape[-1])
