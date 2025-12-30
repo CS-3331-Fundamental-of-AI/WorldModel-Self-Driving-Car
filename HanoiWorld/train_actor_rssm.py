@@ -36,6 +36,7 @@ if CKPT_ROOT is None:
         "JEPA_CKPT_ROOT is not set. "
         "Please define it in .env or environment variables."
     )
+cfg = None
 
 def main():
     parser = argparse.ArgumentParser(description="Train RSSM + Actor on HanoiWorld")
@@ -64,7 +65,9 @@ def main():
         comet_exp = None
 
     # Load config and set runtime overrides.
+    global cfg
     cfg = load_config([args.config])
+
     if args.steps is not None:
         cfg.steps = args.steps
     cfg.logdir = pathlib.Path(args.logdir)
@@ -236,10 +239,14 @@ def build_transition(obs, action, reward, discount):
     out["reward"] = np.array(reward, dtype=np.float32)
     out["discount"] = np.array(discount, dtype=np.float32)
     if action is None:
-        # zero-action placeholder
-        out["action"] = np.zeros((cfg.num_actions,), dtype=np.float32)
+        # First step of episode (no previous action)
+        out["action"] = np.zeros(cfg.num_actions, dtype=np.float32)
     else:
-        out["action"] = np.array(action, dtype=np.float32)
+        action = np.asarray(action, dtype=np.float32)
+        assert action.shape == (cfg.num_actions,), (
+            f"Action shape mismatch: {action.shape} vs ({cfg.num_actions},)"
+        )
+        out["action"] = action
     return out
 
 
