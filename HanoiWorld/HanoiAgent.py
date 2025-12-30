@@ -51,11 +51,13 @@ class HanoiAgent(nn.Module):
     def __call__(self, obs, reset, state=None, training=True):
         step = self._step
         if training and self._dataset is not None:
-            steps = (
-                self._config.pretrain
-                if self._should_pretrain()
-                else self._should_train(step)
-            )
+            if self._should_pretrain():
+                steps = self._config.pretrain
+            elif self._should_train(step):
+                steps = 1
+            else:
+                steps = 0
+
             for _ in range(steps):
                 self._train(next(self._dataset))
                 self._update_count += 1
