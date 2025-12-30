@@ -85,14 +85,34 @@ class JEPA_Encoder(nn.Module):
         # -------------------------------------------------
         # JEPA-1: primitives
         # -------------------------------------------------
+        # Determine input shape
         if pixel_values.dim() == 4:
-            x = pixel_values  # [B, C, H, W]
+            x_flat = pixel_values.permute(0, 3, 1, 2)  # [B, C, H, W]
+            is_sequence = False
         elif pixel_values.dim() == 5:
-            x = pixel_values  # [B, T, C, H, W]
+            B, T, H, W, C = pixel_values.shape
+            x = pixel_values.permute(0, 1, 4, 2, 3)  # [B, T, C, H, W]
+            is_sequence = True
+            # Flatten sequence in **chunks**
+            chunk_size = 64  # frames per chunk
+            s_c_tokens_chunks = []
+            s_c_proj_chunks = []
+            for i in range(0, B*T, chunk_size):
+                x_chunk = x.reshape(B*T, C, H, W)[i:i+chunk_size]  # [chunk, C, H, W]
+                s_c_tokens_chunk, s_c_proj_chunk = self.jepa1(x_chunk)
+                s_c_tokens_chunks.append(s_c_tokens_chunk)
+                s_c_proj_chunks.append(s_c_proj_chunk)
+            s_c_tokens_flat = torch.cat(s_c_tokens_chunks, dim=0)
+            s_c_proj_flat = torch.cat(s_c_proj_chunks, dim=0)
+            N, D = s_c_tokens_flat.shape[1], s_c_tokens_flat.shape[2]
+            s_c_tokens = s_c_tokens_flat.view(B, T, N, D)
+            s_c_proj = s_c_proj_flat.view(B, T, N, D)
         else:
-            raise ValueError()
+            raise ValueError("pixel_values must be 4D or 5D")
 
-        s_c_tokens, s_c_proj = self.jepa1(x)  # works for both
+        if not is_sequence:
+            s_c_tokens, s_c_proj = s_c_tokens_flat, s_c_proj_flat
+
 
         # -------------------------------------------------
         # JEPA-2a: physical affordance

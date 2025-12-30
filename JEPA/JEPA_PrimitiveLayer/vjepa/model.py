@@ -43,18 +43,6 @@ class PrimitiveLayerJEPA(nn.Module):
         self.predictor = SpatialPredictorCNN(embed_dim=prim_dim)
 
     def forward(self, pixel_values):
-         # pixel_values: [B, C, H, W] OR [B, T, C, H, W]
-        is_sequence = False
-        if pixel_values.dim() == 5:
-            is_sequence = True
-            B, T, C, H, W = pixel_values.shape
-            x_flat = pixel_values.reshape(B*T, C, H, W)  # flatten for encoder
-        elif pixel_values.dim() == 4:
-            B, C, H, W = pixel_values.shape
-            x_flat = pixel_values
-        else:
-            raise ValueError(f"pixel_values must be 4D or 5D, got {pixel_values.dim()}")
-
         # -----------------------------
         # 1) Encoder (frozen)
         # -----------------------------
@@ -72,33 +60,25 @@ class PrimitiveLayerJEPA(nn.Module):
         # -----------------------------
         # 3) Reshape to grid
         # -----------------------------
-        if is_sequence:
-            z_proj = z_proj.view(B, T, z_proj.shape[1], z_proj.shape[2])  # [B, T, N, D]
-            B_flat, N, D = B*T, z_proj.shape[2], z_proj.shape[3]
-        else:
-            B_flat, N, D = z_proj.shape
-            
+        B_flat, N, D = z_proj.shape
         H_grid, W_grid = self.grid_h, self.grid_w
         N_target = H_grid * W_grid
+
         if N != N_target:
-            z_proj_reshaped = z_proj.view(B_flat, N, D).transpose(1,2)  # [B_flat, D, N]
-            z_proj_reshaped = torch.nn.functional.adaptive_avg_pool1d(z_proj_reshaped, N_target)
-            z_proj_reshaped = z_proj_reshaped.transpose(1,2)  # [B_flat, N_target, D]
-        else:
-            z_proj_reshaped = z_proj.view(B_flat, N, D)
+            z_proj = z_proj.transpose(1, 2)
+            z_proj = torch.nn.functional.adaptive_avg_pool1d(z_proj, N_target)
+            z_proj = z_proj.transpose(1, 2)
+
+        x_grid = z_proj.transpose(1, 2).reshape(B_flat, D, H_grid, W_grid)
         
         # -----------------------------
         # 4) Spatial predictor
         # -----------------------------
-        x_grid = z_proj_reshaped.transpose(1,2).reshape(B_flat, D, H_grid, W_grid)
         delta = self.predictor(x_grid)
-        z_hat = delta.reshape(B_flat, D, N_target).transpose(1,2)  # [B_flat, N_target, D]
 
         # -----------------------------
         # 5) Back to tokens
         # -----------------------------
-        if is_sequence:
-            z_hat = z_hat.view(B, T, N_target, D)
-            z_proj_reshaped = z_proj_reshaped.view(B, T, N_target, D)
+        z_hat = delta.reshape(B_flat, D, N_target).transpose(1, 2) # [B_flat, N, 128]
 
         return z_hat, z_proj #z_hat = s_c
