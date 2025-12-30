@@ -82,6 +82,8 @@ class HanoiAgent(nn.Module):
     def _policy(self, obs, state, training):
         # state carries (latent, prev_action)
         latent, action = state if state is not None else (None, None)
+        print("Initial action:", latent.shape if latent is not None else None)
+        print("Initial action:", action.shape if action is not None else None)
         obs = self._prepare_obs(obs, latent is None)
 
         # Produce embedding with frozen encoder
@@ -95,6 +97,7 @@ class HanoiAgent(nn.Module):
         # ------------------
 
         latent, _ = self._wm.rssm.obs_step(latent, action, embed, obs["is_first"])
+        print("latent after obs_step:", {k: v.shape for k, v in latent.items()})
         if getattr(self._config, "eval_state_mean", False):
             latent["stoch"] = latent["mean"]
         feat = self._wm.get_feat(latent)
