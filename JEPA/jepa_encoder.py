@@ -27,8 +27,8 @@ class JEPA_Encoder(nn.Module):
         # -------------------------------------------------
         self.jepa1 = PrimitiveLayerJEPA(
             encoder=vision_encoder,
-            grid_h=16,
-            grid_w=16,
+            grid_h=64,
+            grid_w=64,
             enc_dim=1024,
             prim_dim=128,
         )
@@ -82,6 +82,7 @@ class JEPA_Encoder(nn.Module):
         global_edges=None,
     ):
         B = pixel_values.size(0)
+        print("JEPA Encoder input pixel_values shape:", pixel_values.shape)
         # -------------------------------------------------
         # JEPA-1: primitives
         # -------------------------------------------------
