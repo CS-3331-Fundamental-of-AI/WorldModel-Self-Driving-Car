@@ -85,23 +85,14 @@ class JEPA_Encoder(nn.Module):
         # -------------------------------------------------
         # JEPA-1: primitives
         # -------------------------------------------------
-        if pixel_values.dim() == 4:  # single images [B, H, W, C]
-            x = pixel_values.permute(0, 3, 1, 2).unsqueeze(1)  # [B, 1, C, H, W]
-
-        elif pixel_values.dim() == 5:  # sequence [B, T, H, W, C]
-            x = pixel_values.permute(0, 1, 4, 2, 3).contiguous()  # [B, T, C, H, W]
-
+        if pixel_values.dim() == 4:
+            x = pixel_values  # [B, C, H, W]
+        elif pixel_values.dim() == 5:
+            x = pixel_values  # [B, T, C, H, W]
         else:
-            raise ValueError(f"pixel_values must be 4D or 5D, got {pixel_values.dim()}")
+            raise ValueError()
 
-        B, T, C, H, W = x.shape
-
-        # ✅ Pass **5D tensor** to JEPA-1
-        s_c_tokens, s_c_proj = self.jepa1(x)  # JEPA-1 handles [B, T, C, H, W] internally
-
-        # If needed later, you can flatten B*T for other layers:
-        # s_c_tokens_flat = s_c_tokens.view(B*T, N, D)
-
+        s_c_tokens, s_c_proj = self.jepa1(x)  # works for both
 
         # -------------------------------------------------
         # JEPA-2a: physical affordance
