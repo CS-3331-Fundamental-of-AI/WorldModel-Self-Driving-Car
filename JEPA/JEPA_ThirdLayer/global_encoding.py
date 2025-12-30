@@ -186,7 +186,6 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
                 x_tokens = s_y.unsqueeze(1).expand(-1, self.L, -1)[:, :self.L, :self.D]
             else:
                 raise ValueError("s_y must be (B,D) or (B,L,D) when tokens_final not provided")
-        print("x_tokens shape (from s_y):", x_tokens.shape)
         
         # --------------------------------------------------
         # y_modal ← s_c (context → modal slots) from JEPA-1
@@ -200,7 +199,6 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         else:
             raise ValueError(f"s_c has unsupported ndim={s_c.ndim}")
 
-        print("s_c_pool shape (after pooling):", s_c_pool.shape)
         s_c_proj = self.s_c_proj(s_c_pool)  # (B, D)
         y_modal = s_c_proj.unsqueeze(1).expand(B, self.M, self.D)  # [B, M, D]
         
@@ -213,7 +211,6 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
             z_channels = s_tg[:, :self.M, :self.D]
         else:
             raise ValueError("s_tg must be (B,D) or (B,M,D)")
-        print("z_channels shape (from s_tg):", z_channels.shape)
         
         # -----------------------------
         # LayerNorm (Fix-1)
@@ -221,10 +218,6 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         x_tokens = self.norm_x(x_tokens)
         y_modal = self.norm_y(y_modal)
         z_channels = self.norm_z(z_channels)
-        print("After LayerNorm:")
-        print(" x_tokens shape:", x_tokens.shape)   
-        print(" y_modal shape:", y_modal.shape)
-        print(" z_channels shape:", z_channels.shape)
         
         # ==================================================
         # STUDENT: s_ctx (cube_online)
@@ -234,7 +227,6 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
             y_modal,
             z_channels,
         )
-        print("s_ctx shape (from cube_online):", s_ctx.shape)
         has_graph = global_nodes is not None and global_edges is not None
         
         # ==================================================
@@ -268,7 +260,6 @@ class JEPA_Tier3_GlobalEncoding(nn.Module):
         # Auxiliary prediction: s_ctx -> s_tar
         # -----------------------------
         pred_tar = self.pred_from_ctx(s_ctx) #z
-        print("pred_tar shape (from s_ctx):", pred_tar.shape)
 
         return {
             "s_tar": s_tar,

@@ -50,7 +50,6 @@ class PrimitiveLayerJEPA(nn.Module):
             z = self.encoder(
                 pixel_values_videos=pixel_values
             ).last_hidden_state  # [B, N, 1024]
-        print("z shape after encoder:", z.shape)
         # -----------------------------
         # 2) Project to primitive dim
         # -----------------------------
@@ -81,6 +80,5 @@ class PrimitiveLayerJEPA(nn.Module):
         # 5) Back to tokens
         # -----------------------------
         z_hat = delta.reshape(B, D, H*W).transpose(1, 2) # [B, N, 128] 
-        print("z_hat shape:", z_hat.shape)
 
         return z_hat, z_proj #z_hat = s_c

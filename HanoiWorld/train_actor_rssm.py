@@ -235,8 +235,11 @@ def build_transition(obs, action, reward, discount):
     out = dict(obs)
     out["reward"] = np.array(reward, dtype=np.float32)
     out["discount"] = np.array(discount, dtype=np.float32)
-    if action is not None:
-        out["action"] = np.array(action)
+    if action is None:
+        # zero-action placeholder
+        out["action"] = np.zeros((cfg.num_actions,), dtype=np.float32)
+    else:
+        out["action"] = np.array(action, dtype=np.float32)
     return out
 
 
@@ -262,7 +265,7 @@ def close_renderer(env):
     candidates = [
         getattr(env, "viewer", None),
         getattr(getattr(env, "_env", None), "viewer", None),
-        getattr(getattr(getattr(env, "_env", None), "unwrapped", None), "viewer", None),
+        getattr(getattr(getattr(env, "_env", None), "unwraapped", None), "viewer", None),
     ]
     for viewer in candidates:
         if viewer and hasattr(viewer, "close"):
