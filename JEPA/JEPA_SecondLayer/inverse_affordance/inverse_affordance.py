@@ -74,6 +74,8 @@ class JEPA_Tier2_InverseAffordance(nn.Module):
         # 1. Rollout kinematics
         # -----------------------------------------------
         kin_seq = self.kin(action)
+        temporal_out = self.temporal_enc(kin_seq)
+        print("temporal_enc output:", temporal_out)
 
         # -----------------------------------------------
         # 2. Temporal encoding (last layer only)
