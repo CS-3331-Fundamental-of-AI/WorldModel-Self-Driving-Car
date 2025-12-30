@@ -95,25 +95,52 @@ class JEPA_Encoder(nn.Module):
 
         s_c_tokens, s_c_proj = self.jepa1(x)  # works for both
         print("s_c_tokens shape (after JEPA1):", s_c_tokens.shape) 
-        s_c_tokens = s_c_tokens.transpose(1, 2)  # [B, 128, 256]
+        # transpose to [B, 256, 128] → matches [B, T, D] for IA
+        s_c_tokens = s_c_tokens.transpose(1, 2).contiguous()  # [B, 128, 256]
         print("s_c_tokens shape (transposed for JEPA2/3):", s_c_tokens.shape)
         
+        # -------------------------------------------------
+        # JEPA-2a: physical affordance
+        # -------------------------------------------------
+        phys_out = self.jepa2_phys(traj, adj, x_graph)
+        for k, v in phys_out.items():
+            print(f"phys_out {k} shape:", v.shape)
+        s_traj = phys_out["traj_emb"]        # [B, 128]
+        s_tg = phys_out["fusion"]            # [B, 256]
+
+        # -------------------------------------------------
+        # JEPA-2b: inverse affordance
+        # -------------------------------------------------
+        inv_out = self.jepa2_inv(
+            action=action,
+            s_c=s_c_tokens,
+        )
+        for k, v in inv_out.items():
+            print(f"inv_out {k} shape:", v.shape)
+        s_y = inv_out["s_y"]                 # [B, 128]
+        tokens_final = inv_out["tokens"]     # [B, T, 128]
 
         # -------------------------------------------------
         # JEPA-3: global world encoding
         # -------------------------------------------------
         glob_out = self.jepa3(
-            s_y=None,
+            s_y=s_y,
             s_c=s_c_tokens,
-            s_tg=None,
+            s_tg=s_tg,
             global_nodes=global_nodes,
             global_edges=global_edges,
-            tokens_final=None,
+            tokens_final=tokens_final,
         )
 
         return {
             # primitives
             "s_c_tokens": s_c_tokens,
+
+            # tier2
+            "traj_emb": s_traj,
+            "s_tg": s_tg,
+            "s_y": s_y,
+
             # world
             "world_tgt": glob_out["s_tar"],   # target (EMA, if graph exists)
             "world_ctx": glob_out["s_ctx"],     # student
