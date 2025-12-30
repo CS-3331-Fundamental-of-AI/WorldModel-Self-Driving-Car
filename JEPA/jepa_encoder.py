@@ -123,13 +123,12 @@ class JEPA_Encoder(nn.Module):
             global_nodes=global_nodes,
             global_edges=global_edges,
         )
-
+        
         return {
             # primitives
             "s_c_tokens": s_c_tokens,
 
             # tier2
-            "traj_emb": s_traj,
             "s_tg": s_tg,
             "s_y": s_y,
 

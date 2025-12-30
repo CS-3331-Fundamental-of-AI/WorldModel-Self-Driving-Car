@@ -186,7 +186,8 @@ class FrozenEncoder(nn.Module):
             )
 
         world_latent_flat = out["world_latent"]  # [B*T, 128]
+        print("world_latent_flat shape (before reshape):", world_latent_flat.shape)
         world_latent = world_latent_flat.view(B, T, -1)  # restore sequence: [B, T, 128]
-
+        print("world_latent shape (after reshape):", world_latent.shape)
         return self.proj(world_latent)  # [B, T, out_dim]
 
