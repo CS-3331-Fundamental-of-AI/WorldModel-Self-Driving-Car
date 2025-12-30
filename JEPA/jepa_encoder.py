@@ -86,11 +86,11 @@ class JEPA_Encoder(nn.Module):
         # JEPA-1: primitives
         # -------------------------------------------------
         if pixel_values.dim() == 4:  # single images
-            pixel_values = pixel_values.unsqueeze(1)  # [B, 1, C, H, W]
+            x = pixel_values.unsqueeze(1)  # [B, 1, C, H, W]
             B, T, C, H, W = x.shape
             x_flat = x.reshape(B*T, C, H, W) 
         elif pixel_values.dim() == 5:  # [B, T, H, W, C]
-            pixel_values = pixel_values.permute(0, 1, 4, 2, 3).contiguous()  # [B, T, C, H, W]
+            x = pixel_values.permute(0, 1, 4, 2, 3).contiguous()  # [B, T, C, H, W]
             B, T, C, H, W = x.shape
             x_flat = x.reshape(B*T, C, H, W) 
         else:
