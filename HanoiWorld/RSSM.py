@@ -159,7 +159,7 @@ class RSSM(nn.Module):
         deter = state["deter"]
 
         # Flatten discrete if needed
-        if self.discrete:
+        if self._discrete:
             if stoch.dim() == 4:  # (B, T, stoch, discrete)
                 B, T, S, D = stoch.shape
                 stoch = stoch.reshape(B, T, S * D)
