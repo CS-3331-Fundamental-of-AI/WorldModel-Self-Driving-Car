@@ -117,19 +117,22 @@ class HanoiAgent(nn.Module):
         if not training:
             actor = self._wm.actor(feat)
             action = actor.mode()
+            logprob = None
         elif self._should_expl(self._step):
             actor = self._wm.actor(feat)
             action = actor.sample()
+            logprob = actor.log_prob(action)
         else:
             actor = self._wm.actor(feat)
             action = actor.sample()
+            logprob = actor.log_prob(action)
 
-        logprob = actor.log_prob(action)
         latent = {k: v.detach() for k, v in latent.items()}
         action = action.detach()
+        print("action:", action.shape)
         if self._config.actor["dist"] == "onehot_gumble":
             action = torch.one_hot(torch.argmax(action, dim=-1), self._config.num_actions)
-
+        print("final action:", action.shape)
         policy_output = {"action": action, "logprob": logprob}
         state = (latent, action)
         return policy_output, state
