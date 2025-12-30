@@ -85,25 +85,23 @@ class JEPA_Encoder(nn.Module):
         # -------------------------------------------------
         # JEPA-1: primitives
         # -------------------------------------------------
-        if pixel_values.dim() == 4:  # single images
-            x = pixel_values.unsqueeze(1)  # [B, 1, C, H, W]
-            B, T, C, H, W = x.shape
-            x_flat = x.reshape(B*T, C, H, W) 
-        elif pixel_values.dim() == 5:  # [B, T, H, W, C]
+        if pixel_values.dim() == 4:  # single images [B, H, W, C]
+            x = pixel_values.permute(0, 3, 1, 2).unsqueeze(1)  # [B, 1, C, H, W]
+
+        elif pixel_values.dim() == 5:  # sequence [B, T, H, W, C]
             x = pixel_values.permute(0, 1, 4, 2, 3).contiguous()  # [B, T, C, H, W]
-            B, T, C, H, W = x.shape
-            x_flat = x.reshape(B*T, C, H, W) 
+
         else:
             raise ValueError(f"pixel_values must be 4D or 5D, got {pixel_values.dim()}")
 
-        # Pass directly to PrimitiveLayerJEPA
-        # Pass the **flattened tensor** to JEPA-1
-        s_c_tokens_flat, s_c_proj_flat = self.jepa1(x_flat)  # [B*T, N, D]
+        B, T, C, H, W = x.shape
 
-        # Restore sequence dimension
-        N, D = s_c_tokens_flat.shape[1], s_c_tokens_flat.shape[2]
-        s_c_tokens = s_c_tokens_flat.view(B, T, N, D)  # [B, T, N, D]
-        s_c_proj   = s_c_proj_flat.view(B, T, N, D)
+        # ✅ Pass **5D tensor** to JEPA-1
+        s_c_tokens, s_c_proj = self.jepa1(x)  # JEPA-1 handles [B, T, C, H, W] internally
+
+        # If needed later, you can flatten B*T for other layers:
+        # s_c_tokens_flat = s_c_tokens.view(B*T, N, D)
+
 
         # -------------------------------------------------
         # JEPA-2a: physical affordance
