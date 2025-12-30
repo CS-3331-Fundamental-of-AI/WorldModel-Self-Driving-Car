@@ -166,10 +166,11 @@ class FrozenEncoder(nn.Module):
         # --------------------------------------------------
         # Minimal dummy inputs (RSSM inference)
         # --------------------------------------------------
-        traj    = torch.zeros(B, T, 256, 6, device=device)
-        adj     = torch.zeros(B, T, 13, 13, device=device)
-        x_graph = torch.zeros(B, T, 13, 13, device=device)
-        action  = torch.zeros(B, T, 2, device=device)
+        kin_k = 6
+        traj    = torch.zeros(B, kin_k, 6, device=x.device)   # [B, k, 6]
+        adj     = torch.zeros(B, 13, 13, device=x.device)     # [B, N, N]
+        x_graph = torch.zeros(B, 13, 13, device=x.device)     # [B, N, N]
+        action  = torch.zeros(B, kin_k, 2, device=x.device)   # [B, k, 2]
 
 
         # --------------------------------------------------

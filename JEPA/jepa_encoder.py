@@ -95,9 +95,6 @@ class JEPA_Encoder(nn.Module):
 
         s_c_tokens, s_c_proj = self.jepa1(x)  # works for both
         print("s_c_tokens shape (after JEPA1):", s_c_tokens.shape) 
-        # transpose to [B, 256, 128] → matches [B, T, D] for IA
-        s_c_tokens = s_c_tokens.transpose(1, 2).contiguous()  # [B, 128, 256]
-        print("s_c_tokens shape (transposed for JEPA2/3):", s_c_tokens.shape)
         
         # -------------------------------------------------
         # JEPA-2a: physical affordance
@@ -111,9 +108,13 @@ class JEPA_Encoder(nn.Module):
         # -------------------------------------------------
         # JEPA-2b: inverse affordance
         # -------------------------------------------------
+        s_c_tokens_for_ia = s_c_tokens.mean(dim=2, keepdim=True).expand(-1, s_c_tokens.shape[1], kin_k)
+        s_c_tokens_for_ia = s_c_tokens_for_ia.transpose(1, 2).contiguous()
+        print("s_c_tokens_for_ia shape (for JEPA2 InvAff):", s_c_tokens_for_ia.shape)
+        
         inv_out = self.jepa2_inv(
             action=action,
-            s_c=s_c_tokens,
+            s_c=s_c_tokens_for_ia,
         )
         for k, v in inv_out.items():
             print(f"inv_out {k} shape:", v.shape)
