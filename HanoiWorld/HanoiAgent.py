@@ -103,11 +103,13 @@ class HanoiAgent(nn.Module):
 
         if action is None:
             action = torch.zeros(
-                embed.shape[0], 1, self._config.num_actions,
+                embed.shape[0], self._config.num_actions,
                 device=embed.device
             )
+            
+        is_first = obs["is_first"][:, 0]
 
-        latent, _ = self._wm.rssm.obs_step(latent, action, embed, obs["is_first"])
+        latent, _ = self._wm.rssm.obs_step(latent, action, embed, is_first)
         # Remove time dimension for policy
         latent = {k: v[:, 0] for k, v in latent.items()}
         if getattr(self._config, "eval_state_mean", False):

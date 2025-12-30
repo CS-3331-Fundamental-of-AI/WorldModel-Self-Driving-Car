@@ -91,6 +91,7 @@ def main():
     else:
         raise ValueError(f"Unsupported action space: {acts}")
 
+    print(f"Action space size: {cfg.num_actions}")
 
     env.id = "train_env"  # used as key in replay
 
