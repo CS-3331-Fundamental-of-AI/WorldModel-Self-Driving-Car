@@ -113,6 +113,7 @@ class HanoiAgent(nn.Module):
         if getattr(self._config, "eval_state_mean", False):
             latent["stoch"] = latent["mean"]
         feat = self._wm.get_feat(latent)
+        print("feat:", feat.shape)
 
         if not training:
             actor = self._wm.actor(feat)
