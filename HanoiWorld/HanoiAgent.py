@@ -45,8 +45,8 @@ class HanoiAgent(nn.Module):
         self._wm = HanoiWorld(config)
 
         # Optional compilation
-        if getattr(config, "compile", False) and os.name != "nt":
-            self._wm = torch.compile(self._wm)
+        #if getattr(config, "compile", False) and os.name != "nt":
+            #self._wm = torch.compile(self._wm)
 
     def __call__(self, obs, reset, state=None, training=True):
         step = self._step
@@ -82,6 +82,7 @@ class HanoiAgent(nn.Module):
 
         # Produce embedding with frozen encoder
         embed = self.encode_images(obs["image"])  # (B, embed)
+        print("policy image:", obs["image"].shape)
         obs["embed"] = embed
 
         # --- Debug prints ---
@@ -119,6 +120,7 @@ class HanoiAgent(nn.Module):
         # Prepare embeddings for the batch
         img = torch.tensor(data["image"], device=self._config.device)
         emb = self.encode_images(img)   # (B, T, embed)
+        print("train image:", img.shape)
         data["embed"] = emb
 
         post, context, mets = self._wm._train(data)
@@ -168,6 +170,9 @@ class HanoiAgent(nn.Module):
     def encode_images(self, x):
         if x.dtype == torch.uint8:
             x = x.float() / 255.0
+            
+        assert x.dim() in (4, 5), f"Unexpected image dim: {x.shape}"
+        assert x.shape[-1] in (1, 3), f"Expected channel-last image, got {x.shape}"
 
         # TRAINING PATH (sequence)
         if x.dim() == 5:
