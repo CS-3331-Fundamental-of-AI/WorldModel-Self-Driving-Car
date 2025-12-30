@@ -94,11 +94,14 @@ class JEPA_Encoder(nn.Module):
             raise ValueError()
 
         s_c_tokens, s_c_proj = self.jepa1(x)  # works for both
+        print("s_c_tokens shape (after JEPA1):", s_c_tokens.shape) 
 
         # -------------------------------------------------
         # JEPA-2a: physical affordance
         # -------------------------------------------------
         phys_out = self.jepa2_phys(traj, adj, x_graph)
+        for k, v in phys_out.items():
+            print(f"phys_out {k} shape:", v.shape)
         s_traj = phys_out["traj_emb"]        # [B, 128]
         s_tg = phys_out["fusion"]            # [B, 256]
 
@@ -109,7 +112,8 @@ class JEPA_Encoder(nn.Module):
             action=action,
             s_c=s_c_tokens,
         )
-
+        for k, v in inv_out.items():
+            print(f"inv_out {k} shape:", v.shape)
         s_y = inv_out["s_y"]                 # [B, 128]
         tokens_final = inv_out["tokens"]     # [B, T, 128]
 
