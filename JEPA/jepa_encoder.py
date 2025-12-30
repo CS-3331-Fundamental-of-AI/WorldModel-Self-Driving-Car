@@ -108,10 +108,10 @@ class JEPA_Encoder(nn.Module):
         # -------------------------------------------------
         # JEPA-2b: inverse affordance
         # -------------------------------------------------
-        kin_k = self.jepa2_inv.kin.k
-        
+        B, T, k, a = action.shape
+        action_flat = action.view(B*T, k, a)
         inv_out = self.jepa2_inv(
-            action=action,
+            action=action_flat,
             s_c=s_c_tokens,
         )
         for k, v in inv_out.items():
