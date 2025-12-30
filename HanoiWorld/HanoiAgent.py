@@ -86,8 +86,6 @@ class HanoiAgent(nn.Module):
 
         # --- Debug prints ---
         print("embed:", embed.shape)
-        print("latent before RSSM:", None if latent is None else {k: v.shape for k, v in latent.items()})
-        print("action before RSSM:", None if action is None else action.shape)
         print("is_first:", obs["is_first"].shape)
         # ------------------
 
@@ -119,12 +117,9 @@ class HanoiAgent(nn.Module):
     def _train(self, data):
         metrics = {}
         # Prepare embeddings for the batch
-        if "image" in data and "embed" not in data:
-            img = torch.tensor(data["image"], device=self._config.device)
-            if img.dtype == torch.uint8:
-                img = img.float() / 255.0
-            embed = self.encode_images(img)  # (B, T, embed) if sequence
-            data["embed"] = embed
+        img = torch.tensor(data["image"], device=self._config.device)
+        emb = self.encode_images(img)   # (B, T, embed)
+        data["embed"] = emb
 
         post, context, mets = self._wm._train(data)
         metrics.update(mets)
@@ -171,15 +166,19 @@ class HanoiAgent(nn.Module):
         return obs_dict
     
     def encode_images(self, x):
-        """
-        x: (B, H, W, C) or (B, T, H, W, C)
-        returns: (B, T, embed) or (B, 1, embed)
-        """
         if x.dtype == torch.uint8:
             x = x.float() / 255.0
 
+        # TRAINING PATH (sequence)
+        if x.dim() == 5:
+            b, t, h, w, c = x.shape
+            x = x.view(b * t, h, w, c)
+            with torch.no_grad():
+                emb = self.encoder(x)
+            return emb.view(b, t, -1)
+
+        # POLICY PATH (single step)
         with torch.no_grad():
-            emb = self.encoder(x)  # pass x as-is
-        return emb
+            return self.encoder(x)
 
 

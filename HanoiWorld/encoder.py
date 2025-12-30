@@ -185,8 +185,8 @@ class FrozenEncoder(nn.Module):
                 global_edges=None,
             )
 
-        world_latent = out["world_latent"]  # [B*T, 128]
-        print("world_latent shape (before reshape):", world_latent.shape)
+        world_latent = out["world_latent"]  # [16, 128]
+        print("world_latent shape (before reshape):", world_latent.shape) # [16, 128]
 
         return self.proj(world_latent)  # [B, T, out_dim]
 
