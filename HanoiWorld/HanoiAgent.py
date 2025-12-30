@@ -44,26 +44,26 @@ class HanoiAgent(nn.Module):
         )
         self._wm = HanoiWorld(config)
 
-        # Optional compilation
-        #if getattr(config, "compile", False) and os.name != "nt":
-            #self._wm = torch.compile(self._wm)
+        #Optional compilation
+        if getattr(config, "compile", False) and os.name != "nt":
+            self._wm = torch.compile(self._wm)
 
     def __call__(self, obs, reset, state=None, training=True):
         step = self._step
-        if training and self._dataset is not None:
-            if self._should_pretrain():
-                steps = self._config.pretrain
-            elif self._should_train(step):
-                steps = 1
-            else:
-                steps = 0
 
-            for _ in range(steps):
+        if training and self._dataset is not None:
+            do_train = False
+
+            if self._should_pretrain():
+                do_train = True
+            elif self._should_train(step):
+                do_train = True
+
+            if do_train:
                 self._train(next(self._dataset))
                 self._update_count += 1
-                self._metrics["update_count"] = self._metrics.get("update_count", []) + [
-                    self._update_count
-                ]
+                self._metrics.setdefault("update_count", []).append(self._update_count)
+
             if self._should_log(step):
                 for name, values in self._metrics.items():
                     self._logger.scalar(name, float(np.mean(values)))
@@ -75,7 +75,9 @@ class HanoiAgent(nn.Module):
         if training:
             self._step += len(reset)
             self._logger.step = self._config.action_repeat * self._step
+
         return policy_output, state
+
 
     def _policy(self, obs, state, training):
         # state carries (latent, prev_action)
