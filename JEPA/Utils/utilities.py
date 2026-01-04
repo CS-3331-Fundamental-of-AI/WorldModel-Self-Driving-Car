@@ -131,3 +131,7 @@ def batch_global_graphs(global_nodes_list, global_edges_list, device):
 
     return nodes_batch, edges_batch
 
+def to_float(x):
+    if torch.is_tensor(x):
+        return x.detach().item()
+    return float(x)

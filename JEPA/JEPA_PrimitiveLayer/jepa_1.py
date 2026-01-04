@@ -21,7 +21,7 @@ def load_dino_resnet50(device):
     teacher = resnet50(weights=None)
 
     # 2. Load your Kaggle DINO checkpoint
-    ckpt_path = "/kaggle/input/dino-resnet50-pretrain/pytorch/dino_resnet50_pretrain/1/dino_resnet50_pretrain.pth"
+    ckpt_path = "/kaggle/input/dino-resnet50-pretrain/pytorch/default/1/bev_mobilenet_dino_init-240.pt"
     state = torch.load(ckpt_path, map_location="cpu")
 
     # Some DINO checkpoints wrap weights in "state_dict"

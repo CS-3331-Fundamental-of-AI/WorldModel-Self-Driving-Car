@@ -4,7 +4,13 @@ import torch
 import random
 import math
 from torch.utils.data import Dataset
-from JEPA_SecondLayer.kinematic import compute_windows_safe, pad_traj, load_gpickle, build_scene_mapping_parallel
+from JEPA_SecondLayer.physical_affordance.kinematic import (
+    compute_windows_safe,
+    pad_traj,
+    load_gpickle,
+    build_scene_mapping_parallel,
+)
+
 
 # --------------------------
 # Dataset paths
@@ -115,6 +121,18 @@ def apply_safe_augmentations(deltas):
 
     return d
 
+def extract_action(js_t, js_tm1):
+    """
+    Returns action = [acceleration, steering_delta]
+    """
+    accel = js_t["ego_state"].get("acceleration_ms2", 0.0)
+
+    yaw_t   = js_t["ego_state"]["rotation"]["yaw"]
+    yaw_tm1 = js_tm1["ego_state"]["rotation"]["yaw"]
+
+    steering = yaw_t - yaw_tm1
+
+    return torch.tensor([accel, steering], dtype=torch.float32)
 
 # ============================================================
 #  UPDATED DATASET CLASS WITH AUGMENTATION SUPPORT
@@ -168,6 +186,13 @@ class Tier2Dataset(Dataset):
         seq = self.scene_map[scene_token]
 
         js_current = seq[frame_idx]
+        
+        # Extract action
+        if frame_idx > 0:
+            action = extract_action(js_current, seq[frame_idx - 1])
+        else:
+            action = torch.zeros(2, dtype=torch.float32)
+
         frame0 = self._extract_frame(js_current)
         if frame0 is None:
             raise RuntimeError("Invalid current frame: no positions[]")
@@ -207,19 +232,20 @@ class Tier2Dataset(Dataset):
         full_path = os.path.join(self.dataset_path, lg["pickle_file"])
         local_graph = load_gpickle(full_path)
 
-        return (local_graph, deltas, js_current, deltas_aug)
+        return (local_graph, deltas, action, js_current, deltas_aug)
     
 def tier2_collate_fn(batch):
     """
-    batch = list of (local_graph, deltas_clean, meta, deltas_aug)
+    batch = list of (local_graph, deltas_clean, action, meta, deltas_aug)
     """
 
     B = len(batch)
 
+    actions = []
     # ===========================
     # 1. Get max graph size
     # ===========================
-    node_sizes = [G.number_of_nodes() for (G, _, _, _) in batch]
+    node_sizes = [G.number_of_nodes() for (G, _, _, _, _) in batch]
     max_nodes = max(node_sizes)
 
     graph_feats = []
@@ -234,8 +260,9 @@ def tier2_collate_fn(batch):
     graphs = []
     metas  = []
 
-    for (G, deltas_clean, meta, deltas_aug) in batch:
+    for (G, deltas_clean, action, meta, deltas_aug) in batch:
 
+        actions.append(action)
         # ===========================
         # (A) GRAPH FEATURES
         # ===========================
@@ -306,7 +333,7 @@ def tier2_collate_fn(batch):
         "graph_feats": torch.stack(graph_feats),   # [B, max_nodes, F]
         "graph_adj": torch.stack(graph_adj),       # [B, max_nodes, max_nodes]
         "graph_mask": torch.stack(graph_mask),     # [B, max_nodes]
-
+        "action": torch.stack(actions),   # [B, 2]
         "clean_deltas": torch.stack(clean_deltas_list),     # [B, T, 6]
         "aug_deltas": torch.stack(aug_deltas_list),         # [B, T, 6]
         "traj_mask": torch.stack(traj_mask_list),           # [B, T]

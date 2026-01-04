@@ -1,125 +1,146 @@
 import torch
 from Utils.utilities import batch_global_graphs
 
+
 class JEPAPipeline:
     """
-    Steady-state parallel JEPA training pipeline compatible with UnifiedDataset.
+    Steady-state parallel JEPA training pipeline.
 
     Invariants:
-    - Each JEPA tower updates ONLY its own student parameters
+    - Each JEPA tower updates ONLY its own parameters
     - No cross-tower gradient flow
-    - Cross-tower interaction happens only via detached representations
-      and slow EMA evolution
-    """ 
+    - Cross-tower interaction only via detached representations
+    """
 
     def __init__(self, t1, t2, t3, adapter):
-        self.t1 = t1
-        self.t2 = t2
-        self.t3 = t3
+        self.t1 = t1  # JEPA-1 (V-JEPA-2)
+        self.t2 = t2  # JEPA-2 (PA + IA + EMA)
+        self.t3 = t3  # JEPA-3
         self.adapter = adapter
 
+    @torch.no_grad()
+    def _get_s_c(self, batch):
+        if "j1" not in batch or batch["j1"] is None:
+            return None
+        out = self.t1.forward_only(batch["j1"])
+        return {"s_c": out["s_c"]}
+
     def step(self, batch):
+        # --------------------------------------------------
+        # 0) Adapt unified batch
+        # --------------------------------------------------
         batch = self.adapter.adapt(batch)
-        out1, out2 = None, None
 
-        # ----------------------------
-        # JEPA-1
-        # ----------------------------
-        if "j1" in batch and batch["j1"] is not None:
-            (
-                bev_list,
-                mask_emp_list,
-                mask_non_emp_list,
-                mask_union_list,
-                mask_emp_np_list,
-                mask_non_emp_np_list,
-                mask_union_np_list,
-                ph_list,
-                pw_list,
-                img_list
-            ) = batch["j1"]
+        out1, out2, out3 = None, None, None
 
-            device = next(self.t1.model.parameters()).device
-            bev = torch.stack(bev_list).to(device)
-            mask_emp = torch.stack(mask_emp_list).to(device)
-            mask_non_emp = torch.stack(mask_non_emp_list).to(device)
-            mask_union = torch.stack(mask_union_list).to(device)
+        # ==================================================
+        # JEPA-1 (frozen)
+        # ==================================================
+        out1 = self._get_s_c(batch)
 
-            mask_emp_np = torch.stack([torch.from_numpy(x).bool() for x in mask_emp_np_list]).to(device)
-            mask_non_emp_np = torch.stack([torch.from_numpy(x).bool() for x in mask_non_emp_np_list]).to(device)
-            mask_union_np = torch.stack([torch.from_numpy(x).bool() for x in mask_union_np_list]).to(device)
-
-            out1 = self.t1.step((mask_emp, mask_non_emp, mask_union, mask_emp_np, mask_non_emp_np, mask_union_np, bev))
-
-        # ----------------------------
-        # JEPA-2
-        # ----------------------------
-        if "j2" in batch and batch["j2"] is not None:
+        # ==================================================
+        # JEPA-2 (PA + IA)
+        # ==================================================
+        if batch.get("j2") is not None:
             batch_j2 = batch["j2"]
-            device = next(self.t2.model.parameters()).device
 
-            traj = batch_j2["clean_deltas"].to(device)
+            device = next(self.t2.pa.parameters()).device
+
+            traj       = batch_j2["clean_deltas"].to(device)
             traj_mask = batch_j2["traj_mask"].to(device)
-            x_graph = batch_j2["graph_feats"].to(device)
-            adj = batch_j2["graph_adj"].to(device)
+            x_graph   = batch_j2["graph_feats"].to(device)
+            adj       = batch_j2["graph_adj"].to(device)
             graph_mask = batch_j2["graph_mask"].to(device)
 
-            out2 = self.t2.step(traj=traj, x_graph=x_graph, adj=adj, graph_mask=graph_mask, traj_mask=traj_mask)
+            # IA input
+            action = batch_j2["action"].to(device)
 
-        # ----------------------------
-        # Stop-gradient
-        # ----------------------------
-        s_c, s_tg = None, None
-        if out1 is not None:
-            s_c = out1["s_c"].detach()
-        if out2 is not None:
-            s_tg = out2["s_tg"].detach()
+            s_c = out1["s_c"].detach() if out1 else None
 
-        # ----------------------------
+            out2 = self.t2.step(
+                traj=traj,
+                x_graph=x_graph,
+                adj=adj,
+                traj_mask=traj_mask,
+                graph_mask=graph_mask,
+                action=action,
+                s_c=s_c,
+            )
+
+        # ==================================================
+        # Stop-gradient barrier
+        # ==================================================
+        s_c  = out1["s_c"].detach() if out1 else None
+        s_tg = out2["s_tg"].detach() if out2 else None
+        s_y  = out2["s_y"].detach() if out2 else None
+
+        # ==================================================
         # JEPA-3
-        # ----------------------------
-        out3 = None
-        has_context = (s_c is not None) or (s_tg is not None)
-        has_j3 = ("j3" in batch) and (batch["j3"] is not None)
-
-        if has_context and has_j3:
+        # ==================================================
+        if s_c is not None and s_tg is not None and batch.get("j3") is not None:
             batch_j3 = batch["j3"]
-            device = s_c.device if s_c is not None else s_tg.device
+            device = s_c.device
 
             global_nodes_list = batch_j3.get("global_nodes")
             global_edges_list = batch_j3.get("global_edges")
-            if global_nodes_list is not None and global_edges_list is not None:
-                # Use utility function to batch graphs
-                global_nodes_batch, global_edges_batch = batch_global_graphs(
-                    global_nodes_list, global_edges_list, device
+
+            if global_nodes_list is not None:
+                global_nodes, global_edges = batch_global_graphs(
+                    global_nodes_list,
+                    global_edges_list,
+                    device,
                 )
             else:
-                global_nodes_batch, global_edges_batch = None, None
+                global_nodes = global_edges = None
 
             out3 = self.t3.step(
-                action=batch_j3.get("action"),
                 s_c=s_c,
                 s_tg=s_tg,
-                global_nodes=global_nodes_batch,
-                global_edges=global_edges_batch,
+                s_y=s_y,
+                global_nodes=global_nodes,
+                global_edges=global_edges,
             )
 
-        # ----------------------------
+        # ==================================================
         # Aggregate losses
-        # ----------------------------
-        total_loss = 0.0
-        loss_j1 = out1["loss"] if out1 else 0.0
+        # ==================================================
         loss_j2 = out2["loss"] if out2 else 0.0
-        loss_j3 = out3["loss"] if out3 else 0.0
-        loss_j3_inv = out3["loss_inv"] if out3 else 0.0
-        loss_j3_glob = out3["loss_glob"] if out3 else 0.0
-        total_loss = loss_j1 + loss_j2 + loss_j3
+        loss_j2_pa = out2.get("loss_pa", 0.0) if out2 else 0.0
+        loss_j2_ia = out2.get("loss_ia", 0.0) if out2 else 0.0
+        # ---- JEPA-2 diagnostics ----
+        grad_j2_pa = out2.get("grad_norm_pa", 0.0) if out2 else 0.0
+        grad_j2_ia = out2.get("grad_norm_ia", 0.0) if out2 else 0.0
+
+        vic_pa_var = out2.get("vicreg_pa_var", 0.0) if out2 else 0.0
+        vic_ia_var = out2.get("vicreg_ia_var", 0.0) if out2 else 0.0
+
+        
+        # JEPA-3 losses
+        loss_j3      = out3.get("total", 0.0)
+        loss_j3_cos  = out3.get("cos", 0.0)
+        loss_j3_nce  = out3.get("nce", 0.0)
+        loss_j3_vic  = out3.get("vicreg", 0.0)
+        tau          = out3.get("tau", float('nan'))
+
+        total_loss = loss_j2 + loss_j3
 
         return {
             "loss": total_loss,
-            "loss_j1": loss_j1,
+            "loss_j1": 0.0,
             "loss_j2": loss_j2,
+            "loss_j2_pa": loss_j2_pa,
+            "loss_j2_ia": loss_j2_ia,
             "loss_j3": loss_j3,
-            "loss_j3_inv": loss_j3_inv,
-            "loss_j3_glob": loss_j3_glob
+            "loss_j3_cos": loss_j3_cos,
+            "loss_j3_nce": loss_j3_nce,
+            "loss_j3_vic": loss_j3_vic,
+            "tau": tau,
+            
+            # ----------------
+            # diagnostics
+            # ----------------
+            "grad_j2_pa": grad_j2_pa,
+            "grad_j2_ia": grad_j2_ia,
+            "vic_j2_pa_var": vic_pa_var,
+            "vic_j2_ia_var": vic_ia_var,
         }

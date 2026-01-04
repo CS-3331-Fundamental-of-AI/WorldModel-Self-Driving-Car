@@ -1,5 +1,7 @@
 # unified_dataset.py
+
 from torch.utils.data import Dataset
+from .jepa1vjepadata import collate_maps
 from .jepa2data import tier2_collate_fn
 from .jepa3data import tier3_collate_fn   
 
@@ -40,12 +42,21 @@ def unified_collate_fn(batch):
     collated = {}
 
     # --------------------
-    # JEPA-1
+    # JEPA-1 (old)
     # --------------------
-    j1_items = [b.get("j1", None) for b in batch]
-    if any(x is not None for x in j1_items):
-        j1_valid = [x for x in j1_items if x is not None]
-        collated["j1"] = list(zip(*j1_valid))
+    #j1_items = [b.get("j1", None) for b in batch]
+    #if any(x is not None for x in j1_items):
+    #    j1_valid = [x for x in j1_items if x is not None]
+    #    collated["j1"] = list(zip(*j1_valid))
+    #else:
+    #    collated["j1"] = None
+    
+    # --------------------
+    # JEPA-1 (new)
+    # --------------------
+    j1_items = [b.get("j1") for b in batch if b.get("j1") is not None]
+    if j1_items:
+        collated["j1"] = collate_maps(j1_items)  # use existing collate
     else:
         collated["j1"] = None
 

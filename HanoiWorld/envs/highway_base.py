@@ -851,15 +851,32 @@ class HighwayEnv(gymnasium.Env):
         self._was_on_road = not is_off_road
         
     def _resize_image(self, image):
-        """Resize image to target size."""
-        try:
-            import cv2
-            return cv2.resize(image, self._size, interpolation=cv2.INTER_AREA)
-        except ImportError:
-            from PIL import Image as PILImage
-            pil_img = PILImage.fromarray(image)
-            pil_img = pil_img.resize(self._size, PILImage.BILINEAR)
-            return np.array(pil_img)
+        """Resize image to target size safely for any shape/dtype."""
+        import numpy as np
+
+        # Remove extra leading dimensions (e.g., (1, H, W, C) -> (H, W, C))
+        while image.ndim > 3:
+            image = image[0]
+
+        # Convert float to uint8 if needed
+        if np.issubdtype(image.dtype, np.floating):
+            image = np.clip(image, 0.0, 1.0)  # assume floats in 0-1
+            image = (image * 255).astype(np.uint8)
+        elif image.dtype != np.uint8:
+            image = image.astype(np.uint8)
+
+        # Ensure image has 3 channels
+        if image.ndim == 2:
+            image = np.repeat(image[:, :, None], 3, axis=2)
+        elif image.shape[2] == 1:
+            image = np.repeat(image, 3, axis=2)
+
+        # Resize using PIL
+        from PIL import Image as PILImage
+        pil_img = PILImage.fromarray(image)
+        pil_img = pil_img.resize(self._size, PILImage.BILINEAR)
+        return np.array(pil_img)
+
 
     def render(self, mode="rgb_array"):
         """Render the environment."""

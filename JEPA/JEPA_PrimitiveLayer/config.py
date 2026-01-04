@@ -23,11 +23,5 @@ ALPHA_1 = 0.75
 BETA_1 = 1.0
 BETA_2 = 1.0
 GAMMA = 1.0
-if torch.backends.mps.is_available():
-    DEVICE = "mps"
-elif torch.cuda.is_available():
-    DEVICE = "cuda"
-else:
-    DEVICE = "cpu"
 
 DATA_ROOT = "/kaggle/input/test1t/exported_maps"

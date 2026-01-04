@@ -18,6 +18,8 @@ defaults:
   debug: False
   video_pred_log: True
 
+  embed: 128
+
   # Environment
   task: 'dmc_walker_walk'
   size: [64, 64]

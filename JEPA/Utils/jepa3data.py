@@ -83,19 +83,7 @@ class Tier3Dataset(Dataset):
         scene_token, t = self.master_index[idx]
 
         js_t   = self.scene_map[scene_token][t]
-        js_tm1 = self.scene_map[scene_token][t - 1]
-
-        # --------------------------
-        # ACTION (metadata)
-        # --------------------------
-        accel = js_t["ego_state"].get("acceleration_ms2", 0.0)
-
-        yaw_t   = js_t["ego_state"]["rotation"]["yaw"]
-        yaw_tm1 = js_tm1["ego_state"]["rotation"]["yaw"]
-        steering = yaw_t - yaw_tm1
-
-        action = torch.tensor([accel, steering], dtype=torch.float32)
-
+       
         # --------------------------
         # GLOBAL GRAPH
         # --------------------------
@@ -103,7 +91,6 @@ class Tier3Dataset(Dataset):
         global_graph = self._load_global_graph(scene_name)
 
         return {
-            "action": action,
             "global_graph": global_graph,
         }
 
@@ -115,7 +102,7 @@ def tier3_collate_fn(batch, device=None):
     Collate function for JEPA-3 Dataset.
     Converts a list of dicts into batched tensors/lists.
     """
-    action = torch.stack([b["action"] for b in batch])  # [B, 2]
+    #action = torch.stack([b["action"] for b in batch])  # [B, 2]
 
     # For global graph, we keep a list of dicts per sample
     global_graphs = [b["global_graph"] for b in batch]
@@ -125,7 +112,6 @@ def tier3_collate_fn(batch, device=None):
     global_edges  = [g["edges"].to(device) if device else g["edges"] for g in global_graphs]
 
     return {
-        "action": action,
         "global_nodes": global_nodes,
         "global_edges": global_edges,
     }

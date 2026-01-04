@@ -13,7 +13,7 @@ IS_KAGGLE = "KAGGLE_KERNEL_RUN_TYPE" in os.environ
 # -------------------------
 # Training
 # -------------------------
-EPOCHS = 10 if IS_KAGGLE else 200
+EPOCHS = 5 if IS_KAGGLE else 200
 BATCH_SIZE = 8 if IS_KAGGLE else 16
 NUM_WORKERS = 2 if IS_KAGGLE else 4
 
@@ -36,7 +36,7 @@ EMA_JEPA3 = 0.995
 # -------------------------
 LAMBDA_JEPA1 = 1.0
 LAMBDA_JEPA2 = 1.0
-LAMBDA_INV = 1.0
+LAMBDA_INV = 0.25
 LAMBDA_GLOB = 1.0
 
 # JEPA-1 loss params & config
@@ -46,7 +46,7 @@ BETA_1 = 1.0
 BETA_2 = 1.0
 GAMMA = 1.0
 LAMBDA_JEPA = 1.0
-LAMBDA_REG = 1.0
+LAMBDA_REG = 0.05
 
 MASK_RATIO = 0.5
 PATCH_SIZE = 16

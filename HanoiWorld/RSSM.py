@@ -65,8 +65,7 @@ class RSSM(nn.Module):
             img_out_layers.append(nn.LayerNorm(self._hidden, eps=1e-03))
         img_out_layers.append(act())
         self._img_out_layers = nn.Sequential(*img_out_layers)
-        self._img_out_layers.apply(tools.weight_init)
-
+        self._img_out_layers.apply(tools.weight_init)   
         obs_out_layers = []
         inp_dim = self._deter + self._embed
         obs_out_layers.append(nn.Linear(inp_dim, self._hidden, bias=False))
@@ -193,6 +192,9 @@ class RSSM(nn.Module):
                 )
 
         prior = self.img_step(prev_state, prev_action)
+        # print("DEBUG RSSM !")
+        # print(f"deter shape {prior["deter"].shape}")
+        # print(f"embed shape {embed.shape}")
         x = torch.cat([prior["deter"], embed], -1)
         # (batch_size, prior_deter + embed) -> (batch_size, hidden)
         x = self._obs_out_layers(x)

@@ -9,14 +9,140 @@ import time
 import random
 import numpy as np
 import torch
+from collections import deque
 from torch import nn
 from torch.nn import functional as F
 from torch import distributions as torchd
 from torch.utils.tensorboard import SummaryWriter
 
-
 to_np = lambda x: x.detach().cpu().numpy()
 
+def wrap_angle(a):
+
+    return (a + np.pi) % (2 * np.pi) - np.pi
+
+
+
+class TrajectoryBuffer:
+
+    def __init__(self, T=8):
+
+        self.T = T
+
+        self.buf = deque(maxlen=T)
+
+        self.prev_state = None
+
+
+
+    def reset(self):
+
+        self.buf.clear()
+
+        self.prev_state = None
+
+
+
+    def step(self, ego_state, lane):
+
+        if self.prev_state is None:
+
+            self.prev_state = {
+
+                "pos": np.array(ego_state["pos"], dtype=np.float32),
+
+                "speed": float(ego_state["speed"]),
+
+                "yaw": float(ego_state["yaw"]),
+
+            }
+
+            return
+
+
+
+        # Deltas
+
+        dx = ego_state["pos"][0] - self.prev_state["pos"][0]
+
+        dy = ego_state["pos"][1] - self.prev_state["pos"][1]
+
+        dv = ego_state["speed"] - self.prev_state["speed"]
+
+        dyaw = wrap_angle(ego_state["yaw"] - self.prev_state["yaw"])
+
+
+
+        # Frenet (lane-aligned)
+
+        if lane is not None and hasattr(lane, "local_coordinates"):
+
+            s_prev, d_prev = lane.local_coordinates(self.prev_state["pos"])
+
+            s_curr, d_curr = lane.local_coordinates(ego_state["pos"])
+
+            ds_forward = s_curr - s_prev
+
+            ds_side = d_curr - d_prev
+
+        else:
+
+            ds_forward = 0.0
+
+            ds_side = 0.0
+
+
+
+        vec = np.array(
+
+            [dx, dy, dv, dyaw, ds_forward, ds_side],
+
+            dtype=np.float32
+
+        )
+
+        self.buf.append(vec)
+
+
+
+        self.prev_state = {
+
+            "pos": np.array(ego_state["pos"], dtype=np.float32),
+
+            "speed": float(ego_state["speed"]),
+
+            "yaw": float(ego_state["yaw"]),
+
+        }
+
+
+
+    def get(self):
+
+        if len(self.buf) < self.T:
+
+            pad = [np.zeros(6, dtype=np.float32)] * (self.T - len(self.buf))
+
+            return np.stack(pad + list(self.buf), axis=0)
+
+        return np.stack(self.buf, axis=0) 
+    
+    def compute_ego_traj(prev, curr, dt=0.2):
+
+        dx = curr.x - prev.x
+
+        dy = curr.y - prev.y
+
+        dv = curr.speed - prev.speed
+
+        dyaw = wrap_angle(curr.heading - prev.heading)
+
+        ds_fwd = dx * np.cos(curr.heading) + dy * np.sin(curr.heading)
+
+        ds_lat = -dx * np.sin(curr.heading) + dy * np.cos(curr.heading)
+
+        return np.array([dx, dy, dv, dyaw, ds_fwd, ds_lat], dtype=np.float32) 
+    
 
 def symlog(x):
     return torch.sign(x) * torch.log(torch.abs(x) + 1.0)
@@ -1001,3 +1127,74 @@ def recursively_load_optim_state_dict(obj, optimizers_state_dicts):
         for key in keys:
             obj_now = getattr(obj_now, key)
         obj_now.load_state_dict(state_dict)
+
+def state_dict(self):
+
+        return {
+
+            "opt": self._opt.state_dict(),
+
+            "scaler": self._scaler.state_dict(),
+
+        }
+
+def load_state_dict(self, state):
+
+    self._opt.load_state_dict(state["opt"])
+
+    self._scaler.load_state_dict(state["scaler"])
+
+class RewardEMA:
+    """running mean and std"""
+
+    def __init__(self, device, alpha=1e-2):
+        self.device = device
+        self.alpha = alpha
+        self.range = torch.tensor([0.05, 0.95], device=device)
+
+    def __call__(self, x, ema_vals):
+        flat_x = torch.flatten(x.detach())
+        x_quantile = torch.quantile(input=flat_x, q=self.range)
+        # this should be in-place operation
+        ema_vals[:] = self.alpha * x_quantile + (1 - self.alpha) * ema_vals
+        scale = torch.clip(ema_vals[1] - ema_vals[0], min=1.0)
+        offset = ema_vals[0]
+        return offset.detach(), scale.detach()
+    
+def cfg_to_dict(cfg):
+    if hasattr(cfg, "__dict__"):
+        return vars(cfg)
+    if hasattr(cfg, "_asdict"):
+        return cfg._asdict()
+    return dict(cfg)
+
+def save_ckpt(step, agent, cfg, env_name):
+    os.makedirs("ckpts", exist_ok=True)
+    path = f"ckpts/ckpt_{step}.pt"
+
+    torch.save(
+        {
+            # ---- metadata ----
+            "step": step,
+            "env_name": env_name,
+            "cfg": cfg_to_dict(cfg),
+
+            # ---- model weights ----
+            "encoder": agent.encoder.state_dict(),
+            "world": agent.world.state_dict(),
+
+            # ---- optimizer states ----
+            "optimizers": {
+                "model": agent.world.model_opt.state_dict(),
+                "actor": agent.world.actor_opt.state_dict(),
+                "value": agent.world.value_opt.state_dict(),
+            },
+        },
+        path,
+    )
+
+    return path
+
+def to_scalar(x):
+    x = np.asarray(x)
+    return float(x.mean())
