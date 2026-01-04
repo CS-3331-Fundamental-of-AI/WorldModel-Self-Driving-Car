@@ -65,8 +65,7 @@ class RSSM(nn.Module):
             img_out_layers.append(nn.LayerNorm(self._hidden, eps=1e-03))
         img_out_layers.append(act())
         self._img_out_layers = nn.Sequential(*img_out_layers)
-        self._img_out_layers.apply(tools.weight_init)
-
+        self._img_out_layers.apply(tools.weight_init)   
         obs_out_layers = []
         inp_dim = self._deter + self._embed
         obs_out_layers.append(nn.Linear(inp_dim, self._hidden, bias=False))
@@ -151,36 +150,11 @@ class RSSM(nn.Module):
         return prior
 
     def get_feat(self, state):
-        """
-        Concatenate stochastic + deterministic latent.
-        Supports both single-step {B, stoch, ...} and sequence {B, T, stoch, ...}.
-        """
         stoch = state["stoch"]
-        deter = state["deter"]
-
-        # Flatten discrete if needed
         if self._discrete:
-            if stoch.dim() == 4:  # (B, T, stoch, discrete)
-                B, T, S, D = stoch.shape
-                stoch = stoch.reshape(B, T, S * D)
-            elif stoch.dim() == 3:  # (B, stoch, discrete)
-                B, S, D = stoch.shape
-                stoch = stoch.reshape(B, S * D)
-
-        # Handle time dimension for deterministic state
-        if deter.dim() == 3 and stoch.dim() == 3:
-            # sequence (B, T, deter) already matches stoch (B, T, stoch_total)
-            pass
-        elif deter.dim() == 2 and stoch.dim() == 2:
-            # single-step (B, deter) matches (B, stoch_total)
-            pass
-        elif deter.dim() == 3 and stoch.dim() == 2:
-            # add time dim to stoch
-            stoch = stoch.unsqueeze(1)
-
-        feat = torch.cat([stoch, deter], dim=-1)
-        return feat  # shape: (B, T?, stoch+deter)
-
+            shape = list(stoch.shape[:-2]) + [self._stoch * self._discrete]
+            stoch = stoch.reshape(shape)
+        return torch.cat([stoch, state["deter"]], -1)
 
     def get_dist(self, state, dtype=None):
         if self._discrete:
@@ -218,6 +192,9 @@ class RSSM(nn.Module):
                 )
 
         prior = self.img_step(prev_state, prev_action)
+        # print("DEBUG RSSM !")
+        # print(f"deter shape {prior["deter"].shape}")
+        # print(f"embed shape {embed.shape}")
         x = torch.cat([prior["deter"], embed], -1)
         # (batch_size, prior_deter + embed) -> (batch_size, hidden)
         x = self._obs_out_layers(x)
@@ -234,7 +211,7 @@ class RSSM(nn.Module):
         # (batch, stoch, discrete_num) - the transition model/ prior - the way model predict next
         # latent state | prev latent & action & no observation
         prev_stoch = prev_state["stoch"]
-        if self._discrete and prev_stoch.dim() > 2:
+        if self._discrete:
             shape = list(prev_stoch.shape[:-2]) + [self._stoch * self._discrete]
             # (batch, stoch, discrete_num) -> (batch, stoch * discrete_num)
             prev_stoch = prev_stoch.reshape(shape)
