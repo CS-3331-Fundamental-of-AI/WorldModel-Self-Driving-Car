@@ -50,8 +50,4 @@ LAMBDA_REG = 0.05
 
 MASK_RATIO = 0.5
 PATCH_SIZE = 16
-# -------------------------
-# Checkpoints
-# -------------------------
-CKPT_DIR = ROOT / "checkpoints"
-CKPT_DIR.mkdir(exist_ok=True)
+

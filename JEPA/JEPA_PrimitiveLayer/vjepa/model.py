@@ -22,6 +22,7 @@ class SpatialPredictorCNN(nn.Module):
 
     def forward(self, x):
         return self.conv(x)
+    
 class PrimitiveLayerJEPA(nn.Module):
     def __init__(
         self,
