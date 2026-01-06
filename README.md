@@ -17,9 +17,9 @@ It is designed to evaluate **world models** and **representation learning method
 HanoiWorld provides three driving environments, each targeting different planning and perception challenges:
 
 envs/
-├── highway/       # High-speed lane keeping and collision avoidance
-├── roundabout/    # Multi-agent interaction and yielding behavior
-└── merge/         # Lane merging and gap acceptance
+- highway/       # High-speed lane keeping and collision avoidance
+- roundabout/    # Multi-agent interaction and yielding behavior
+- merge/         # Lane merging and gap acceptance
 
 ### Environment Overview
 
@@ -57,19 +57,25 @@ Supported world model components:
 ### Install dependencies
 ```bash
 pip install -r requirements.txt
-🏋️ Training
+```
+### 🏋️ Training
 Train DreamerV3 on a HanoiWorld environment:
 
-
+```bash
 python dreamer.py \
   --configs hanoiworld \
   --task highway \
   --logdir ./logdir/highway
-Monitor training with TensorBoard:
 
-tensorboard --logdir ./logdir
-⚠️ In most experiments, JEPA models are pretrained and reused for evaluation.
 ```
+
+### Monitor training with TensorBoard:
+```bash
+tensorboard --logdir ./logdir
+```
+
+Note: In most experiments, JEPA models are pretrained and reused for evaluation.
+
 
 ## 📊 Evaluation
 Evaluate a pretrained JEPA + RSSM model inside Dreamer.
@@ -99,11 +105,11 @@ https://github.com/Min34r/dreamerv3-torch
 Dreamer components (RSSM, actor, critic, imagination) remain largely unchanged.
 Custom logic is introduced via:
 
-Encoder replacement (JEPA)
+- Encoder replacement (JEPA)
 
-Environment wrappers
+- Environment wrappers
 
-Evaluation scripts
+- Evaluation scripts
 
 ## 🙏 Acknowledgments
 This project builds upon:
