@@ -127,7 +127,11 @@ JEPA: https://arxiv.org/abs/2301.08243
 ## Authorship
 
 Thanks you for these member for the contribution of the project
+
 Dat Tran Tien (*):  dat.tt228006@sis.hust.edu.vn
+
 Duc Nguyen Duy: bachduc.june@gmail.com 
+
 An Nguyen Hai: dung.nkv207947@sis.hust.edu.vn
+
 Dung Nguyen Khanh Viet: haiann663@gmail.com
